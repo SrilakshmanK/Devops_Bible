@@ -1,0 +1,246 @@
+==================================================
+VOLUME 01 - FOUNDATIONS
+CHAPTER 01 - COMPUTER BASICS
+==================================================
+
+Estimated Time
+--------------
+1 - 2 Days
+
+Goal
+--------------
+Understand what a computer is, identify every major hardware component,
+and explain how they work together.
+
+This chapter is the foundation for Linux, Networking, Cloud and DevOps.
+
+==================================================
+TOPICS TO LEARN
+==================================================
+
+SECTION 1 - What is a Computer?
+
+Learn
+
+□ What is a Computer?
+□ Input
+□ Process
+□ Output
+□ Storage
+□ Data vs Information
+
+Completion
+
+□ Explain what a computer does in one minute.
+
+--------------------------------------------------
+
+SECTION 2 - Types of Computers
+
+Learn
+
+□ Desktop
+□ Laptop
+□ Server
+□ Workstation
+□ Mainframe
+□ Supercomputer
+□ Embedded System
+□ Mobile Devices
+
+Completion
+
+□ Explain why servers are different from personal computers.
+
+--------------------------------------------------
+
+SECTION 3 - Hardware Components
+
+Learn
+
+□ Motherboard
+□ CPU
+□ RAM
+□ ROM
+□ HDD
+□ SSD
+□ GPU
+□ Power Supply (PSU)
+□ Cooling System
+□ Network Interface Card (NIC)
+
+Completion
+
+□ Identify every hardware component inside a PC.
+
+--------------------------------------------------
+
+SECTION 4 - Input Devices
+
+Learn
+
+□ Keyboard
+□ Mouse
+□ Scanner
+□ Microphone
+□ Webcam
+
+Completion
+
+□ Explain why these are input devices.
+
+--------------------------------------------------
+
+SECTION 5 - Output Devices
+
+Learn
+
+□ Monitor
+□ Printer
+□ Speakers
+□ Projector
+
+Completion
+
+□ Explain why these are output devices.
+
+--------------------------------------------------
+
+SECTION 6 - Ports
+
+Learn
+
+□ USB
+□ HDMI
+□ Ethernet
+□ Audio Jack
+□ DisplayPort
+
+Completion
+
+□ Identify each port on your own computer.
+
+==================================================
+PRACTICAL
+==================================================
+
+Windows
+
+□ Open Task Manager
+
+Observe
+
+□ CPU
+□ Memory
+□ Disk
+□ Network
+□ GPU
+
+--------------------------------
+
+Install
+
+□ CPU-Z
+
+Observe
+
+□ CPU
+□ RAM
+□ Motherboard
+
+--------------------------------
+
+Open
+
+□ Device Manager
+
+Explore every hardware category.
+
+==================================================
+MINI PROJECT
+==================================================
+
+Draw your computer.
+
+Label every hardware component.
+
+Explain the purpose of each component.
+
+==================================================
+INTERVIEW QUESTIONS
+==================================================
+
+□ What is a computer?
+
+□ Difference between Data and Information?
+
+□ What are the four basic functions of a computer?
+
+□ Difference between RAM and Storage?
+
+□ Difference between HDD and SSD?
+
+□ What does the motherboard do?
+
+□ What is the role of a CPU?
+
+□ What is a GPU?
+
+□ Why does a computer need RAM?
+
+□ What is a NIC?
+
+==================================================
+BEST RESOURCES
+==================================================
+
+YouTube
+
+□ Crash Course Computer Science
+   Episode 1
+
+□ PowerCert Animated Videos
+   Computer Hardware
+
+□ Code.org
+   How Computers Work
+
+Reading
+
+□ Computer Hope
+□ GeeksforGeeks (Basics only)
+
+==================================================
+OPTIONAL
+==================================================
+
+If you have an old computer,
+open it and identify every component physically.
+
+Nothing beats seeing real hardware.
+
+==================================================
+MOVE TO NEXT CHAPTER ONLY IF
+==================================================
+
+□ You can explain what a computer is.
+
+□ You know every major hardware component.
+
+□ You know the difference between
+RAM, ROM, HDD and SSD.
+
+□ You can explain Input → Process →
+Output → Storage.
+
+□ You can identify the hardware inside
+your own computer.
+
+==================================================
+STATUS
+
+□ NOT STARTED
+
+□ IN PROGRESS
+
+□ COMPLETED

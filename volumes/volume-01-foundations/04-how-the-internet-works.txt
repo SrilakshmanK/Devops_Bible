@@ -1,0 +1,375 @@
+==================================================
+VOLUME 01 - FOUNDATIONS
+CHAPTER 04 - HOW THE INTERNET WORKS
+==================================================
+
+Estimated Time
+--------------
+3 - 4 Days
+
+Goal
+--------------
+Understand exactly what happens when you
+open a website like google.com.
+
+By the end of this chapter, you should be
+able to explain the complete journey of a
+request from your browser to the server and
+back.
+
+==================================================
+TOPICS TO LEARN
+==================================================
+
+SECTION 1 - What is the Internet?
+
+Learn
+
+□ What is the Internet?
+□ Network of Networks
+□ ISP
+□ Public Internet
+
+Completion
+
+□ Explain what the Internet actually is.
+
+--------------------------------------------------
+
+SECTION 2 - Client & Server
+
+Learn
+
+□ Client
+□ Server
+□ Request
+□ Response
+
+Completion
+
+□ Explain why every web application has
+clients and servers.
+
+--------------------------------------------------
+
+SECTION 3 - IP Address
+
+Learn
+
+□ IPv4
+□ IPv6
+□ Public IP
+□ Private IP
+□ Static IP
+□ Dynamic IP
+
+Completion
+
+□ Find your Public IP.
+□ Find your Local IP.
+
+--------------------------------------------------
+
+SECTION 4 - Domain Names
+
+Learn
+
+□ Domain
+□ URL
+□ FQDN
+
+Completion
+
+□ Explain why google.com is easier than
+remembering an IP address.
+
+--------------------------------------------------
+
+SECTION 5 - DNS
+
+Learn
+
+□ DNS
+□ DNS Resolver
+□ DNS Records
+
+High Level
+
+□ A Record
+□ AAAA Record
+□ CNAME
+□ MX
+
+Completion
+
+□ Explain how google.com becomes an
+IP address.
+
+--------------------------------------------------
+
+SECTION 6 - Ports
+
+Learn
+
+□ What is a Port?
+□ Well Known Ports
+□ Ephemeral Ports
+
+Must Know
+
+□ 22
+□ 53
+□ 80
+□ 443
+
+Completion
+
+□ Explain why one IP can run multiple
+services.
+
+--------------------------------------------------
+
+SECTION 7 - Protocols
+
+High Level Only
+
+Learn
+
+□ TCP
+□ UDP
+□ HTTP
+□ HTTPS
+□ DNS
+□ SSH
+
+Completion
+
+□ Explain the purpose of each protocol.
+
+(Don't go deep.
+Networking Volume will cover them.)
+
+--------------------------------------------------
+
+SECTION 8 - Packets
+
+Learn
+
+□ Packet
+□ Header
+□ Payload
+
+Completion
+
+□ Explain why large files are split into
+packets.
+
+--------------------------------------------------
+
+SECTION 9 - Journey of a Request
+
+Learn
+
+Browser
+
+↓
+
+DNS
+
+↓
+
+IP Address
+
+↓
+
+Router
+
+↓
+
+Internet
+
+↓
+
+Server
+
+↓
+
+Response
+
+Completion
+
+□ Explain the complete journey of
+opening google.com.
+
+==================================================
+PRACTICAL
+==================================================
+
+Windows
+
+□ ipconfig
+
+□ ping google.com
+
+□ tracert google.com
+
+□ nslookup google.com
+
+□ netstat -ano
+
+Linux
+
+□ ip addr
+
+□ ping
+
+□ traceroute
+
+□ dig
+
+□ ss -tuln
+
+Browser
+
+□ Open Developer Tools
+
+□ Network Tab
+
+Observe
+
+□ Request
+
+□ Response
+
+□ Status Code
+
+□ Headers
+
+==================================================
+MINI PROJECT
+==================================================
+
+Draw the complete flow
+
+You
+
+↓
+
+Browser
+
+↓
+
+DNS
+
+↓
+
+Router
+
+↓
+
+ISP
+
+↓
+
+Internet
+
+↓
+
+Google Server
+
+↓
+
+Response
+
+Explain every step.
+
+==================================================
+INTERVIEW QUESTIONS
+==================================================
+
+□ What is the Internet?
+
+□ Difference between Internet and Web?
+
+□ What is an IP Address?
+
+□ Difference between IPv4 and IPv6?
+
+□ What is DNS?
+
+□ Why do we need DNS?
+
+□ What is a Port?
+
+□ What is HTTP?
+
+□ Difference between HTTP and HTTPS?
+
+□ What happens when you type google.com
+and press Enter?
+
+==================================================
+BEST RESOURCES
+==================================================
+
+Videos
+
+□ Practical Networking
+
+□ PowerCert Animated Videos
+
+□ Computerphile
+
+Reading
+
+□ Cloudflare Learning Center
+
+□ Mozilla Developer Network
+
+==================================================
+REAL WORLD
+==================================================
+
+Every DevOps engineer troubleshoots
+network issues almost every day.
+
+Without understanding this chapter:
+
+Linux becomes harder.
+
+Docker becomes confusing.
+
+Kubernetes becomes overwhelming.
+
+Cloud makes little sense.
+
+This chapter is one of the highest ROI
+chapters in the entire roadmap.
+
+==================================================
+MOVE TO NEXT CHAPTER ONLY IF
+==================================================
+
+□ You can explain what happens after
+typing google.com.
+
+□ You understand Client & Server.
+
+□ You understand DNS.
+
+□ You understand IP Address.
+
+□ You understand Ports.
+
+□ You understand Packets.
+
+□ You understand Request & Response.
+
+==================================================
+STATUS
+
+□ NOT STARTED
+
+□ IN PROGRESS
+
+□ COMPLETED

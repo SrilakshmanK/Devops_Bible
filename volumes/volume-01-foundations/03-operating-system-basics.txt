@@ -1,0 +1,281 @@
+==================================================
+VOLUME 01 - FOUNDATIONS
+CHAPTER 03 - OPERATING SYSTEM BASICS
+==================================================
+
+Estimated Time
+--------------
+2 - 3 Days
+
+Goal
+--------------
+Understand what an Operating System does,
+how it manages hardware, and why Linux
+exists.
+
+By the end of this chapter, you'll know
+why an OS is the heart of every computer.
+
+==================================================
+TOPICS TO LEARN
+==================================================
+
+SECTION 1 - What is an Operating System?
+
+Learn
+
+□ What is an Operating System?
+□ Why do computers need an OS?
+□ Responsibilities of an OS
+
+Completion
+
+□ Explain why a computer cannot practically
+run modern applications without an OS.
+
+--------------------------------------------------
+
+SECTION 2 - Kernel
+
+Learn
+
+□ What is a Kernel?
+□ User Space
+□ Kernel Space
+□ Kernel Responsibilities
+
+Completion
+
+□ Explain what happens when an application
+needs to read a file.
+
+--------------------------------------------------
+
+SECTION 3 - System Calls
+
+Learn
+
+□ What is a System Call?
+□ Why applications can't directly access hardware
+□ User Space → Kernel Space
+
+Completion
+
+□ Explain how an application requests access
+to hardware.
+
+--------------------------------------------------
+
+SECTION 4 - Process Management
+
+Learn
+
+□ Process
+□ Process ID (PID)
+□ Parent Process
+□ Child Process
+□ Context Switching
+
+Completion
+
+□ Explain why multiple applications can run
+at the same time.
+
+--------------------------------------------------
+
+SECTION 5 - Memory Management
+
+Learn
+
+□ RAM Allocation
+□ Virtual Memory
+□ Paging
+□ Swapping (High Level)
+
+Completion
+
+□ Explain what happens when RAM becomes full.
+
+--------------------------------------------------
+
+SECTION 6 - File System Basics
+
+Learn
+
+□ What is a File System?
+□ Files
+□ Directories
+□ Paths
+□ Mounting (High Level)
+
+Completion
+
+□ Explain how the OS stores files.
+
+--------------------------------------------------
+
+SECTION 7 - Device Management
+
+Learn
+
+□ Drivers
+□ Plug and Play
+□ Interrupts (High Level)
+
+Completion
+
+□ Explain how the OS detects a USB device.
+
+--------------------------------------------------
+
+SECTION 8 - Types of Operating Systems
+
+Learn
+
+□ Windows
+□ Linux
+□ macOS
+□ Android
+□ iOS
+□ Embedded OS
+
+Completion
+
+□ Explain where each OS is commonly used.
+
+==================================================
+PRACTICAL
+==================================================
+
+Windows
+
+□ Task Manager
+□ Resource Monitor
+□ Disk Management
+□ Device Manager
+
+Linux
+
+□ uname -a
+□ ps
+□ top
+□ htop
+□ free -h
+□ lsblk
+□ df -h
+□ mount
+
+Observe
+
+□ Running processes
+□ Memory usage
+□ Mounted drives
+
+==================================================
+MINI PROJECT
+==================================================
+
+Draw the relationship between:
+
+Application
+
+↓
+
+System Call
+
+↓
+
+Kernel
+
+↓
+
+Driver
+
+↓
+
+Hardware
+
+Explain the role of each component.
+
+==================================================
+INTERVIEW QUESTIONS
+==================================================
+
+□ What is an Operating System?
+
+□ Why do we need an OS?
+
+□ What is the Kernel?
+
+□ Difference between User Space and Kernel Space?
+
+□ What is a System Call?
+
+□ What is a Process?
+
+□ What is Context Switching?
+
+□ What is Virtual Memory?
+
+□ What is a File System?
+
+□ What are Device Drivers?
+
+==================================================
+BEST RESOURCES
+==================================================
+
+YouTube
+
+□ Operating Systems - Crash Course
+
+□ Operating System Playlist - Gate Smashers
+
+□ Computerphile
+
+Reading
+
+□ Microsoft Learn
+
+□ Red Hat Documentation
+
+□ Linux Kernel Documentation (Overview)
+
+==================================================
+REAL WORLD
+==================================================
+
+Understand why every cloud server,
+Docker container, Kubernetes node,
+database server and web server depends
+on an Operating System.
+
+DevOps engineers spend a huge amount
+of time interacting with Linux.
+
+==================================================
+MOVE TO NEXT CHAPTER ONLY IF
+==================================================
+
+□ You understand the purpose of an OS.
+
+□ You can explain the Kernel.
+
+□ You understand User Space vs Kernel Space.
+
+□ You understand Processes.
+
+□ You understand Memory Management.
+
+□ You understand File Systems.
+
+□ You understand Device Drivers.
+
+==================================================
+STATUS
+
+□ NOT STARTED
+
+□ IN PROGRESS
+
+□ COMPLETED

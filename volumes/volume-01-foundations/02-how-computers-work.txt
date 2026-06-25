@@ -1,0 +1,270 @@
+==================================================
+VOLUME 01 - FOUNDATIONS
+CHAPTER 02 - HOW COMPUTERS WORK
+==================================================
+
+Estimated Time
+--------------
+2 - 3 Days
+
+Goal
+--------------
+Understand what happens inside a computer
+from the moment you press the power button
+until an application starts running.
+
+If you understand this chapter,
+Operating Systems and Linux will become
+much easier.
+
+==================================================
+TOPICS TO LEARN
+==================================================
+
+SECTION 1 - Boot Process
+
+Learn
+
+□ Power Button
+□ Power Supply (PSU)
+□ BIOS
+□ UEFI
+□ POST (Power On Self Test)
+□ Boot Device Selection
+□ Boot Loader
+
+Completion
+
+□ Explain everything that happens after
+pressing the power button.
+
+--------------------------------------------------
+
+SECTION 2 - Operating System Boot
+
+Learn
+
+□ Kernel
+□ Kernel Initialization
+□ Device Drivers
+□ Init System
+□ Services
+□ Login Screen
+
+Completion
+
+□ Explain how Windows or Linux starts.
+
+--------------------------------------------------
+
+SECTION 3 - Program Execution
+
+Learn
+
+□ What is a Program?
+□ What is an Executable?
+□ Loading into RAM
+□ CPU executes Instructions
+□ Program becomes Process
+
+Completion
+
+□ Explain how Chrome starts after
+double-clicking it.
+
+--------------------------------------------------
+
+SECTION 4 - CPU Execution Cycle
+
+Learn
+
+□ Fetch
+□ Decode
+□ Execute
+□ Store
+
+Completion
+
+□ Explain how a CPU executes instructions.
+
+--------------------------------------------------
+
+SECTION 5 - Memory
+
+Learn
+
+□ Registers
+□ Cache
+□ RAM
+□ Virtual Memory
+
+Completion
+
+□ Explain where data travels before
+reaching the CPU.
+
+--------------------------------------------------
+
+SECTION 6 - Process Lifecycle
+
+Learn
+
+□ New
+□ Ready
+□ Running
+□ Waiting
+□ Terminated
+
+Completion
+
+□ Explain what happens when an application
+is opened and closed.
+
+==================================================
+PRACTICAL
+==================================================
+
+Windows
+
+□ Task Manager
+
+Observe
+
+Processes
+
+Performance
+
+Startup Apps
+
+-----------------------------------
+
+Linux
+
+Commands
+
+□ ps
+□ top
+□ htop
+□ free -h
+□ uptime
+
+Observe
+
+Running processes
+
+CPU usage
+
+Memory usage
+
+==================================================
+MINI PROJECT
+==================================================
+
+Create a flow diagram
+
+Power Button
+
+↓
+
+BIOS / UEFI
+
+↓
+
+Boot Loader
+
+↓
+
+Kernel
+
+↓
+
+Operating System
+
+↓
+
+Login
+
+↓
+
+Application
+
+↓
+
+Process
+
+↓
+
+CPU
+
+Explain every step.
+
+==================================================
+INTERVIEW QUESTIONS
+==================================================
+
+□ What happens after pressing the
+power button?
+
+□ What is BIOS?
+
+□ Difference between BIOS and UEFI?
+
+□ What is POST?
+
+□ What is Boot Loader?
+
+□ What is Kernel?
+
+□ What is a Process?
+
+□ Difference between Program and Process?
+
+□ What happens when you open Chrome?
+
+□ Explain the Fetch Decode Execute cycle.
+
+==================================================
+BEST RESOURCES
+==================================================
+
+YouTube
+
+□ PowerCert Animated Videos
+
+□ Crash Course Computer Science
+
+□ Computerphile
+
+Reading
+
+□ GeeksforGeeks
+
+□ Microsoft Learn (Boot Process)
+
+□ Red Hat Documentation (Boot Process)
+
+==================================================
+MOVE TO NEXT CHAPTER ONLY IF
+==================================================
+
+□ You can explain the complete boot process.
+
+□ You know the difference between
+Program and Process.
+
+□ You understand the CPU execution cycle.
+
+□ You understand how an application
+starts running.
+
+□ You can explain the journey from
+Power Button to Desktop.
+
+==================================================
+STATUS
+
+□ NOT STARTED
+
+□ IN PROGRESS
+
+□ COMPLETED
