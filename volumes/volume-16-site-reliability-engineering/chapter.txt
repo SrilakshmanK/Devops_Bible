@@ -1,0 +1,303 @@
+📘 Volume 16 — Site Reliability Engineering (SRE)
+🎯 Objective
+
+Learn the principles and practices of Site Reliability Engineering to design, operate, maintain, and continuously improve highly available, scalable, and reliable production systems.
+
+Outcome:
+After completing this volume, you should be able to manage production environments using reliability engineering principles, respond to incidents, plan capacity, improve system resilience, and balance innovation with stability.
+
+Chapter 1 — Introduction to Site Reliability Engineering
+Topics
+What is Site Reliability Engineering?
+History of SRE
+DevOps vs SRE
+Why SRE Exists
+Reliability Engineering
+Production Mindset
+Service Ownership
+Reliability Culture
+Google's SRE Principles
+Chapter 2 — Reliability Fundamentals
+Topics
+Reliability
+Availability
+Durability
+Scalability
+Maintainability
+Fault Tolerance
+Resilience
+Redundancy
+High Availability
+Service Reliability
+Chapter 3 — Service Level Objectives
+Topics
+SLA (Service Level Agreement)
+SLO (Service Level Objective)
+SLI (Service Level Indicator)
+Error Budgets
+Reliability Targets
+Measuring Reliability
+User-Centric Metrics
+Choosing SLIs
+SLO Best Practices
+Chapter 4 — Incident Management
+Topics
+What is an Incident?
+Incident Severity Levels
+Incident Lifecycle
+Detection
+Triage
+Escalation
+Communication
+Incident Commander
+Recovery
+Resolution
+Post-Incident Activities
+Chapter 5 — Postmortems
+Topics
+What is a Postmortem?
+Blameless Culture
+Root Cause Analysis
+Timeline Creation
+Impact Assessment
+Corrective Actions
+Preventive Actions
+Documentation
+Continuous Improvement
+Chapter 6 — Monitoring Reliability
+Topics
+Reliability Metrics
+Uptime Monitoring
+Error Rate Monitoring
+Latency Monitoring
+Saturation Monitoring
+Capacity Metrics
+Availability Monitoring
+Health Monitoring
+Alert Reliability
+Chapter 7 — Capacity Planning
+Topics
+Capacity Planning
+Traffic Forecasting
+Resource Forecasting
+CPU Capacity
+Memory Capacity
+Storage Capacity
+Network Capacity
+Scaling Strategies
+Cost vs Performance
+Growth Planning
+Chapter 8 — High Availability
+Topics
+High Availability Design
+Single Point of Failure
+Active-Active
+Active-Passive
+Failover
+Load Balancing Review
+Multi-AZ Architecture
+Multi-Region Concepts
+Redundancy Strategies
+Chapter 9 — Disaster Recovery
+Topics
+Disaster Recovery Fundamentals
+Recovery Point Objective (RPO)
+Recovery Time Objective (RTO)
+Backup Strategies
+Restore Procedures
+Business Continuity
+Disaster Recovery Planning
+DR Testing
+Multi-Region Recovery
+Chapter 10 — Chaos Engineering
+Topics
+What is Chaos Engineering?
+Why Chaos Engineering Exists
+Failure Injection
+Resilience Testing
+Controlled Experiments
+Chaos Principles
+System Recovery
+Learning from Failure
+Chaos Best Practices
+Chapter 11 — Performance Engineering
+Topics
+Performance Testing
+Load Testing
+Stress Testing
+Spike Testing
+Endurance Testing
+Bottleneck Analysis
+Response Time Optimization
+Throughput Optimization
+Resource Optimization
+Chapter 12 — Reliability Automation
+Topics
+Auto Healing
+Auto Scaling Review
+Self-Healing Systems
+Automated Recovery
+Health Checks
+Scheduled Maintenance
+Maintenance Windows
+Operational Automation
+Reliability Scripts
+Chapter 13 — Operational Excellence
+Topics
+Runbooks
+Playbooks
+Standard Operating Procedures
+Documentation
+Operational Readiness
+Change Management
+Release Readiness
+On-Call Practices
+Shift Handover
+Chapter 14 — Production Operations
+Topics
+Production Deployments
+Safe Deployments
+Canary Releases Review
+Blue-Green Deployments Review
+Rollback Procedures
+Production Validation
+Change Risk Assessment
+Maintenance Planning
+Chapter 15 — Reliability Best Practices
+Topics
+Designing for Failure
+Failure Domains
+Automation First
+Observability First
+Continuous Improvement
+Cost vs Reliability
+Reliability Reviews
+Engineering Trade-offs
+Chapter 16 — Troubleshooting Production Systems
+Topics
+Service Outages
+High Latency
+Database Failures
+Network Failures
+Kubernetes Failures
+Cloud Infrastructure Failures
+CI/CD Failures
+Storage Failures
+Cascading Failures
+Recovery Validation
+Hands-on Labs
+Define SLIs, SLOs, and SLAs for your application.
+Create error budget policies.
+Simulate production incidents.
+Conduct incident response exercises.
+Write blameless postmortems.
+Configure uptime monitoring.
+Perform capacity planning.
+Simulate failover scenarios.
+Configure backup and restore procedures.
+Test disaster recovery plans.
+Execute chaos engineering experiments.
+Perform load and stress testing.
+Create operational runbooks.
+Practice production deployments with rollback.
+Measure application reliability over time.
+Mini Projects
+Project 1 — Reliability Assessment
+
+Evaluate the production platform from previous volumes.
+
+Analyze:
+
+Availability
+Reliability
+Scalability
+Performance
+Operational risks
+
+Document improvement recommendations.
+
+Project 2 — Disaster Recovery Platform
+
+Design and implement:
+
+Backup automation
+Restore procedures
+Recovery testing
+Multi-AZ architecture
+Disaster recovery documentation
+Project 3 — Chaos Engineering Lab
+
+Perform controlled experiments on your Kubernetes platform:
+
+Kill Pods
+Stop Nodes
+Simulate Network Failures
+Remove Storage
+Overload CPU
+Exhaust Memory
+Validate Self-Healing
+
+Record:
+
+Expected behavior
+Actual behavior
+Recovery time
+Lessons learned
+Project 4 — Production Reliability Platform
+
+Implement:
+
+SLO monitoring
+Error budget tracking
+Automated recovery
+Incident response workflow
+Capacity planning
+Runbooks
+Postmortem templates
+Integration Labs
+
+Apply SRE principles to everything built so far:
+
+Measure Kubernetes reliability.
+Validate AWS high availability.
+Improve CI/CD deployment safety.
+Monitor Docker workloads.
+Test Terraform recovery procedures.
+Validate observability dashboards.
+Secure production operations.
+Improve application resilience.
+Volume Challenge
+
+Build a Production Reliability Platform.
+
+Your platform should include:
+
+Defined SLIs, SLOs, and SLAs
+Error budget policies
+High availability architecture
+Disaster recovery strategy
+Automated backups
+Failover procedures
+Capacity planning
+Chaos engineering experiments
+Incident response process
+Runbooks
+Blameless postmortems
+Performance testing
+Operational documentation
+
+The objective is to operate your platform with the reliability standards expected of a modern production environment.
+
+Prerequisites for Volume 17
+
+Before moving on, you should be able to:
+
+Explain Site Reliability Engineering principles.
+Define and measure service reliability.
+Create SLIs, SLOs, and SLAs.
+Respond effectively to production incidents.
+Plan capacity for growing systems.
+Design highly available architectures.
+Build disaster recovery strategies.
+Conduct chaos engineering experiments.
+Operate production systems confidently.

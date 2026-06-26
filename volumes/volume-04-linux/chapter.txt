@@ -1,0 +1,284 @@
+📘 Volume 04 — Linux
+🎯 Objective
+
+Develop a deep understanding of Linux as an operating system and become comfortable administering Linux systems entirely from the command line.
+
+Outcome:
+After completing this volume, you should be able to confidently navigate, configure, troubleshoot, secure, and maintain a Linux system—the foundation of almost every DevOps environment.
+
+Chapter 1 — Introduction to Linux
+Topics
+History of Unix
+History of Linux
+GNU Project
+Open Source Philosophy
+Linux Distributions
+Choosing a Distribution
+Linux Architecture Overview
+Kernel Space vs User Space
+Linux Use Cases
+Why Linux Dominates Servers
+Chapter 2 — Linux Installation & Environment
+Topics
+Installation Methods
+Dual Boot
+Virtual Machine Installation
+WSL
+Cloud Linux Instances (Introduction)
+Desktop vs Server Editions
+Linux Boot Modes
+Initial System Configuration
+Shell vs Terminal
+TTY
+Virtual Consoles
+Chapter 3 — Linux Filesystem
+Topics
+Filesystem Hierarchy Standard (FHS)
+Root Directory
+Important Directories (/etc, /var, /home, /usr, /opt, /tmp, /proc, /sys, /dev, /boot)
+Absolute vs Relative Paths
+Hidden Files
+Symbolic Links
+Hard Links
+Mount Points
+Inodes (Linux Perspective)
+Chapter 4 — File & Directory Management
+Topics
+File Operations
+Directory Operations
+File Searching
+File Viewing
+File Comparison
+Archiving
+Compression
+Checksums & File Integrity
+File Permissions Overview
+Chapter 5 — Users & Groups
+Topics
+Users
+Groups
+User IDs (UID)
+Group IDs (GID)
+Home Directories
+Login Shells
+User Management
+Group Management
+Password Policies
+Account Locking
+Sudo
+Root User
+Privilege Escalation Basics
+Chapter 6 — Permissions & Ownership
+Topics
+Read, Write, Execute
+Ownership
+User, Group, Others
+Numeric Permissions
+Symbolic Permissions
+Default Permissions
+umask
+Special Permissions (SUID, SGID, Sticky Bit)
+Access Control Lists (ACL)
+File Attributes (chattr, lsattr)
+Chapter 7 — Processes & Jobs
+Topics
+What is a Process?
+Process Lifecycle
+Parent & Child Processes
+Daemons
+Foreground & Background Jobs
+Job Control
+Process Priorities
+Nice & Renice
+Signals
+Zombie Processes
+Orphan Processes
+Process Monitoring
+Chapter 8 — Package Management
+Topics
+Software Repositories
+Package Formats
+Dependency Management
+APT
+DNF/YUM
+Pacman
+Snap
+Flatpak
+Building from Source
+Software Updates
+Chapter 9 — System Services
+Topics
+What is systemd?
+Units
+Services
+Targets
+Journald
+Service Management
+Boot Targets
+Startup Services
+Service Dependencies
+Chapter 10 — Storage Management
+Topics
+Disk Identification
+Partitioning
+Filesystems
+Formatting
+Mounting
+Persistent Mounts (fstab)
+Swap
+LVM (Introduction)
+RAID (Concept)
+Disk Usage Analysis
+Disk Health Monitoring
+Chapter 11 — Networking in Linux
+Topics
+Network Interfaces
+Interface Configuration
+Hostname
+DNS Configuration
+Routing
+Firewall Basics
+SSH Server
+SSH Client
+SCP
+SFTP
+Port Management
+Socket Inspection
+Chapter 12 — Environment & Shell
+Topics
+Shell Types
+Bash
+Zsh
+Environment Variables
+Shell Variables
+Profile Files
+Aliases
+PATH
+Command History
+Shell Customization
+Chapter 13 — Logging
+Topics
+Why Logging Matters
+System Logs
+Journal Logs
+Log Rotation
+Application Logs
+Kernel Logs
+Log Analysis
+Troubleshooting with Logs
+Chapter 14 — Scheduling Tasks
+Topics
+Cron
+Crontab
+Anacron
+systemd Timers (Introduction)
+Scheduling Best Practices
+Chapter 15 — System Monitoring
+Topics
+CPU Monitoring
+Memory Monitoring
+Disk Monitoring
+Network Monitoring
+I/O Monitoring
+Performance Metrics
+Resource Limits
+System Uptime
+Chapter 16 — Linux Security Basics
+Topics
+Secure SSH Configuration
+Firewall Configuration
+Fail2Ban (Introduction)
+File Permissions Review
+User Security
+Password Policies
+SELinux (Introduction)
+AppArmor (Introduction)
+Security Best Practices
+Chapter 17 — Troubleshooting Linux
+Topics
+Boot Failures
+Service Failures
+Permission Problems
+Disk Full Issues
+Memory Issues
+CPU Bottlenecks
+Network Connectivity Issues
+Package Conflicts
+Log-Based Troubleshooting
+Performance Troubleshooting
+Hands-on Labs
+Install Linux using a virtual machine and WSL.
+Navigate the filesystem using only the terminal.
+Create, copy, move, and delete files and directories.
+Work with hard and symbolic links.
+Manage users and groups.
+Configure file permissions and ACLs.
+Install and remove software using package managers.
+Create and manage system services.
+Partition, format, and mount storage devices.
+Configure SSH for secure remote access.
+Analyze system logs using journalctl and log files.
+Schedule recurring tasks with cron.
+Monitor CPU, memory, disk, and network usage.
+Recover from common Linux issues.
+Secure a Linux server with basic hardening techniques.
+Mini Projects
+Project 1 — Build Your Linux Administration Lab
+
+Set up a Linux environment with:
+
+Multiple users
+Shared groups
+SSH access
+Scheduled tasks
+Custom shell configuration
+Proper filesystem organization
+Project 2 — Linux Server Hardening
+
+Secure a fresh Linux installation by:
+
+Creating administrative and non-administrative users.
+Configuring SSH securely.
+Applying least-privilege permissions.
+Enabling a firewall.
+Configuring automatic updates.
+Auditing logs for suspicious activity.
+Project 3 — Linux Health Check Toolkit
+
+Create a toolkit or scripts that collect:
+
+CPU usage
+Memory usage
+Disk usage
+Running services
+Network information
+System uptime
+Log summaries
+
+This project will naturally prepare you for Bash scripting in the next volume.
+
+Volume Challenge
+
+Take a fresh Linux installation and configure it into a usable server environment using only the terminal.
+
+Your system should support:
+
+Multi-user access
+Secure SSH login
+Persistent storage mounts
+Scheduled maintenance
+Service management
+Basic monitoring
+Basic security hardening
+Effective troubleshooting
+Prerequisites for Volume 05
+
+Before moving on, you should be able to:
+
+Navigate Linux confidently without a GUI.
+Manage files, users, permissions, services, and packages.
+Configure networking and SSH.
+Analyze logs and troubleshoot common issues.
+Monitor system resources.
+Perform routine Linux administration tasks.
+Understand enough Linux internals to automate them with Bash.

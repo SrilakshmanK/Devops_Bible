@@ -1,0 +1,294 @@
+📘 Volume 08 — Containers & Docker
+🎯 Objective
+
+Understand containerization from first principles and master Docker for building, running, networking, securing, and managing containers in production.
+
+Outcome:
+After completing this volume, you should understand how containers work internally, build optimized Docker images, manage multi-container applications, troubleshoot container issues, and prepare for Kubernetes.
+
+Chapter 1 — Why Containers Exist
+Topics
+Traditional Application Deployment
+Dependency Hell
+"Works on My Machine" Problem
+Why Virtual Machines Weren't Enough
+Evolution of Containers
+Containers vs Virtual Machines
+Container Ecosystem Overview
+OCI (Open Container Initiative)
+Docker Architecture Overview
+Chapter 2 — Linux Features Behind Containers
+Topics
+Linux Namespaces
+PID Namespace
+Network Namespace
+Mount Namespace
+UTS Namespace
+IPC Namespace
+User Namespace
+cgroups
+Resource Isolation
+Union File Systems
+OverlayFS
+Container Runtime Concepts
+Chapter 3 — Docker Installation & Architecture
+Topics
+Installing Docker
+Docker Engine
+Docker Daemon
+Docker CLI
+Docker Desktop vs Docker Engine
+Docker Client-Server Architecture
+Docker Context
+Docker Rootless Mode (Introduction)
+Chapter 4 — Docker Basics
+Topics
+Images
+Containers
+Registries
+Docker Hub
+Image vs Container
+Image Layers
+Pulling Images
+Running Containers
+Container Lifecycle
+Interactive Containers
+Detached Containers
+Inspecting Containers
+Chapter 5 — Docker Images
+Topics
+Dockerfile
+Build Context
+Image Layers
+Image Caching
+COPY vs ADD
+ENTRYPOINT
+CMD
+ENV
+ARG
+LABEL
+EXPOSE
+WORKDIR
+USER
+Multi-stage Builds
+Build Optimization
+Chapter 6 — Container Management
+Topics
+Starting Containers
+Stopping Containers
+Restart Policies
+Removing Containers
+Logs
+Inspect
+Exec
+Attach
+Stats
+Top
+Copy Files
+Rename
+Pause & Unpause
+Pruning Resources
+Chapter 7 — Docker Networking
+Topics
+Container Networking Fundamentals
+Bridge Network
+Host Network
+None Network
+Overlay Network (Introduction)
+Macvlan (Introduction)
+DNS Inside Docker
+Port Publishing
+Container-to-Container Communication
+Network Inspection
+Custom Networks
+Chapter 8 — Docker Storage
+Topics
+Container Filesystems
+Writable Layer
+Volumes
+Bind Mounts
+tmpfs Mounts
+Volume Drivers
+Persistent Data
+Backup & Restore Volumes
+Storage Best Practices
+Chapter 9 — Docker Compose
+Topics
+Why Docker Compose Exists
+Compose File Structure
+Services
+Networks
+Volumes
+Environment Variables
+Dependencies
+Health Checks
+Scaling Services
+Compose Profiles
+Override Files
+Chapter 10 — Docker Registries
+Topics
+Docker Hub
+Private Registries
+Image Tagging
+Image Versioning
+Pushing Images
+Pulling Images
+Registry Authentication
+Registry Security
+Chapter 11 — Docker Security
+Topics
+Running as Non-root
+Image Security
+Docker Content Trust (Concept)
+Secrets (Introduction)
+Image Signing (Concept)
+Least Privilege
+Capabilities
+Seccomp (Introduction)
+AppArmor Integration
+Rootless Containers
+Chapter 12 — Docker Logging & Monitoring
+Topics
+Container Logs
+Logging Drivers
+Resource Monitoring
+Health Checks
+Container Metrics
+Basic Troubleshooting
+Container Inspection
+Performance Monitoring
+Chapter 13 — Docker Best Practices
+Topics
+Small Images
+Layer Optimization
+Image Versioning
+Efficient Dockerfiles
+Multi-stage Builds
+Environment Separation
+Secret Management
+Cleanup Strategies
+Production Best Practices
+Chapter 14 — Troubleshooting Docker
+Topics
+Container Startup Failures
+Networking Issues
+DNS Problems
+Volume Problems
+Build Failures
+Permission Issues
+Resource Exhaustion
+Image Pull Errors
+Registry Issues
+Debugging Containers
+Chapter 15 — Docker in DevOps
+Topics
+Docker in CI/CD
+Docker for Development
+Docker for Testing
+Docker in Production
+Container Lifecycle in DevOps
+Immutable Infrastructure
+Introduction to Orchestration
+Preparing for Kubernetes
+Hands-on Labs
+Install Docker on Linux.
+Build custom Docker images.
+Create optimized Dockerfiles.
+Run and manage containers.
+Inspect image layers.
+Connect multiple containers using custom networks.
+Configure persistent storage using volumes.
+Build multi-container applications with Docker Compose.
+Push and pull images from Docker Hub.
+Secure containers using non-root users.
+Debug broken containers.
+Analyze resource usage.
+Optimize Docker image size.
+Recover from common Docker failures.
+Mini Projects
+Project 1 — Containerize a Python Application
+
+Use your Volume 07 Automation Framework and:
+
+Create a Dockerfile.
+Build an image.
+Run the application in a container.
+Configure environment variables.
+Mount configuration files.
+Persist logs using volumes.
+Project 2 — Multi-Container Monitoring Stack
+
+Containerize:
+
+Python monitoring application
+Nginx
+Redis
+PostgreSQL
+
+Connect everything using Docker Compose.
+
+Project 3 — Self-Hosted Development Environment
+
+Build a complete local environment containing:
+
+Git Server (optional)
+PostgreSQL
+Redis
+Nginx
+Your Python applications
+Docker Compose
+Persistent storage
+Custom networking
+Project 4 — Production-Ready Container
+
+Take an application and:
+
+Reduce image size.
+Use multi-stage builds.
+Run as non-root.
+Add health checks.
+Configure restart policies.
+Secure secrets.
+Optimize startup time.
+Integration Labs
+
+Integrate all previous volumes:
+
+Containerize Linux automation scripts from Volume 05.
+Containerize Python applications from Volume 07.
+Clone repositories from GitHub inside containers.
+Use Docker networking concepts from Volume 03.
+Analyze container resource usage using Linux tools from Volume 04.
+Automate Docker management using Python.
+Volume Challenge
+
+Build a complete containerized application platform.
+
+It should include:
+
+Multiple services
+Custom Docker images
+Docker Compose
+Persistent volumes
+Custom networks
+Environment configuration
+Health checks
+Logging
+Secure configuration
+Automated deployment scripts
+Documentation
+
+The entire environment should be reproducible with a single command.
+
+Prerequisites for Volume 09
+
+Before moving on, you should be able to:
+
+Explain how containers differ from virtual machines.
+Understand Linux namespaces and cgroups conceptually.
+Build efficient Docker images.
+Write production-ready Dockerfiles.
+Manage container networking and storage.
+Deploy multi-container applications with Docker Compose.
+Secure and troubleshoot Docker environments.
+Understand why orchestration platforms like Kubernetes are needed.

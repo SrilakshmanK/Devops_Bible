@@ -1,0 +1,312 @@
+📘 Volume 09 — Web Infrastructure & Deployment Architecture
+🎯 Objective
+
+Understand how modern web applications are designed, deployed, scaled, and delivered in production environments.
+
+Outcome:
+After completing this volume, you should understand every component involved in serving a web application—from the browser to the database—and be able to design and troubleshoot production architectures.
+
+Chapter 1 — Introduction to Web Infrastructure
+Topics
+What is Web Infrastructure?
+Evolution of Web Applications
+Monolithic Architecture
+Three-Tier Architecture
+N-Tier Architecture
+Microservices (Introduction)
+Request-Response Lifecycle
+Production vs Development Environments
+Chapter 2 — How the Internet Serves a Website
+Topics
+Browser Request Lifecycle
+URL Structure
+DNS Resolution
+TCP Connection
+TLS Handshake
+HTTP Request
+Reverse Proxy
+Application Server
+Database Query
+Response Generation
+Browser Rendering
+Caching Along the Path
+Chapter 3 — Web Servers
+Topics
+What is a Web Server?
+Static vs Dynamic Content
+Nginx
+Apache HTTP Server
+Caddy (Introduction)
+Virtual Hosts
+Server Blocks
+MIME Types
+Directory Indexing
+Compression
+Keep-Alive Connections
+Chapter 4 — Reverse Proxies
+Topics
+Why Reverse Proxies Exist
+Reverse Proxy Architecture
+Nginx as Reverse Proxy
+SSL Termination
+URL Rewriting
+Header Forwarding
+Load Distribution Basics
+Security Benefits
+Proxy Buffers
+Timeouts
+Chapter 5 — Application Servers
+Topics
+What is an Application Server?
+Backend Frameworks
+Runtime Environments
+Node.js Servers
+Python Application Servers
+Java Application Servers (Introduction)
+Process Managers
+Application Lifecycle
+Chapter 6 — Load Balancing
+Topics
+Why Load Balancers Exist
+Layer 4 vs Layer 7 Load Balancing
+Round Robin
+Least Connections
+IP Hash
+Weighted Algorithms
+Sticky Sessions
+Health Checks
+Failover
+High Availability
+Chapter 7 — Caching
+Topics
+Why Caching Exists
+Browser Cache
+CDN Cache
+Reverse Proxy Cache
+Application Cache
+Database Cache
+Redis
+Memcached
+Cache Invalidation
+Cache-Control Headers
+Cache Strategies
+Chapter 8 — Databases in Production
+Topics
+Database Roles
+SQL vs NoSQL
+Primary & Replica
+Read Replicas
+Replication
+Sharding (Introduction)
+Connection Pooling
+Transactions
+Database Backups
+Recovery Concepts
+Chapter 9 — Storage Systems
+Topics
+Local Storage
+Network Storage
+Object Storage
+Block Storage
+File Storage
+Shared Storage
+Persistent Storage
+Backup Storage
+Storage Redundancy
+Chapter 10 — Content Delivery Networks (CDN)
+Topics
+What is a CDN?
+Edge Locations
+CDN Caching
+Static Asset Delivery
+Dynamic Content
+CDN Security
+Cache Purging
+Global Performance
+Chapter 11 — Message Queues
+Topics
+Why Queues Exist
+Synchronous vs Asynchronous Processing
+Producers
+Consumers
+Queues
+Topics
+RabbitMQ (Introduction)
+Kafka (Introduction)
+Background Jobs
+Event-Driven Architecture (Introduction)
+Chapter 12 — API Architecture
+Topics
+REST APIs
+API Gateway
+API Versioning
+Rate Limiting
+Authentication
+Authorization
+Idempotency
+Pagination
+Webhooks
+WebSockets (Production Perspective)
+Chapter 13 — High Availability & Scalability
+Topics
+Horizontal Scaling
+Vertical Scaling
+Stateless Applications
+Stateful Applications
+Session Management
+Auto Scaling Concepts
+Fault Tolerance
+Redundancy
+Single Point of Failure
+Disaster Recovery (Introduction)
+Chapter 14 — Security in Web Infrastructure
+Topics
+HTTPS Everywhere
+TLS Certificates
+Certificate Authorities
+HSTS
+CORS
+CSRF (Introduction)
+XSS (Introduction)
+Security Headers
+Rate Limiting
+DDoS Basics
+WAF (Introduction)
+Chapter 15 — Observability in Web Applications
+Topics
+Application Logs
+Access Logs
+Error Logs
+Metrics
+Health Endpoints
+Readiness Checks
+Liveness Checks
+Tracing (Introduction)
+Monitoring Overview
+Chapter 16 — Troubleshooting Production Systems
+Topics
+Website Down
+DNS Failures
+SSL Problems
+Reverse Proxy Issues
+Load Balancer Problems
+Database Connectivity
+Slow Responses
+High Latency
+Memory Leaks
+CPU Bottlenecks
+Timeout Issues
+Log-Based Investigation
+Hands-on Labs
+Deploy a static website using Nginx.
+Configure Nginx as a reverse proxy.
+Deploy a containerized web application behind Nginx.
+Configure HTTPS using self-signed certificates (development).
+Build a multi-tier application (frontend + backend + database).
+Configure Redis caching.
+Simulate load balancing using multiple application instances.
+Deploy PostgreSQL with persistent storage.
+Analyze access and error logs.
+Trace the lifecycle of an HTTP request.
+Simulate infrastructure failures and recover from them.
+Mini Projects
+Project 1 — Production Web Stack
+
+Deploy:
+
+Nginx
+Python/Node.js Application
+PostgreSQL
+Redis
+
+Containerize everything using Docker Compose.
+
+Project 2 — Highly Available Application
+
+Create:
+
+Multiple application instances
+Reverse proxy
+Load balancing
+Health checks
+Shared database
+Logging
+Project 3 — Full Deployment Architecture
+
+Build a deployment that includes:
+
+Browser
+      ↓
+DNS
+      ↓
+Reverse Proxy (Nginx)
+      ↓
+Application
+      ↓
+Redis Cache
+      ↓
+PostgreSQL
+      ↓
+Persistent Storage
+
+Document the complete request flow.
+
+Project 4 — Failure Simulation Lab
+
+Intentionally create failures:
+
+Stop database
+Break DNS
+Kill containers
+Remove reverse proxy
+Fill disk
+Expire certificates (development simulation)
+
+Document:
+
+Symptoms
+Root cause
+Investigation
+Resolution
+Integration Labs
+
+Integrate previous volumes by:
+
+Running applications inside Docker containers.
+Using Git repositories for deployment.
+Automating deployments with Python and Bash.
+Configuring Linux services.
+Applying networking knowledge to routing and reverse proxies.
+Monitoring system resources during deployments.
+Volume Challenge
+
+Design and deploy a production-style web infrastructure capable of serving a real application.
+
+It should include:
+
+Reverse proxy
+HTTPS
+Multiple application instances
+Database
+Cache
+Persistent storage
+Logging
+Health checks
+Load balancing
+Docker Compose
+Documentation of the full request lifecycle
+
+The system should be reproducible, documented, and resilient to common failures.
+
+Prerequisites for Volume 10
+
+Before moving on, you should be able to:
+
+Explain the complete lifecycle of a web request.
+Configure and troubleshoot Nginx.
+Deploy multi-tier applications.
+Understand reverse proxies and load balancers.
+Use caching effectively.
+Understand production database architecture.
+Design scalable deployment architectures.
+Troubleshoot common production issues.

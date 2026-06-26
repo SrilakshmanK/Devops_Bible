@@ -1,0 +1,136 @@
+📘 Volume 01 — Foundations
+🎯 Objective
+
+Build the mindset and learning skills required to become an engineer before touching technical tools.
+
+Outcome:
+After completing this volume, you should know how to approach learning complex technical subjects, debug problems, read documentation effectively, and think like an engineer.
+
+Chapter 1 — Welcome to DevOps
+Topics
+What is DevOps?
+History of DevOps
+DevOps vs Traditional IT
+DevOps Culture
+DevOps Lifecycle
+DevOps Engineer Roles & Responsibilities
+DevOps Roadmap Overview
+Understanding the Big Picture
+Chapter 2 — The Engineer's Mindset
+Topics
+Thinking Like an Engineer
+First-Principles Thinking
+Systems Thinking
+Breaking Problems into Smaller Parts
+Cause vs Symptoms
+Curiosity-Driven Learning
+Engineering vs Memorization
+Chapter 3 — Learning How to Learn
+Topics
+Active Learning
+Passive Learning
+The Feynman Technique
+Spaced Repetition
+Deliberate Practice
+Building Long-Term Memory
+Learning from Mistakes
+Creating Personal Notes
+Avoiding Tutorial Hell
+Chapter 4 — Problem Solving
+Topics
+What is Problem Solving?
+Logical Thinking
+Step-by-Step Reasoning
+Pattern Recognition
+Decomposition
+Abstraction
+Algorithmic Thinking
+Developing Solutions
+Chapter 5 — Debugging
+Topics
+What is Debugging?
+Debugging Mindset
+Reading Error Messages
+Reproducing Bugs
+Binary Search Debugging
+Rubber Duck Debugging
+Logging
+Using Documentation During Debugging
+Root Cause Analysis
+Chapter 6 — Reading Documentation
+Topics
+Why Documentation Matters
+Types of Documentation
+Navigating Official Docs
+Understanding Technical Language
+Finding Examples
+Searching Efficiently
+Release Notes
+Version Differences
+Chapter 7 — Asking Better Questions
+Topics
+Asking Good Technical Questions
+Research Before Asking
+Minimal Reproducible Example
+Providing Context
+Sharing Logs
+Stack Overflow Etiquette
+GitHub Issues
+AI Prompting for Engineers
+Chapter 8 — Scientific Method in Engineering
+Topics
+Observation
+Hypothesis
+Experiment
+Testing
+Measuring Results
+Iteration
+Validation
+Documentation of Findings
+Chapter 9 — Productivity & Workflow
+Topics
+Organizing Projects
+Folder Structures
+Naming Conventions
+Time Management
+Deep Work
+Task Management
+Keeping a Learning Journal
+Versioning Personal Notes
+Hands-on Labs
+Research an unfamiliar technology using only official documentation.
+Solve a simple technical problem using structured debugging.
+Create a minimal reproducible example for a bug.
+Read and summarize a technical documentation page.
+Break a large technical problem into smaller tasks.
+Practice asking well-structured technical questions.
+Create your personal knowledge base for the remaining volumes.
+Mini Project
+
+Engineer Starter Kit
+
+Build your own development workspace.
+
+Include:
+
+Folder organization
+Notes organization
+Git repository for learning
+Terminal setup
+Editor setup
+Learning journal
+Documentation bookmarks
+Volume Challenge
+
+Complete a small unknown task without following a YouTube tutorial, relying instead on official documentation, logical reasoning, debugging, and experimentation.
+
+Prerequisites for Volume 02
+
+Before moving on, you should be able to:
+
+Think logically about technical problems.
+Read documentation independently.
+Debug simple issues methodically.
+Ask effective technical questions.
+Organize your learning workflow.
+Learn unfamiliar technologies without relying solely on tutorials.

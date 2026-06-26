@@ -1,0 +1,315 @@
+📘 Volume 10 — Continuous Integration & Continuous Delivery (CI/CD)
+🎯 Objective
+
+Master the principles, tools, and workflows of Continuous Integration and Continuous Delivery/Deployment by designing, building, securing, and maintaining production-grade CI/CD pipelines.
+
+Outcome:
+After completing this volume, you should be able to build automated pipelines that compile, test, package, scan, and deploy applications using Jenkins and GitHub Actions while following modern DevOps best practices.
+
+Chapter 1 — Introduction to CI/CD
+Topics
+What is CI/CD?
+History of CI/CD
+DevOps Pipeline Overview
+Continuous Integration
+Continuous Delivery
+Continuous Deployment
+Why CI/CD Exists
+Manual vs Automated Deployment
+CI/CD Benefits
+Common CI/CD Terminology
+Chapter 2 — Software Delivery Lifecycle
+Topics
+SDLC Overview
+Development Workflow
+Source Code Management
+Build Process
+Testing Process
+Artifact Generation
+Deployment Process
+Release Management
+Rollback Concepts
+Chapter 3 — Pipeline Fundamentals
+Topics
+Pipeline Architecture
+Pipeline Stages
+Pipeline Triggers
+Pipeline Agents
+Pipeline Executors
+Pipeline Variables
+Secrets Management
+Parallel Execution
+Pipeline Dependencies
+Pipeline Optimization
+Chapter 4 — Build Automation
+Topics
+What is a Build?
+Build Tools Overview
+Build Artifacts
+Dependency Management
+Versioning
+Build Caching
+Artifact Naming
+Build Metadata
+Reproducible Builds
+Chapter 5 — Automated Testing
+Topics
+Unit Testing
+Integration Testing
+Functional Testing
+End-to-End Testing
+Smoke Testing
+Regression Testing
+Test Reports
+Test Coverage
+Fail Fast Principle
+Chapter 6 — Artifact Management
+Topics
+What are Artifacts?
+Artifact Repositories
+Artifact Versioning
+Build Retention
+Artifact Promotion
+Docker Images as Artifacts
+Package Repositories
+Binary Management
+Chapter 7 — Jenkins
+Topics
+Jenkins Architecture
+Jenkins Installation
+Master/Controller & Agent Architecture
+Nodes
+Executors
+Jobs
+Freestyle Projects
+Pipeline Projects
+Jenkinsfile
+Declarative Pipelines
+Scripted Pipelines
+Pipeline Syntax
+Parameters
+Environment Variables
+Credentials Management
+Plugins
+Shared Libraries
+Distributed Builds
+Backup & Restore
+Jenkins Best Practices
+Chapter 8 — GitHub Actions
+Topics
+GitHub Actions Overview
+Workflow Files
+Events
+Jobs
+Steps
+Runners
+Hosted Runners
+Self-hosted Runners
+Matrix Builds
+Secrets
+Artifacts
+Caching
+Reusable Workflows
+Composite Actions
+Marketplace Actions
+Chapter 9 — Deployment Strategies
+Topics
+Manual Deployment
+Automated Deployment
+Rolling Deployment
+Blue-Green Deployment
+Canary Deployment
+Recreate Deployment
+A/B Deployment
+Feature Flags (Introduction)
+Rollback Strategies
+Chapter 10 — Container CI/CD
+Topics
+Building Docker Images
+Image Tagging
+Multi-stage Build Pipelines
+Docker Registry Integration
+Image Scanning
+Publishing Images
+Docker Compose Deployment
+Registry Authentication
+Chapter 11 — Infrastructure in CI/CD
+Topics
+Infrastructure Pipelines
+Configuration Deployment
+Environment Promotion
+Infrastructure Validation
+Infrastructure Testing
+GitOps Concepts (Introduction)
+Chapter 12 — Pipeline Security
+Topics
+Secrets Management
+Credentials
+Secure Variables
+Least Privilege
+Dependency Scanning
+Secret Scanning
+Image Scanning
+License Scanning
+Supply Chain Basics
+Pipeline Hardening
+Chapter 13 — Monitoring CI/CD
+Topics
+Build Logs
+Pipeline Metrics
+Build Success Rate
+Deployment Metrics
+Failure Analysis
+Notifications
+Alerts
+Dashboard Basics
+Chapter 14 — Troubleshooting Pipelines
+Topics
+Build Failures
+Test Failures
+Docker Build Errors
+Authentication Problems
+Network Issues
+Runner Failures
+Agent Failures
+Artifact Problems
+Deployment Failures
+Rollback Procedures
+Chapter 15 — CI/CD Best Practices
+Topics
+Pipeline as Code
+Small Deployments
+Fast Feedback
+Build Once, Deploy Anywhere
+Immutable Artifacts
+Versioning Strategy
+Branch Strategy
+Environment Separation
+Documentation
+Pipeline Maintenance
+Hands-on Labs
+Install Jenkins on Linux.
+Configure Jenkins agents.
+Create Freestyle jobs.
+Build Declarative Pipelines.
+Build Scripted Pipelines.
+Create Jenkins Shared Libraries.
+Configure GitHub Actions workflows.
+Build Docker images automatically.
+Push images to Docker Hub.
+Store build artifacts.
+Configure deployment pipelines.
+Deploy to staging.
+Configure rollback mechanisms.
+Secure pipeline credentials.
+Scan Docker images.
+Integrate automated testing.
+Build multi-stage pipelines.
+Mini Projects
+Project 1 — Automated Portfolio Deployment
+
+Build a pipeline that:
+
+Pulls code from GitHub.
+Runs automated tests.
+Builds Docker images.
+Pushes images to Docker Hub.
+Deploys automatically using Docker Compose.
+Verifies application health.
+Project 2 — Multi-Environment Pipeline
+
+Create environments:
+
+Development
+Testing
+Staging
+Production
+
+Automate promotion between them with approvals where appropriate.
+
+Project 3 — Jenkins CI/CD Platform
+
+Build a complete Jenkins environment including:
+
+Controller
+Multiple agents
+Shared libraries
+Docker integration
+GitHub integration
+Notifications
+Artifact management
+Project 4 — GitHub Actions Platform
+
+Automate:
+
+Code quality checks
+Unit tests
+Docker builds
+Security scanning
+Artifact publishing
+Automated deployment
+Release creation
+Project 5 — Production Deployment Pipeline
+
+Using the application from Volume 09:
+
+Automate:
+
+Git Push
+      ↓
+CI Pipeline
+      ↓
+Tests
+      ↓
+Docker Build
+      ↓
+Image Scan
+      ↓
+Push Registry
+      ↓
+Deploy
+      ↓
+Health Check
+      ↓
+Rollback (if required)
+Integration Labs
+
+Integrate all previous volumes:
+
+Trigger pipelines from Git.
+Build Python applications automatically.
+Package applications into Docker images.
+Deploy to the production architecture from Volume 09.
+Use Bash scripts inside Jenkins pipelines.
+Configure Linux build agents.
+Analyze network issues affecting pipelines.
+Volume Challenge
+
+Build a production-grade CI/CD platform capable of:
+
+Source code integration
+Automated testing
+Artifact management
+Docker image creation
+Security scanning
+Multi-environment deployments
+Rollback support
+Notifications
+Monitoring
+Documentation
+
+The platform should support both Jenkins and GitHub Actions, demonstrating an understanding of traditional and modern CI/CD systems.
+
+Prerequisites for Volume 11
+
+Before moving on, you should be able to:
+
+Explain the complete CI/CD lifecycle.
+Build Jenkins pipelines from scratch.
+Create GitHub Actions workflows.
+Automate testing and deployments.
+Manage build artifacts.
+Implement deployment strategies.
+Secure CI/CD pipelines.
+Troubleshoot pipeline failures.
+Integrate Docker, Git, Python, and Linux into automated workflows.

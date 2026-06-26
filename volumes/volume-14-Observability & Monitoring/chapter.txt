@@ -1,0 +1,343 @@
+📘 Volume 14 — Observability & Monitoring
+🎯 Objective
+
+Master observability by collecting, visualizing, analyzing, and alerting on metrics, logs, and traces from applications and infrastructure.
+
+Outcome:
+After completing this volume, you should be able to monitor production systems, troubleshoot failures quickly, create dashboards, configure alerts, and build a complete observability platform.
+
+Chapter 1 — Introduction to Observability
+Topics
+What is Observability?
+Monitoring vs Observability
+Why Observability Exists
+The Three Pillars of Observability
+Metrics
+Logs
+Traces
+Telemetry
+Golden Signals
+RED Method
+USE Method
+Chapter 2 — Metrics
+Topics
+What are Metrics?
+Time-Series Data
+Metric Types
+Counter
+Gauge
+Histogram
+Summary
+Labels
+Cardinality
+Metric Naming
+Retention
+Sampling
+Chapter 3 — Prometheus
+Topics
+Prometheus Architecture
+Prometheus Server
+Exporters
+Node Exporter
+Blackbox Exporter
+cAdvisor
+Scraping
+Service Discovery
+Prometheus Configuration
+Storage
+Recording Rules
+Alerting Rules
+Federation (Introduction)
+Remote Write (Introduction)
+Chapter 4 — PromQL
+Topics
+Introduction to PromQL
+Instant Queries
+Range Queries
+Selectors
+Aggregation
+Functions
+Operators
+Rate Functions
+Histogram Queries
+Label Matching
+Query Optimization
+Chapter 5 — Grafana
+Topics
+Grafana Architecture
+Data Sources
+Dashboards
+Panels
+Variables
+Transformations
+Time Ranges
+Alerts
+Dashboard Sharing
+Dashboard Provisioning
+Best Practices
+Chapter 6 — Logging Fundamentals
+Topics
+Why Logging Matters
+Structured Logging
+Log Levels
+Log Formats
+JSON Logs
+Log Rotation
+Centralized Logging
+Log Retention
+Correlation IDs
+Logging Best Practices
+Chapter 7 — Loki
+Topics
+Loki Architecture
+Promtail
+Log Collection
+Log Labels
+Log Storage
+Log Queries
+Log Aggregation
+Integration with Grafana
+Scaling Loki
+Chapter 8 — Distributed Tracing
+Topics
+Why Tracing Exists
+Trace
+Span
+Parent & Child Spans
+Context Propagation
+Trace IDs
+Sampling
+Latency Analysis
+Service Dependency Graphs
+Chapter 9 — OpenTelemetry
+Topics
+What is OpenTelemetry?
+Architecture
+Instrumentation
+Collectors
+Exporters
+SDKs
+Metrics Collection
+Log Collection
+Trace Collection
+Auto Instrumentation
+Manual Instrumentation
+Chapter 10 — Alerting
+Topics
+Why Alerting Exists
+Alertmanager
+Alert Rules
+Alert Routing
+Alert Grouping
+Alert Deduplication
+Silencing Alerts
+Escalation
+Notification Channels
+Alert Fatigue
+Runbooks
+Chapter 11 — Monitoring Kubernetes
+Topics
+Cluster Monitoring
+Node Monitoring
+Pod Monitoring
+Deployment Monitoring
+Resource Usage
+Control Plane Monitoring
+kube-state-metrics
+Metrics Server
+Cluster Dashboards
+Kubernetes Alerts
+Chapter 12 — Monitoring Cloud Infrastructure
+Topics
+AWS CloudWatch
+CloudWatch Metrics
+CloudWatch Logs
+CloudWatch Dashboards
+CloudWatch Alarms
+Custom Metrics
+Infrastructure Monitoring
+EC2 Monitoring
+RDS Monitoring
+Load Balancer Monitoring
+Chapter 13 — Application Performance Monitoring (APM)
+Topics
+What is APM?
+Response Time
+Throughput
+Error Rate
+Database Performance
+Slow Queries
+API Monitoring
+Dependency Monitoring
+User Experience Monitoring
+Chapter 14 — Dashboard Design
+Topics
+Dashboard Principles
+Infrastructure Dashboards
+Application Dashboards
+Business Dashboards
+Executive Dashboards
+Visualization Best Practices
+Color Usage
+Dashboard Organization
+Drill-Down Techniques
+Chapter 15 — Incident Investigation
+Topics
+Using Metrics
+Using Logs
+Using Traces
+Correlating Data
+Root Cause Analysis
+Timeline Reconstruction
+Performance Analysis
+Failure Investigation
+Postmortems
+Chapter 16 — Observability Best Practices
+Topics
+Monitoring Strategy
+What to Monitor
+SLI Introduction
+SLO Introduction
+Alert Design
+Dashboard Maintenance
+Data Retention
+Cost Optimization
+Documentation
+Chapter 17 — Troubleshooting Observability
+Topics
+Missing Metrics
+Missing Logs
+Missing Traces
+Exporter Failures
+High Cardinality
+Storage Problems
+Alert Failures
+Dashboard Issues
+Performance Bottlenecks
+Collector Failures
+Hands-on Labs
+Install Prometheus.
+Install Grafana.
+Configure Node Exporter.
+Monitor Linux servers.
+Monitor Docker containers.
+Monitor Kubernetes clusters.
+Create custom Prometheus metrics.
+Build Grafana dashboards.
+Write PromQL queries.
+Configure Loki for centralized logging.
+Instrument an application with OpenTelemetry.
+Configure Alertmanager.
+Send alerts to Email/Slack/Discord.
+Monitor AWS resources using CloudWatch.
+Investigate simulated production failures.
+Mini Projects
+Project 1 — Infrastructure Monitoring Platform
+
+Build a monitoring stack using:
+
+Prometheus
+Grafana
+Node Exporter
+Alertmanager
+
+Monitor:
+
+Linux
+Docker
+Kubernetes
+AWS
+Project 2 — Centralized Logging Platform
+
+Build a logging solution using:
+
+Loki
+Promtail
+Grafana
+
+Collect logs from:
+
+Linux servers
+Docker containers
+Kubernetes Pods
+Applications
+Project 3 — Full Observability Platform
+
+Deploy:
+
+Prometheus
+Grafana
+Loki
+Alertmanager
+OpenTelemetry Collector
+
+Monitor your application from Volume 13.
+
+Project 4 — Incident Investigation Lab
+
+Simulate failures:
+
+High CPU
+Memory leak
+Pod crash
+Database outage
+DNS failure
+Network latency
+Disk full
+
+Use observability tools to:
+
+Detect
+Investigate
+Identify root cause
+Resolve
+Document findings
+Integration Labs
+
+Integrate everything you've built:
+
+Monitor AWS infrastructure.
+Monitor Kubernetes clusters.
+Monitor Docker containers.
+Collect Linux system metrics.
+Monitor CI/CD pipelines.
+Instrument Python applications.
+Monitor Nginx and PostgreSQL.
+Centralize logs from every component.
+Build dashboards for the complete production platform.
+Volume Challenge
+
+Build a Production Observability Platform.
+
+It should include:
+
+Prometheus
+Grafana
+Loki
+Alertmanager
+OpenTelemetry
+Kubernetes monitoring
+AWS monitoring
+Linux monitoring
+Application monitoring
+Dashboards
+Alerting
+Centralized logging
+Distributed tracing
+Incident investigation documentation
+
+The platform should give complete visibility into your production environment and allow you to detect, diagnose, and resolve issues efficiently.
+
+Prerequisites for Volume 15
+
+Before moving on, you should be able to:
+
+Explain the principles of observability.
+Collect and analyze metrics, logs, and traces.
+Build and maintain Grafana dashboards.
+Write effective PromQL queries.
+Configure Prometheus and Alertmanager.
+Centralize logs using Loki.
+Instrument applications with OpenTelemetry.
+Investigate production incidents using observability data.
+Monitor Linux, Docker, Kubernetes, and AWS environments.

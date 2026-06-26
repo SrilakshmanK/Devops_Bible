@@ -1,0 +1,266 @@
+📘 Volume 05 — Bash Scripting
+🎯 Objective
+
+Master Bash scripting to automate Linux system administration, reduce repetitive work, and build reusable command-line tools.
+
+Outcome:
+After completing this volume, you should be able to write professional Bash scripts for automation, server administration, monitoring, deployments, backups, and troubleshooting.
+
+Chapter 1 — Introduction to Bash
+Topics
+What is Bash?
+Why Bash Exists
+Shell vs Bash
+Interactive Shell vs Script
+How Bash Executes Commands
+Shebang (#!/bin/bash)
+Script Execution Process
+Bash Best Practices
+Bash vs Other Shells (sh, zsh, fish)
+Chapter 2 — Writing Your First Scripts
+Topics
+Creating Scripts
+Executing Scripts
+File Permissions
+Comments
+Variables
+Constants
+Environment Variables
+Reading User Input
+Command-Line Arguments
+Exit Status
+Return Codes
+Chapter 3 — Bash Data Types & Operators
+Topics
+Strings
+Integers
+Arrays
+Associative Arrays
+Arithmetic Operations
+String Operations
+Comparison Operators
+Logical Operators
+File Test Operators
+Numeric Test Operators
+Chapter 4 — Control Flow
+Topics
+if
+if-else
+elif
+Nested Conditions
+case Statements
+for Loops
+while Loops
+until Loops
+break
+continue
+select Menus
+Chapter 5 — Functions
+Topics
+Creating Functions
+Function Parameters
+Returning Values
+Local Variables
+Scope
+Reusable Functions
+Function Libraries
+Chapter 6 — Working with Files
+Topics
+Reading Files
+Writing Files
+Appending Data
+Temporary Files
+File Searching
+File Processing
+File Validation
+Directory Traversal
+Recursive Operations
+Chapter 7 — Text Processing
+Topics
+grep
+egrep
+sed
+awk
+cut
+sort
+uniq
+tr
+head
+tail
+xargs
+paste
+column
+wc
+Chapter 8 — Streams & Redirection
+Topics
+Standard Input
+Standard Output
+Standard Error
+Pipes
+Redirection
+Here Documents
+Here Strings
+Tee
+Process Substitution
+Chapter 9 — Process Automation
+Topics
+Running Commands
+Background Jobs
+Monitoring Processes
+Killing Processes
+Scheduling Scripts
+Automation with Cron
+Script Logging
+Error Handling
+Retry Logic
+Chapter 10 — System Administration with Bash
+Topics
+User Management Automation
+Group Management
+Permission Automation
+Package Management Automation
+Service Management
+Disk Monitoring
+CPU Monitoring
+Memory Monitoring
+Network Monitoring
+Log Rotation
+Log Cleanup
+Chapter 11 — Networking Automation
+Topics
+Connectivity Checks
+Port Scanning Basics
+DNS Lookup Automation
+HTTP Requests
+Downloading Files
+SSH Automation
+SCP Automation
+Remote Command Execution
+Health Checks
+Chapter 12 — Script Security
+Topics
+Secure Variables
+Protecting Secrets
+Input Validation
+Preventing Command Injection
+Secure Temporary Files
+File Permissions for Scripts
+Least Privilege
+Safe Error Handling
+Chapter 13 — Debugging Bash Scripts
+Topics
+Debugging Techniques
+Bash Debug Mode
+Verbose Mode
+Logging
+Error Messages
+Tracing
+Common Bash Mistakes
+ShellCheck
+Writing Maintainable Scripts
+Chapter 14 — Professional Bash Practices
+Topics
+Script Structure
+Naming Conventions
+Modular Scripts
+Configuration Files
+Reusable Libraries
+Documentation
+Version Control
+Script Testing
+Performance Considerations
+Hands-on Labs
+Write your first Bash script.
+Accept user input from the terminal.
+Build menu-driven scripts.
+Process log files using text-processing utilities.
+Automate software installation.
+Automate backups.
+Automate user creation.
+Create system monitoring scripts.
+Automate SSH tasks.
+Build scheduled maintenance scripts.
+Parse CSV and text files.
+Validate user input.
+Debug broken Bash scripts.
+Create reusable utility functions.
+Mini Projects
+Project 1 — Linux Automation Toolkit
+
+Build a collection of reusable scripts for:
+
+System updates
+Disk cleanup
+User management
+Package installation
+Log cleanup
+Service restart
+Backup automation
+Project 2 — Server Health Monitor
+
+Create a monitoring script that reports:
+
+CPU usage
+Memory usage
+Disk usage
+Running services
+Failed services
+Network status
+System uptime
+Logged-in users
+
+Generate readable reports and logs.
+
+Project 3 — Automated Backup System
+
+Build a backup solution that:
+
+Compresses files
+Creates timestamped backups
+Verifies backup integrity
+Removes old backups
+Maintains backup logs
+Sends status notifications (optional)
+Project 4 — Deployment Helper
+
+Create a script that can:
+
+Pull latest code
+Install dependencies
+Restart services
+Verify deployment
+Roll back on failure (basic implementation)
+
+This prepares you for the CI/CD volume later.
+
+Volume Challenge
+
+Build a Linux Server Management Toolkit.
+
+It should include modules for:
+
+User management
+File management
+Disk monitoring
+Log analysis
+Backup management
+Package management
+Service management
+Network diagnostics
+System reporting
+Scheduled maintenance
+
+The toolkit should use menus, functions, logging, configuration files, and proper error handling.
+
+Prerequisites for Volume 06
+
+Before moving on, you should be able to:
+
+Write modular Bash scripts.
+Automate common Linux administration tasks.
+Process and manipulate text efficiently.
+Handle errors and debug scripts.
+Schedule automated tasks.
+Create reusable command-line tools.
+Follow professional scripting practices.
+Build automation solutions for real Linux systems.

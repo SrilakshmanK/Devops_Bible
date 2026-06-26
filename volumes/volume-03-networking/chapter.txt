@@ -1,0 +1,218 @@
+📘 Volume 03 — Computer Networking
+🎯 Objective
+
+Build a deep understanding of computer networking from the physical connection between devices to secure communication over the Internet.
+
+Outcome:
+After completing this volume, you should understand how data travels between devices, how networks are designed, how common protocols work, and how to troubleshoot network issues.
+
+Chapter 1 — Networking Fundamentals
+Topics
+What is a Network?
+Why Networking Exists
+Types of Networks (LAN, WAN, MAN, PAN)
+Client-Server Architecture
+Peer-to-Peer Architecture
+Internet vs Intranet
+Bandwidth
+Latency
+Throughput
+Jitter
+Packet Loss
+Chapter 2 — Network Models
+Topics
+Why Network Models Exist
+OSI Model
+TCP/IP Model
+Layer Responsibilities
+Encapsulation
+Decapsulation
+Protocol Stack
+Data Flow Through Layers
+Chapter 3 — Physical & Data Link Layer
+Topics
+Physical Layer
+Network Interface Card (NIC)
+Ethernet
+MAC Address
+Frames
+Switches
+ARP (Address Resolution Protocol)
+Broadcast Domains
+Collision Domains
+VLAN (Introduction)
+Chapter 4 — Internet Layer
+Topics
+IP Addressing
+IPv4
+IPv6
+Public vs Private IP
+Network ID & Host ID
+Subnet Masks
+CIDR Notation
+Subnetting
+Routing
+Routing Tables
+Routers
+Default Gateway
+ICMP
+NAT
+PAT
+Chapter 5 — Transport Layer
+Topics
+TCP
+UDP
+Ports
+Sockets
+Three-Way Handshake
+Four-Way Termination
+Flow Control
+Congestion Control
+Reliability
+Checksums
+When to Use TCP
+When to Use UDP
+Chapter 6 — Application Layer
+Topics
+DNS
+DHCP
+HTTP
+HTTPS
+TLS/SSL
+FTP
+SFTP
+SMTP
+POP3
+IMAP
+NTP
+SSH
+Telnet
+WebSockets (Introduction)
+Chapter 7 — Internet Infrastructure
+Topics
+How the Internet Works
+Internet Service Providers (ISP)
+Autonomous Systems (AS)
+BGP (Introduction)
+Internet Exchange Points (IXP)
+Undersea Cables
+CDN (Introduction)
+Edge Computing (Introduction)
+Chapter 8 — Network Security
+Topics
+Firewalls
+Stateful vs Stateless Firewalls
+Access Control Lists (ACL)
+VPN
+Proxy
+Reverse Proxy
+Network Segmentation
+DMZ
+IDS
+IPS
+Zero Trust (Introduction)
+Chapter 9 — Load Balancing
+Topics
+Why Load Balancers Exist
+Types of Load Balancers
+Layer 4 vs Layer 7
+Health Checks
+Sticky Sessions
+Load Balancing Algorithms
+Reverse Proxy vs Load Balancer
+High Availability
+Chapter 10 — Cloud Networking
+Topics
+Virtual Networks
+VPC
+Subnets in Cloud
+Route Tables
+Internet Gateway
+NAT Gateway
+Security Groups
+Network ACLs
+Private Endpoints
+Bastion Hosts
+Chapter 11 — Network Troubleshooting
+Topics
+Common Network Problems
+DNS Troubleshooting
+Connectivity Issues
+Packet Loss Analysis
+Latency Analysis
+Routing Problems
+Firewall Issues
+Port Connectivity
+SSL/TLS Issues
+Performance Bottlenecks
+Hands-on Labs
+View and analyze your network interfaces.
+Assign static and dynamic IP addresses.
+Practice subnetting exercises.
+Configure a small local network using virtual machines.
+Capture packets using Wireshark.
+Analyze ARP traffic.
+Capture and inspect TCP handshakes.
+Inspect DNS queries.
+Compare HTTP and HTTPS traffic.
+Configure SSH between two Linux machines.
+Explore routing tables.
+Test connectivity using networking tools.
+Trace packet paths across networks.
+Build a simple firewall rule set.
+Configure a reverse proxy.
+Simulate network failures and troubleshoot them.
+Mini Projects
+Project 1 — Home Network Analysis
+
+Document and analyze your home network.
+
+Include:
+
+Router
+ISP
+Devices
+IP addressing
+Subnets
+DNS
+Gateway
+Internet path
+Project 2 — Build a Virtual Network Lab
+
+Using virtual machines:
+
+Create multiple Linux systems.
+Connect them on a virtual network.
+Assign IP addresses.
+Configure routing.
+Test communication.
+Capture packets with Wireshark.
+Troubleshoot intentionally broken connections.
+Project 3 — Website Journey Analysis
+
+Trace the complete lifecycle of opening a website:
+
+Browser → DNS → TCP Handshake → TLS Handshake → HTTP Request → Server → Response → Browser Rendering
+
+Understand every step involved.
+
+Volume Challenge
+
+Be able to explain the complete journey of a packet:
+
+Application → TCP/UDP → IP → Ethernet → Switch → Router → ISP → Internet → Remote Server → Response Back
+
+You should be able to identify what happens at each stage, which protocol is involved, and where common failures can occur.
+
+Prerequisites for Volume 04
+
+Before moving on, you should be able to:
+
+Explain the OSI and TCP/IP models.
+Understand IPv4 addressing and subnetting.
+Configure basic network settings.
+Explain how DNS, DHCP, HTTP, HTTPS, SSH, and TCP work.
+Capture and analyze network traffic with Wireshark.
+Troubleshoot common network issues.
+Understand the role of firewalls, proxies, and load balancers.
+Understand basic cloud networking concepts.

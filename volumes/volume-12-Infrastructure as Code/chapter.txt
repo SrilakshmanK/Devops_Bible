@@ -1,0 +1,301 @@
+📘 Volume 12 — Infrastructure as Code (Terraform & OpenTofu)
+🎯 Objective
+
+Master Infrastructure as Code (IaC) by learning how to define, provision, manage, and version cloud infrastructure using Terraform and OpenTofu.
+
+Outcome:
+After completing this volume, you should be able to build reproducible, scalable, version-controlled infrastructure and automate cloud provisioning without manual configuration.
+
+Chapter 1 — Introduction to Infrastructure as Code
+Topics
+What is Infrastructure as Code?
+Why IaC Exists
+Manual vs Automated Infrastructure
+Infrastructure Drift
+Declarative vs Imperative
+Immutable Infrastructure
+Mutable Infrastructure
+IaC Best Practices
+GitOps Relationship (Introduction)
+Chapter 2 — Terraform & OpenTofu Fundamentals
+Topics
+What is Terraform?
+What is OpenTofu?
+Terraform Architecture
+Providers
+Resources
+Data Sources
+Plugins
+Terraform CLI
+Terraform Workflow
+HCL (HashiCorp Configuration Language)
+Chapter 3 — HCL Language
+Topics
+Blocks
+Arguments
+Expressions
+Variables
+Local Values
+Outputs
+Comments
+Functions
+Dynamic Blocks
+Conditionals
+Loops
+For Expressions
+Chapter 4 — Terraform State
+Topics
+What is State?
+State File
+State Lifecycle
+State Locking
+Remote State
+State Security
+State Backup
+State Import
+State Manipulation
+Drift Detection
+Chapter 5 — Providers & Resources
+Topics
+Provider Configuration
+AWS Provider
+Resource Blocks
+Data Sources
+Dependencies
+Explicit Dependencies
+Implicit Dependencies
+Lifecycle Rules
+Provisioners (Introduction)
+Chapter 6 — Variables & Outputs
+Topics
+Input Variables
+Variable Types
+Variable Validation
+tfvars Files
+Sensitive Variables
+Environment Variables
+Output Values
+Local Values
+Variable Best Practices
+Chapter 7 — Modules
+Topics
+Why Modules Exist
+Module Structure
+Root Modules
+Child Modules
+Module Inputs
+Module Outputs
+Module Versioning
+Module Reusability
+Public Module Registry
+Private Modules
+Chapter 8 — Provisioning AWS Infrastructure
+Topics
+IAM
+VPC
+Subnets
+Route Tables
+Internet Gateway
+NAT Gateway
+Security Groups
+EC2
+EBS
+S3
+Load Balancers
+Auto Scaling
+RDS
+Route 53
+Chapter 9 — Secrets & Security
+Topics
+Sensitive Variables
+Secrets Management
+AWS Secrets Manager Integration
+IAM Roles
+Least Privilege
+Backend Security
+State File Protection
+Encryption
+Secret Rotation Concepts
+Chapter 10 — Terraform Workflow
+Topics
+init
+fmt
+validate
+plan
+apply
+destroy
+refresh
+import
+output
+state Commands
+Workspace Management
+Chapter 11 — Remote Backends
+Topics
+Why Remote State?
+S3 Backend
+DynamoDB Locking
+Backend Configuration
+Team Collaboration
+Remote State Access
+State Sharing
+Backend Migration
+Chapter 12 — Testing & Validation
+Topics
+Validation
+Formatting
+Static Analysis
+Linting
+Plan Review
+Policy Validation (Introduction)
+Infrastructure Testing Concepts
+Chapter 13 — CI/CD Integration
+Topics
+Terraform in Jenkins
+Terraform in GitHub Actions
+Automated Plans
+Approval Workflows
+Automated Apply
+Environment Promotion
+Infrastructure Pipelines
+GitOps Preparation
+Chapter 14 — Terraform Best Practices
+Topics
+Folder Structure
+Naming Conventions
+Module Design
+Environment Separation
+DRY Principles
+Version Pinning
+Documentation
+Reusability
+Scalability
+Chapter 15 — Troubleshooting Terraform
+Topics
+State Corruption
+Provider Errors
+Dependency Cycles
+Import Issues
+Drift Problems
+Authentication Errors
+Backend Failures
+Lock Conflicts
+Resource Recreation
+Debugging Plans
+Hands-on Labs
+Install Terraform/OpenTofu.
+Configure the AWS provider.
+Create EC2 instances.
+Provision a custom VPC.
+Deploy public and private subnets.
+Create security groups.
+Provision S3 buckets.
+Create RDS databases.
+Build reusable modules.
+Configure remote state in S3.
+Enable state locking with DynamoDB.
+Integrate Terraform into GitHub Actions.
+Build infrastructure across multiple environments.
+Import existing AWS resources.
+Destroy infrastructure safely.
+Mini Projects
+Project 1 — AWS Infrastructure as Code
+
+Recreate your Volume 11 AWS environment using Terraform.
+
+Provision:
+
+VPC
+Subnets
+Security Groups
+EC2
+S3
+RDS
+Load Balancer
+
+No manual AWS Console configuration.
+
+Project 2 — Reusable Infrastructure Modules
+
+Build reusable modules for:
+
+Networking
+Compute
+Storage
+Database
+Security
+
+Use them to create multiple environments.
+
+Project 3 — Multi-Environment Infrastructure
+
+Provision:
+
+Development
+Testing
+Staging
+Production
+
+Each environment should share modules but use different configurations.
+
+Project 4 — Automated Infrastructure Pipeline
+
+Integrate Terraform with GitHub Actions or Jenkins to:
+
+Validate code
+Generate plans
+Require approval
+Apply infrastructure changes
+Store remote state
+Handle rollbacks where appropriate
+Integration Labs
+
+Integrate all previous volumes:
+
+Deploy AWS infrastructure using Terraform.
+Automatically trigger infrastructure provisioning from GitHub.
+Use Python to generate Terraform variable files.
+Deploy Docker-based applications onto Terraform-created EC2 instances.
+Configure networking based on your Volume 03 knowledge.
+Use Linux servers provisioned by Terraform.
+Combine CI/CD pipelines with Infrastructure as Code.
+Volume Challenge
+
+Build a fully automated production AWS platform.
+
+It should provision:
+
+IAM
+Networking
+EC2
+Security Groups
+Load Balancer
+Auto Scaling
+Storage
+Database
+Monitoring prerequisites
+
+Requirements:
+
+Modular architecture
+Remote state
+State locking
+Multiple environments
+CI/CD integration
+Version control
+Documentation
+Repeatable deployments
+
+Everything should be created from code, not through the AWS Console.
+
+Prerequisites for Volume 13
+
+Before moving on, you should be able to:
+
+Explain Infrastructure as Code principles.
+Write clean Terraform/OpenTofu configurations.
+Design reusable modules.
+Manage Terraform state securely.
+Provision AWS infrastructure programmatically.
+Integrate Terraform into CI/CD pipelines.
+Troubleshoot state and provider issues.
+Build production-ready infrastructure from source code.

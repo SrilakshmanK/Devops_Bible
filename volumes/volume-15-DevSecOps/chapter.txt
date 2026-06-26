@@ -1,0 +1,318 @@
+📘 Volume 15 — DevSecOps
+🎯 Objective
+
+Integrate security into every stage of the DevOps lifecycle by learning how to secure infrastructure, applications, containers, CI/CD pipelines, Kubernetes, and cloud environments.
+
+Outcome:
+After completing this volume, you should be able to design, implement, automate, and maintain secure DevOps workflows while following modern DevSecOps practices.
+
+Chapter 1 — Introduction to DevSecOps
+Topics
+What is DevSecOps?
+Why DevSecOps Exists
+Security in the SDLC
+Shift Left Security
+Shift Right Security
+Shared Responsibility
+Defense in Depth
+Zero Trust Architecture
+Security Culture
+Secure Software Supply Chain
+Chapter 2 — Identity & Access Management
+Topics
+Authentication
+Authorization
+Identity Management
+IAM Principles
+Least Privilege
+Role-Based Access Control (RBAC)
+Attribute-Based Access Control (ABAC)
+Multi-Factor Authentication (MFA)
+Single Sign-On (SSO)
+Federated Identity
+Privileged Access Management (PAM)
+Chapter 3 — Secrets Management
+Topics
+Why Secrets Management Exists
+API Keys
+Passwords
+Certificates
+SSH Keys
+Kubernetes Secrets
+Environment Variables
+Secret Rotation
+HashiCorp Vault
+AWS Secrets Manager
+Secret Injection
+Secret Best Practices
+Chapter 4 — Infrastructure Security
+Topics
+Linux Hardening
+SSH Hardening
+File Permissions
+Firewall Hardening
+Cloud Infrastructure Security
+IAM Hardening
+Network Segmentation
+Infrastructure Auditing
+Secure Configuration
+Compliance Basics
+Chapter 5 — Container Security
+Topics
+Container Security Principles
+Image Security
+Base Image Selection
+Minimal Images
+Image Signing
+Rootless Containers
+Runtime Security
+Capabilities
+Seccomp
+AppArmor
+Container Isolation
+Container Escape (Concept)
+Chapter 6 — Kubernetes Security
+Topics
+Kubernetes Security Model
+RBAC
+Service Accounts
+Admission Controllers
+Pod Security Standards
+Network Policies
+Secrets Management
+Security Context
+Image Policies
+Namespace Isolation
+API Security
+Chapter 7 — CI/CD Security
+Topics
+Pipeline Security
+Secret Protection
+Secure Credentials
+Build Integrity
+Artifact Integrity
+Pipeline Permissions
+Secure Runners
+Branch Protection
+Code Signing
+Secure Releases
+Chapter 8 — Vulnerability Management
+Topics
+Vulnerability Assessment
+Vulnerability Scanning
+CVE
+CVSS
+Risk Assessment
+Patch Management
+Security Advisories
+Dependency Management
+Security Updates
+Chapter 9 — Application Security Testing
+Topics
+Static Application Security Testing (SAST)
+Dynamic Application Security Testing (DAST)
+Software Composition Analysis (SCA)
+Interactive Application Security Testing (IAST)
+Secret Scanning
+Code Quality
+Secure Coding Principles
+Chapter 10 — Container & Kubernetes Scanning
+Topics
+Trivy
+Grype
+Docker Scout
+Image Scanning
+Dependency Scanning
+Kubernetes Manifest Scanning
+Configuration Scanning
+Vulnerability Reports
+Chapter 11 — Supply Chain Security
+Topics
+Software Supply Chain
+SBOM
+Software Provenance
+Artifact Signing
+Sigstore (Introduction)
+Cosign
+Trusted Registries
+Dependency Trust
+Third-Party Risk
+Chapter 12 — Policy as Code
+Topics
+What is Policy as Code?
+Open Policy Agent (OPA)
+Rego (Introduction)
+Admission Policies
+Compliance Policies
+Infrastructure Policies
+Kubernetes Policies
+Policy Enforcement
+Chapter 13 — Runtime Security
+Topics
+Runtime Monitoring
+Runtime Threat Detection
+Falco
+Sysdig (Introduction)
+Audit Logs
+Process Monitoring
+File Integrity Monitoring
+Behavioral Analysis
+Chapter 14 — Cloud Security
+Topics
+AWS Security Best Practices
+IAM Security Review
+Security Groups
+NACL Security
+S3 Security
+RDS Security
+KMS
+Encryption
+CloudTrail Security
+GuardDuty (Introduction)
+Chapter 15 — Incident Response
+Topics
+Security Incidents
+Incident Lifecycle
+Detection
+Containment
+Eradication
+Recovery
+Lessons Learned
+Digital Forensics (Introduction)
+Security Reporting
+Chapter 16 — Compliance & Governance
+Topics
+Security Policies
+Governance
+Risk Management
+Auditing
+CIS Benchmarks
+ISO 27001 (Introduction)
+SOC 2 (Introduction)
+PCI DSS (Introduction)
+GDPR (Introduction)
+Compliance Automation
+Chapter 17 — DevSecOps Best Practices
+Topics
+Security by Design
+Continuous Security
+Automated Security Testing
+Secure Deployments
+Secure Infrastructure
+Security Monitoring
+Documentation
+Continuous Improvement
+Hands-on Labs
+Harden a Linux server.
+Configure HashiCorp Vault.
+Store secrets securely.
+Scan Docker images using Trivy.
+Scan Kubernetes manifests.
+Configure RBAC.
+Apply Kubernetes Network Policies.
+Integrate SAST into CI/CD.
+Integrate DAST into CI/CD.
+Generate an SBOM.
+Sign container images.
+Configure OPA policies.
+Detect runtime threats using Falco.
+Audit AWS security configurations.
+Respond to simulated security incidents.
+Mini Projects
+Project 1 — Secure CI/CD Pipeline
+
+Implement:
+
+Secret management
+Image scanning
+Dependency scanning
+SAST
+DAST
+Artifact signing
+Secure deployments
+Project 2 — Secure Kubernetes Platform
+
+Secure your Kubernetes cluster with:
+
+RBAC
+Network Policies
+Secrets Management
+Admission Policies
+Image Policies
+Runtime Monitoring
+Project 3 — Secure Production Platform
+
+Secure everything you've built so far:
+
+Linux
+Docker
+Kubernetes
+AWS
+Terraform
+CI/CD
+Monitoring
+
+Perform a complete security review and implement hardening measures.
+
+Project 4 — DevSecOps Platform
+
+Build a security platform integrating:
+
+Vault
+Trivy
+Falco
+OPA
+Cosign
+GitHub Actions/Jenkins
+
+Automate security throughout the software delivery pipeline.
+
+Integration Labs
+
+Integrate security into every previous volume:
+
+Secure Linux systems.
+Secure Docker containers.
+Secure Kubernetes clusters.
+Secure AWS infrastructure.
+Secure Terraform state.
+Secure CI/CD pipelines.
+Secure Python applications.
+Secure Git repositories.
+Integrate vulnerability scanning into deployments.
+Volume Challenge
+
+Build a Production DevSecOps Platform.
+
+The platform should include:
+
+Identity management
+Secret management
+Secure infrastructure
+Secure containers
+Secure Kubernetes
+Secure CI/CD
+Vulnerability scanning
+Runtime protection
+Policy enforcement
+Supply chain security
+Security monitoring
+Incident response procedures
+Compliance considerations
+Documentation
+
+Security should be integrated throughout the platform rather than treated as an afterthought.
+
+Prerequisites for Volume 16
+
+Before moving on, you should be able to:
+
+Explain DevSecOps principles.
+Secure Linux, Docker, Kubernetes, and AWS environments.
+Manage secrets safely.
+Scan applications and infrastructure for vulnerabilities.
+Protect CI/CD pipelines.
+Implement runtime security.
+Apply Policy as Code.
+Integrate security into the complete DevOps lifecycle.
+Build secure production platforms.

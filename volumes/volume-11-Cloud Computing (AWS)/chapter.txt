@@ -1,0 +1,310 @@
+📘 Volume 11 — Cloud Computing (AWS)
+🎯 Objective
+
+Understand cloud computing principles and master AWS services required to deploy, manage, secure, and scale modern applications.
+
+Outcome:
+After completing this volume, you should be able to design and deploy production-ready applications on AWS using industry best practices while understanding the reasoning behind each cloud service.
+
+Chapter 1 — Introduction to Cloud Computing
+Topics
+What is Cloud Computing?
+History of Cloud Computing
+Why Cloud Exists
+Traditional Data Centers vs Cloud
+Cloud Characteristics
+Shared Responsibility Model
+Cloud Economics
+Regions
+Availability Zones
+Edge Locations
+Global Infrastructure
+Chapter 2 — Cloud Service Models
+Topics
+IaaS
+PaaS
+SaaS
+FaaS
+Serverless Computing
+Managed Services
+Self-Managed Services
+Choosing the Right Service Model
+Chapter 3 — AWS Fundamentals
+Topics
+AWS Global Infrastructure
+AWS Management Console
+AWS CLI
+AWS SDKs
+AWS CloudShell
+Resource Naming
+Tags
+Cost Explorer (Introduction)
+AWS Free Tier
+AWS Well-Architected Framework (Introduction)
+Chapter 4 — Identity & Access Management (IAM)
+Topics
+IAM Overview
+Users
+Groups
+Roles
+Policies
+Permission Boundaries
+MFA
+Temporary Credentials
+Cross-Account Access (Introduction)
+Least Privilege
+IAM Best Practices
+Chapter 5 — Amazon EC2
+Topics
+What is EC2?
+Instance Types
+AMIs
+Launch Templates
+Key Pairs
+User Data
+Elastic IP
+Security Groups
+Placement Groups (Introduction)
+Instance Metadata
+EC2 Lifecycle
+SSH Access
+Chapter 6 — Storage Services
+Topics
+Amazon EBS
+Volume Types
+Snapshots
+Amazon S3
+Buckets
+Object Storage
+Versioning
+Lifecycle Policies
+Storage Classes
+Static Website Hosting
+Amazon EFS (Introduction)
+Choosing the Right Storage Service
+Chapter 7 — AWS Networking
+Topics
+VPC
+CIDR Blocks
+Public Subnets
+Private Subnets
+Route Tables
+Internet Gateway
+NAT Gateway
+Elastic Network Interfaces
+Network ACLs
+Security Groups
+Bastion Hosts
+VPC Peering (Introduction)
+Chapter 8 — Load Balancing & Scaling
+Topics
+Elastic Load Balancer Overview
+Application Load Balancer (ALB)
+Network Load Balancer (NLB)
+Target Groups
+Health Checks
+Auto Scaling Groups
+Launch Templates
+Scaling Policies
+High Availability
+Chapter 9 — DNS & Content Delivery
+Topics
+Amazon Route 53
+Hosted Zones
+DNS Records
+Health Checks
+Routing Policies
+Amazon CloudFront
+CDN Concepts
+Edge Caching
+SSL Certificates (Introduction)
+Chapter 10 — Databases
+Topics
+Amazon RDS
+Database Engines
+Multi-AZ
+Read Replicas
+Backups
+Snapshots
+Amazon DynamoDB (Introduction)
+ElastiCache (Introduction)
+Database Security
+Chapter 11 — Monitoring & Logging
+Topics
+Amazon CloudWatch
+Metrics
+Logs
+Dashboards
+Alarms
+Events
+AWS CloudTrail
+AWS Config (Introduction)
+Trusted Advisor (Introduction)
+Chapter 12 — Security in AWS
+Topics
+Security Groups Deep Dive
+NACL Best Practices
+IAM Review
+AWS Secrets Manager
+AWS KMS (Introduction)
+Encryption at Rest
+Encryption in Transit
+AWS Shield (Introduction)
+AWS WAF (Introduction)
+Chapter 13 — Deployment on AWS
+Topics
+Deploying Docker Applications
+Deploying Multi-tier Applications
+Environment Variables
+SSL Configuration
+Domain Configuration
+High Availability Deployment
+Backup Strategies
+Recovery Planning
+Chapter 14 — Cost Optimization
+Topics
+AWS Pricing Models
+On-Demand Instances
+Reserved Instances
+Spot Instances
+Savings Plans (Introduction)
+Storage Cost Optimization
+Auto Scaling for Cost
+Cost Monitoring
+Budget Alerts
+Chapter 15 — AWS Best Practices
+Topics
+Resource Organization
+Naming Conventions
+Tagging Strategy
+High Availability
+Fault Tolerance
+Security Best Practices
+Backup Best Practices
+Disaster Recovery Basics
+Operational Excellence
+Chapter 16 — Troubleshooting AWS
+Topics
+EC2 Connection Problems
+IAM Permission Errors
+Security Group Issues
+Route Table Problems
+DNS Failures
+Load Balancer Issues
+S3 Access Problems
+CloudWatch Investigation
+High Latency
+Cost Troubleshooting
+Hands-on Labs
+Create an AWS account and secure it.
+Configure IAM users, groups, and roles.
+Launch and manage EC2 instances.
+Connect to EC2 using SSH.
+Create and attach EBS volumes.
+Host a static website using S3.
+Build a custom VPC.
+Configure public and private subnets.
+Configure Internet and NAT Gateways.
+Create an Application Load Balancer.
+Configure Auto Scaling Groups.
+Deploy a multi-tier application.
+Configure Route 53 with a custom domain.
+Monitor infrastructure using CloudWatch.
+Configure CloudTrail logging.
+Apply AWS security best practices.
+Mini Projects
+Project 1 — Cloud Migration
+
+Take the production stack from Volume 09 and migrate it to AWS.
+
+Include:
+
+EC2
+S3
+EBS
+VPC
+Security Groups
+Route 53
+Project 2 — Highly Available Web Application
+
+Deploy:
+
+ALB
+Multiple EC2 instances
+Auto Scaling Group
+RDS
+S3
+CloudWatch
+
+Design for high availability across multiple Availability Zones.
+
+Project 3 — Production AWS Platform
+
+Build an AWS environment containing:
+
+Custom VPC
+Public & Private Subnets
+Bastion Host
+Application Servers
+Database
+Storage
+Monitoring
+Logging
+Security
+Backup Strategy
+Project 4 — Cost-Optimized Infrastructure
+
+Design an architecture that balances:
+
+Performance
+High availability
+Security
+Cost efficiency
+
+Document the design decisions and trade-offs.
+
+Integration Labs
+
+Integrate all previous volumes:
+
+Deploy Docker containers on EC2.
+Use GitHub Actions or Jenkins to deploy to AWS.
+Automate EC2 management with Python.
+Configure Linux servers in the cloud.
+Apply networking knowledge to VPC design.
+Host your production web architecture from Volume 09 on AWS.
+Volume Challenge
+
+Build a production-ready AWS environment capable of hosting your application.
+
+It should include:
+
+Secure IAM configuration
+Custom VPC
+Public & private networking
+EC2 instances
+Load balancer
+Auto Scaling
+S3 storage
+RDS database
+CloudWatch monitoring
+CloudTrail auditing
+Backup strategy
+Cost optimization
+Documentation
+
+The infrastructure should be secure, highly available, scalable, and ready to be automated.
+
+Prerequisites for Volume 12
+
+Before moving on, you should be able to:
+
+Explain core cloud computing concepts.
+Design AWS networking using VPCs.
+Deploy and manage EC2-based applications.
+Secure AWS resources with IAM.
+Use S3, EBS, and RDS effectively.
+Configure load balancing and auto scaling.
+Monitor AWS infrastructure.
+Troubleshoot common AWS issues.
+Estimate and optimize cloud costs.

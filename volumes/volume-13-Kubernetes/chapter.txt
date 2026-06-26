@@ -1,0 +1,317 @@
+📘 Volume 13 — Kubernetes
+🎯 Objective
+
+Master Kubernetes from first principles by understanding why container orchestration exists and learning how to deploy, scale, secure, monitor, and troubleshoot production-grade Kubernetes clusters.
+
+Outcome:
+After completing this volume, you should be able to build, manage, secure, and troubleshoot production Kubernetes clusters and deploy resilient cloud-native applications.
+
+Chapter 1 — Why Kubernetes Exists
+Topics
+The Limits of Docker
+Container Orchestration
+Scheduling Problems
+High Availability
+Self-Healing
+Scaling Challenges
+Why Kubernetes Was Created
+Kubernetes Architecture Overview
+Kubernetes Ecosystem
+Chapter 2 — Kubernetes Architecture
+Topics
+Cluster
+Control Plane
+Worker Nodes
+API Server
+etcd
+Scheduler
+Controller Manager
+Cloud Controller Manager
+kubelet
+kube-proxy
+Container Runtime
+Cluster Communication
+Chapter 3 — Kubernetes Objects
+Topics
+Declarative Configuration
+YAML Manifests
+Labels
+Selectors
+Annotations
+Namespaces
+Resource Definitions
+Object Lifecycle
+Metadata
+Desired State
+Chapter 4 — Pods
+Topics
+What is a Pod?
+Pod Lifecycle
+Multi-Container Pods
+Init Containers
+Sidecar Containers
+Static Pods
+Ephemeral Containers
+Pod Scheduling Basics
+Resource Requests
+Resource Limits
+Chapter 5 — Controllers
+Topics
+ReplicaSets
+Deployments
+StatefulSets
+DaemonSets
+Jobs
+CronJobs
+Rollouts
+Rollbacks
+Scaling
+Controller Patterns
+Chapter 6 — Services & Networking
+Topics
+Why Services Exist
+ClusterIP
+NodePort
+LoadBalancer
+ExternalName
+Endpoints
+kube-proxy
+CoreDNS
+Service Discovery
+Network Policies
+Container Networking Interface (CNI)
+Chapter 7 — Ingress
+Topics
+What is Ingress?
+Ingress Controllers
+Routing Rules
+Path Routing
+Host Routing
+TLS
+SSL Termination
+NGINX Ingress Controller
+Ingress Best Practices
+Chapter 8 — Storage
+Topics
+Persistent Volumes (PV)
+Persistent Volume Claims (PVC)
+Storage Classes
+Dynamic Provisioning
+CSI Drivers
+Stateful Applications
+Volume Types
+Backup Concepts
+Data Persistence
+Chapter 9 — Configuration Management
+Topics
+ConfigMaps
+Secrets
+Environment Variables
+Volume Mounts
+Configuration Updates
+Secret Rotation Concepts
+External Secrets (Introduction)
+Configuration Best Practices
+Chapter 10 — Scheduling
+Topics
+Node Selectors
+Node Affinity
+Pod Affinity
+Anti-Affinity
+Taints
+Tolerations
+Priority Classes
+Resource Scheduling
+Topology Spread Constraints
+Chapter 11 — Scaling
+Topics
+Manual Scaling
+Horizontal Pod Autoscaler (HPA)
+Vertical Pod Autoscaler (Introduction)
+Cluster Autoscaler
+Resource Optimization
+Scaling Strategies
+Performance Considerations
+Chapter 12 — Security
+Topics
+RBAC
+Service Accounts
+Security Contexts
+Pod Security Standards
+Admission Controllers
+Image Security
+Secret Management
+Network Policies
+Least Privilege
+Kubernetes Security Best Practices
+Chapter 13 — Helm
+Topics
+Why Helm Exists
+Charts
+Repositories
+Templates
+Values Files
+Releases
+Upgrades
+Rollbacks
+Chart Dependencies
+Chart Best Practices
+Chapter 14 — Observability
+Topics
+kubectl Logs
+Events
+Metrics Server
+Resource Monitoring
+Health Probes
+Liveness Probes
+Readiness Probes
+Startup Probes
+Cluster Diagnostics
+Debugging Workloads
+Chapter 15 — Advanced Kubernetes
+Topics
+Custom Resource Definitions (CRDs)
+Operators
+Admission Webhooks (Introduction)
+API Extensions
+Multi-Cluster Concepts
+GitOps Introduction
+Service Mesh Introduction
+Kubernetes API Concepts
+Chapter 16 — Troubleshooting Kubernetes
+Topics
+Pod CrashLoopBackOff
+ImagePullBackOff
+Pending Pods
+Scheduling Failures
+Network Connectivity Issues
+DNS Problems
+Volume Mount Failures
+Node Failures
+Resource Exhaustion
+API Server Issues
+etcd Basics
+Cluster Recovery Concepts
+Chapter 17 — Kubernetes Best Practices
+Topics
+Namespace Strategy
+Resource Organization
+Labeling Strategy
+Image Versioning
+Resource Limits
+High Availability
+Backup Strategy
+Upgrade Strategy
+Production Readiness Checklist
+Hands-on Labs
+Install Kubernetes using Kind, Minikube, or K3s.
+Explore the Kubernetes architecture.
+Deploy Pods manually.
+Deploy applications using Deployments.
+Configure ReplicaSets.
+Expose applications using Services.
+Configure Ingress with TLS.
+Mount Persistent Volumes.
+Configure ConfigMaps and Secrets.
+Configure RBAC.
+Scale applications manually and automatically.
+Deploy Stateful applications.
+Package applications using Helm.
+Upgrade and roll back Helm releases.
+Troubleshoot intentionally broken clusters.
+Mini Projects
+Project 1 — Migrate Docker Compose to Kubernetes
+
+Take your Docker Compose application from Volume 08 and convert it into Kubernetes manifests.
+
+Deploy:
+
+Application
+PostgreSQL
+Redis
+Volumes
+Services
+Ingress
+Project 2 — Production Kubernetes Platform
+
+Deploy:
+
+Multiple microservices
+Shared networking
+Ingress Controller
+Persistent storage
+Auto Scaling
+RBAC
+Secrets
+Health probes
+Project 3 — Helm-Based Deployment
+
+Package your entire application stack as reusable Helm charts.
+
+Support:
+
+Development
+Testing
+Staging
+Production
+
+using different values files.
+
+Project 4 — Highly Available Kubernetes Cluster
+
+Build a cluster that includes:
+
+Multiple worker nodes
+High availability
+Auto scaling
+Monitoring prerequisites
+Secure networking
+Persistent storage
+Integration Labs
+
+Integrate every previous volume:
+
+Provision AWS infrastructure with Terraform.
+Install Kubernetes on the provisioned infrastructure.
+Deploy applications using CI/CD pipelines.
+Use Docker images from Volume 08.
+Configure Linux worker nodes.
+Use Python automation for cluster management.
+Manage Kubernetes manifests in Git.
+Secure cluster communication.
+Apply networking concepts to Services and Ingress.
+Volume Challenge
+
+Build a production-ready Kubernetes platform.
+
+The platform should include:
+
+Multi-node cluster
+Helm deployments
+RBAC
+ConfigMaps
+Secrets
+Persistent storage
+Ingress Controller
+Auto Scaling
+Health probes
+Rolling updates
+Rollbacks
+CI/CD integration
+Infrastructure as Code integration
+Documentation
+
+Your application should be deployable with minimal manual intervention and capable of handling production workloads.
+
+Prerequisites for Volume 14
+
+Before moving on, you should be able to:
+
+Explain Kubernetes architecture and control plane components.
+Deploy and manage workloads using Kubernetes resources.
+Configure networking, storage, and security.
+Package applications with Helm.
+Scale and update applications safely.
+Troubleshoot common Kubernetes failures.
+Integrate Kubernetes with AWS, Terraform, Docker, and CI/CD.
+Design a production-ready Kubernetes deployment.

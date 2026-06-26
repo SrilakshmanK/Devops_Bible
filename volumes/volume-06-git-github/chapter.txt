@@ -1,0 +1,254 @@
+📘 Volume 06 — Version Control with Git & GitHub
+🎯 Objective
+
+Master version control concepts and Git workflows used by professional software and DevOps teams.
+
+Outcome:
+After completing this volume, you should confidently manage source code, collaborate with teams, resolve conflicts, understand Git internals, and integrate Git into DevOps workflows.
+
+Chapter 1 — Introduction to Version Control
+Topics
+What is Version Control?
+Why Version Control Exists
+Problems Without Version Control
+Local Version Control
+Centralized Version Control
+Distributed Version Control
+Git vs Other VCS
+Git Architecture Overview
+Chapter 2 — Installing & Configuring Git
+Topics
+Installing Git
+Git Configuration
+Git Identity
+Global vs Local Configuration
+Git Help
+Git Environment
+Default Editor
+SSH vs HTTPS Authentication
+Chapter 3 — Git Fundamentals
+Topics
+Repository
+Working Directory
+Staging Area (Index)
+Local Repository
+Remote Repository
+Git Lifecycle
+Creating Repositories
+Cloning Repositories
+Tracking Files
+Ignoring Files (.gitignore)
+Chapter 4 — Snapshots & History
+Topics
+What is a Commit?
+Commit Messages
+Viewing History
+Commit Metadata
+Diffing Changes
+File History
+Blame
+Tags
+Annotated vs Lightweight Tags
+Chapter 5 — Branching
+Topics
+Why Branches Exist
+Branch Creation
+Branch Switching
+Branch Deletion
+Branch Naming
+Branch Comparison
+Detached HEAD
+Fast-Forward Merge
+Three-Way Merge
+Chapter 6 — Merging & Conflict Resolution
+Topics
+Merge Strategies
+Merge Conflicts
+Conflict Resolution
+Rebase
+Interactive Rebase
+Squashing Commits
+Cherry Pick
+Revert
+Reset
+Restore
+Chapter 7 — Git Internals
+Topics
+Git Objects
+Blob
+Tree
+Commit Object
+Hashing (SHA)
+References
+HEAD
+Reflog
+Object Database
+Packfiles
+Garbage Collection
+Git Plumbing vs Porcelain
+Chapter 8 — Remote Repositories
+Topics
+Remote Repositories
+Origin
+Fetch
+Pull
+Push
+Upstream Branches
+Multiple Remotes
+Synchronization
+Authentication Methods
+Chapter 9 — GitHub Fundamentals
+Topics
+GitHub Overview
+Repository Structure
+README
+LICENSE
+Releases
+GitHub Pages
+Repository Settings
+Repository Visibility
+Forking
+Watching & Starring
+Chapter 10 — Collaboration Workflow
+Topics
+Pull Requests
+Code Reviews
+Branch Protection
+Protected Branches
+Feature Branch Workflow
+Git Flow
+Trunk-Based Development
+Fork Workflow
+Merge Strategies for Teams
+Chapter 11 — GitHub Collaboration Features
+Topics
+Issues
+Labels
+Milestones
+Discussions
+Wikis
+Projects
+Templates
+Mentions
+Notifications
+Chapter 12 — Security & Authentication
+Topics
+SSH Keys
+Personal Access Tokens
+Secret Management
+Signed Commits
+Commit Verification
+Repository Security Basics
+Access Permissions
+Chapter 13 — Git Best Practices
+Topics
+Commit Message Standards
+Small Commits
+Atomic Commits
+Repository Organization
+Monorepo vs Polyrepo
+Semantic Versioning
+Release Management
+Backup Strategies
+Chapter 14 — Troubleshooting Git
+Topics
+Recovering Lost Commits
+Undoing Mistakes
+Resolving Merge Issues
+Fixing Detached HEAD
+Recovering Deleted Branches
+Cleaning Repositories
+Large File Issues
+Authentication Problems
+Chapter 15 — Git for DevOps
+Topics
+Git as Source of Truth
+Infrastructure as Code with Git
+Configuration Versioning
+Git in CI/CD
+GitOps (Introduction)
+Repository Strategies for DevOps
+Managing Configuration Files
+Deployment Workflows
+Hands-on Labs
+Initialize a Git repository.
+Clone repositories from GitHub.
+Configure Git using SSH authentication.
+Create meaningful commit histories.
+Practice branching and merging.
+Resolve merge conflicts manually.
+Recover deleted commits using reflog.
+Compare merge and rebase workflows.
+Create and manage Git tags.
+Fork and contribute to an open-source repository.
+Open pull requests and perform code reviews.
+Protect branches using GitHub settings.
+Create releases with semantic versioning.
+Recover from common Git mistakes.
+Mini Projects
+Project 1 — Portfolio Version History
+
+Use Git to manage your portfolio project.
+
+Practice:
+
+Feature branches
+Releases
+Tags
+Merge requests
+Code reviews (self-review or peer review)
+Project 2 — Team Collaboration Simulation
+
+Simulate a team by creating multiple branches:
+
+main
+develop
+feature/login
+feature/dashboard
+hotfix/security
+
+Practice merging, rebasing, conflict resolution, and releases.
+
+Project 3 — Infrastructure Repository
+
+Create a Git repository for infrastructure configuration.
+
+Include:
+
+Linux setup scripts
+Bash automation scripts
+Documentation
+Configuration files
+Versioned changes
+
+This repository will continue evolving throughout later volumes.
+
+Volume Challenge
+
+Create and manage a professional GitHub repository that demonstrates:
+
+Clean commit history
+Branching strategy
+Pull requests
+Code reviews
+Semantic versioning
+Releases
+Documentation
+Issue tracking
+Proper repository organization
+Recovery from common mistakes
+
+The goal is to work as if you're part of a real engineering team.
+
+Prerequisites for Volume 07
+
+Before moving on, you should be able to:
+
+Understand Git's object model and workflow.
+Manage repositories confidently.
+Collaborate using branches and pull requests.
+Resolve merge conflicts.
+Recover from Git mistakes.
+Apply Git best practices.
+Organize projects professionally on GitHub.
+Explain how Git supports DevOps and CI/CD workflows.

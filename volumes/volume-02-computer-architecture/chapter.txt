@@ -1,0 +1,194 @@
+📘 Volume 02 — Computer Architecture
+🎯 Objective
+
+Build a solid understanding of how a computer works from the moment you press the power button until an application is running.
+
+Outcome:
+After completing this volume, you should understand the internal components of a computer, how the operating system interacts with hardware, how programs execute, how memory works, and why Linux and servers exist.
+
+Chapter 1 — Introduction to Computers
+Topics
+What is a Computer?
+Evolution of Computers
+Types of Computers
+Hardware vs Software
+Input → Process → Output Cycle
+Binary (0s and 1s)
+Bits and Bytes
+Data Representation
+Number Systems (Binary, Decimal, Hexadecimal)
+Chapter 2 — Computer Hardware
+Topics
+Motherboard
+CPU Overview
+RAM
+ROM
+Cache Memory
+Storage Devices (HDD, SSD, NVMe)
+GPU
+Power Supply Unit (PSU)
+Cooling Systems
+Expansion Cards
+Input Devices
+Output Devices
+Computer Buses
+Chapter 3 — CPU Architecture
+Topics
+CPU Components
+Registers
+Arithmetic Logic Unit (ALU)
+Control Unit (CU)
+Clock Speed
+Cores vs Threads
+CPU Cache (L1, L2, L3)
+Instruction Cycle
+Fetch–Decode–Execute Cycle
+Machine Instructions
+Interrupts
+Chapter 4 — Memory
+Topics
+What is Memory?
+Memory Hierarchy
+Registers
+Cache
+RAM
+Virtual Memory
+Paging
+Swapping
+Stack
+Heap
+Memory Allocation
+Memory Leaks (Concept)
+Shared Memory
+Chapter 5 — Storage
+Topics
+HDD vs SSD vs NVMe
+Partitions
+Volumes
+File Systems
+Inodes (Introduction)
+Mount Points
+Read/Write Operations
+IOPS
+Storage Performance Basics
+Chapter 6 — Boot Process
+Topics
+What Happens When You Press the Power Button?
+BIOS
+UEFI
+POST (Power-On Self-Test)
+Bootloader
+Kernel Loading
+Init/System Initialization
+Login Process
+User Space
+Chapter 7 — Operating Systems
+Topics
+What is an Operating System?
+Responsibilities of an OS
+Kernel
+User Space
+System Calls
+Processes
+Threads
+Scheduling
+Context Switching
+Multitasking
+Resource Management
+Chapter 8 — Process & Memory Management
+Topics
+Process Lifecycle
+Process States
+Parent & Child Processes
+Daemons
+Threads vs Processes
+CPU Scheduling
+Process Communication (IPC Introduction)
+Signals (Introduction)
+Chapter 9 — File Systems
+Topics
+What is a File System?
+File vs Directory
+Directory Tree
+Metadata
+Inodes
+Journaling
+Common Linux File Systems (ext4, XFS, Btrfs)
+Windows File Systems (NTFS, FAT32, exFAT)
+Permissions (Introduction)
+Chapter 10 — Virtualization Fundamentals
+Topics
+Why Virtualization Exists
+Physical Machines
+Virtual Machines
+Hypervisors
+Type 1 Hypervisors
+Type 2 Hypervisors
+Guest OS
+Host OS
+Resource Allocation
+Why Containers Came Later
+Chapter 11 — Servers
+Topics
+What is a Server?
+Server vs Personal Computer
+Bare Metal Servers
+Rack Servers
+Blade Servers
+Virtual Servers
+Cloud Servers
+Headless Systems
+Why Linux Dominates Servers
+Hands-on Labs
+Identify every hardware component in your own computer.
+Check CPU information using system tools.
+Inspect RAM usage.
+Explore storage devices and partitions.
+Compare HDD, SSD, and NVMe performance.
+Observe the boot process.
+Monitor running processes.
+Explore the process tree.
+Inspect memory usage.
+Explore the file system hierarchy.
+Install a virtual machine.
+Compare a VM with the host operating system.
+Mini Projects
+Project 1 — My Computer Blueprint
+
+Document your entire computer, including:
+
+CPU
+RAM
+Storage
+Motherboard
+GPU
+BIOS/UEFI
+Operating System
+Partition Layout
+File System
+Boot Mode
+Project 2 — Build a Virtual Lab
+Install VirtualBox (or another hypervisor)
+Create a Linux virtual machine
+Allocate CPU, RAM, and storage
+Explore how virtual hardware is presented to the guest OS
+Volume Challenge
+
+Trace the complete lifecycle of a program:
+
+Power Button → BIOS/UEFI → Bootloader → Kernel → Operating System → User Login → Launch Application → CPU Execution → Memory Usage → Storage Access → Program Exit
+
+Be able to explain each stage at a high level.
+
+Prerequisites for Volume 03
+
+Before moving on, you should be able to:
+
+Explain how a computer boots.
+Describe the role of the CPU, RAM, storage, and motherboard.
+Understand how programs execute.
+Explain processes and threads.
+Understand basic memory management.
+Understand file systems and storage concepts.
+Explain why virtualization exists.
+Explain the difference between a desktop computer and a server.
