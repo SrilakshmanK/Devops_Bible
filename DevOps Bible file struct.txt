@@ -1,0 +1,83 @@
+DevOps Bible/
+│
+├── Volume 1 - Foundations
+├── Volume 2 - Linux
+├── Volume 3 - Networking
+├── Volume 4 - Git
+├── Volume 5 - Python & Bash
+├── Volume 6 - Docker
+├── Volume 7 - CI/CD
+├── Volume 8 - Cloud
+├── Volume 9 - Terraform
+├── Volume 10 - Kubernetes
+├── Volume 11 - Monitoring
+├── Volume 12 - Security
+├── Volume 13 - Production Projects
+└── Volume 14 - Future DevOps
+
+PART I
+Foundations
+│
+├── Engineer Mindset
+├── Computer Fundamentals
+├── Operating Systems
+├── Networking
+└── Linux
+        │
+        ▼
+PART II
+Development Foundation
+│
+├── Git
+├── Bash
+├── Python
+└── APIs
+        │
+        ▼
+PART III
+Infrastructure
+│
+├── Virtualization
+├── Containers
+├── Docker
+├── Container Registries
+└── Web Servers
+        │
+        ▼
+PART IV
+Cloud & Automation
+│
+├── AWS
+├── Terraform
+├── Ansible
+├── CI/CD
+└── Jenkins / GitHub Actions
+        │
+        ▼
+PART V
+Orchestration
+│
+├── Kubernetes
+├── Helm
+├── GitOps
+└── ArgoCD
+        │
+        ▼
+PART VI
+Operations
+│
+├── Monitoring
+├── Logging
+├── OpenTelemetry
+├── Security
+└── Reliability
+        │
+        ▼
+PART VII
+Production Engineering
+│
+├── Large Deployments
+├── Failure Labs
+├── Incident Response
+├── Scaling
+└── Final Enterprise Project

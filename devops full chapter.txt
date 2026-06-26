@@ -1,0 +1,387 @@
+The Chapters (Draft)
+📘 PART I — Foundations of Computing
+
+This is where most roadmaps fail.
+
+Phase 0 — The Engineer's Mindset
+How to learn difficult technical subjects
+First-principles thinking
+Mental models
+Reading documentation
+Debugging mindset
+The scientific method in engineering
+Asking better questions
+Learning how to learn
+Phase 1 — Computer Fundamentals
+
+Everything begins here.
+
+What is a computer?
+CPU
+RAM
+Cache
+Storage
+Motherboard
+BIOS
+UEFI
+Boot Process
+Interrupts
+Kernel
+Operating System
+Process
+Thread
+Virtual Memory
+File Systems
+Why Linux?
+Why Servers?
+
+Mini Project
+
+Understand your own laptop completely.
+
+📗 PART II — Networking
+
+This isn't CCNA.
+
+This is networking for DevOps.
+
+Network Models (OSI & TCP/IP)
+Ethernet
+MAC
+ARP
+IP
+IPv4
+IPv6
+Subnets
+CIDR
+Routing
+DNS
+DHCP
+NAT
+TCP
+UDP
+HTTP
+HTTPS
+TLS
+SSH
+VPN
+Reverse Proxy
+Load Balancer
+Firewalls
+VPC
+Gateways
+
+Labs
+
+Wireshark.
+
+Packet tracing.
+
+Terminal networking.
+
+Real troubleshooting.
+
+📙 PART III — Linux
+
+Not beginner Linux.
+
+Real Linux.
+
+Linux Architecture
+Filesystem Hierarchy
+Users
+Groups
+Permissions
+Processes
+Signals
+Scheduling
+Package Managers
+Services
+Logging
+Environment Variables
+SSH
+Cron
+Networking
+Bash
+System Administration
+Storage
+Disk Management
+
+100+ Labs
+
+📕 PART IV — Version Control
+
+Git.
+
+But understanding Git.
+
+Not memorizing commands.
+
+Snapshots
+Branches
+Merge
+Rebase
+Remote
+GitHub
+Pull Requests
+Git Internals
+📘 PART V — Programming
+
+Python.
+
+Only what DevOps needs.
+
+APIs
+JSON
+YAML
+Requests
+Automation
+OS Module
+Subprocess
+File Handling
+Regular Expressions
+📗 PART VI — Bash
+
+Automation.
+
+Real automation.
+
+📙 PART VII — Virtualization
+
+Before Docker.
+
+Understand:
+
+VMware
+
+VirtualBox
+
+Hypervisors
+
+Type 1
+
+Type 2
+
+Why VMs exist.
+
+📕 PART VIII — Containers
+
+Docker.
+
+From scratch.
+
+Linux namespaces
+cgroups
+Images
+Layers
+Registries
+Volumes
+Networking
+Compose
+📘 PART IX — Web Infrastructure
+
+How websites actually work.
+
+Browser
+
+↓
+
+DNS
+
+↓
+
+Load Balancer
+
+↓
+
+Reverse Proxy
+
+↓
+
+Application
+
+↓
+
+Database
+
+↓
+
+Cache
+
+↓
+
+Storage
+
+📗 PART X — CI/CD
+
+Before Jenkins.
+
+Why CI/CD exists.
+
+Then:
+
+GitHub Actions
+
+Jenkins
+
+Artifacts
+
+Runners
+
+Deployment
+
+Rollback
+
+Blue-Green
+
+Canary
+
+📙 PART XI — Cloud
+
+AWS.
+
+Not certification.
+
+Engineering.
+
+IAM
+EC2
+EBS
+S3
+VPC
+ALB
+Auto Scaling
+CloudWatch
+Route53
+RDS
+📕 PART XII — Infrastructure as Code
+
+Terraform.
+
+OpenTofu.
+
+State.
+
+Modules.
+
+Providers.
+
+📘 PART XIII — Kubernetes
+
+This will probably become the biggest chapter.
+
+Pods.
+
+Deployments.
+
+ReplicaSets.
+
+Services.
+
+Ingress.
+
+Volumes.
+
+Networking.
+
+Scheduling.
+
+Security.
+
+Helm.
+
+Operators.
+
+📗 PART XIV — Observability
+
+Monitoring.
+
+Logging.
+
+Tracing.
+
+Metrics.
+
+Prometheus.
+
+Grafana.
+
+Loki.
+
+OpenTelemetry.
+
+Alertmanager.
+
+📙 PART XV — Security
+
+DevSecOps.
+
+IAM.
+
+Vault.
+
+Secrets.
+
+RBAC.
+
+Scanning.
+
+Supply Chain.
+
+📕 PART XVI — Reliability Engineering
+
+SRE.
+
+Availability.
+
+Latency.
+
+Error Budgets.
+
+SLIs.
+
+SLOs.
+
+Incident Response.
+
+Disaster Recovery.
+
+Backups.
+
+📘 PART XVII — Production Projects
+
+From zero.
+
+Deploy.
+
+Scale.
+
+Break.
+
+Fix.
+
+Monitor.
+
+Secure.
+
+Everything.
+
+📗 PART XVIII — Advanced Topics
+
+GitOps
+
+ArgoCD
+
+Platform Engineering
+
+eBPF
+
+FinOps
+
+Service Mesh
+
+OPA
+
+Policy as Code
+
+AI for DevOps
