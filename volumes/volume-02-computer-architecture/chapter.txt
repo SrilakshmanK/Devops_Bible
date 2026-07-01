@@ -17,6 +17,7 @@ Binary (0s and 1s)
 Bits and Bytes
 Data Representation
 Number Systems (Binary, Decimal, Hexadecimal)
+
 Chapter 2 — Computer Hardware
 Topics
 Motherboard
@@ -32,6 +33,7 @@ Expansion Cards
 Input Devices
 Output Devices
 Computer Buses
+
 Chapter 3 — CPU Architecture
 Topics
 CPU Components
@@ -192,3 +194,9 @@ Understand basic memory management.
 Understand file systems and storage concepts.
 Explain why virtualization exists.
 Explain the difference between a desktop computer and a server.
+
+Capstone Milestone (LMS Project)
+Estimate the compute resources (CPU, RAM, storage) your LMS stack will realistically need — Next.js frontend, Node.js backend, database, and Redis — and write down your reasoning.
+
+Career Layer
+Add a short 'System Requirements' note to your LMS README based on this estimate.

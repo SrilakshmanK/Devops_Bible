@@ -1,0 +1,385 @@
+📘 Volume 13 — Configuration Management & Infrastructure Automation (Ansible)
+🎯 Objective
+
+Master Configuration Management by understanding why infrastructure automation exists and learning how to configure, maintain, secure, and automate production infrastructure using Ansible.
+
+Outcome:
+
+After completing this volume, you should be able to automate server provisioning, configure production environments, deploy applications, manage fleets of Linux servers, integrate Ansible with AWS and Terraform, and prepare infrastructure for Kubernetes using industry best practices.
+
+Chapter 1 — Introduction to Configuration Management
+Topics
+What is Configuration Management?
+Why Configuration Management Exists
+Manual vs Automated Configuration
+Infrastructure Provisioning vs Configuration
+Desired State
+Idempotency
+Configuration Drift
+Immutable vs Mutable Infrastructure
+Agent-Based vs Agentless Tools
+Why Ansible?
+Where Ansible Fits in DevOps
+Configuration Management Best Practices
+Chapter 2 — Ansible Fundamentals
+Topics
+What is Ansible?
+Ansible Architecture
+Control Node
+Managed Nodes
+SSH Communication
+Push Model
+Python Requirement
+Agentless Automation
+Installing Ansible
+Ansible CLI
+Project Structure
+Ansible Configuration File (ansible.cfg)
+Chapter 3 — YAML for Ansible
+Topics
+YAML Refresher
+YAML Syntax
+Lists
+Dictionaries
+Scalars
+Anchors (Introduction)
+Variables
+Indentation Rules
+Multi-line Strings
+YAML Best Practices
+Chapter 4 — Inventory Management
+Topics
+What is Inventory?
+Static Inventory
+INI Inventory
+YAML Inventory
+Groups
+Child Groups
+Host Variables
+Group Variables
+Inventory Variables
+Inventory Plugins (Introduction)
+Dynamic Inventory Concepts
+Chapter 5 — Ad-hoc Commands
+Topics
+Why Ad-hoc Commands Exist
+Ping Module
+Shell Module
+Command Module
+Copy Module
+File Module
+Service Module
+Package Module
+User Module
+Reboot Module
+Gathering Facts
+Running Commands on Multiple Hosts
+
+Chapter 5 — YAML for Ansible
+Topics
+YAML Refresher
+YAML Syntax
+Lists
+Dictionaries
+Scalars
+Anchors (Introduction)
+Variables
+Indentation Rules
+Multi-line Strings
+YAML Best Practices
+
+Chapter 6 — Playbooks
+Topics
+What is a Playbook?
+Plays
+Tasks
+Modules
+Handlers
+Execution Order
+Playbook Structure
+Running Playbooks
+Check Mode
+Diff Mode
+Dry Runs
+Idempotent Playbooks
+Chapter 7 — Variables & Facts
+Topics
+Variables
+Variable Precedence
+Host Variables
+Group Variables
+Facts
+Custom Facts
+Registered Variables
+Magic Variables
+Environment Variables
+Fact Gathering
+Variable Best Practices
+Chapter 8 — Templates & Jinja2
+Topics
+Why Templates Exist
+Jinja2 Basics
+Variables
+Filters
+Loops
+Conditionals
+Template Module
+Configuration Generation
+Dynamic Configuration Files
+Template Best Practices
+Chapter 9 — Roles & Collections
+Topics
+Why Roles Exist
+Role Structure
+Tasks
+Defaults
+Vars
+Files
+Templates
+Handlers
+Meta
+Collections
+Ansible Galaxy
+Reusable Automation
+Chapter 10 — Automation Patterns
+Topics
+Loops
+Conditionals
+Tags
+Blocks
+Error Handling
+Rescue
+Always
+Delegation
+Run Once
+Async Tasks
+Parallelism
+Execution Strategies
+Chapter 11 — Secrets & Security
+Topics
+Why Secrets Matter
+Ansible Vault
+Vault Encryption
+Vault Password Files
+Sensitive Variables
+SSH Key Management
+Privilege Escalation
+become
+Least Privilege
+Secure Automation
+Secret Management Best Practices
+Chapter 12 — Infrastructure Automation
+Topics
+Installing Packages
+Managing Services
+Creating Users
+Managing Groups
+Managing Files
+Managing Directories
+Managing Permissions
+Cron Jobs
+System Updates
+Firewall Configuration
+Storage Configuration
+System Hardening Concepts
+Chapter 13 — Testing & Validation
+
+Topics:
+
+Syntax Checking
+Check Mode
+Diff Mode
+ansible-lint
+Molecule (Introduction)
+Playbook Validation
+Role Testing
+CI/CD Integration
+Idempotency Testing
+Automation Quality Assurance
+
+Chapter 14 — AWS & Terraform Integration
+Topics
+Dynamic AWS Inventory
+Using Terraform Outputs
+Provision → Configure Workflow
+Configuring EC2 Instances
+Installing Docker Automatically
+Configuring Nginx
+Deploying Python Applications
+AWS Modules Overview
+Infrastructure Validation
+Multi-Environment Automation
+Chapter 15 — Docker Deployment Automation
+Topics
+Installing Docker
+Docker Service Management
+Docker Compose Deployment
+Container Updates
+Image Pull Automation
+Registry Authentication
+Environment Variables
+Rolling Updates (Concept)
+Zero-Downtime Concepts
+Preparing for Kubernetes
+Chapter 16 — Troubleshooting Ansible
+Topics
+SSH Failures
+Authentication Errors
+YAML Errors
+Variable Problems
+Module Errors
+Playbook Failures
+Permission Issues
+Inventory Problems
+Vault Errors
+Debug Module
+Verbose Logging
+Performance Optimization
+Chapter 17 — Ansible Best Practices
+Topics
+Project Structure
+Naming Conventions
+Role Design
+Idempotency
+DRY Principles
+Environment Separation
+Version Control
+Documentation
+Testing Playbooks
+Linting
+Scalability
+Production Readiness Checklist
+Hands-on Labs
+Install Ansible on Linux.
+Configure passwordless SSH.
+Build static inventories.
+Build YAML inventories.
+Execute ad-hoc commands.
+Create production playbooks.
+Manage users automatically.
+Install Docker across multiple servers.
+Configure Nginx automatically.
+Deploy Python applications.
+Create reusable roles.
+Use Jinja2 templates.
+Encrypt secrets using Ansible Vault.
+Configure AWS Dynamic Inventory.
+Integrate Terraform with Ansible.
+Configure multiple environments.
+Troubleshoot intentionally broken playbooks.
+Mini Projects
+Project 1 — Automated Linux Server Provisioning
+
+Automatically configure EC2 instances created by Terraform.
+
+Provision:
+
+Users
+SSH
+Docker
+Nginx
+Firewall
+Monitoring prerequisites
+
+No manual SSH configuration.
+
+Project 2 — Production Web Server Automation
+
+Configure multiple web servers.
+
+Deploy:
+
+Docker
+Nginx
+SSL configuration
+Python application
+Environment variables
+Log directories
+
+Using reusable roles.
+
+Project 3 — Multi-Environment Automation
+
+Configure:
+
+Development
+Testing
+Staging
+Production
+
+using:
+
+Inventory Groups
+Variables
+Templates
+Roles
+Vault
+Project 4 — Automated Infrastructure Configuration Platform
+
+Starting with Terraform-created infrastructure:
+
+Automatically:
+
+Configure Linux
+Install Docker
+Deploy applications
+Configure monitoring prerequisites
+Configure security
+Validate configuration
+
+Everything should be repeatable with a single playbook.
+
+Integration Labs
+
+Integrate every previous volume:
+
+Configure AWS EC2 instances provisioned by Terraform.
+Deploy Docker applications automatically.
+Install services using Linux knowledge.
+Automate infrastructure with Python-generated variables.
+Trigger Ansible playbooks from GitHub Actions and Jenkins.
+Configure networking using concepts from Volume 03.
+Prepare Kubernetes worker nodes.
+Configure production environments using reusable roles.
+Manage infrastructure using Git.
+Volume Challenge
+
+Build a fully automated production infrastructure platform.
+
+The platform should:
+
+Configure Terraform-created AWS infrastructure.
+Install Docker automatically.
+Configure Nginx.
+Deploy applications.
+Configure users and SSH.
+Secure secrets using Vault.
+Use reusable roles.
+Support multiple environments.
+Integrate with GitHub Actions or Jenkins.
+Prepare Kubernetes nodes.
+Document the entire automation workflow.
+
+No manual server configuration should be required after infrastructure provisioning.
+
+Prerequisites for Volume 14
+
+Before moving on, you should be able to:
+
+Explain Configuration Management principles.
+Understand idempotent automation.
+Design reusable Ansible roles.
+Manage inventories and variables.
+Secure automation using Ansible Vault.
+Configure Linux servers automatically.
+Integrate Ansible with AWS and Terraform.
+Deploy Docker applications using Ansible.
+Troubleshoot common automation failures.
+Build production-ready infrastructure through automation.
+Prepare infrastructure for Kubernetes deployment.
+
+Capstone Milestone (LMS Project)
+Use Ansible to configure the servers running the LMS — installing dependencies, managing config files, and deploying the app.
+
+Career Layer
+No specific addition here.

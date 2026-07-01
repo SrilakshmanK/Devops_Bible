@@ -1,4 +1,4 @@
-📘 Volume 14 — Observability & Monitoring
+📘 Volume 16 — Observability & Monitoring
 🎯 Objective
 
 Master observability by collecting, visualizing, analyzing, and alerting on metrics, logs, and traces from applications and infrastructure.
@@ -341,3 +341,9 @@ Centralize logs using Loki.
 Instrument applications with OpenTelemetry.
 Investigate production incidents using observability data.
 Monitor Linux, Docker, Kubernetes, and AWS environments.
+
+Capstone Milestone (LMS Project)
+Instrument the LMS with metrics, logs, and traces (e.g. Prometheus, Grafana, Loki) and build a real dashboard for it.
+
+Career Layer
+Add dashboard screenshots to your LMS README/portfolio — visuals like this stand out to reviewers.

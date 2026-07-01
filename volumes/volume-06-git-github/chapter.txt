@@ -252,3 +252,9 @@ Recover from Git mistakes.
 Apply Git best practices.
 Organize projects professionally on GitHub.
 Explain how Git supports DevOps and CI/CD workflows.
+
+Capstone Milestone (LMS Project)
+Formalize Git workflow for the LMS repo: branching strategy, .gitignore, PR/commit conventions, and a proper README with setup instructions.
+
+Career Layer
+Your LMS repo should now look like a real open-source project. This is the backbone of your portfolio — link it from your resume/LinkedIn.

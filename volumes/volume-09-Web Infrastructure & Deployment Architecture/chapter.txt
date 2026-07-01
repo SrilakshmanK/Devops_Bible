@@ -310,3 +310,9 @@ Use caching effectively.
 Understand production database architecture.
 Design scalable deployment architectures.
 Troubleshoot common production issues.
+
+Capstone Milestone (LMS Project)
+Design the real deployment architecture for the LMS — reverse proxy (NGINX), load balancing, DNS, and where a CDN would sit — as a diagram.
+
+Career Layer
+Add the deployment architecture diagram to your repo's /docs folder.

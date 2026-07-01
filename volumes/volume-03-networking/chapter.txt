@@ -216,3 +216,9 @@ Capture and analyze network traffic with Wireshark.
 Troubleshoot common network issues.
 Understand the role of firewalls, proxies, and load balancers.
 Understand basic cloud networking concepts.
+
+Capstone Milestone (LMS Project)
+Diagram the network flow for your LMS: client → frontend → backend API → database/Redis, including which ports and protocols each hop uses.
+
+Career Layer
+Save this network diagram in your repo's /docs folder — it's the first piece of your architecture documentation.

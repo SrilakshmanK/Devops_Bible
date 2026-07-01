@@ -292,3 +292,9 @@ Manage container networking and storage.
 Deploy multi-container applications with Docker Compose.
 Secure and troubleshoot Docker environments.
 Understand why orchestration platforms like Kubernetes are needed.
+
+Capstone Milestone (LMS Project)
+Containerize the LMS: Dockerfiles for the frontend and backend, and a docker-compose.yml wiring together the app, database, and Redis.
+
+Career Layer
+Add a 'Dockerized' section to your LMS README with instructions to run the whole stack with one command.

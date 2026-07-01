@@ -299,3 +299,9 @@ Monitor and troubleshoot systems.
 Apply SRE principles.
 Maintain production workloads.
 Integrate the entire DevOps toolchain into one cohesive platform.
+
+Capstone Milestone (LMS Project)
+Your LMS now becomes the production project for this volume: bring infrastructure, deployment, CI/CD, security, and monitoring together into one live, production-grade deployment instead of starting a new project from scratch.
+
+Career Layer
+Write a full case-study README for the LMS documenting architecture, decisions, and the build journey — this becomes your primary interview talking piece.

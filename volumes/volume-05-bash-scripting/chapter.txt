@@ -264,3 +264,9 @@ Schedule automated tasks.
 Create reusable command-line tools.
 Follow professional scripting practices.
 Build automation solutions for real Linux systems.
+
+Capstone Milestone (LMS Project)
+Write Bash scripts to automate common LMS dev tasks — starting/stopping all services locally, tailing logs, or resetting the local database.
+
+Career Layer
+Add these scripts to a /scripts folder in your LMS repo with brief usage docs.

@@ -282,3 +282,9 @@ Analyze logs and troubleshoot common issues.
 Monitor system resources.
 Perform routine Linux administration tasks.
 Understand enough Linux internals to automate them with Bash.
+
+Capstone Milestone (LMS Project)
+Provision a Linux server (local VM or cheap cloud instance) and manually install and run your LMS backend, frontend, and database on it entirely from the command line.
+
+Career Layer
+Write up the manual setup steps as a 'Manual Deployment' doc — this is a great before/after comparison once automation is introduced later.

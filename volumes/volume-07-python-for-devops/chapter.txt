@@ -313,3 +313,9 @@ Handle errors gracefully.
 Test and package Python applications.
 Build command-line utilities for DevOps tasks.
 Choose when to use Bash and when Python is the better tool.
+
+Capstone Milestone (LMS Project)
+Write a Python automation script that supports the LMS project — e.g. seeding test data, backing up the database, or a health-check script for its services.
+
+Career Layer
+No specific addition here — keep building the script library alongside the project.

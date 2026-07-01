@@ -299,3 +299,9 @@ Provision AWS infrastructure programmatically.
 Integrate Terraform into CI/CD pipelines.
 Troubleshoot state and provider issues.
 Build production-ready infrastructure from source code.
+
+Capstone Milestone (LMS Project)
+Rewrite the AWS infrastructure you provisioned manually as Terraform code, so the LMS environment is reproducible from scratch.
+
+Career Layer
+No specific addition here — this strengthens the IaC section of your project README.

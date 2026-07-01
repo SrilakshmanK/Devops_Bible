@@ -313,3 +313,9 @@ Implement deployment strategies.
 Secure CI/CD pipelines.
 Troubleshoot pipeline failures.
 Integrate Docker, Git, Python, and Linux into automated workflows.
+
+Capstone Milestone (LMS Project)
+Build a real CI/CD pipeline (GitHub Actions or Jenkins) for the LMS repo that runs tests, builds images, and deploys on push.
+
+Career Layer
+Add a CI/CD status badge to your LMS README.

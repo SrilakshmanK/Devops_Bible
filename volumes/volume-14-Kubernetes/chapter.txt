@@ -1,4 +1,4 @@
-📘 Volume 13 — Kubernetes
+📘 Volume 14 — Kubernetes
 🎯 Objective
 
 Master Kubernetes from first principles by understanding why container orchestration exists and learning how to deploy, scale, secure, monitor, and troubleshoot production-grade Kubernetes clusters.
@@ -315,3 +315,9 @@ Scale and update applications safely.
 Troubleshoot common Kubernetes failures.
 Integrate Kubernetes with AWS, Terraform, Docker, and CI/CD.
 Design a production-ready Kubernetes deployment.
+
+Capstone Milestone (LMS Project)
+Deploy the LMS onto a Kubernetes cluster: Deployments, Services, Ingress, ConfigMaps, and Secrets for each component.
+
+Career Layer
+This is a natural point to start CKA/CKAD certification prep if you want a credential alongside the project.

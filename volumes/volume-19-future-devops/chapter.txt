@@ -1,4 +1,4 @@
-📘 Volume 18 — Advanced DevOps & Future Technologies
+📘 Volume 19 — Advanced DevOps & Future Technologies
 🎯 Objective
 
 Explore advanced DevOps concepts, emerging technologies, modern platform engineering practices, and future trends to prepare for senior engineering and architecture roles.
@@ -317,3 +317,9 @@ Build Internal Developer Platforms.
 Use GitOps for continuous delivery.
 Evaluate and adopt emerging DevOps technologies.
 Continue learning independently as the ecosystem evolves.
+
+Capstone Milestone (LMS Project)
+Migrate the LMS's deployment workflow to GitOps (e.g. ArgoCD) as a final evolution of the project.
+
+Career Layer
+Final career phase: update your resume, LinkedIn, and portfolio site with the finished LMS project, and prepare interview talking points using it as your primary example.

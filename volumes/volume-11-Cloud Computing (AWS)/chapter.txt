@@ -308,3 +308,9 @@ Configure load balancing and auto scaling.
 Monitor AWS infrastructure.
 Troubleshoot common AWS issues.
 Estimate and optimize cloud costs.
+
+Capstone Milestone (LMS Project)
+Provision real AWS resources to host the LMS — compute, database, storage, and networking.
+
+Career Layer
+This is a natural point to start AWS Cloud Practitioner or Solutions Architect Associate cert prep if you want a credential alongside the project.

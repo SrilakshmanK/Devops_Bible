@@ -1,4 +1,4 @@
-📘 Volume 16 — Site Reliability Engineering (SRE)
+📘 Volume 18 — Site Reliability Engineering (SRE)
 🎯 Objective
 
 Learn the principles and practices of Site Reliability Engineering to design, operate, maintain, and continuously improve highly available, scalable, and reliable production systems.
@@ -301,3 +301,9 @@ Design highly available architectures.
 Build disaster recovery strategies.
 Conduct chaos engineering experiments.
 Operate production systems confidently.
+
+Capstone Milestone (LMS Project)
+Define SLOs/SLIs and an error budget for the LMS, then run a simulated incident or chaos test against it and write a postmortem.
+
+Career Layer
+No specific addition here.

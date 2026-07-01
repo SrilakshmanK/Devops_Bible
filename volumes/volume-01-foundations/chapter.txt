@@ -10,10 +10,10 @@ Chapter 1 — Welcome to DevOps
 Topics
 What is DevOps?
 History of DevOps
-DevOps vs Traditional IT
+DevOps vs Traditional IT  ---> jun 27 2026 time 19:50 
 DevOps Culture
 DevOps Lifecycle
-DevOps Engineer Roles & Responsibilities
+DevOps Engineer Roles & Responsibilities---> jul 01 2026 time 20:21 
 DevOps Roadmap Overview
 Understanding the Big Picture
 Chapter 2 — The Engineer's Mindset
@@ -134,3 +134,9 @@ Debug simple issues methodically.
 Ask effective technical questions.
 Organize your learning workflow.
 Learn unfamiliar technologies without relying solely on tutorials.
+
+Capstone Milestone (LMS Project)
+Set up the repository and folder structure for your LMS project (MERN + Next.js + TypeScript + Redis). Create a project README with the initial goal, and start a build log/learning journal entry specifically for this project — you will keep adding to it as you progress through the roadmap.
+
+Career Layer
+Push your LMS repo and learning journal to GitHub publicly from day one, with clean, meaningful commits. This becomes the foundation of your portfolio.

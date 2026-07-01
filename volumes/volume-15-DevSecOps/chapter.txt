@@ -316,3 +316,9 @@ Implement runtime security.
 Apply Policy as Code.
 Integrate security into the complete DevOps lifecycle.
 Build secure production platforms.
+
+Capstone Milestone (LMS Project)
+Run security scans against the LMS codebase, container images, and infrastructure (dependency, container, and secrets scanning), and fix what they find.
+
+Career Layer
+No specific addition here.
