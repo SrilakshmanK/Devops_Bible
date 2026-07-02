@@ -17,7 +17,7 @@ DevOps Culture
 DevOps Lifecycle
 DevOps Engineer Roles & Responsibilities---> jul 01 2026 time 20:21 
 DevOps Roadmap Overview
-Understanding the Big Picture--> jul 02 2026 time 19:03 completed :) 
+Understanding the Big Picture  ---> jul 02 2026 time 19:03 completed :) 
 
 
 Chapter 2 — The Engineer's Mindset:
@@ -26,7 +26,7 @@ Topics
 
 Thinking Like an Engineer
 First-Principles Thinking
-Systems Thinking
+Systems Thinking----------------------------> jul 02 2026 time 20:00 
 Breaking Problems into Smaller Parts
 Cause vs Symptoms
 Curiosity-Driven Learning
