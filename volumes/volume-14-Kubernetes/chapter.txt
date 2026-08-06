@@ -17,6 +17,9 @@ Scaling Challenges
 Why Kubernetes Was Created
 Kubernetes Architecture Overview
 Kubernetes Ecosystem
+
+💡 Mini-Task
+Write 4 lines on what specifically breaks when you run 3 containers manually with Docker across 2 machines and one crashes — what would Kubernetes automate away?
 Chapter 2 — Kubernetes Architecture
 Topics
 Cluster
@@ -31,6 +34,9 @@ kubelet
 kube-proxy
 Container Runtime
 Cluster Communication
+
+💡 Mini-Task
+Install Kind or Minikube, spin up a local cluster, and run `kubectl cluster-info` and `kubectl get nodes` to confirm it's working.
 Chapter 3 — Kubernetes Objects
 Topics
 Declarative Configuration
@@ -43,6 +49,9 @@ Resource Definitions
 Object Lifecycle
 Metadata
 Desired State
+
+💡 Mini-Task
+Run `kubectl get pods -A` and `kubectl describe node` to inspect what's running in the control plane and identify the API server, etcd, and scheduler components.
 Chapter 4 — Pods
 Topics
 What is a Pod?
@@ -55,6 +64,9 @@ Ephemeral Containers
 Pod Scheduling Basics
 Resource Requests
 Resource Limits
+
+💡 Mini-Task
+Write a plain Pod YAML manifest for one of your Docker images, apply it, and confirm it's running with `kubectl get pods` and `kubectl describe pod`.
 Chapter 5 — Controllers
 Topics
 ReplicaSets
@@ -67,6 +79,9 @@ Rollouts
 Rollbacks
 Scaling
 Controller Patterns
+
+💡 Mini-Task
+Create a Pod with a resource request/limit set, and try to schedule more replicas than your cluster can fit — observe what happens.
 Chapter 6 — Services & Networking
 Topics
 Why Services Exist
@@ -80,6 +95,9 @@ CoreDNS
 Service Discovery
 Network Policies
 Container Networking Interface (CNI)
+
+💡 Mini-Task
+Deploy your app using a Deployment (not a bare Pod) with 2 replicas, then scale it up and down with `kubectl scale`.
 Chapter 7 — Ingress
 Topics
 What is Ingress?
@@ -91,6 +109,9 @@ TLS
 SSL Termination
 NGINX Ingress Controller
 Ingress Best Practices
+
+💡 Mini-Task
+Expose your Deployment using a ClusterIP Service, then a NodePort Service, and access it both from inside and outside the cluster.
 Chapter 8 — Storage
 Topics
 Persistent Volumes (PV)
@@ -102,6 +123,9 @@ Stateful Applications
 Volume Types
 Backup Concepts
 Data Persistence
+
+💡 Mini-Task
+Set up an Ingress Controller (e.g. nginx-ingress) and route a hostname to your Service with path-based routing.
 Chapter 9 — Configuration Management
 Topics
 ConfigMaps
@@ -112,6 +136,9 @@ Configuration Updates
 Secret Rotation Concepts
 External Secrets (Introduction)
 Configuration Best Practices
+
+💡 Mini-Task
+Add a PersistentVolumeClaim to a StatefulSet (e.g. a small Postgres pod) and confirm data survives a pod restart.
 Chapter 10 — Scheduling
 Topics
 Node Selectors
@@ -123,6 +150,9 @@ Tolerations
 Priority Classes
 Resource Scheduling
 Topology Spread Constraints
+
+💡 Mini-Task
+Move a hardcoded config value into a ConfigMap and a fake password into a Secret, and mount both into your Deployment's containers.
 Chapter 11 — Scaling
 Topics
 Manual Scaling
@@ -132,6 +162,9 @@ Cluster Autoscaler
 Resource Optimization
 Scaling Strategies
 Performance Considerations
+
+💡 Mini-Task
+Add node affinity or a toleration to one of your Pods and confirm it schedules only where intended.
 Chapter 12 — Security
 Topics
 RBAC
@@ -144,6 +177,9 @@ Secret Management
 Network Policies
 Least Privilege
 Kubernetes Security Best Practices
+
+💡 Mini-Task
+Add a Horizontal Pod Autoscaler to your Deployment and load-test it (even a simple loop) to trigger a scale-up.
 Chapter 13 — Helm
 Topics
 Why Helm Exists
@@ -156,6 +192,9 @@ Upgrades
 Rollbacks
 Chart Dependencies
 Chart Best Practices
+
+💡 Mini-Task
+Create a basic RBAC Role and RoleBinding restricting a ServiceAccount to read-only access on Pods, and test it with `kubectl auth can-i`.
 Chapter 14 — Observability
 Topics
 kubectl Logs
@@ -168,6 +207,9 @@ Readiness Probes
 Startup Probes
 Cluster Diagnostics
 Debugging Workloads
+
+💡 Mini-Task
+Package your Deployment + Service + Ingress as a Helm chart with a values.yaml, then install/upgrade/rollback it.
 Chapter 15 — Advanced Kubernetes
 Topics
 Custom Resource Definitions (CRDs)
@@ -178,6 +220,9 @@ Multi-Cluster Concepts
 GitOps Introduction
 Service Mesh Introduction
 Kubernetes API Concepts
+
+💡 Mini-Task
+Check `kubectl logs`, `kubectl get events`, and liveness/readiness probes on one of your Pods to understand your cluster's built-in observability.
 Chapter 16 — Troubleshooting Kubernetes
 Topics
 Pod CrashLoopBackOff
@@ -192,6 +237,9 @@ Resource Exhaustion
 API Server Issues
 etcd Basics
 Cluster Recovery Concepts
+
+💡 Mini-Task
+Explore one CRD/Operator example (even just reading `kubectl get crds` on a cluster that has one installed) and note what problem it's solving.
 Chapter 17 — Kubernetes Best Practices
 Topics
 Namespace Strategy
@@ -203,6 +251,9 @@ High Availability
 Backup Strategy
 Upgrade Strategy
 Production Readiness Checklist
+
+💡 Mini-Task
+Deliberately cause a CrashLoopBackOff or ImagePullBackOff (bad image tag, broken command) and diagnose it using `kubectl describe` and `kubectl logs` before fixing it.
 Hands-on Labs
 Install Kubernetes using Kind, Minikube, or K3s.
 Explore the Kubernetes architecture.

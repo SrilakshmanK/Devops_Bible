@@ -19,6 +19,9 @@ Latency
 Throughput
 Jitter
 Packet Loss
+
+💡 Mini-Task
+Run a speed test and note your bandwidth, then ping a nearby vs far-away server (e.g. a local site vs one hosted overseas) and compare latency.
 Chapter 2 — Network Models
 Topics
 Why Network Models Exist
@@ -29,6 +32,9 @@ Encapsulation
 Decapsulation
 Protocol Stack
 Data Flow Through Layers
+
+💡 Mini-Task
+Draw the OSI model 7 layers on paper from memory, then check it against the real list and mark what you missed.
 Chapter 3 — Physical & Data Link Layer
 Topics
 Physical Layer
@@ -41,6 +47,9 @@ ARP (Address Resolution Protocol)
 Broadcast Domains
 Collision Domains
 VLAN (Introduction)
+
+💡 Mini-Task
+Run `arp -a` (or `ip neigh`) on your machine and identify at least 2 devices on your network by MAC address.
 Chapter 4 — Internet Layer
 Topics
 IP Addressing
@@ -58,6 +67,9 @@ Default Gateway
 ICMP
 NAT
 PAT
+
+💡 Mini-Task
+Find your machine's IP address, subnet mask, and default gateway. Manually calculate the network ID and broadcast address using CIDR notation.
 Chapter 5 — Transport Layer
 Topics
 TCP
@@ -72,6 +84,9 @@ Reliability
 Checksums
 When to Use TCP
 When to Use UDP
+
+💡 Mini-Task
+Open a TCP connection with `curl -v` to any HTTPS site and identify where in the output the three-way handshake and TLS negotiation happen.
 Chapter 6 — Application Layer
 Topics
 DNS
@@ -88,6 +103,9 @@ NTP
 SSH
 Telnet
 WebSockets (Introduction)
+
+💡 Mini-Task
+Run `dig` or `nslookup` on 3 different domains and note their DNS record types (A, CNAME, MX) and TTL values.
 Chapter 7 — Internet Infrastructure
 Topics
 How the Internet Works
@@ -98,6 +116,9 @@ Internet Exchange Points (IXP)
 Undersea Cables
 CDN (Introduction)
 Edge Computing (Introduction)
+
+💡 Mini-Task
+Set up SSH key-based login between two machines (or two terminal sessions/VMs) and confirm passwordless login works.
 Chapter 8 — Network Security
 Topics
 Firewalls
@@ -111,6 +132,9 @@ DMZ
 IDS
 IPS
 Zero Trust (Introduction)
+
+💡 Mini-Task
+Read about BGP and CDNs, then run `traceroute` (or `tracert`) to a site hosted far from you and count how many hops it takes.
 Chapter 9 — Load Balancing
 Topics
 Why Load Balancers Exist
@@ -121,6 +145,9 @@ Sticky Sessions
 Load Balancing Algorithms
 Reverse Proxy vs Load Balancer
 High Availability
+
+💡 Mini-Task
+Check if your machine's firewall is active, and write one rule (even a no-op test rule) allowing/blocking a specific port.
 Chapter 10 — Cloud Networking
 Topics
 Virtual Networks
@@ -133,6 +160,9 @@ Security Groups
 Network ACLs
 Private Endpoints
 Bastion Hosts
+
+💡 Mini-Task
+Set up Nginx or a simple reverse proxy locally that forwards to a basic app running on another port, and confirm it works.
 Chapter 11 — Network Troubleshooting
 Topics
 Common Network Problems
@@ -145,6 +175,9 @@ Firewall Issues
 Port Connectivity
 SSL/TLS Issues
 Performance Bottlenecks
+
+💡 Mini-Task
+Use `ping`, `traceroute`, and `curl -I` together to diagnose (simulate) why a fake domain doesn't resolve, and write down your diagnostic steps in order.
 Hands-on Labs
 View and analyze your network interfaces.
 Assign static and dynamic IP addresses.

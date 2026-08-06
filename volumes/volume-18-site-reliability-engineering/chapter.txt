@@ -17,6 +17,9 @@ Production Mindset
 Service Ownership
 Reliability Culture
 Google's SRE Principles
+
+💡 Mini-Task
+Write 3 lines on how SRE differs from general DevOps in your own words, using your LMS as the example of what each role would focus on.
 Chapter 2 — Reliability Fundamentals
 Topics
 Reliability
@@ -29,6 +32,9 @@ Resilience
 Redundancy
 High Availability
 Service Reliability
+
+💡 Mini-Task
+Pick 2 reliability properties (availability, durability, fault tolerance) and rate your current LMS setup honestly against each.
 Chapter 3 — Service Level Objectives
 Topics
 SLA (Service Level Agreement)
@@ -40,6 +46,9 @@ Measuring Reliability
 User-Centric Metrics
 Choosing SLIs
 SLO Best Practices
+
+💡 Mini-Task
+Define one real SLI for your LMS (e.g. % of requests under 300ms), a target SLO for it (e.g. 99% over 30 days), and calculate what error budget that leaves you.
 Chapter 4 — Incident Management
 Topics
 What is an Incident?
@@ -53,6 +62,9 @@ Incident Commander
 Recovery
 Resolution
 Post-Incident Activities
+
+💡 Mini-Task
+Simulate a small incident on your LMS (stop a container) and run through detection → triage → recovery using your own monitoring from Volume 16.
 Chapter 5 — Postmortems
 Topics
 What is a Postmortem?
@@ -64,6 +76,9 @@ Corrective Actions
 Preventive Actions
 Documentation
 Continuous Improvement
+
+💡 Mini-Task
+Write a blameless postmortem for the incident you just simulated: timeline, root cause, and one corrective action — no blame language.
 Chapter 6 — Monitoring Reliability
 Topics
 Reliability Metrics
@@ -75,6 +90,9 @@ Capacity Metrics
 Availability Monitoring
 Health Monitoring
 Alert Reliability
+
+💡 Mini-Task
+Set up an uptime check (even a simple cron+curl script or a free service like UptimeRobot) against your LMS and confirm it alerts you on downtime.
 Chapter 7 — Capacity Planning
 Topics
 Capacity Planning
@@ -87,6 +105,9 @@ Network Capacity
 Scaling Strategies
 Cost vs Performance
 Growth Planning
+
+💡 Mini-Task
+Estimate future capacity needs for your LMS: if traffic 10x'd, which resource (CPU, DB connections, storage) would hit its limit first?
 Chapter 8 — High Availability
 Topics
 High Availability Design
@@ -98,6 +119,9 @@ Load Balancing Review
 Multi-AZ Architecture
 Multi-Region Concepts
 Redundancy Strategies
+
+💡 Mini-Task
+Design (on paper) an active-passive failover setup for your LMS database, noting what would need to change from your current single-instance setup.
 Chapter 9 — Disaster Recovery
 Topics
 Disaster Recovery Fundamentals
@@ -109,6 +133,9 @@ Business Continuity
 Disaster Recovery Planning
 DR Testing
 Multi-Region Recovery
+
+💡 Mini-Task
+Write an RPO/RTO target for your LMS database (e.g. lose at most 1 hour of data, restore within 30 min) and check if your current backup strategy actually meets it.
 Chapter 10 — Chaos Engineering
 Topics
 What is Chaos Engineering?
@@ -120,6 +147,9 @@ Chaos Principles
 System Recovery
 Learning from Failure
 Chaos Best Practices
+
+💡 Mini-Task
+Run one chaos experiment on your Kubernetes cluster from Volume 14: kill a pod and time how long it takes to self-heal, recording expected vs actual behavior.
 Chapter 11 — Performance Engineering
 Topics
 Performance Testing
@@ -131,6 +161,9 @@ Bottleneck Analysis
 Response Time Optimization
 Throughput Optimization
 Resource Optimization
+
+💡 Mini-Task
+Run a basic load test against your LMS (e.g. with a free tool like hey or k6) and identify the point where response times start degrading.
 Chapter 12 — Reliability Automation
 Topics
 Auto Healing
@@ -142,6 +175,9 @@ Scheduled Maintenance
 Maintenance Windows
 Operational Automation
 Reliability Scripts
+
+💡 Mini-Task
+Write a self-healing check for one service (e.g. a liveness probe or a systemd restart policy) and confirm it recovers automatically when you kill the process.
 Chapter 13 — Operational Excellence
 Topics
 Runbooks
@@ -153,6 +189,9 @@ Change Management
 Release Readiness
 On-Call Practices
 Shift Handover
+
+💡 Mini-Task
+Write one operational runbook for your LMS: 'the app is down, what do I check first, in what order.'
 Chapter 14 — Production Operations
 Topics
 Production Deployments
@@ -163,6 +202,9 @@ Rollback Procedures
 Production Validation
 Change Risk Assessment
 Maintenance Planning
+
+💡 Mini-Task
+Practice a safe production deploy with a rollback: deploy a small change, then deliberately roll it back and confirm the previous version comes back cleanly.
 Chapter 15 — Reliability Best Practices
 Topics
 Designing for Failure
@@ -173,6 +215,9 @@ Continuous Improvement
 Cost vs Reliability
 Reliability Reviews
 Engineering Trade-offs
+
+💡 Mini-Task
+Review your reliability setup for one single point of failure (e.g. one DB instance, one Nginx container) and write down what it would take to remove it.
 Chapter 16 — Troubleshooting Production Systems
 Topics
 Service Outages
@@ -185,6 +230,9 @@ CI/CD Failures
 Storage Failures
 Cascading Failures
 Recovery Validation
+
+💡 Mini-Task
+Deliberately trigger one production-style failure (DB connection drop, disk full, bad config push) and diagnose the cascading effect it has on other components before restoring service.
 Hands-on Labs
 Define SLIs, SLOs, and SLAs for your application.
 Create error budget policies.

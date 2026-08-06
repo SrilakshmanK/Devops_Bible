@@ -18,6 +18,9 @@ Linux Architecture Overview
 Kernel Space vs User Space
 Linux Use Cases
 Why Linux Dominates Servers
+
+💡 Mini-Task
+Spin up a free Linux VM or WSL instance if you don't have one already, and just log in via terminal — confirm you're in a real shell.
 Chapter 2 — Linux Installation & Environment
 Topics
 Installation Methods
@@ -31,6 +34,9 @@ Initial System Configuration
 Shell vs Terminal
 TTY
 Virtual Consoles
+
+💡 Mini-Task
+Boot your VM to a plain terminal (no GUI) and check which distro/version you're on using a command, not the installer info.
 Chapter 3 — Linux Filesystem
 Topics
 Filesystem Hierarchy Standard (FHS)
@@ -42,6 +48,9 @@ Symbolic Links
 Hard Links
 Mount Points
 Inodes (Linux Perspective)
+
+💡 Mini-Task
+Using only `cd`, `ls`, and `pwd`, navigate to /etc, /var/log, and /home and list what's inside each — write one line on what each directory is for.
 Chapter 4 — File & Directory Management
 Topics
 File Operations
@@ -53,6 +62,9 @@ Archiving
 Compression
 Checksums & File Integrity
 File Permissions Overview
+
+💡 Mini-Task
+Create a folder structure with 3 nested directories, add a file, create both a symlink and a hard link to it, then delete the original and observe what happens to each link.
 Chapter 5 — Users & Groups
 Topics
 Users
@@ -68,6 +80,9 @@ Account Locking
 Sudo
 Root User
 Privilege Escalation Basics
+
+💡 Mini-Task
+Create a new user and a new group, add the user to the group, and confirm with `id`. Then set a password policy or lock the account.
 Chapter 6 — Permissions & Ownership
 Topics
 Read, Write, Execute
@@ -80,6 +95,9 @@ umask
 Special Permissions (SUID, SGID, Sticky Bit)
 Access Control Lists (ACL)
 File Attributes (chattr, lsattr)
+
+💡 Mini-Task
+Create a file, set its permissions to 750 using numeric mode, then change it to 644 using symbolic mode. Try accessing it as a different user.
 Chapter 7 — Processes & Jobs
 Topics
 What is a Process?
@@ -94,6 +112,9 @@ Signals
 Zombie Processes
 Orphan Processes
 Process Monitoring
+
+💡 Mini-Task
+Start a long-running background process (e.g. `sleep 300 &`), list it with `jobs`, bring it to foreground, then kill it by PID.
 Chapter 8 — Package Management
 Topics
 Software Repositories
@@ -106,6 +127,9 @@ Snap
 Flatpak
 Building from Source
 Software Updates
+
+💡 Mini-Task
+Install and remove one real package using your distro's package manager (apt/dnf/pacman), and check what dependencies it pulled in.
 Chapter 9 — System Services
 Topics
 What is systemd?
@@ -117,6 +141,9 @@ Service Management
 Boot Targets
 Startup Services
 Service Dependencies
+
+💡 Mini-Task
+Write a basic systemd service file for a simple script, enable it, start it, and check its status with `systemctl`.
 Chapter 10 — Storage Management
 Topics
 Disk Identification
@@ -130,6 +157,9 @@ LVM (Introduction)
 RAID (Concept)
 Disk Usage Analysis
 Disk Health Monitoring
+
+💡 Mini-Task
+Add a new disk/partition (or a loop device if no spare disk) and mount it, then make the mount persistent via /etc/fstab.
 Chapter 11 — Networking in Linux
 Topics
 Network Interfaces
@@ -144,6 +174,9 @@ SCP
 SFTP
 Port Management
 Socket Inspection
+
+💡 Mini-Task
+Configure SSH key-based login into your Linux machine/VM from your host machine, and disable password login as a next step.
 Chapter 12 — Environment & Shell
 Topics
 Shell Types
@@ -156,6 +189,9 @@ Aliases
 PATH
 Command History
 Shell Customization
+
+💡 Mini-Task
+Change your default shell, set a custom alias and a PATH addition in your shell profile, and confirm it persists across a new terminal session.
 Chapter 13 — Logging
 Topics
 Why Logging Matters
@@ -166,6 +202,9 @@ Application Logs
 Kernel Logs
 Log Analysis
 Troubleshooting with Logs
+
+💡 Mini-Task
+Trigger an error deliberately (e.g. failed service start) and find the relevant entry using `journalctl`.
 Chapter 14 — Scheduling Tasks
 Topics
 Cron
@@ -173,6 +212,9 @@ Crontab
 Anacron
 systemd Timers (Introduction)
 Scheduling Best Practices
+
+💡 Mini-Task
+Write a cron job that runs a simple command every minute, verify it fires, then remove it.
 Chapter 15 — System Monitoring
 Topics
 CPU Monitoring
@@ -183,6 +225,9 @@ I/O Monitoring
 Performance Metrics
 Resource Limits
 System Uptime
+
+💡 Mini-Task
+Use `top`/`htop`, `free -h`, and `df -h` together to get a full resource snapshot of your machine, and write down what's using the most CPU/RAM.
 Chapter 16 — Linux Security Basics
 Topics
 Secure SSH Configuration
@@ -194,6 +239,9 @@ Password Policies
 SELinux (Introduction)
 AppArmor (Introduction)
 Security Best Practices
+
+💡 Mini-Task
+Harden SSH on your VM: disable root login, change the default port or restrict to key auth, and confirm you can still connect.
 Chapter 17 — Troubleshooting Linux
 Topics
 Boot Failures
@@ -206,6 +254,9 @@ Network Connectivity Issues
 Package Conflicts
 Log-Based Troubleshooting
 Performance Troubleshooting
+
+💡 Mini-Task
+Deliberately break something small (e.g. wrong permission on a config file or fill a disk to 95%) and practice diagnosing it using logs and monitoring tools before fixing it.
 Hands-on Labs
 Install Linux using a virtual machine and WSL.
 Navigate the filesystem using only the terminal.

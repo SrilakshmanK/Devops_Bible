@@ -19,6 +19,9 @@ Regions
 Availability Zones
 Edge Locations
 Global Infrastructure
+
+💡 Mini-Task
+Research AWS's shared responsibility model and write 3 lines on what AWS secures vs what you're responsible for securing on EC2.
 Chapter 2 — Cloud Service Models
 Topics
 IaaS
@@ -29,6 +32,9 @@ Serverless Computing
 Managed Services
 Self-Managed Services
 Choosing the Right Service Model
+
+💡 Mini-Task
+Compare EC2 (IaaS) vs a managed service like RDS (PaaS) for a database — note what setup/maintenance you'd skip with the managed option.
 Chapter 3 — AWS Fundamentals
 Topics
 AWS Global Infrastructure
@@ -41,6 +47,9 @@ Tags
 Cost Explorer (Introduction)
 AWS Free Tier
 AWS Well-Architected Framework (Introduction)
+
+💡 Mini-Task
+Create a free-tier AWS account, enable MFA on the root user, and install/configure the AWS CLI with a test `aws sts get-caller-identity` call.
 Chapter 4 — Identity & Access Management (IAM)
 Topics
 IAM Overview
@@ -54,6 +63,9 @@ Temporary Credentials
 Cross-Account Access (Introduction)
 Least Privilege
 IAM Best Practices
+
+💡 Mini-Task
+Create an IAM user (not root) with a least-privilege policy for EC2 access only, and use that user's credentials for the rest of this volume.
 Chapter 5 — Amazon EC2
 Topics
 What is EC2?
@@ -68,6 +80,9 @@ Placement Groups (Introduction)
 Instance Metadata
 EC2 Lifecycle
 SSH Access
+
+💡 Mini-Task
+Launch a free-tier EC2 instance, connect via SSH, and confirm you can run commands on it — then terminate it when done.
 Chapter 6 — Storage Services
 Topics
 Amazon EBS
@@ -82,6 +97,9 @@ Storage Classes
 Static Website Hosting
 Amazon EFS (Introduction)
 Choosing the Right Storage Service
+
+💡 Mini-Task
+Create an S3 bucket, upload a file, and enable static website hosting to serve a simple HTML page publicly.
 Chapter 7 — AWS Networking
 Topics
 VPC
@@ -96,6 +114,9 @@ Network ACLs
 Security Groups
 Bastion Hosts
 VPC Peering (Introduction)
+
+💡 Mini-Task
+Build a custom VPC with one public and one private subnet, and explain (in writing) why the private subnet has no direct internet route.
 Chapter 8 — Load Balancing & Scaling
 Topics
 Elastic Load Balancer Overview
@@ -107,6 +128,9 @@ Auto Scaling Groups
 Launch Templates
 Scaling Policies
 High Availability
+
+💡 Mini-Task
+Launch two EC2 instances behind an Application Load Balancer and confirm traffic distributes between them.
 Chapter 9 — DNS & Content Delivery
 Topics
 Amazon Route 53
@@ -118,6 +142,9 @@ Amazon CloudFront
 CDN Concepts
 Edge Caching
 SSL Certificates (Introduction)
+
+💡 Mini-Task
+Register a free subdomain (or use Route 53's test tools) and point a DNS record at your EC2 instance or S3 website.
 Chapter 10 — Databases
 Topics
 Amazon RDS
@@ -129,6 +156,9 @@ Snapshots
 Amazon DynamoDB (Introduction)
 ElastiCache (Introduction)
 Database Security
+
+💡 Mini-Task
+Launch a free-tier RDS database instance, connect to it from your EC2 instance, and note what Multi-AZ would add if enabled.
 Chapter 11 — Monitoring & Logging
 Topics
 Amazon CloudWatch
@@ -140,6 +170,9 @@ Events
 AWS CloudTrail
 AWS Config (Introduction)
 Trusted Advisor (Introduction)
+
+💡 Mini-Task
+Set up a CloudWatch alarm on your EC2 instance (e.g. CPU > 70%) and trigger it artificially with a stress test.
 Chapter 12 — Security in AWS
 Topics
 Security Groups Deep Dive
@@ -151,6 +184,9 @@ Encryption at Rest
 Encryption in Transit
 AWS Shield (Introduction)
 AWS WAF (Introduction)
+
+💡 Mini-Task
+Create a Secrets Manager secret for a fake DB password, retrieve it via CLI, then deploy a Dockerized app (Volume 08) onto your EC2 instance using it instead of a hardcoded credential.
 Chapter 13 — Deployment on AWS
 Topics
 Deploying Docker Applications
@@ -161,6 +197,9 @@ Domain Configuration
 High Availability Deployment
 Backup Strategies
 Recovery Planning
+
+💡 Mini-Task
+Compare On-Demand vs Spot pricing for the instance type you used, and calculate what a month of your test setup would roughly cost.
 Chapter 14 — Cost Optimization
 Topics
 AWS Pricing Models
@@ -172,6 +211,9 @@ Storage Cost Optimization
 Auto Scaling for Cost
 Cost Monitoring
 Budget Alerts
+
+💡 Mini-Task
+Tag all the AWS resources you've created this volume consistently (e.g. project=lms, env=dev) and review them in the Cost Explorer/Resource Groups view.
 Chapter 15 — AWS Best Practices
 Topics
 Resource Organization
@@ -183,6 +225,9 @@ Security Best Practices
 Backup Best Practices
 Disaster Recovery Basics
 Operational Excellence
+
+💡 Mini-Task
+Deliberately misconfigure a security group (block SSH) and practice diagnosing the connection failure before fixing it.
 Chapter 16 — Troubleshooting AWS
 Topics
 EC2 Connection Problems
@@ -195,6 +240,9 @@ S3 Access Problems
 CloudWatch Investigation
 High Latency
 Cost Troubleshooting
+
+💡 Mini-Task
+Tear down every AWS resource you created this volume (EC2, RDS, S3, VPC) and confirm your billing dashboard shows nothing running.
 Hands-on Labs
 Create an AWS account and secure it.
 Configure IAM users, groups, and roles.

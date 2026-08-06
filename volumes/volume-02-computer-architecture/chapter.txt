@@ -18,6 +18,9 @@ Bits and Bytes
 Data Representation
 Number Systems (Binary, Decimal, Hexadecimal)
 
+
+💡 Mini-Task
+Convert your own age and your phone number's last 3 digits into binary and hex by hand, then verify with a terminal calculator (python3 -c or bc).
 Chapter 2 — Computer Hardware
 Topics
 Motherboard
@@ -34,6 +37,9 @@ Input Devices
 Output Devices
 Computer Buses
 
+
+💡 Mini-Task
+Open your own machine's hardware info (Task Manager / About This Mac / lscpu+free) and write down actual CPU cores, RAM size, and storage type — real numbers, not guesses.
 Chapter 3 — CPU Architecture
 Topics
 CPU Components
@@ -47,6 +53,9 @@ Instruction Cycle
 Fetch–Decode–Execute Cycle
 Machine Instructions
 Interrupts
+
+💡 Mini-Task
+Run a CPU-heavy command (e.g. a loop or `yes > /dev/null`) and watch core usage in a system monitor. Note how many cores/threads get used.
 Chapter 4 — Memory
 Topics
 What is Memory?
@@ -62,6 +71,9 @@ Heap
 Memory Allocation
 Memory Leaks (Concept)
 Shared Memory
+
+💡 Mini-Task
+Open a memory monitor while running a browser with many tabs. Note total RAM used, and look up what 'swap' is doing on your machine right now.
 Chapter 5 — Storage
 Topics
 HDD vs SSD vs NVMe
@@ -73,6 +85,9 @@ Mount Points
 Read/Write Operations
 IOPS
 Storage Performance Basics
+
+💡 Mini-Task
+Check your own disk's file system type and free space using a terminal command (df -h, or Disk Utility). Note SSD vs HDD if you know which you have.
 Chapter 6 — Boot Process
 Topics
 What Happens When You Press the Power Button?
@@ -84,6 +99,9 @@ Kernel Loading
 Init/System Initialization
 Login Process
 User Space
+
+💡 Mini-Task
+Time how long your machine takes to boot from power-on to login screen. Research what BIOS/UEFI screen briefly appears before that, if you can catch it.
 Chapter 7 — Operating Systems
 Topics
 What is an Operating System?
@@ -97,6 +115,9 @@ Scheduling
 Context Switching
 Multitasking
 Resource Management
+
+💡 Mini-Task
+List every process currently running on your machine using a system tool, and identify 3 you don't recognize — look up what they are.
 Chapter 8 — Process & Memory Management
 Topics
 Process Lifecycle
@@ -107,6 +128,9 @@ Threads vs Processes
 CPU Scheduling
 Process Communication (IPC Introduction)
 Signals (Introduction)
+
+💡 Mini-Task
+Kill a background app process from your terminal (not the GUI) and observe what happens. Note the difference between a process and an app.
 Chapter 9 — File Systems
 Topics
 What is a File System?
@@ -118,6 +142,9 @@ Journaling
 Common Linux File Systems (ext4, XFS, Btrfs)
 Windows File Systems (NTFS, FAT32, exFAT)
 Permissions (Introduction)
+
+💡 Mini-Task
+Check what file system your root/home partition uses, and browse your file system hierarchy from the terminal noting 3 directories you didn't know existed.
 Chapter 10 — Virtualization Fundamentals
 Topics
 Why Virtualization Exists
@@ -130,6 +157,9 @@ Guest OS
 Host OS
 Resource Allocation
 Why Containers Came Later
+
+💡 Mini-Task
+Install a free hypervisor (VirtualBox/UTM/Hyper-V) if not already installed, and just get to the 'create new VM' screen — don't build it yet, that's the Mini Project.
 Chapter 11 — Servers
 Topics
 What is a Server?
@@ -141,6 +171,9 @@ Virtual Servers
 Cloud Servers
 Headless Systems
 Why Linux Dominates Servers
+
+💡 Mini-Task
+Research and write 5 lines on why most cloud servers run Linux instead of Windows or macOS, citing at least one real reason (cost, licensing, resource footprint).
 Hands-on Labs
 Identify every hardware component in your own computer.
 Check CPU information using system tools.

@@ -19,6 +19,9 @@ Telemetry
 Golden Signals
 RED Method
 USE Method
+
+💡 Mini-Task
+Write 3 lines contrasting 'monitoring' (known failure modes) vs 'observability' (unknown failure modes) using a real incident you've experienced or read about.
 Chapter 2 — Metrics
 Topics
 What are Metrics?
@@ -33,6 +36,9 @@ Cardinality
 Metric Naming
 Retention
 Sampling
+
+💡 Mini-Task
+Look at any metric you already have (CPU% from earlier volumes) and classify it as a counter, gauge, or histogram, and explain why.
 Chapter 3 — Prometheus
 Topics
 Prometheus Architecture
@@ -49,6 +55,9 @@ Recording Rules
 Alerting Rules
 Federation (Introduction)
 Remote Write (Introduction)
+
+💡 Mini-Task
+Install Prometheus and Node Exporter on your Linux VM, confirm Prometheus is scraping it, and view raw metrics at :9100/metrics.
 Chapter 4 — PromQL
 Topics
 Introduction to PromQL
@@ -62,6 +71,9 @@ Rate Functions
 Histogram Queries
 Label Matching
 Query Optimization
+
+💡 Mini-Task
+Write 3 PromQL queries against your Node Exporter data: current CPU usage, memory usage over time, and a rate() of network traffic.
 Chapter 5 — Grafana
 Topics
 Grafana Architecture
@@ -75,6 +87,9 @@ Alerts
 Dashboard Sharing
 Dashboard Provisioning
 Best Practices
+
+💡 Mini-Task
+Install Grafana, connect it to your Prometheus data source, and build one dashboard panel showing live CPU usage from your VM.
 Chapter 6 — Logging Fundamentals
 Topics
 Why Logging Matters
@@ -87,6 +102,9 @@ Centralized Logging
 Log Retention
 Correlation IDs
 Logging Best Practices
+
+💡 Mini-Task
+Add structured JSON logging (with a level and timestamp) to one of your Python scripts from Volume 07 instead of plain print statements.
 Chapter 7 — Loki
 Topics
 Loki Architecture
@@ -98,6 +116,9 @@ Log Queries
 Log Aggregation
 Integration with Grafana
 Scaling Loki
+
+💡 Mini-Task
+Install Loki + Promtail, ship your Linux VM's logs into it, and query them from Grafana using LogQL.
 Chapter 8 — Distributed Tracing
 Topics
 Why Tracing Exists
@@ -109,6 +130,9 @@ Trace IDs
 Sampling
 Latency Analysis
 Service Dependency Graphs
+
+💡 Mini-Task
+Add basic tracing (even a simple manual span using OpenTelemetry's Python SDK) to one function in your LMS backend and view the trace.
 Chapter 9 — OpenTelemetry
 Topics
 What is OpenTelemetry?
@@ -122,6 +146,9 @@ Log Collection
 Trace Collection
 Auto Instrumentation
 Manual Instrumentation
+
+💡 Mini-Task
+Instrument one of your apps with the OpenTelemetry SDK to export metrics automatically to your Prometheus/Grafana stack.
 Chapter 10 — Alerting
 Topics
 Why Alerting Exists
@@ -135,6 +162,9 @@ Escalation
 Notification Channels
 Alert Fatigue
 Runbooks
+
+💡 Mini-Task
+Configure Alertmanager with one alert rule (e.g. CPU > 80% for 2 min) and route it to a real notification channel (email/Slack/Discord).
 Chapter 11 — Monitoring Kubernetes
 Topics
 Cluster Monitoring
@@ -147,6 +177,9 @@ kube-state-metrics
 Metrics Server
 Cluster Dashboards
 Kubernetes Alerts
+
+💡 Mini-Task
+Deploy kube-state-metrics or Metrics Server to your Kubernetes cluster (Volume 14) and view Pod/Node resource usage in Grafana.
 Chapter 12 — Monitoring Cloud Infrastructure
 Topics
 AWS CloudWatch
@@ -159,6 +192,9 @@ Infrastructure Monitoring
 EC2 Monitoring
 RDS Monitoring
 Load Balancer Monitoring
+
+💡 Mini-Task
+Set up a CloudWatch alarm and dashboard for one AWS resource from Volume 11 (e.g. EC2 CPU), and compare it to your Prometheus setup.
 Chapter 13 — Application Performance Monitoring (APM)
 Topics
 What is APM?
@@ -170,6 +206,9 @@ Slow Queries
 API Monitoring
 Dependency Monitoring
 User Experience Monitoring
+
+💡 Mini-Task
+Measure your LMS's real response time and error rate for one endpoint (even with a simple script) and note what an APM tool would add.
 Chapter 14 — Dashboard Design
 Topics
 Dashboard Principles
@@ -181,6 +220,9 @@ Visualization Best Practices
 Color Usage
 Dashboard Organization
 Drill-Down Techniques
+
+💡 Mini-Task
+Redesign one dashboard you built this volume following dashboard best practices — group related panels, fix confusing colors, add drill-down links.
 Chapter 15 — Incident Investigation
 Topics
 Using Metrics
@@ -192,6 +234,9 @@ Timeline Reconstruction
 Performance Analysis
 Failure Investigation
 Postmortems
+
+💡 Mini-Task
+Simulate one failure (kill a service, fill disk, or stop a container) and use your metrics + logs together to find the root cause before restarting it.
 Chapter 16 — Observability Best Practices
 Topics
 Monitoring Strategy
@@ -203,6 +248,9 @@ Dashboard Maintenance
 Data Retention
 Cost Optimization
 Documentation
+
+💡 Mini-Task
+Define one SLI and SLO for your LMS (e.g. 95% of requests under 300ms) and check whether your current setup could actually measure it.
 Chapter 17 — Troubleshooting Observability
 Topics
 Missing Metrics
@@ -215,6 +263,9 @@ Alert Failures
 Dashboard Issues
 Performance Bottlenecks
 Collector Failures
+
+💡 Mini-Task
+Deliberately misconfigure an exporter or scrape target and diagnose the 'missing metrics' problem using Prometheus's target status page.
 Hands-on Labs
 Install Prometheus.
 Install Grafana.

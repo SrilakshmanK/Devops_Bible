@@ -17,6 +17,9 @@ Containers vs Virtual Machines
 Container Ecosystem Overview
 OCI (Open Container Initiative)
 Docker Architecture Overview
+
+💡 Mini-Task
+List 3 real times you've hit 'works on my machine' problems before, and write down which Docker feature (from this chapter's topics) would have prevented each.
 Chapter 2 — Linux Features Behind Containers
 Topics
 Linux Namespaces
@@ -31,6 +34,9 @@ Resource Isolation
 Union File Systems
 OverlayFS
 Container Runtime Concepts
+
+💡 Mini-Task
+Run `unshare` or inspect `/proc/[pid]/ns` on your Linux VM to see namespaces in action, and check a running process's cgroup limits under /sys/fs/cgroup.
 Chapter 3 — Docker Installation & Architecture
 Topics
 Installing Docker
@@ -41,6 +47,9 @@ Docker Desktop vs Docker Engine
 Docker Client-Server Architecture
 Docker Context
 Docker Rootless Mode (Introduction)
+
+💡 Mini-Task
+Install Docker on your Linux VM/WSL, run `docker info` and `docker version`, and confirm the daemon and CLI are both working.
 Chapter 4 — Docker Basics
 Topics
 Images
@@ -55,6 +64,9 @@ Container Lifecycle
 Interactive Containers
 Detached Containers
 Inspecting Containers
+
+💡 Mini-Task
+Pull an existing image (e.g. nginx or python), run it interactively and detached, then inspect it with `docker inspect` and `docker logs`.
 Chapter 5 — Docker Images
 Topics
 Dockerfile
@@ -72,6 +84,9 @@ WORKDIR
 USER
 Multi-stage Builds
 Build Optimization
+
+💡 Mini-Task
+Write a Dockerfile for one of your Python scripts from Volume 07, build it, and run the container — confirm it produces the same output as running locally.
 Chapter 6 — Container Management
 Topics
 Starting Containers
@@ -88,6 +103,9 @@ Copy Files
 Rename
 Pause & Unpause
 Pruning Resources
+
+💡 Mini-Task
+Start, stop, exec into, and remove a container using only CLI commands — then check `docker stats` while it's running.
 Chapter 7 — Docker Networking
 Topics
 Container Networking Fundamentals
@@ -101,6 +119,9 @@ Port Publishing
 Container-to-Container Communication
 Network Inspection
 Custom Networks
+
+💡 Mini-Task
+Run two containers on a custom bridge network and get them to talk to each other by container name instead of IP.
 Chapter 8 — Docker Storage
 Topics
 Container Filesystems
@@ -112,6 +133,9 @@ Volume Drivers
 Persistent Data
 Backup & Restore Volumes
 Storage Best Practices
+
+💡 Mini-Task
+Add a named volume to a container running a database image (e.g. Postgres) and confirm data survives a container restart.
 Chapter 9 — Docker Compose
 Topics
 Why Docker Compose Exists
@@ -125,6 +149,9 @@ Health Checks
 Scaling Services
 Compose Profiles
 Override Files
+
+💡 Mini-Task
+Write a docker-compose.yml with 2 services (e.g. your app + Redis) and bring the whole stack up with `docker compose up`.
 Chapter 10 — Docker Registries
 Topics
 Docker Hub
@@ -135,6 +162,9 @@ Pushing Images
 Pulling Images
 Registry Authentication
 Registry Security
+
+💡 Mini-Task
+Tag and push an image you built to Docker Hub (or a free private registry), then pull it down fresh on the same or another machine.
 Chapter 11 — Docker Security
 Topics
 Running as Non-root
@@ -147,6 +177,9 @@ Capabilities
 Seccomp (Introduction)
 AppArmor Integration
 Rootless Containers
+
+💡 Mini-Task
+Rebuild one of your Dockerfiles to run as a non-root user and add a USER instruction, then confirm it still works.
 Chapter 12 — Docker Logging & Monitoring
 Topics
 Container Logs
@@ -157,6 +190,9 @@ Container Metrics
 Basic Troubleshooting
 Container Inspection
 Performance Monitoring
+
+💡 Mini-Task
+Check `docker logs` and `docker stats` on a running container to diagnose (simulated) high memory usage.
 Chapter 13 — Docker Best Practices
 Topics
 Small Images
@@ -168,6 +204,9 @@ Environment Separation
 Secret Management
 Cleanup Strategies
 Production Best Practices
+
+💡 Mini-Task
+Take an existing Dockerfile and shrink its image size using a smaller base image and multi-stage build — compare `docker images` size before/after.
 Chapter 14 — Troubleshooting Docker
 Topics
 Container Startup Failures
@@ -180,6 +219,9 @@ Resource Exhaustion
 Image Pull Errors
 Registry Issues
 Debugging Containers
+
+💡 Mini-Task
+Deliberately break a container (bad ENV, wrong port, missing file) and practice diagnosing it using logs and inspect before fixing the Dockerfile.
 Chapter 15 — Docker in DevOps
 Topics
 Docker in CI/CD
@@ -190,6 +232,9 @@ Container Lifecycle in DevOps
 Immutable Infrastructure
 Introduction to Orchestration
 Preparing for Kubernetes
+
+💡 Mini-Task
+Write a short note on where in a CI/CD pipeline you'd expect `docker build` and `docker push` to happen, based on what you know so far.
 Hands-on Labs
 Install Docker on Linux.
 Build custom Docker images.

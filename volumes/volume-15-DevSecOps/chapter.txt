@@ -18,6 +18,9 @@ Defense in Depth
 Zero Trust Architecture
 Security Culture
 Secure Software Supply Chain
+
+💡 Mini-Task
+Pick one stage of your LMS pipeline (code, build, deploy) and write 3 lines on what a 'shift-left' security check would look like there vs fixing it in production.
 Chapter 2 — Identity & Access Management
 Topics
 Authentication
@@ -31,6 +34,9 @@ Multi-Factor Authentication (MFA)
 Single Sign-On (SSO)
 Federated Identity
 Privileged Access Management (PAM)
+
+💡 Mini-Task
+Add MFA to one real account you use (GitHub, AWS) if not already on, and review your AWS IAM users from Volume 11 for least-privilege violations.
 Chapter 3 — Secrets Management
 Topics
 Why Secrets Management Exists
@@ -45,6 +51,9 @@ HashiCorp Vault
 AWS Secrets Manager
 Secret Injection
 Secret Best Practices
+
+💡 Mini-Task
+Install HashiCorp Vault locally (dev mode is fine), store a secret, and retrieve it via the CLI instead of an env var or hardcoded value.
 Chapter 4 — Infrastructure Security
 Topics
 Linux Hardening
@@ -57,6 +66,9 @@ Network Segmentation
 Infrastructure Auditing
 Secure Configuration
 Compliance Basics
+
+💡 Mini-Task
+Run a Linux hardening pass on your VM: disable root SSH login, remove an unused service, and check file permissions on /etc/shadow and /etc/passwd.
 Chapter 5 — Container Security
 Topics
 Container Security Principles
@@ -71,6 +83,9 @@ Seccomp
 AppArmor
 Container Isolation
 Container Escape (Concept)
+
+💡 Mini-Task
+Scan one of your Docker images from Volume 08 with Trivy and fix at least one reported vulnerability by changing the base image or a package version.
 Chapter 6 — Kubernetes Security
 Topics
 Kubernetes Security Model
@@ -84,6 +99,9 @@ Security Context
 Image Policies
 Namespace Isolation
 API Security
+
+💡 Mini-Task
+Apply a NetworkPolicy to your Kubernetes cluster from Volume 14 restricting traffic between two namespaces, and confirm it blocks what it should.
 Chapter 7 — CI/CD Security
 Topics
 Pipeline Security
@@ -96,6 +114,9 @@ Secure Runners
 Branch Protection
 Code Signing
 Secure Releases
+
+💡 Mini-Task
+Add a secret-scanning step (e.g. gitleaks or truffleHog) to one of your GitHub Actions workflows and confirm it catches a deliberately committed fake secret.
 Chapter 8 — Vulnerability Management
 Topics
 Vulnerability Assessment
@@ -107,6 +128,9 @@ Patch Management
 Security Advisories
 Dependency Management
 Security Updates
+
+💡 Mini-Task
+Look up a real CVE for a package/library you use, read its CVSS score, and decide (with reasoning) whether it needs immediate patching.
 Chapter 9 — Application Security Testing
 Topics
 Static Application Security Testing (SAST)
@@ -116,6 +140,9 @@ Interactive Application Security Testing (IAST)
 Secret Scanning
 Code Quality
 Secure Coding Principles
+
+💡 Mini-Task
+Run a free SAST tool (e.g. Bandit for Python, or GitHub's CodeQL) against one of your repos and review its findings.
 Chapter 10 — Container & Kubernetes Scanning
 Topics
 Trivy
@@ -126,6 +153,9 @@ Dependency Scanning
 Kubernetes Manifest Scanning
 Configuration Scanning
 Vulnerability Reports
+
+💡 Mini-Task
+Scan your Kubernetes manifests with a tool like kubesec or Trivy's config scan and fix one flagged misconfiguration.
 Chapter 11 — Supply Chain Security
 Topics
 Software Supply Chain
@@ -137,6 +167,9 @@ Cosign
 Trusted Registries
 Dependency Trust
 Third-Party Risk
+
+💡 Mini-Task
+Generate an SBOM for one of your Docker images (e.g. with Syft) and review what dependencies it lists.
 Chapter 12 — Policy as Code
 Topics
 What is Policy as Code?
@@ -147,6 +180,9 @@ Compliance Policies
 Infrastructure Policies
 Kubernetes Policies
 Policy Enforcement
+
+💡 Mini-Task
+Write a simple OPA/Rego policy that denies Kubernetes Pods without resource limits, and test it against one of your manifests.
 Chapter 13 — Runtime Security
 Topics
 Runtime Monitoring
@@ -157,6 +193,9 @@ Audit Logs
 Process Monitoring
 File Integrity Monitoring
 Behavioral Analysis
+
+💡 Mini-Task
+Install Falco (or read through its example rules) and note 2 runtime behaviors it would flag as suspicious on a container.
 Chapter 14 — Cloud Security
 Topics
 AWS Security Best Practices
@@ -169,6 +208,9 @@ KMS
 Encryption
 CloudTrail Security
 GuardDuty (Introduction)
+
+💡 Mini-Task
+Review your AWS CloudTrail logs from Volume 11 for one unusual or interesting event, and note what GuardDuty would add on top.
 Chapter 15 — Incident Response
 Topics
 Security Incidents
@@ -180,6 +222,9 @@ Recovery
 Lessons Learned
 Digital Forensics (Introduction)
 Security Reporting
+
+💡 Mini-Task
+Write a short incident response runbook (detect → contain → eradicate → recover → lessons learned) for a hypothetical leaked API key in your LMS repo.
 Chapter 16 — Compliance & Governance
 Topics
 Security Policies
@@ -192,6 +237,9 @@ SOC 2 (Introduction)
 PCI DSS (Introduction)
 GDPR (Introduction)
 Compliance Automation
+
+💡 Mini-Task
+Pick one compliance framework (CIS Benchmarks is a good start) and run its Docker or Linux benchmark tool against one of your systems, noting 2 failed checks.
 Chapter 17 — DevSecOps Best Practices
 Topics
 Security by Design
@@ -202,6 +250,9 @@ Secure Infrastructure
 Security Monitoring
 Documentation
 Continuous Improvement
+
+💡 Mini-Task
+Add one automated security check (scan, lint, or policy check) into your existing LMS CI/CD pipeline so it runs on every push, not just manually.
 Hands-on Labs
 Harden a Linux server.
 Configure HashiCorp Vault.

@@ -21,6 +21,9 @@ Agent-Based vs Agentless Tools
 Why Ansible?
 Where Ansible Fits in DevOps
 Configuration Management Best Practices
+
+💡 Mini-Task
+Write 4 lines comparing what Terraform does (Volume 12: provisioning) vs what Ansible does (configuration) — why do teams usually use both, not just one?
 Chapter 2 — Ansible Fundamentals
 Topics
 What is Ansible?
@@ -35,6 +38,9 @@ Installing Ansible
 Ansible CLI
 Project Structure
 Ansible Configuration File (ansible.cfg)
+
+💡 Mini-Task
+Install Ansible on your control node, set up passwordless SSH to a target Linux VM, and run `ansible all -m ping` successfully.
 Chapter 3 — YAML for Ansible
 Topics
 YAML Refresher
@@ -47,6 +53,9 @@ Variables
 Indentation Rules
 Multi-line Strings
 YAML Best Practices
+
+💡 Mini-Task
+Write a small standalone YAML file (list + dictionary + a multi-line string) and validate it parses correctly with a YAML linter or `python3 -c 'import yaml'`.
 Chapter 4 — Inventory Management
 Topics
 What is Inventory?
@@ -60,6 +69,9 @@ Group Variables
 Inventory Variables
 Inventory Plugins (Introduction)
 Dynamic Inventory Concepts
+
+💡 Mini-Task
+Create a static inventory file with 2 host groups (e.g. web, db) and confirm `ansible web --list-hosts` shows only the right hosts.
 Chapter 5 — Ad-hoc Commands
 Topics
 Why Ad-hoc Commands Exist
@@ -75,6 +87,9 @@ Reboot Module
 Gathering Facts
 Running Commands on Multiple Hosts
 
+
+💡 Mini-Task
+Run 3 different ad-hoc commands against your inventory: check connectivity (ping module), install a package (package module), and check disk space (shell module).
 Chapter 5 — YAML for Ansible
 Topics
 YAML Refresher
@@ -88,6 +103,9 @@ Indentation Rules
 Multi-line Strings
 YAML Best Practices
 
+
+💡 Mini-Task
+Re-verify your earlier YAML file using anchors or an additional Ansible-specific variable file, since this topic repeats from Chapter 3 — treat it as a deeper YAML drill for variables files specifically.
 Chapter 6 — Playbooks
 Topics
 What is a Playbook?
@@ -102,6 +120,9 @@ Check Mode
 Diff Mode
 Dry Runs
 Idempotent Playbooks
+
+💡 Mini-Task
+Write your first real playbook with 2-3 tasks (e.g. install nginx, start the service, copy a file) and run it, confirming a second run reports no changes (idempotency).
 Chapter 7 — Variables & Facts
 Topics
 Variables
@@ -115,6 +136,9 @@ Magic Variables
 Environment Variables
 Fact Gathering
 Variable Best Practices
+
+💡 Mini-Task
+Register a variable from a task's output (e.g. a file check) and use it in a conditional in a later task in the same playbook.
 Chapter 8 — Templates & Jinja2
 Topics
 Why Templates Exist
@@ -127,6 +151,9 @@ Template Module
 Configuration Generation
 Dynamic Configuration Files
 Template Best Practices
+
+💡 Mini-Task
+Create a Jinja2 template for an nginx config file with a variable port, and use the template module to deploy it, then confirm the rendered file is correct.
 Chapter 9 — Roles & Collections
 Topics
 Why Roles Exist
@@ -141,6 +168,9 @@ Meta
 Collections
 Ansible Galaxy
 Reusable Automation
+
+💡 Mini-Task
+Convert your playbook from earlier into a proper role (with tasks/, defaults/, templates/ folders) and call it from a new playbook.
 Chapter 10 — Automation Patterns
 Topics
 Loops
@@ -155,6 +185,9 @@ Run Once
 Async Tasks
 Parallelism
 Execution Strategies
+
+💡 Mini-Task
+Add a loop to install 3 packages in one task, and add a tag so you can run just that task in isolation with `--tags`.
 Chapter 11 — Secrets & Security
 Topics
 Why Secrets Matter
@@ -168,6 +201,9 @@ become
 Least Privilege
 Secure Automation
 Secret Management Best Practices
+
+💡 Mini-Task
+Encrypt a fake secret (e.g. a DB password) using ansible-vault, reference it in a playbook, and run the playbook providing the vault password.
 Chapter 12 — Infrastructure Automation
 Topics
 Installing Packages
@@ -182,6 +218,9 @@ System Updates
 Firewall Configuration
 Storage Configuration
 System Hardening Concepts
+
+💡 Mini-Task
+Write a playbook that creates a user, sets up a cron job, and configures a basic firewall rule — all in one idempotent run.
 Chapter 13 — Testing & Validation
 
 Topics:
@@ -197,6 +236,9 @@ CI/CD Integration
 Idempotency Testing
 Automation Quality Assurance
 
+
+💡 Mini-Task
+Run `ansible-playbook --syntax-check` and `--check` (dry run) on one of your playbooks before actually applying it, and run ansible-lint if available.
 Chapter 14 — AWS & Terraform Integration
 Topics
 Dynamic AWS Inventory
@@ -209,6 +251,9 @@ Deploying Python Applications
 AWS Modules Overview
 Infrastructure Validation
 Multi-Environment Automation
+
+💡 Mini-Task
+If you have Terraform-created EC2 instances from Volume 11/12, configure AWS dynamic inventory and target them directly instead of a static inventory file.
 Chapter 15 — Docker Deployment Automation
 Topics
 Installing Docker
@@ -221,6 +266,9 @@ Environment Variables
 Rolling Updates (Concept)
 Zero-Downtime Concepts
 Preparing for Kubernetes
+
+💡 Mini-Task
+Write a playbook that installs Docker and deploys a docker-compose stack on a target host, confirming the containers come up.
 Chapter 16 — Troubleshooting Ansible
 Topics
 SSH Failures
@@ -235,6 +283,9 @@ Vault Errors
 Debug Module
 Verbose Logging
 Performance Optimization
+
+💡 Mini-Task
+Break something in a playbook on purpose (bad variable name, wrong module option) and use `-vvv` verbose output to diagnose and fix it.
 Chapter 17 — Ansible Best Practices
 Topics
 Project Structure
@@ -249,6 +300,9 @@ Testing Playbooks
 Linting
 Scalability
 Production Readiness Checklist
+
+💡 Mini-Task
+Reorganize your roles/playbooks into a clean project structure (roles/, inventories/, group_vars/) following naming conventions, and document it briefly in a README.
 Hands-on Labs
 Install Ansible on Linux.
 Configure passwordless SSH.

@@ -18,6 +18,9 @@ Why CI/CD Exists
 Manual vs Automated Deployment
 CI/CD Benefits
 Common CI/CD Terminology
+
+💡 Mini-Task
+Write down (in your journal) the manual deployment steps you did for your LMS in Volume 04/09, then mark which of those steps CI/CD would automate.
 Chapter 2 — Software Delivery Lifecycle
 Topics
 SDLC Overview
@@ -29,6 +32,9 @@ Artifact Generation
 Deployment Process
 Release Management
 Rollback Concepts
+
+💡 Mini-Task
+Draw the full SDLC for one small feature you've built (e.g. login) from code → build → test → deploy → release, labeling each stage with what actually happened.
 Chapter 3 — Pipeline Fundamentals
 Topics
 Pipeline Architecture
@@ -41,6 +47,9 @@ Secrets Management
 Parallel Execution
 Pipeline Dependencies
 Pipeline Optimization
+
+💡 Mini-Task
+Create a minimal GitHub Actions workflow file that just triggers on push and runs `echo hello` — confirm it runs in the Actions tab.
 Chapter 4 — Build Automation
 Topics
 What is a Build?
@@ -52,6 +61,9 @@ Build Caching
 Artifact Naming
 Build Metadata
 Reproducible Builds
+
+💡 Mini-Task
+Add a build step to your workflow that installs dependencies for your LMS backend/frontend and confirms the build succeeds.
 Chapter 5 — Automated Testing
 Topics
 Unit Testing
@@ -63,6 +75,9 @@ Regression Testing
 Test Reports
 Test Coverage
 Fail Fast Principle
+
+💡 Mini-Task
+Add a real automated test step (even one simple test) to your pipeline and confirm the pipeline fails when the test fails.
 Chapter 6 — Artifact Management
 Topics
 What are Artifacts?
@@ -73,6 +88,9 @@ Artifact Promotion
 Docker Images as Artifacts
 Package Repositories
 Binary Management
+
+💡 Mini-Task
+Configure your pipeline to upload a build artifact (e.g. a build folder or test report) and download it from the Actions run.
 Chapter 7 — Jenkins
 Topics
 Jenkins Architecture
@@ -95,6 +113,9 @@ Shared Libraries
 Distributed Builds
 Backup & Restore
 Jenkins Best Practices
+
+💡 Mini-Task
+Set up Jenkins locally (Docker container is fine), create a Freestyle job that runs a shell command, then write a basic declarative Jenkinsfile with build+test stages and run it.
 Chapter 8 — GitHub Actions
 Topics
 GitHub Actions Overview
@@ -112,6 +133,9 @@ Caching
 Reusable Workflows
 Composite Actions
 Marketplace Actions
+
+💡 Mini-Task
+Create a GitHub Actions workflow that builds a Docker image from your LMS Dockerfile, push it to Docker Hub using stored secrets (not hardcoded credentials), and confirm both steps work.
 Chapter 9 — Deployment Strategies
 Topics
 Manual Deployment
@@ -123,6 +147,9 @@ Recreate Deployment
 A/B Deployment
 Feature Flags (Introduction)
 Rollback Strategies
+
+💡 Mini-Task
+Design (on paper or in a workflow file) a rolling or blue-green deployment plan for your LMS, noting rollback steps if a deploy fails.
 Chapter 10 — Container CI/CD
 Topics
 Building Docker Images
@@ -133,6 +160,9 @@ Image Scanning
 Publishing Images
 Docker Compose Deployment
 Registry Authentication
+
+💡 Mini-Task
+Add a Docker build + tag + registry push sequence to your CI pipeline and confirm the final image appears in the registry.
 Chapter 11 — Infrastructure in CI/CD
 Topics
 Infrastructure Pipelines
@@ -141,6 +171,9 @@ Environment Promotion
 Infrastructure Validation
 Infrastructure Testing
 GitOps Concepts (Introduction)
+
+💡 Mini-Task
+Design a 3-environment promotion flow (dev → staging → prod) for your LMS, noting where a manual approval or infra validation would go.
 Chapter 12 — Pipeline Security
 Topics
 Secrets Management
@@ -153,6 +186,9 @@ Image Scanning
 License Scanning
 Supply Chain Basics
 Pipeline Hardening
+
+💡 Mini-Task
+Add a secret-scanning or dependency-scanning step to your pipeline and review what it flags in your repo.
 Chapter 13 — Monitoring CI/CD
 Topics
 Build Logs
@@ -163,6 +199,9 @@ Failure Analysis
 Notifications
 Alerts
 Dashboard Basics
+
+💡 Mini-Task
+Add an image scan step (e.g. Trivy) to your Docker CI pipeline and review the vulnerability report it produces.
 Chapter 14 — Troubleshooting Pipelines
 Topics
 Build Failures
@@ -175,6 +214,9 @@ Agent Failures
 Artifact Problems
 Deployment Failures
 Rollback Procedures
+
+💡 Mini-Task
+Deliberately break your pipeline (bad test, bad Dockerfile line, missing credential) and practice reading the CI logs to find and fix the failure.
 Chapter 15 — CI/CD Best Practices
 Topics
 Pipeline as Code
@@ -187,6 +229,9 @@ Branch Strategy
 Environment Separation
 Documentation
 Pipeline Maintenance
+
+💡 Mini-Task
+Finish your end-to-end pipeline: push → test → build → scan → push image → deploy trigger, and confirm the whole chain runs on a real push.
 Hands-on Labs
 Install Jenkins on Linux.
 Configure Jenkins agents.

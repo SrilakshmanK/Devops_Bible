@@ -16,6 +16,9 @@ N-Tier Architecture
 Microservices (Introduction)
 Request-Response Lifecycle
 Production vs Development Environments
+
+💡 Mini-Task
+Pick a real product you use (e.g. Netflix, Amazon) and sketch whether it's likely monolithic, 3-tier, or microservices based on what you observe, and justify your guess.
 Chapter 2 — How the Internet Serves a Website
 Topics
 Browser Request Lifecycle
@@ -30,6 +33,9 @@ Database Query
 Response Generation
 Browser Rendering
 Caching Along the Path
+
+💡 Mini-Task
+Open browser DevTools Network tab on any site, load a page, and trace the request lifecycle: find the DNS, TCP, TLS, and actual HTTP request timings.
 Chapter 3 — Web Servers
 Topics
 What is a Web Server?
@@ -43,6 +49,9 @@ MIME Types
 Directory Indexing
 Compression
 Keep-Alive Connections
+
+💡 Mini-Task
+Install Nginx on your Linux VM, serve a static HTML page with it, and access it from your browser.
 Chapter 4 — Reverse Proxies
 Topics
 Why Reverse Proxies Exist
@@ -55,6 +64,9 @@ Load Distribution Basics
 Security Benefits
 Proxy Buffers
 Timeouts
+
+💡 Mini-Task
+Configure Nginx as a reverse proxy in front of a simple app (your Python/Node app from earlier volumes) running on another port.
 Chapter 5 — Application Servers
 Topics
 What is an Application Server?
@@ -65,6 +77,9 @@ Python Application Servers
 Java Application Servers (Introduction)
 Process Managers
 Application Lifecycle
+
+💡 Mini-Task
+Set up a Node.js or Python app server behind Nginx and confirm requests pass through correctly, checking process manager basics (e.g. pm2 or gunicorn).
 Chapter 6 — Load Balancing
 Topics
 Why Load Balancers Exist
@@ -77,6 +92,9 @@ Sticky Sessions
 Health Checks
 Failover
 High Availability
+
+💡 Mini-Task
+Run 2 instances of the same app on different ports and configure Nginx to round-robin between them — confirm both get traffic.
 Chapter 7 — Caching
 Topics
 Why Caching Exists
@@ -90,6 +108,9 @@ Memcached
 Cache Invalidation
 Cache-Control Headers
 Cache Strategies
+
+💡 Mini-Task
+Add Redis in front of a slow operation (or simulate with time.sleep) in your app, and measure the speed difference cached vs uncached.
 Chapter 8 — Databases in Production
 Topics
 Database Roles
@@ -102,6 +123,9 @@ Connection Pooling
 Transactions
 Database Backups
 Recovery Concepts
+
+💡 Mini-Task
+Set up Postgres with a Docker volume, insert some data, restart the container, and confirm the data persisted — then look up what a read replica would add.
 Chapter 9 — Storage Systems
 Topics
 Local Storage
@@ -113,6 +137,9 @@ Shared Storage
 Persistent Storage
 Backup Storage
 Storage Redundancy
+
+💡 Mini-Task
+Compare object storage (like S3) vs block storage conceptually by researching one real use case for each, and note which your LMS would need.
 Chapter 10 — Content Delivery Networks (CDN)
 Topics
 What is a CDN?
@@ -123,6 +150,9 @@ Dynamic Content
 CDN Security
 Cache Purging
 Global Performance
+
+💡 Mini-Task
+Research how a CDN would serve your LMS's static assets (JS/CSS/images) differently from your origin server, and note the expected latency benefit.
 Chapter 11 — Message Queues
 Topics
 Why Queues Exist
@@ -135,6 +165,9 @@ RabbitMQ (Introduction)
 Kafka (Introduction)
 Background Jobs
 Event-Driven Architecture (Introduction)
+
+💡 Mini-Task
+Set up a very simple producer/consumer pattern (even with a Python queue or Redis list) to simulate why async processing matters for a slow task.
 Chapter 12 — API Architecture
 Topics
 REST APIs
@@ -147,6 +180,9 @@ Idempotency
 Pagination
 Webhooks
 WebSockets (Production Perspective)
+
+💡 Mini-Task
+Design a REST endpoint with pagination and rate limiting rules on paper (or a basic implementation) for one resource in your LMS.
 Chapter 13 — High Availability & Scalability
 Topics
 Horizontal Scaling
@@ -159,6 +195,9 @@ Fault Tolerance
 Redundancy
 Single Point of Failure
 Disaster Recovery (Introduction)
+
+💡 Mini-Task
+Run 2 app instances behind Nginx, kill one, and confirm your setup either fails over or you can observe the failure — note what health checks would fix.
 Chapter 14 — Security in Web Infrastructure
 Topics
 HTTPS Everywhere
@@ -172,6 +211,9 @@ Security Headers
 Rate Limiting
 DDoS Basics
 WAF (Introduction)
+
+💡 Mini-Task
+Get HTTPS working locally with a self-signed cert on your Nginx setup, and inspect the cert details in your browser.
 Chapter 15 — Observability in Web Applications
 Topics
 Application Logs
@@ -183,6 +225,9 @@ Readiness Checks
 Liveness Checks
 Tracing (Introduction)
 Monitoring Overview
+
+💡 Mini-Task
+Set up basic access + error logging on your Nginx/app setup and generate a few real log lines by hitting the app, including one deliberate error.
 Chapter 16 — Troubleshooting Production Systems
 Topics
 Website Down
@@ -197,6 +242,9 @@ Memory Leaks
 CPU Bottlenecks
 Timeout Issues
 Log-Based Investigation
+
+💡 Mini-Task
+Deliberately break one part of your stack (stop the DB container, break DNS resolution, or kill Nginx) and write down your diagnostic steps before fixing it.
 Hands-on Labs
 Deploy a static website using Nginx.
 Configure Nginx as a reverse proxy.

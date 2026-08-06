@@ -16,6 +16,9 @@ Centralized Version Control
 Distributed Version Control
 Git vs Other VCS
 Git Architecture Overview
+
+💡 Mini-Task
+Create a folder with 3 versions of a file saved manually (file_v1, file_v2, file_v3) to feel the pain of no-VCS, then note 3 problems this creates for a team.
 Chapter 2 — Installing & Configuring Git
 Topics
 Installing Git
@@ -26,6 +29,9 @@ Git Help
 Git Environment
 Default Editor
 SSH vs HTTPS Authentication
+
+💡 Mini-Task
+Configure your global Git identity (name/email) and set up SSH auth with GitHub if not already done — confirm with `ssh -T git@github.com`.
 Chapter 3 — Git Fundamentals
 Topics
 Repository
@@ -38,6 +44,9 @@ Creating Repositories
 Cloning Repositories
 Tracking Files
 Ignoring Files (.gitignore)
+
+💡 Mini-Task
+Initialize a new local repo, create a .gitignore for a Node.js project, and make your first commit tracking only the right files.
 Chapter 4 — Snapshots & History
 Topics
 What is a Commit?
@@ -49,6 +58,9 @@ File History
 Blame
 Tags
 Annotated vs Lightweight Tags
+
+💡 Mini-Task
+Make 3 commits with clear messages, then run `git log`, `git diff`, and `git blame` on a file to see how history is stored.
 Chapter 5 — Branching
 Topics
 Why Branches Exist
@@ -60,6 +72,9 @@ Branch Comparison
 Detached HEAD
 Fast-Forward Merge
 Three-Way Merge
+
+💡 Mini-Task
+Create a new branch, switch to it, make a change, then intentionally create and resolve a detached HEAD state.
 Chapter 6 — Merging & Conflict Resolution
 Topics
 Merge Strategies
@@ -72,6 +87,9 @@ Cherry Pick
 Revert
 Reset
 Restore
+
+💡 Mini-Task
+Create a merge conflict on purpose (edit the same line on two branches) and resolve it manually, then try the same scenario with rebase instead.
 Chapter 7 — Git Internals
 Topics
 Git Objects
@@ -86,6 +104,9 @@ Object Database
 Packfiles
 Garbage Collection
 Git Plumbing vs Porcelain
+
+💡 Mini-Task
+Find a commit's SHA with `git log`, then use `git cat-file -p` to inspect the raw commit and tree objects behind it.
 Chapter 8 — Remote Repositories
 Topics
 Remote Repositories
@@ -97,6 +118,9 @@ Upstream Branches
 Multiple Remotes
 Synchronization
 Authentication Methods
+
+💡 Mini-Task
+Add a second remote to a repo (e.g. a fork), fetch from both, and push a branch upstream, confirming tracking is set up correctly.
 Chapter 9 — GitHub Fundamentals
 Topics
 GitHub Overview
@@ -109,6 +133,9 @@ Repository Settings
 Repository Visibility
 Forking
 Watching & Starring
+
+💡 Mini-Task
+Create a real GitHub repo with a proper README and LICENSE, and fork someone else's public repo to explore the fork workflow.
 Chapter 10 — Collaboration Workflow
 Topics
 Pull Requests
@@ -120,6 +147,9 @@ Git Flow
 Trunk-Based Development
 Fork Workflow
 Merge Strategies for Teams
+
+💡 Mini-Task
+Open a pull request against your own repo from a feature branch (or use a sandbox repo), and self-review the diff before merging.
 Chapter 11 — GitHub Collaboration Features
 Topics
 Issues
@@ -131,6 +161,9 @@ Projects
 Templates
 Mentions
 Notifications
+
+💡 Mini-Task
+Create an Issue, label it, and link it to a Milestone in a real or test GitHub repo.
 Chapter 12 — Security & Authentication
 Topics
 SSH Keys
@@ -140,6 +173,9 @@ Signed Commits
 Commit Verification
 Repository Security Basics
 Access Permissions
+
+💡 Mini-Task
+Generate a Personal Access Token, use it for an HTTPS clone, then revoke it and switch that repo back to SSH.
 Chapter 13 — Git Best Practices
 Topics
 Commit Message Standards
@@ -150,6 +186,9 @@ Monorepo vs Polyrepo
 Semantic Versioning
 Release Management
 Backup Strategies
+
+💡 Mini-Task
+Rewrite your last 3 commit messages using conventional commit style (feat:, fix:, chore:) using `git commit --amend` or interactive rebase.
 Chapter 14 — Troubleshooting Git
 Topics
 Recovering Lost Commits
@@ -160,6 +199,9 @@ Recovering Deleted Branches
 Cleaning Repositories
 Large File Issues
 Authentication Problems
+
+💡 Mini-Task
+Delete a branch, then recover it using `git reflog` — confirm the branch and its commits are back.
 Chapter 15 — Git for DevOps
 Topics
 Git as Source of Truth
@@ -170,6 +212,9 @@ GitOps (Introduction)
 Repository Strategies for DevOps
 Managing Configuration Files
 Deployment Workflows
+
+💡 Mini-Task
+Set up branch protection rules on a GitHub repo (require PR review before merge) and test that a direct push to main is blocked.
 Hands-on Labs
 Initialize a Git repository.
 Clone repositories from GitHub.

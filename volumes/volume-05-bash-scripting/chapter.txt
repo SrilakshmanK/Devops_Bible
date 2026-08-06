@@ -17,6 +17,9 @@ Shebang (#!/bin/bash)
 Script Execution Process
 Bash Best Practices
 Bash vs Other Shells (sh, zsh, fish)
+
+💡 Mini-Task
+Write a one-line `#!/bin/bash` script that just echoes 'hello', make it executable with chmod, and run it two ways: `./script.sh` and `bash script.sh`.
 Chapter 2 — Writing Your First Scripts
 Topics
 Creating Scripts
@@ -30,6 +33,9 @@ Reading User Input
 Command-Line Arguments
 Exit Status
 Return Codes
+
+💡 Mini-Task
+Write a script that takes your name as a command-line argument and greets you, then extend it to read a second input interactively with `read`.
 Chapter 3 — Bash Data Types & Operators
 Topics
 Strings
@@ -42,6 +48,9 @@ Comparison Operators
 Logical Operators
 File Test Operators
 Numeric Test Operators
+
+💡 Mini-Task
+Write a script using an array of 3 servers/services (fake names) and a loop that prints each with its index using arithmetic operations.
 Chapter 4 — Control Flow
 Topics
 if
@@ -55,6 +64,9 @@ until Loops
 break
 continue
 select Menus
+
+💡 Mini-Task
+Write a script that checks disk usage and prints 'OK' or 'WARNING' using if/elif/else based on a threshold percentage.
 Chapter 5 — Functions
 Topics
 Creating Functions
@@ -64,6 +76,9 @@ Local Variables
 Scope
 Reusable Functions
 Function Libraries
+
+💡 Mini-Task
+Refactor a script you already wrote this volume into a function with parameters and a return value, then call it from a loop.
 Chapter 6 — Working with Files
 Topics
 Reading Files
@@ -75,6 +90,9 @@ File Processing
 File Validation
 Directory Traversal
 Recursive Operations
+
+💡 Mini-Task
+Write a script that reads a text file line by line and counts how many lines contain a specific keyword.
 Chapter 7 — Text Processing
 Topics
 grep
@@ -91,6 +109,9 @@ xargs
 paste
 column
 wc
+
+💡 Mini-Task
+Take any log file (even a fake one) and use grep + awk + sort + uniq together in a pipeline to extract and count the top 3 recurring lines.
 Chapter 8 — Streams & Redirection
 Topics
 Standard Input
@@ -102,6 +123,9 @@ Here Documents
 Here Strings
 Tee
 Process Substitution
+
+💡 Mini-Task
+Write a script that redirects a command's stdout to one file and stderr to another, then combine them into a single log using tee.
 Chapter 9 — Process Automation
 Topics
 Running Commands
@@ -113,6 +137,9 @@ Automation with Cron
 Script Logging
 Error Handling
 Retry Logic
+
+💡 Mini-Task
+Write a script that runs a background job, logs its PID, and includes basic retry logic if the command fails.
 Chapter 10 — System Administration with Bash
 Topics
 User Management Automation
@@ -126,6 +153,9 @@ Memory Monitoring
 Network Monitoring
 Log Rotation
 Log Cleanup
+
+💡 Mini-Task
+Write a script that reports current disk, memory, and CPU usage in one combined output — this feeds directly into your Project 2 health monitor.
 Chapter 11 — Networking Automation
 Topics
 Connectivity Checks
@@ -137,6 +167,9 @@ SSH Automation
 SCP Automation
 Remote Command Execution
 Health Checks
+
+💡 Mini-Task
+Write a script that checks if a host is reachable (ping) and if a specific port is open, then prints a pass/fail health check.
 Chapter 12 — Script Security
 Topics
 Secure Variables
@@ -147,6 +180,9 @@ Secure Temporary Files
 File Permissions for Scripts
 Least Privilege
 Safe Error Handling
+
+💡 Mini-Task
+Write a script that reads a secret from an environment variable instead of hardcoding it, and validates a user input before using it in a command.
 Chapter 13 — Debugging Bash Scripts
 Topics
 Debugging Techniques
@@ -158,6 +194,9 @@ Tracing
 Common Bash Mistakes
 ShellCheck
 Writing Maintainable Scripts
+
+💡 Mini-Task
+Take a script you already wrote and deliberately break it, then debug it using `bash -x` and fix it. Optionally run it through ShellCheck.
 Chapter 14 — Professional Bash Practices
 Topics
 Script Structure
@@ -169,6 +208,9 @@ Documentation
 Version Control
 Script Testing
 Performance Considerations
+
+💡 Mini-Task
+Restructure one of your scripts to follow a consistent style: header comment, variables at top, functions, then main logic — and add it to version control.
 Hands-on Labs
 Write your first Bash script.
 Accept user input from the terminal.
