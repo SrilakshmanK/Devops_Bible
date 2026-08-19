@@ -1,305 +1,1387 @@
-📘 Volume 06 — Version Control with Git & GitHub
-🎯 Objective
+# 📘 Volume 06 — Version Control with Git & GitHub
 
-Master version control concepts and Git workflows used by professional software and DevOps teams.
+## 🎯 Objective
 
-Outcome:
-After completing this volume, you should confidently manage source code, collaborate with teams, resolve conflicts, understand Git internals, and integrate Git into DevOps workflows.
+Master Git and GitHub workflows used by professional software and DevOps teams, including repository management, commits, branching, **visual Git history with Git Graph**, merging, rebasing, collaboration, recovery, and Git-based DevOps workflows.
 
-Chapter 1 — Introduction to Version Control
-Topics
-What is Version Control?
-Why Version Control Exists
-Problems Without Version Control
-Local Version Control
-Centralized Version Control
-Distributed Version Control
-Git vs Other VCS
-Git Architecture Overview
+## Outcome
 
-💡 Mini-Task
-Create a folder with 3 versions of a file saved manually (file_v1, file_v2, file_v3) to feel the pain of no-VCS, then note 3 problems this creates for a team.
-Chapter 2 — Installing & Configuring Git
-Topics
-Installing Git
-Git Configuration
-Git Identity
-Global vs Local Configuration
-Git Help
-Git Environment
-Default Editor
-SSH vs HTTPS Authentication
+After completing this volume, you should confidently:
 
-💡 Mini-Task
-Configure your global Git identity (name/email) and set up SSH auth with GitHub if not already done — confirm with `ssh -T git@github.com`.
-Chapter 3 — Git Fundamentals
-Topics
-Repository
+* Understand version control and why Git exists.
+* Configure Git professionally.
+* Understand the working directory, staging area, local repository, and remote repository.
+* Create meaningful commits and inspect history.
+* Use **Git Graph in VS Code** to understand repository history visually.
+* Understand local and remote branches.
+* Understand `main`, `origin`, `origin/HEAD`, and `HEAD`.
+* Create, merge, rebase, and delete branches.
+* Resolve merge conflicts.
+* Understand Git internals and the object model.
+* Use GitHub for collaboration.
+* Work with Pull Requests and code reviews.
+* Recover from common Git mistakes.
+* Apply Git best practices.
+* Understand how Git integrates with CI/CD and DevOps.
+
+---
+
+# Chapter 1 — Introduction to Version Control
+
+## Topics
+
+* What is Version Control?
+* Why Version Control Exists
+* Problems Without Version Control
+* Manual Versioning
+* Local Version Control
+* Centralized Version Control
+* Distributed Version Control
+* Git vs Other VCS
+* Why Git Became Popular
+* Git Architecture Overview
+* Git as a Distributed Version Control System
+* Git Snapshot Concept
+* Git Repository Concept
+
+## 💡 Mini-Task
+
+Create a folder containing:
+
+```text
+file_v1
+file_v2
+file_v3
+```
+
+Pretend multiple developers are working on these files manually.
+
+Document at least 5 problems this creates for a team.
+
+---
+
+# Chapter 2 — Installing & Configuring Git
+
+## Topics
+
+* Installing Git
+* Verifying Git Installation
+* Git Configuration
+* Git Identity
+* Global vs Local Configuration
+* Git Configuration Levels
+* Git Help
+* Git Environment
+* Default Editor
+* Git Aliases
+* Line Endings
+* SSH Authentication
+* HTTPS Authentication
+* SSH vs HTTPS
+* Git Credential Management
+
+## Important Commands
+
+```bash
+git --version
+git config --list
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+git config --global core.editor
+git config --global alias.st status
+git help
+```
+
+## 💡 Mini-Task
+
+Configure:
+
+* Git name
+* Git email
+* Default editor
+* Useful Git aliases
+* SSH authentication with GitHub
+
+Confirm SSH:
+
+```bash
+ssh -T git@github.com
+```
+
+---
+
+# Chapter 3 — Git Fundamentals
+
+## Topics
+
+* Repository
+* Working Directory
+* Staging Area / Index
+* Local Repository
+* Remote Repository
+* Git Lifecycle
+* Creating Repositories
+* Cloning Repositories
+* Tracking Files
+* Untracked Files
+* Modified Files
+* Staged Files
+* Committed Files
+* `.gitignore`
+* Global `.gitignore`
+* Repository Structure
+
+## Git Lifecycle
+
+```text
 Working Directory
-Staging Area (Index)
+       ↓
+   git add
+       ↓
+Staging Area
+       ↓
+  git commit
+       ↓
 Local Repository
+       ↓
+   git push
+       ↓
 Remote Repository
-Git Lifecycle
-Creating Repositories
-Cloning Repositories
-Tracking Files
-Ignoring Files (.gitignore)
+```
 
-💡 Mini-Task
-Initialize a new local repo, create a .gitignore for a Node.js project, and make your first commit tracking only the right files.
-Chapter 4 — Snapshots & History
-Topics
-What is a Commit?
-Commit Messages
-Viewing History
-Commit Metadata
-Diffing Changes
-File History
-Blame
-Tags
-Annotated vs Lightweight Tags
+## 💡 Mini-Task
 
-💡 Mini-Task
-Make 3 commits with clear messages, then run `git log`, `git diff`, and `git blame` on a file to see how history is stored.
-Chapter 5 — Branching
-Topics
-Why Branches Exist
-Branch Creation
-Branch Switching
-Branch Deletion
-Branch Naming
-Branch Comparison
-Detached HEAD
-Fast-Forward Merge
-Three-Way Merge
+Initialize a Node.js repository.
 
-💡 Mini-Task
-Create a new branch, switch to it, make a change, then intentionally create and resolve a detached HEAD state.
-Chapter 6 — Merging & Conflict Resolution
-Topics
-Merge Strategies
-Merge Conflicts
-Conflict Resolution
-Rebase
-Interactive Rebase
-Squashing Commits
-Cherry Pick
-Revert
-Reset
-Restore
+Create:
 
-💡 Mini-Task
-Create a merge conflict on purpose (edit the same line on two branches) and resolve it manually, then try the same scenario with rebase instead.
-Chapter 7 — Git Internals
-Topics
-Git Objects
-Blob
+```text
+.gitignore
+README.md
+package.json
+src/
+```
+
+Track only the appropriate files and make your first commit.
+
+---
+
+# Chapter 4 — Commits & Git History
+
+## Topics
+
+* What is a Commit?
+* Git Snapshots
+* Commit Hash
+* Commit Metadata
+* Commit Author
+* Commit Date
+* Commit Message
+* Parent Commit
+* Viewing History
+* Comparing Changes
+* `git show`
+* `git diff`
+* File History
+* `git blame`
+* Tags
+* Lightweight Tags
+* Annotated Tags
+* Semantic Version Tags
+
+## Important Commands
+
+```bash
+git log
+git log --oneline
+git show <commit>
+git diff
+git diff --staged
+git blame <file>
+git tag
+git tag -a v1.0.0 -m "Release v1.0.0"
+```
+
+## 💡 Mini-Task
+
+Create 5 meaningful commits.
+
+Use:
+
+```bash
+git log
+git show
+git diff
+git blame
+```
+
+Explain what each command tells you about the project's history.
+
+---
+
+# Chapter 5 — Git Graph in VS Code ⭐
+
+> **Practical Git Graph chapter — based on the Git Graph interface used in VS Code.**
+
+## Objective
+
+Learn to visually understand Git history instead of relying only on command-line output.
+
+## Topics
+
+### Git Graph Basics
+
+* What is Git Graph?
+* Why visualize Git history?
+* Installing Git Graph in VS Code
+* Opening Git Graph
+* Understanding the Git Graph interface
+* Commit rows
+* Graph column
+* Description / commit message
+* Date
+* Author
+* Commit hash
+
+### Understanding Branches
+
+* Local branches
+* Remote branches
+* Current branch
+* `main`
+* `origin`
+* `origin/main`
+* `origin/HEAD`
+* `HEAD`
+* Branch labels
+* Branch pointers
+* Remote-tracking branches
+
+### Git Graph Interface
+
+Learn how to use:
+
+* Branch selector
+* Show All branches
+* Show Remote Branches
+* Search
+* Commit filtering
+* Commit selection
+* Commit details
+* Branch information
+* Remote branch visibility
+* Commit comparison
+* History navigation
+
+### Reading the Graph
+
+Understand:
+
+* Commit nodes
+* Connecting lines
+* Branch creation
+* Branch divergence
+* Branch convergence
+* Merge commits
+* Linear history
+* Multiple branches
+* Remote/local differences
+* Where a branch started
+* Where branches merged
+* Which commits belong to which branch
+
+### Git Graph and Git Commands
+
+Connect the visual interface with:
+
+```bash
+git log --oneline --graph --decorate --all
+git branch -a
+git branch -avv
+git remote -v
+git status
+git show <commit>
+git diff <branch1> <branch2>
+```
+
+## Screenshot-Based Understanding
+
+A Git Graph entry such as:
+
+```text
+main    origin    origin/HEAD
+│
+●  Update: Added mini task...
+│
+●  Problem solving chapter...
+│
+●  Volume 1 chapter 3 started
+│
+●  Volume 1 chapter 2 completed
+│
+●  Version 1.0.0 Finished
+│
+●  file structure were initialized
+```
+
+should allow you to identify:
+
+* Which branch you are currently on.
+* Which remote branch you are tracking.
+* Where `origin` points.
+* What `origin/HEAD` represents.
+* The latest commit.
+* Previous commits.
+* Commit hashes.
+* Authors.
+* Commit dates.
+* Commit messages.
+* The chronological relationship between commits.
+
+## 💡 Mini-Task — Git Graph Exploration
+
+Open your own LMS repository in Git Graph.
+
+Identify:
+
+1. Current branch.
+2. Remote repository.
+3. Remote-tracking branch.
+4. `origin/HEAD`.
+5. Latest commit.
+6. First commit.
+7. At least 5 previous commits.
+8. Commit hashes.
+9. Commit authors.
+10. Commit dates.
+
+Then explain what the graph tells you that `git status` does not.
+
+---
+
+# Chapter 6 — Branching
+
+## Topics
+
+* Why Branches Exist
+* Branches as References
+* Branch Creation
+* Branch Switching
+* Branch Naming
+* Branch Comparison
+* Branch Deletion
+* Local Branches
+* Remote Branches
+* Tracking Branches
+* Upstream Branches
+* `HEAD`
+* Detached HEAD
+* Branch Visualization in Git Graph
+
+## Important Commands
+
+```bash
+git branch
+git branch -a
+git branch -avv
+git switch main
+git switch -c feature/login
+git branch -d feature/login
+git branch -D feature/login
+git switch --detach <commit>
+```
+
+## 💡 Mini-Task
+
+Create:
+
+```text
+main
+feature/login
+feature/dashboard
+```
+
+Make commits on each branch.
+
+Open Git Graph and identify:
+
+* Where the branches diverged.
+* Which commits belong to each branch.
+* Where `HEAD` is located.
+* Which branch is currently checked out.
+
+---
+
+# Chapter 7 — Merging & Conflict Resolution
+
+## Topics
+
+* Why Merge Exists
+* Fast-Forward Merge
+* Three-Way Merge
+* Merge Commit
+* Merge Strategies
+* Merge Conflicts
+* Conflict Markers
+* Conflict Resolution
+* Abort Merge
+* Merge Visualization in Git Graph
+* Understanding Merge Commits
+
+## Fast-Forward Merge
+
+```text
+A---B---C
+        \
+         D---E
+```
+
+After fast-forward:
+
+```text
+A---B---C---D---E
+```
+
+## Three-Way Merge
+
+```text
+        D---E
+       /     \
+A---B---C-----M
+              ↑
+             main
+```
+
+## 💡 Mini-Task
+
+Create two branches.
+
+Modify the same line on both branches.
+
+Create a merge conflict.
+
+Resolve it manually.
+
+Then open Git Graph and identify the merge commit.
+
+---
+
+# Chapter 8 — Rebase, Squash, Cherry-Pick, Revert & Reset
+
+## Topics
+
+* What is Rebase?
+* Merge vs Rebase
+* Visualizing Rebase in Git Graph
+* Interactive Rebase
+* Squashing Commits
+* Reordering Commits
+* Editing Commits
+* Dropping Commits
+* Cherry-Pick
+* Revert
+* Reset
+* Restore
+* History Rewriting
+* Force Push
+* `--force-with-lease`
+
+## Important Commands
+
+```bash
+git merge
+git rebase
+git rebase -i
+git cherry-pick
+git revert
+git reset
+git restore
+git push --force-with-lease
+```
+
+## 💡 Mini-Task
+
+Perform the same feature integration twice:
+
+### Method 1
+
+Merge the feature branch.
+
+### Method 2
+
+Rebase the feature branch.
+
+Open Git Graph after both operations.
+
+Compare:
+
+* Commit order
+* Branch structure
+* Merge commits
+* Commit hashes
+* Linear vs non-linear history
+
+---
+
+# Chapter 9 — Git Internals
+
+## Topics
+
+* Git Object Model
+* Git Object Database
+* Blob
+* Tree
+* Commit Object
+* Tag Object
+* SHA/Object IDs
+* Content Addressing
+* References
+* HEAD
+* Reflog
+* Packfiles
+* Garbage Collection
+* Plumbing Commands
+* Porcelain Commands
+
+## Core Relationship
+
+```text
+Commit
+  ↓
 Tree
-Commit Object
-Hashing (SHA)
-References
-HEAD
-Reflog
-Object Database
-Packfiles
-Garbage Collection
-Git Plumbing vs Porcelain
+  ↓
+Blob
+```
 
-💡 Mini-Task
-Find a commit's SHA with `git log`, then use `git cat-file -p` to inspect the raw commit and tree objects behind it.
-Chapter 8 — Remote Repositories
-Topics
-Remote Repositories
-Origin
-Fetch
-Pull
-Push
-Upstream Branches
-Multiple Remotes
-Synchronization
-Authentication Methods
+And:
 
-💡 Mini-Task
-Add a second remote to a repo (e.g. a fork), fetch from both, and push a branch upstream, confirming tracking is set up correctly.
-Chapter 9 — GitHub Fundamentals
-Topics
-GitHub Overview
-Repository Structure
-README
+```text
+Commit B
+   ↓
+Parent
+   ↓
+Commit A
+```
+
+## Important Commands
+
+```bash
+git cat-file -p <object>
+git cat-file -t <object>
+git rev-parse HEAD
+git rev-parse HEAD~1
+git fsck
+git count-objects
+git reflog
+```
+
+## 💡 Mini-Task
+
+Find a commit:
+
+```bash
+git log --oneline
+```
+
+Inspect it:
+
+```bash
+git cat-file -p <SHA>
+```
+
+Follow:
+
+```text
+Commit → Tree → Blob
+```
+
+Then connect this understanding back to what you see in Git Graph.
+
+---
+
+# Chapter 10 — Remote Repositories
+
+## Topics
+
+* Remote Repositories
+* `origin`
+* `upstream`
+* Fetch
+* Pull
+* Push
+* Remote-Tracking Branches
+* Upstream Branches
+* Tracking Configuration
+* Multiple Remotes
+* Synchronization
+* Fetch vs Pull
+* Pull with Rebase
+* Remote Branch Deletion
+* Local vs Remote History
+* Visualizing Remote Branches in Git Graph
+
+## Important Commands
+
+```bash
+git remote -v
+git remote add origin <url>
+git remote add upstream <url>
+git fetch
+git pull
+git push
+git branch -vv
+git push -u origin feature/login
+```
+
+## 💡 Mini-Task
+
+Add:
+
+```text
+origin
+upstream
+```
+
+Fetch from both.
+
+Create a branch and push it:
+
+```bash
+git push -u origin feature/login
+```
+
+Open Git Graph with **Show Remote Branches** enabled.
+
+Identify:
+
+* Local branch
+* Remote branch
+* Tracking relationship
+* `origin`
+* `origin/HEAD`
+
+---
+
+# Chapter 11 — GitHub Fundamentals
+
+## Topics
+
+* GitHub Overview
+* Repository Structure
+* README
+* LICENSE
+* `.gitignore`
+* Releases
+* GitHub Pages
+* Repository Settings
+* Repository Visibility
+* Forking
+* Watching
+* Starring
+* GitHub Commit History
+* GitHub Branches
+* GitHub Tags
+* GitHub Network Graph
+* Git Graph vs GitHub Graph
+
+## 💡 Mini-Task
+
+Create a professional GitHub repository with:
+
+```text
+README.md
 LICENSE
-Releases
-GitHub Pages
-Repository Settings
-Repository Visibility
-Forking
-Watching & Starring
+.gitignore
+src/
+docs/
+```
 
-💡 Mini-Task
-Create a real GitHub repo with a proper README and LICENSE, and fork someone else's public repo to explore the fork workflow.
-Chapter 10 — Collaboration Workflow
-Topics
-Pull Requests
-Code Reviews
-Branch Protection
-Protected Branches
-Feature Branch Workflow
-Git Flow
-Trunk-Based Development
-Fork Workflow
-Merge Strategies for Teams
+Create a release:
 
-💡 Mini-Task
-Open a pull request against your own repo from a feature branch (or use a sandbox repo), and self-review the diff before merging.
-Chapter 11 — GitHub Collaboration Features
-Topics
-Issues
-Labels
-Milestones
-Discussions
-Wikis
-Projects
-Templates
-Mentions
-Notifications
+```text
+v1.0.0
+```
 
-💡 Mini-Task
-Create an Issue, label it, and link it to a Milestone in a real or test GitHub repo.
-Chapter 12 — Security & Authentication
-Topics
-SSH Keys
-Personal Access Tokens
-Secret Management
-Signed Commits
-Commit Verification
-Repository Security Basics
-Access Permissions
+Then inspect the repository's history locally using Git Graph.
 
-💡 Mini-Task
-Generate a Personal Access Token, use it for an HTTPS clone, then revoke it and switch that repo back to SSH.
-Chapter 13 — Git Best Practices
-Topics
-Commit Message Standards
-Small Commits
-Atomic Commits
-Repository Organization
-Monorepo vs Polyrepo
-Semantic Versioning
-Release Management
-Backup Strategies
+---
 
-💡 Mini-Task
-Rewrite your last 3 commit messages using conventional commit style (feat:, fix:, chore:) using `git commit --amend` or interactive rebase.
-Chapter 14 — Troubleshooting Git
-Topics
-Recovering Lost Commits
-Undoing Mistakes
-Resolving Merge Issues
-Fixing Detached HEAD
-Recovering Deleted Branches
-Cleaning Repositories
-Large File Issues
-Authentication Problems
+# Chapter 12 — Collaboration Workflow
 
-💡 Mini-Task
-Delete a branch, then recover it using `git reflog` — confirm the branch and its commits are back.
-Chapter 15 — Git for DevOps
-Topics
-Git as Source of Truth
-Infrastructure as Code with Git
-Configuration Versioning
-Git in CI/CD
-GitOps (Introduction)
-Repository Strategies for DevOps
-Managing Configuration Files
-Deployment Workflows
+## Topics
 
-💡 Mini-Task
-Set up branch protection rules on a GitHub repo (require PR review before merge) and test that a direct push to main is blocked.
-Hands-on Labs
-Initialize a Git repository.
-Clone repositories from GitHub.
-Configure Git using SSH authentication.
-Create meaningful commit histories.
-Practice branching and merging.
-Resolve merge conflicts manually.
-Recover deleted commits using reflog.
-Compare merge and rebase workflows.
-Create and manage Git tags.
-Fork and contribute to an open-source repository.
-Open pull requests and perform code reviews.
-Protect branches using GitHub settings.
-Create releases with semantic versioning.
-Recover from common Git mistakes.
-Mini Projects
-Project 1 — Portfolio Version History
+* Pull Requests
+* Code Reviews
+* Branch Protection
+* Protected Branches
+* Feature Branch Workflow
+* Git Flow
+* Trunk-Based Development
+* Fork Workflow
+* Merge Strategies
+* Squash Merge
+* Merge Commit
+* Rebase Merge
+* Draft Pull Requests
+* PR Conflict Resolution
+* CI Checks
+* Reviewing Git Graph Before Merge
 
-Use Git to manage your portfolio project.
+## 💡 Mini-Task
+
+Open a Pull Request from:
+
+```text
+feature/login
+        ↓
+      main
+```
+
+Perform a self-review.
+
+Review the Git Graph before merging.
+
+Merge the Pull Request.
+
+Inspect the graph again and explain what changed.
+
+---
+
+# Chapter 13 — GitHub Collaboration Features
+
+## Topics
+
+* Issues
+* Labels
+* Milestones
+* Discussions
+* Wikis
+* Projects
+* Templates
+* Mentions
+* Notifications
+* Issue Templates
+* Pull Request Templates
+* CODEOWNERS
+* Linking Issues and PRs
+
+## 💡 Mini-Task
+
+Create:
+
+* 1 Issue
+* 3 Labels
+* 1 Milestone
+* 1 Project
+
+Link the Issue to a Pull Request and close it through the PR.
+
+---
+
+# Chapter 14 — Security & Authentication
+
+## Topics
+
+* SSH Keys
+* SSH Authentication
+* HTTPS Authentication
+* Personal Access Tokens
+* Credential Management
+* Secret Management
+* `.gitignore` and Secrets
+* Signed Commits
+* Commit Verification
+* GPG
+* SSH Commit Signing
+* Repository Security
+* Access Permissions
+* Secret Scanning
+* Push Protection
+
+## 💡 Mini-Task
 
 Practice:
 
-Feature branches
-Releases
-Tags
-Merge requests
-Code reviews (self-review or peer review)
-Project 2 — Team Collaboration Simulation
+1. HTTPS authentication.
+2. Use a Personal Access Token.
+3. Revoke the token.
+4. Switch the repository to SSH.
+5. Verify SSH authentication.
+6. Configure signed commits if supported.
 
-Simulate a team by creating multiple branches:
+---
 
+# Chapter 15 — Git Best Practices
+
+## Topics
+
+* Commit Message Standards
+* Conventional Commits
+* Small Commits
+* Atomic Commits
+* Repository Organization
+* Monorepo vs Polyrepo
+* Semantic Versioning
+* Release Management
+* Git Tags
+* Backup Strategies
+* Branch Naming
+* Pull Request Standards
+* Commit History Hygiene
+* When to Rebase
+* When Not to Rebase
+* When to Squash
+* When Not to Rewrite Public History
+
+## Conventional Commit Types
+
+```text
+feat:
+fix:
+docs:
+refactor:
+test:
+chore:
+ci:
+build:
+perf:
+```
+
+## 💡 Mini-Task
+
+Take your last 3 messy commits and rewrite them using:
+
+```bash
+git rebase -i
+```
+
+Create a clean, understandable history.
+
+Inspect the result in Git Graph.
+
+---
+
+# Chapter 16 — Troubleshooting & Recovery
+
+## Topics
+
+* Recovering Lost Commits
+* Undoing Mistakes
+* Reset vs Restore vs Revert
+* Resolving Merge Problems
+* Fixing Detached HEAD
+* Recovering Deleted Branches
+* Aborted Merge
+* Aborted Rebase
+* Authentication Problems
+* Large File Problems
+* Accidental Commits
+* Reflog
+* Recovering Unreachable Commits
+
+## Important Command
+
+```bash
+git reflog
+```
+
+## 💡 Mini-Task
+
+Delete a branch containing important commits.
+
+Use:
+
+```bash
+git reflog
+```
+
+Find the lost commit.
+
+Recover the branch.
+
+Open Git Graph and verify that the recovered history is correct.
+
+---
+
+# Chapter 17 — Git for DevOps
+
+## Topics
+
+* Git as Source of Truth
+* Infrastructure as Code with Git
+* Configuration Versioning
+* Git in CI/CD
+* GitOps Introduction
+* Repository Strategies
+* Managing Configuration Files
+* Deployment Workflows
+* Branch-Based Deployments
+* Tag-Based Deployments
+* Pull Request Automation
+* CI Checks
+* Deployment Approvals
+* Infrastructure Change Reviews
+
+## Example Workflow
+
+```text
+Developer
+    ↓
+Feature Branch
+    ↓
+Pull Request
+    ↓
+Code Review
+    ↓
+CI
+    ↓
+Merge
+    ↓
+main
+    ↓
+Build
+    ↓
+Artifact
+    ↓
+Deployment
+```
+
+## 💡 Mini-Task
+
+Create an infrastructure repository containing:
+
+```text
+scripts/
+infra/
+config/
+docs/
+.github/
+```
+
+Use Git to version infrastructure and configuration changes.
+
+---
+
+# 🧪 Hands-on Labs
+
+## Lab 1 — Initialize a Git Repository
+
+Create a repository from scratch.
+
+## Lab 2 — Git Lifecycle
+
+Practice:
+
+```text
+Untracked
+   ↓
+Modified
+   ↓
+Staged
+   ↓
+Committed
+```
+
+## Lab 3 — Git History
+
+Create meaningful commits and investigate them with:
+
+```bash
+git log
+git show
+git diff
+git blame
+```
+
+## Lab 4 — Git Graph ⭐
+
+Install Git Graph in VS Code.
+
+Learn:
+
+* Graph panel
+* Branch selector
+* Show All
+* Show Remote Branches
+* Search
+* Commit information
+* Author
+* Date
+* Commit hash
+* Local branches
+* Remote branches
+
+Use your own repository and analyze its history.
+
+## Lab 5 — Branching
+
+Create:
+
+```text
+main
+develop
+feature/login
+feature/dashboard
+```
+
+Analyze the graph.
+
+## Lab 6 — Merge
+
+Practice:
+
+* Fast-forward merge
+* Three-way merge
+* Merge conflicts
+* Conflict resolution
+
+Analyze each result in Git Graph.
+
+## Lab 7 — Rebase
+
+Practice:
+
+* Rebase
+* Interactive rebase
+* Squashing
+* Reordering
+* Conflict resolution
+
+Compare the graph before and after.
+
+## Lab 8 — Cherry-Pick / Revert / Reset
+
+Perform each operation.
+
+Use Git Graph to understand the resulting history.
+
+## Lab 9 — Git Internals
+
+Inspect:
+
+```text
+Commit
+Tree
+Blob
+Reference
+HEAD
+```
+
+## Lab 10 — Remote Synchronization
+
+Practice:
+
+```text
+clone
+fetch
+pull
+push
+origin
+upstream
+tracking
+```
+
+Enable **Show Remote Branches** in Git Graph.
+
+## Lab 11 — Pull Request
+
+Create a feature branch.
+
+Open a Pull Request.
+
+Review it.
+
+Merge it.
+
+Inspect the resulting history.
+
+## Lab 12 — Recovery
+
+Delete a branch.
+
+Recover it using:
+
+```bash
+git reflog
+```
+
+Verify recovery using Git Graph.
+
+---
+
+# 🚀 Mini Projects
+
+## Project 1 — Portfolio Version History
+
+Use Git to manage your portfolio.
+
+Practice:
+
+* Feature branches
+* Meaningful commits
+* Git Graph
+* Releases
+* Tags
+* Pull Requests
+* Code reviews
+* Semantic versioning
+
+---
+
+## Project 2 — Team Collaboration Simulation
+
+Create:
+
+```text
 main
 develop
 feature/login
 feature/dashboard
 hotfix/security
+```
 
-Practice merging, rebasing, conflict resolution, and releases.
+Practice:
 
-Project 3 — Infrastructure Repository
+* Branching
+* Merging
+* Rebasing
+* Conflict resolution
+* Cherry-picking
+* Hotfixes
+* Releases
+* Branch protection
+* Git Graph analysis
+
+---
+
+## Project 3 — Infrastructure Repository
 
 Create a Git repository for infrastructure configuration.
 
 Include:
 
-Linux setup scripts
-Bash automation scripts
+```text
+linux/
+scripts/
+terraform/
+ansible/
+config/
+docs/
+.github/
+```
+
+Practice:
+
+* Configuration versioning
+* Infrastructure changes
+* Pull Requests
+* Code reviews
+* CI
+* Release tags
+
+---
+
+# 🏆 Volume Challenge
+
+Create and manage a **professional GitHub repository** demonstrating:
+
+* Clean repository structure
+* Meaningful commits
+* Git Graph usage
+* Branching strategy
+* Feature branches
+* Pull Requests
+* Code reviews
+* Branch protection
+* Merge strategies
+* Rebase
+* Conflict resolution
+* Cherry-pick
+* Revert
+* Tags
+* Semantic versioning
+* GitHub releases
+* README
+* LICENSE
+* Issue tracking
+* Recovery using reflog
+* CI integration
+* DevOps-oriented Git workflow
+
+## Git Graph Requirement
+
+Your final repository must have enough history to demonstrate multiple branches.
+
+You should be able to open Git Graph and explain:
+
+* Current branch
+* Local branches
+* Remote branches
+* `origin`
+* `origin/HEAD`
+* Commit hashes
+* Commit messages
+* Authors
+* Dates
+* Branch divergence
+* Merge commits
+* Rebased history
+* Branch relationships
+* Current HEAD
+* Remote/local differences
+
+---
+
+# 🎓 Prerequisites for Volume 07
+
+Before moving to Volume 07 — Python for DevOps, you should be able to:
+
+* Explain why Git exists.
+* Configure Git.
+* Create and clone repositories.
+* Understand the Git lifecycle.
+* Create meaningful commits.
+* Read Git history.
+* Use Git Graph in VS Code.
+* Explain what `main` represents.
+* Explain `origin`.
+* Explain `origin/HEAD`.
+* Explain `HEAD`.
+* Understand local vs remote branches.
+* Create and manage branches.
+* Understand branch divergence.
+* Perform fast-forward merges.
+* Perform three-way merges.
+* Resolve merge conflicts.
+* Understand merge vs rebase.
+* Perform interactive rebase.
+* Use cherry-pick, revert, reset, and restore.
+* Understand Git's object model.
+* Use GitHub Pull Requests.
+* Perform code reviews.
+* Configure branch protection.
+* Recover deleted branches using reflog.
+* Explain Git's role in CI/CD and DevOps.
+
+---
+
+# 🏁 Capstone Milestone — LMS Project
+
+Formalize the Git workflow for the LMS repository.
+
+Implement:
+
+```text
+Branching Strategy
+        ↓
+.gitignore
+        ↓
+Commit Convention
+        ↓
+Pull Request Convention
+        ↓
+Code Review
+        ↓
+Branch Protection
+        ↓
+CI Checks
+        ↓
+Semantic Versioning
+        ↓
+Release
+        ↓
 Documentation
-Configuration files
-Versioned changes
+```
 
-This repository will continue evolving throughout later volumes.
+Your LMS repository should contain:
 
-Volume Challenge
+```text
+README.md
+LICENSE
+.gitignore
+.github/
+docs/
+src/
+```
 
-Create and manage a professional GitHub repository that demonstrates:
+And should demonstrate:
 
-Clean commit history
-Branching strategy
-Pull requests
-Code reviews
-Semantic versioning
-Releases
-Documentation
-Issue tracking
-Proper repository organization
-Recovery from common mistakes
+* Professional README
+* Setup instructions
+* `.gitignore`
+* LICENSE
+* Branching strategy
+* Conventional commits
+* Pull Request template
+* Issue template
+* Branch protection
+* Tags/releases
+* Clean commit history
+* Git Graph history
+* CI configuration
+* Documentation
 
-The goal is to work as if you're part of a real engineering team.
+---
 
-Prerequisites for Volume 07
+# 💼 Career Layer
 
-Before moving on, you should be able to:
+Your LMS repository should now look like a **real engineering/open-source repository**.
 
-Understand Git's object model and workflow.
-Manage repositories confidently.
-Collaborate using branches and pull requests.
-Resolve merge conflicts.
-Recover from Git mistakes.
-Apply Git best practices.
-Organize projects professionally on GitHub.
-Explain how Git supports DevOps and CI/CD workflows.
+You should be able to demonstrate Git Graph during an interview and explain:
 
-Capstone Milestone (LMS Project)
-Formalize Git workflow for the LMS repo: branching strategy, .gitignore, PR/commit conventions, and a proper README with setup instructions.
+> "I use Git Graph to visually inspect repository history, understand branch relationships, identify merge points, compare local and remote branches, and troubleshoot unexpected Git history."
 
-Career Layer
-Your LMS repo should now look like a real open-source project. This is the backbone of your portfolio — link it from your resume/LinkedIn.
+Your Git learning progression should now be:
+
+```text
+Git Fundamentals
+       ↓
+Commits & History
+       ↓
+Git Graph in VS Code
+       ↓
+Branching
+       ↓
+Merging
+       ↓
+Rebase
+       ↓
+Git Internals
+       ↓
+Remote Repositories
+       ↓
+GitHub
+       ↓
+Pull Requests
+       ↓
+Collaboration
+       ↓
+Recovery
+       ↓
+CI/CD
+       ↓
+DevOps / GitOps
+```
+
+## Final Goal
+
+By the end of Volume 06, **Git Graph should no longer look like a confusing collection of lines and commit messages**.
+
+When you open your repository and see:
+
+```text
+main
+origin
+origin/HEAD
+
+● Commit A
+│
+● Commit B
+│\
+│ ● Commit C
+│ ● Commit D
+│/
+● Commit E
+```
+
+you should immediately understand **what happened, which branch moved, where the branches diverged, how they were merged, and what Git is doing underneath the visualization.**
