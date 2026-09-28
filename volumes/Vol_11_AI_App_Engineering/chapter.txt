@@ -1,0 +1,3789 @@
+# 📘 Volume 11 — AI Application Engineering
+
+## 🎯 Objective
+
+Learn how to engineer complete, reliable AI-powered applications.
+
+You already learned:
+
+```text
+V08 → Backend/API Engineering
+V09 → AI & LLM Fundamentals
+V10 → Embeddings, Vector Search & RAG
+```
+
+Now combine them.
+
+The goal of V11 is to move from:
+
+> "I know how to call an LLM."
+
+to:
+
+> "I can design, build, test, secure, evaluate, and operate an AI application."
+
+This volume covers:
+
+* AI application architecture
+* LLM orchestration
+* RAG integration
+* tool calling
+* workflows
+* agents
+* structured outputs
+* state management
+* conversational systems
+* streaming
+* multimodal applications
+* evaluation
+* AI security
+* reliability
+* frontend/backend integration
+* production-oriented architecture
+
+---
+
+# 🧠 The Core Mental Model
+
+A modern AI application is usually **not**:
+
+```text
+User → LLM → Answer
+```
+
+It is closer to:
+
+```text
+                         USER
+                           │
+                           ▼
+                     ┌───────────┐
+                     │ Frontend  │
+                     └─────┬─────┘
+                           │
+                           ▼
+                     ┌───────────┐
+                     │ FastAPI   │
+                     └─────┬─────┘
+                           │
+                 ┌─────────┼─────────┐
+                 │         │         │
+                 ▼         ▼         ▼
+              Auth      AI Logic   Database
+                           │
+              ┌────────────┼────────────┐
+              │            │            │
+              ▼            ▼            ▼
+             LLM        Retrieval      Tools
+              │            │            │
+              └────────────┼────────────┘
+                           │
+                           ▼
+                       Validation
+                           │
+                           ▼
+                        Response
+```
+
+And around everything:
+
+```text
+Security
+Evaluation
+Logging
+Observability
+Cost Control
+Rate Limiting
+Error Handling
+```
+
+---
+
+# 🗺️ Volume Structure
+
+## Chapter 01 — What Makes an AI Application Different?
+
+## Chapter 02 — AI Application Architecture
+
+## Chapter 03 — LLM Orchestration
+
+## Chapter 04 — Prompt Architecture & Prompt Management
+
+## Chapter 05 — Structured Outputs & Reliable Data Extraction
+
+## Chapter 06 — Tool Calling & Function Execution
+
+## Chapter 07 — AI Workflows
+
+## Chapter 08 — State, Memory & Conversation Management
+
+## Chapter 09 — RAG Application Integration
+
+## Chapter 10 — Agents From First Principles
+
+## Chapter 11 — Agent Loops & Tool-Based Reasoning
+
+## Chapter 12 — Agent Boundaries, Permissions & Control
+
+## Chapter 13 — Human-in-the-Loop Systems
+
+## Chapter 14 — Streaming AI Applications
+
+## Chapter 15 — Multimodal AI Applications
+
+## Chapter 16 — AI + Traditional Software Architecture
+
+## Chapter 17 — AI Application Testing
+
+## Chapter 18 — AI Evaluation & Regression Engineering
+
+## Chapter 19 — AI Security
+
+## Chapter 20 — Reliability, Guardrails & Failure Handling
+
+## Chapter 21 — Cost, Latency & Model Routing
+
+## Chapter 22 — AI UX & Frontend Integration
+
+## Chapter 23 — Production AI Application Architecture
+
+## Chapter 24 — Frameworks & Abstractions
+
+## Chapter 25 — Professional AI Engineering Workflow
+
+## Chapter 26 — V11 Integration Project & Final Pre-Flagship Review
+
+---
+
+# Chapter 01 — What Makes an AI Application Different?
+
+Start by understanding the difference between ordinary software and AI-powered software.
+
+---
+
+## 1.1 Traditional Software
+
+Traditional software is usually:
+
+```text
+Input
+ ↓
+Deterministic logic
+ ↓
+Output
+```
+
+Example:
+
+```python
+if age >= 18:
+    return "adult"
+```
+
+---
+
+## 1.2 AI Software
+
+AI systems often behave more like:
+
+```text
+Input
+ ↓
+Context
+ ↓
+Model
+ ↓
+Probabilistic output
+ ↓
+Validation
+ ↓
+Application logic
+ ↓
+Output
+```
+
+The output is not guaranteed to be identical every time.
+
+---
+
+## 1.3 New Engineering Problems
+
+AI applications introduce:
+
+* nondeterminism
+* hallucination
+* prompt injection
+* model failures
+* token costs
+* context limits
+* evaluation challenges
+* provider dependency
+* tool misuse
+
+---
+
+## 1.4 The Important Principle
+
+Never allow:
+
+```text
+LLM output
+    ↓
+direct privileged action
+```
+
+without validation and authorization.
+
+Prefer:
+
+```text
+LLM
+ ↓
+Structured output
+ ↓
+Validation
+ ↓
+Authorization
+ ↓
+Application logic
+ ↓
+Action
+```
+
+---
+
+# Chapter 02 — AI Application Architecture
+
+Connect V08 + V09 + V10.
+
+---
+
+## 2.1 Basic Architecture
+
+```text
+Frontend
+   ↓
+API
+   ↓
+AI Service
+   ↓
+LLM
+```
+
+---
+
+## 2.2 RAG Architecture
+
+```text
+Frontend
+   ↓
+API
+   ↓
+AI Service
+   ↓
+Retriever
+   ↓
+Vector DB
+   ↓
+Context
+   ↓
+LLM
+```
+
+---
+
+## 2.3 Tool Architecture
+
+```text
+User
+ ↓
+LLM
+ ↓
+Tool Request
+ ↓
+Application
+ ↓
+Tool
+ ↓
+Result
+ ↓
+LLM
+```
+
+---
+
+## 2.4 Complete Architecture
+
+```text
+                         ┌─────────────┐
+                         │   Client    │
+                         └──────┬──────┘
+                                │
+                                ▼
+                         ┌─────────────┐
+                         │   FastAPI   │
+                         └──────┬──────┘
+                                │
+                       ┌────────┴────────┐
+                       │                 │
+                       ▼                 ▼
+                    Auth              AI Service
+                                         │
+                              ┌──────────┼──────────┐
+                              │          │          │
+                              ▼          ▼          ▼
+                             LLM       RAG        Tools
+                              │          │          │
+                              │          ▼          ▼
+                              │       Vector DB   APIs/DB
+                              │
+                              ▼
+                         Validation
+                              │
+                              ▼
+                           Response
+```
+
+---
+
+## 2.5 Architectural Boundaries
+
+Separate:
+
+```text
+API layer
+AI orchestration
+LLM provider
+retrieval
+tools
+database
+evaluation
+configuration
+security
+```
+
+This prevents one giant AI function from becoming impossible to maintain.
+
+---
+
+# Chapter 03 — LLM Orchestration
+
+Calling an LLM is easy.
+
+Coordinating multiple operations reliably is the real engineering problem.
+
+---
+
+## 3.1 What Is Orchestration?
+
+Orchestration means controlling:
+
+```text
+which model
+which prompt
+which tools
+which retrieval
+which sequence
+which state
+which validation
+```
+
+---
+
+## 3.2 Simple Chain
+
+```text
+Input
+ ↓
+Prompt
+ ↓
+LLM
+ ↓
+Output
+```
+
+---
+
+## 3.3 Multi-Step Chain
+
+```text
+Input
+ ↓
+Classify
+ ↓
+Retrieve
+ ↓
+Generate
+ ↓
+Validate
+ ↓
+Return
+```
+
+---
+
+## 3.4 Conditional Workflow
+
+```text
+Question
+ ↓
+Classifier
+ ├── simple → direct answer
+ │
+ ├── knowledge → RAG
+ │
+ └── action → tools
+```
+
+---
+
+## 3.5 Orchestration Should Be Explicit
+
+Do not create complicated invisible chains just because a framework makes them easy.
+
+You should be able to draw the workflow.
+
+---
+
+# Chapter 04 — Prompt Architecture & Prompt Management
+
+Prompts become application code.
+
+Treat them accordingly.
+
+---
+
+## 4.1 Prompt Components
+
+```text
+System instructions
++
+Application context
++
+Retrieved context
++
+Tool results
++
+User input
+```
+
+---
+
+## 4.2 Prompt Templates
+
+Separate:
+
+```text
+prompt template
+```
+
+from:
+
+```text
+runtime data
+```
+
+---
+
+## 4.3 Versioning Prompts
+
+Treat prompts like source code.
+
+Record:
+
+```text
+prompt version
+model
+configuration
+evaluation results
+```
+
+---
+
+## 4.4 Prompt Regression
+
+A prompt change can improve one task and break another.
+
+Therefore:
+
+```text
+Prompt change
+ ↓
+Evaluation suite
+ ↓
+Compare
+ ↓
+Deploy
+```
+
+---
+
+## 4.5 Prompt Injection
+
+Never insert arbitrary user/document content into trusted instruction sections.
+
+Maintain boundaries:
+
+```text
+TRUSTED INSTRUCTIONS
+
+<untrusted_user_input>
+...
+</untrusted_user_input>
+```
+
+---
+
+## 🧪 Lab
+
+Create three prompt versions for the same task.
+
+Evaluate them against the same dataset.
+
+Record:
+
+* quality
+* failures
+* latency
+* token usage
+
+---
+
+# Chapter 05 — Structured Outputs & Reliable Data Extraction
+
+LLMs are powerful at generating text.
+
+Applications need structured data.
+
+---
+
+## 5.1 Free-Form Output
+
+```text
+John has five years of Python experience.
+```
+
+Harder to consume programmatically.
+
+---
+
+## 5.2 Structured Output
+
+```json
+{
+  "name": "John",
+  "experience_years": 5,
+  "skills": ["Python"]
+}
+```
+
+---
+
+## 5.3 Schema
+
+Define:
+
+```text
+expected fields
+types
+constraints
+```
+
+Use Pydantic.
+
+---
+
+## 5.4 Validation Pipeline
+
+```text
+LLM
+ ↓
+Structured Output
+ ↓
+Pydantic Validation
+ ↓
+Business Validation
+ ↓
+Application
+```
+
+---
+
+## 5.5 Retry on Invalid Output
+
+Conceptually:
+
+```text
+LLM
+ ↓
+invalid
+ ↓
+repair/retry
+ ↓
+validation
+```
+
+Do not retry indefinitely.
+
+---
+
+## 5.6 Partial Failure
+
+If one field is invalid, decide whether to:
+
+* reject
+* repair
+* request clarification
+* continue with defaults
+
+The decision belongs to application logic.
+
+---
+
+# Chapter 06 — Tool Calling & Function Execution
+
+This is one of the most important AI application concepts.
+
+---
+
+## 6.1 Tool Definition
+
+A tool has:
+
+```text
+name
+description
+input schema
+execution logic
+permissions
+```
+
+---
+
+## 6.2 Example
+
+```text
+get_employee_leave_balance(employee_id)
+```
+
+The model can request:
+
+```json
+{
+  "employee_id": "123"
+}
+```
+
+But the application decides whether this is allowed.
+
+---
+
+## 6.3 Tool Execution Flow
+
+```text
+User
+ ↓
+LLM
+ ↓
+Tool Call
+ ↓
+Validate Arguments
+ ↓
+Authorize
+ ↓
+Execute Tool
+ ↓
+Tool Result
+ ↓
+LLM
+ ↓
+Final Response
+```
+
+---
+
+## 6.4 Tools vs APIs
+
+A tool can internally call:
+
+* database
+* REST API
+* Python function
+* search engine
+* business service
+
+---
+
+## 6.5 Tool Permissions
+
+Example:
+
+```text
+read_user_profile
+```
+
+may be allowed.
+
+But:
+
+```text
+delete_user
+```
+
+should require stronger authorization.
+
+---
+
+## 6.6 Tool Idempotency
+
+Some operations can safely repeat.
+
+Others cannot.
+
+Understand the difference before allowing automatic retries.
+
+---
+
+## 🧪 Lab
+
+Build five safe tools:
+
+```text
+calculator
+current_time
+search_documents
+get_user_profile
+get_project_status
+```
+
+Implement schemas and authorization.
+
+---
+
+# Chapter 07 — AI Workflows
+
+An AI workflow is a predefined sequence of AI and non-AI operations.
+
+---
+
+## 7.1 Sequential Workflow
+
+```text
+Input
+ ↓
+Extract
+ ↓
+Classify
+ ↓
+Generate
+ ↓
+Validate
+```
+
+---
+
+## 7.2 Parallel Workflow
+
+Some tasks can execute independently:
+
+```text
+               ┌── Summarize
+Input ─────────┼── Extract entities
+               └── Classify
+                       │
+                       ▼
+                     Merge
+```
+
+---
+
+## 7.3 Conditional Workflow
+
+```text
+Question
+ ↓
+Classify
+ ├── FAQ
+ ├── RAG
+ ├── Tool
+ └── Human
+```
+
+---
+
+## 7.4 Workflow State
+
+Maintain explicit state:
+
+```text
+request_id
+user_id
+task
+results
+errors
+tool_calls
+retrieved_context
+final_output
+```
+
+---
+
+## 7.5 Workflow vs Agent
+
+Important distinction:
+
+### Workflow
+
+The developer defines the sequence.
+
+### Agent
+
+The model participates in deciding what action to take next.
+
+---
+
+# Chapter 08 — State, Memory & Conversation Management
+
+A chatbot is not simply:
+
+```text
+question → answer
+```
+
+if it supports conversations.
+
+---
+
+## 8.1 Conversation State
+
+Store:
+
+```text
+conversation_id
+user_id
+messages
+timestamps
+metadata
+```
+
+---
+
+## 8.2 Short-Term Context
+
+Recent conversation included in the prompt.
+
+---
+
+## 8.3 Long-Term Memory
+
+Information stored externally.
+
+Examples:
+
+```text
+user preferences
+previous decisions
+application state
+```
+
+---
+
+## 8.4 Memory Is Application Data
+
+Do not blindly let the LLM decide what becomes permanent memory.
+
+Use rules.
+
+---
+
+## 8.5 Conversation Summarization
+
+Long conversations can exceed context limits.
+
+Possible strategy:
+
+```text
+Old messages
+ ↓
+Summary
+ ↓
+Recent messages
+ ↓
+Current question
+```
+
+---
+
+## 8.6 Memory Security
+
+Never allow one user's conversation state to appear in another user's context.
+
+---
+
+# Chapter 09 — RAG Application Integration
+
+V10 built RAG.
+
+Now integrate it into an application.
+
+---
+
+## 9.1 RAG as a Tool
+
+Treat retrieval as one capability:
+
+```text
+AI Application
+      │
+      ├── LLM
+      ├── RAG
+      ├── Database
+      └── External APIs
+```
+
+---
+
+## 9.2 Query Routing
+
+```text
+User question
+ ↓
+Router
+ ├── general → LLM
+ ├── company knowledge → RAG
+ ├── account information → Database
+ └── current external data → API
+```
+
+---
+
+## 9.3 Why Routing Matters
+
+Not every question needs vector search.
+
+For example:
+
+```text
+"What is 12 × 15?"
+```
+
+does not require RAG.
+
+---
+
+## 9.4 RAG + Conversation
+
+Conversation context and retrieval context are different.
+
+```text
+Conversation context
++
+Retrieved knowledge
++
+Current user question
+```
+
+must be assembled deliberately.
+
+---
+
+## 9.5 RAG Citation
+
+Return:
+
+```text
+answer
++
+source references
+```
+
+and validate the source IDs.
+
+---
+
+# Chapter 10 — Agents From First Principles
+
+Do not begin with an agent framework.
+
+Understand the architecture first.
+
+---
+
+## 10.1 What Is an Agent?
+
+A useful engineering definition:
+
+> An AI system that can select and execute actions based on the current task and observed results.
+
+---
+
+## 10.2 Basic Agent Loop
+
+```text
+Goal
+ ↓
+Model
+ ↓
+Choose action
+ ↓
+Execute action
+ ↓
+Observe result
+ ↓
+Model
+ ↓
+Choose next action
+ ↓
+...
+```
+
+---
+
+## 10.3 Workflow vs Agent
+
+Workflow:
+
+```text
+A → B → C → D
+```
+
+Agent:
+
+```text
+A
+ ↓
+decide
+ ├── B
+ ├── C
+ └── D
+```
+
+---
+
+## 10.4 Agent Components
+
+```text
+Model
+Tools
+State
+Memory
+Planner
+Executor
+Guardrails
+```
+
+---
+
+## 10.5 Agents Are Not Magic
+
+An agent is still software.
+
+It has:
+
+* inputs
+* state
+* control flow
+* permissions
+* failure modes
+* resource limits
+
+---
+
+# Chapter 11 — Agent Loops & Tool-Based Reasoning
+
+## 11.1 Basic Loop
+
+```text
+while not finished:
+
+    observe state
+
+    ask model for next action
+
+    validate action
+
+    execute action
+
+    update state
+```
+
+---
+
+## 11.2 Maximum Steps
+
+Always establish:
+
+```text
+max_iterations
+```
+
+Otherwise an agent can loop forever.
+
+---
+
+## 11.3 Tool Failure
+
+A tool can fail.
+
+The agent should receive:
+
+```text
+tool_error
+```
+
+rather than crashing unpredictably.
+
+---
+
+## 11.4 Observation Size
+
+Do not dump unlimited tool output back into the model.
+
+Limit and summarize where appropriate.
+
+---
+
+## 11.5 Agent State
+
+Track:
+
+```text
+goal
+steps
+tool calls
+observations
+errors
+remaining budget
+```
+
+---
+
+## 🧪 Lab
+
+Build a tiny agent with:
+
+```text
+calculator
+document search
+current time
+```
+
+Require:
+
+* maximum 5 steps
+* schema validation
+* tool authorization
+* logging
+
+---
+
+# Chapter 12 — Agent Boundaries, Permissions & Control
+
+This is more important than making an agent "smart."
+
+---
+
+## 12.1 Principle of Least Privilege
+
+Give an agent only the permissions it needs.
+
+---
+
+## 12.2 Read vs Write Tools
+
+Safer:
+
+```text
+search_documents
+```
+
+More dangerous:
+
+```text
+delete_document
+```
+
+---
+
+## 12.3 Approval Gates
+
+For sensitive operations:
+
+```text
+Agent
+ ↓
+Proposed action
+ ↓
+Human approval
+ ↓
+Execution
+```
+
+---
+
+## 12.4 Financial / Destructive Actions
+
+Never let an unconstrained model directly perform high-impact operations.
+
+Use:
+
+* authorization
+* validation
+* approval
+* audit logs
+* transaction controls
+
+---
+
+## 12.5 Resource Limits
+
+Control:
+
+* steps
+* tokens
+* execution time
+* tool calls
+* cost
+
+---
+
+# Chapter 13 — Human-in-the-Loop Systems
+
+Not every task should be fully autonomous.
+
+---
+
+## 13.1 Human Review
+
+Use humans for:
+
+* sensitive decisions
+* uncertain outputs
+* destructive actions
+* compliance-sensitive tasks
+* exceptional cases
+
+---
+
+## 13.2 Confidence-Based Escalation
+
+Conceptually:
+
+```text
+AI output
+ ↓
+Validation
+ ↓
+high confidence → continue
+low confidence → human review
+```
+
+But do not treat raw model confidence as reliable without validation.
+
+---
+
+## 13.3 Approval Workflow
+
+```text
+AI proposes
+ ↓
+Human reviews
+ ↓
+Approve / Reject / Edit
+ ↓
+System executes
+```
+
+---
+
+## 13.4 Audit Trail
+
+Record:
+
+```text
+who
+what
+when
+why
+model output
+human decision
+final action
+```
+
+---
+
+# Chapter 14 — Streaming AI Applications
+
+Connect V08 and V09.
+
+---
+
+## 14.1 Streaming Architecture
+
+```text
+Frontend
+ ↓
+FastAPI
+ ↓
+AI Orchestrator
+ ↓
+LLM
+ ↓
+Stream
+ ↓
+Frontend
+```
+
+---
+
+## 14.2 Streaming Events
+
+Instead of treating everything as one text stream, consider structured events:
+
+```text
+thinking_started
+retrieval_started
+source_found
+tool_started
+tool_finished
+text_delta
+completed
+error
+```
+
+Do not expose private model reasoning.
+
+The event stream should expose useful application state, not hidden chain-of-thought.
+
+---
+
+## 14.3 Reconnection
+
+Understand what happens if the browser disconnects.
+
+---
+
+## 14.4 Cancellation
+
+Users may stop generation.
+
+The backend should propagate cancellation when possible.
+
+---
+
+# Chapter 15 — Multimodal AI Applications
+
+Modern AI is not limited to text.
+
+---
+
+## 15.1 Modalities
+
+Study:
+
+* text
+* images
+* audio
+* video
+* documents
+
+---
+
+## 15.2 Multimodal Pipeline
+
+Example:
+
+```text
+Image
+ ↓
+Vision Model
+ ↓
+Structured Data
+ ↓
+Application
+```
+
+---
+
+## 15.3 Document Understanding
+
+A PDF may contain:
+
+```text
+text
+tables
+images
+charts
+```
+
+A production system may need different extraction paths.
+
+---
+
+## 15.4 Audio
+
+Understand:
+
+```text
+speech → text
+text → LLM
+LLM → text
+text → speech
+```
+
+---
+
+## 15.5 Multimodal RAG
+
+Conceptually:
+
+```text
+Image
+Text
+Table
+ ↓
+Representations
+ ↓
+Retrieval
+ ↓
+Multimodal context
+ ↓
+Model
+```
+
+---
+
+# Chapter 16 — AI + Traditional Software Architecture
+
+AI should not replace deterministic code unnecessarily.
+
+---
+
+## 16.1 Use Code for Deterministic Tasks
+
+Examples:
+
+```text
+12 × 15
+permission checks
+database transactions
+validation
+billing calculations
+```
+
+Use normal code.
+
+---
+
+## 16.2 Use LLMs Where Language Helps
+
+Examples:
+
+```text
+summarization
+classification
+extraction
+natural-language interfaces
+document understanding
+draft generation
+```
+
+---
+
+## 16.3 Hybrid Architecture
+
+```text
+User
+ ↓
+LLM Router
+ ├── deterministic function
+ ├── database
+ ├── RAG
+ └── LLM generation
+```
+
+---
+
+## 16.4 Never Use an LLM as a Calculator If a Calculator Is Available
+
+Instead:
+
+```text
+LLM
+ ↓
+calculator tool
+ ↓
+exact result
+```
+
+---
+
+## 16.5 LLM as Interface
+
+A powerful pattern:
+
+```text
+Natural Language
+ ↓
+LLM
+ ↓
+Structured Intent
+ ↓
+Deterministic Application Logic
+```
+
+---
+
+# Chapter 17 — AI Application Testing
+
+AI applications require multiple testing layers.
+
+---
+
+## 17.1 Unit Tests
+
+Test deterministic code:
+
+* validators
+* parsers
+* chunkers
+* routing
+* authorization
+* cost calculations
+
+---
+
+## 17.2 Integration Tests
+
+Test:
+
+```text
+API
+ ↓
+AI service
+ ↓
+database
+```
+
+---
+
+## 17.3 Model Contract Tests
+
+Verify that model output satisfies expected schemas.
+
+---
+
+## 17.4 Tool Tests
+
+Test every tool independently.
+
+---
+
+## 17.5 Retrieval Tests
+
+Test:
+
+```text
+query
+ ↓
+expected documents
+```
+
+---
+
+## 17.6 End-to-End Tests
+
+Test:
+
+```text
+user
+ ↓
+API
+ ↓
+retrieval
+ ↓
+LLM
+ ↓
+response
+```
+
+---
+
+## 17.7 Failure Tests
+
+Simulate:
+
+* provider unavailable
+* timeout
+* malformed output
+* retrieval failure
+* tool failure
+* database failure
+
+---
+
+# Chapter 18 — AI Evaluation & Regression Engineering
+
+This is where your AI system becomes measurable.
+
+---
+
+## 18.1 Golden Dataset
+
+Maintain representative examples.
+
+---
+
+## 18.2 Evaluation Pipeline
+
+```text
+Dataset
+ ↓
+Application Version
+ ↓
+Run
+ ↓
+Metrics
+ ↓
+Comparison
+ ↓
+Decision
+```
+
+---
+
+## 18.3 Evaluate Different Layers
+
+### Retrieval
+
+Did we find the right information?
+
+### Generation
+
+Did we answer correctly?
+
+### Tool Use
+
+Did the system choose and execute the correct tool?
+
+### Safety
+
+Did it violate constraints?
+
+---
+
+## 18.4 Regression
+
+Every change should potentially trigger evaluation.
+
+Changes include:
+
+* prompt
+* model
+* retrieval
+* chunking
+* tool schema
+* application logic
+
+---
+
+## 18.5 Human Evaluation
+
+Some qualities are difficult to fully automate.
+
+Use human review for selected samples.
+
+---
+
+# Chapter 19 — AI Security
+
+This is a major engineering topic.
+
+---
+
+## 19.1 Prompt Injection
+
+Untrusted content may attempt to manipulate the model.
+
+---
+
+## 19.2 Indirect Prompt Injection
+
+Example:
+
+```text
+User
+ ↓
+RAG
+ ↓
+Document contains malicious instructions
+ ↓
+LLM
+```
+
+The malicious instruction came from a document rather than the user.
+
+---
+
+## 19.3 Tool Injection
+
+A model may attempt to call a tool with dangerous parameters.
+
+Always validate.
+
+---
+
+## 19.4 Data Leakage
+
+Possible sources:
+
+* prompts
+* logs
+* retrieved context
+* conversation memory
+* model outputs
+* tool results
+
+---
+
+## 19.5 Authorization
+
+Never let the model decide access rights.
+
+Use deterministic application authorization.
+
+---
+
+## 19.6 Output Security
+
+Treat model output as untrusted input if it is later used by another system.
+
+---
+
+## 19.7 Secrets
+
+Never expose:
+
+```text
+API keys
+JWT secrets
+database passwords
+cloud credentials
+```
+
+to the model unless there is a very deliberate and controlled architecture.
+
+---
+
+# Chapter 20 — Reliability, Guardrails & Failure Handling
+
+---
+
+## 20.1 Guardrails
+
+Guardrails can exist at:
+
+```text
+input
+ ↓
+retrieval
+ ↓
+model
+ ↓
+tool call
+ ↓
+output
+```
+
+---
+
+## 20.2 Input Guardrails
+
+Validate:
+
+* size
+* format
+* authorization
+* abuse patterns
+
+---
+
+## 20.3 Output Guardrails
+
+Validate:
+
+* schema
+* content
+* business rules
+* citations
+
+---
+
+## 20.4 Tool Guardrails
+
+Validate:
+
+```text
+tool
+arguments
+authorization
+rate
+resource
+```
+
+---
+
+## 20.5 Fallbacks
+
+Possible:
+
+```text
+primary model
+ ↓
+failure
+ ↓
+fallback model
+```
+
+or:
+
+```text
+AI unavailable
+ ↓
+deterministic fallback
+```
+
+---
+
+## 20.6 Circuit Breakers
+
+If an external provider repeatedly fails:
+
+```text
+requests
+ ↓
+failure threshold
+ ↓
+circuit opens
+ ↓
+temporary rejection/fallback
+```
+
+Understand the pattern conceptually.
+
+---
+
+# Chapter 21 — Cost, Latency & Model Routing
+
+AI applications can become expensive quickly.
+
+---
+
+## 21.1 Cost Sources
+
+```text
+LLM input tokens
+LLM output tokens
+embedding requests
+reranking
+storage
+network
+tool execution
+```
+
+---
+
+## 21.2 Latency Sources
+
+```text
+frontend
+network
+retrieval
+database
+LLM
+tools
+serialization
+```
+
+---
+
+## 21.3 Model Routing
+
+```text
+Request
+ ↓
+Classifier
+ ├── simple → small model
+ ├── complex → capable model
+ └── deterministic → code
+```
+
+---
+
+## 21.4 Token Budgets
+
+Set limits.
+
+Do not allow unlimited generation.
+
+---
+
+## 21.5 Context Optimization
+
+Remove irrelevant context.
+
+---
+
+## 21.6 Caching
+
+Potential caching:
+
+* embeddings
+* retrieval results
+* deterministic tool results
+* selected LLM outputs
+
+---
+
+## 🧪 Experiment
+
+Build three configurations:
+
+```text
+cheap
+balanced
+quality-focused
+```
+
+Measure:
+
+* latency
+* cost
+* evaluation score
+
+---
+
+# Chapter 22 — AI UX & Frontend Integration
+
+AI systems need different UX patterns.
+
+---
+
+## 22.1 Loading
+
+Instead of:
+
+```text
+Loading...
+```
+
+show useful state:
+
+```text
+Searching documents...
+Generating response...
+```
+
+---
+
+## 22.2 Streaming
+
+Display output progressively.
+
+---
+
+## 22.3 Citations
+
+Show:
+
+```text
+Answer
+ ↓
+Sources
+```
+
+---
+
+## 22.4 Tool Activity
+
+For appropriate applications, show:
+
+```text
+Searching...
+Checking project...
+```
+
+rather than exposing hidden reasoning.
+
+---
+
+## 22.5 Errors
+
+Users should understand:
+
+```text
+AI service unavailable
+```
+
+rather than:
+
+```text
+500 Internal Server Error
+```
+
+---
+
+## 22.6 Conversation UX
+
+Handle:
+
+* new conversation
+* rename
+* delete
+* retry
+* regenerate
+* stop generation
+* feedback
+
+---
+
+# Chapter 23 — Production AI Application Architecture
+
+Bring everything together.
+
+---
+
+## 23.1 Reference Architecture
+
+```text
+                              USERS
+                                │
+                                ▼
+                         ┌────────────┐
+                         │  Frontend  │
+                         └──────┬─────┘
+                                │
+                                ▼
+                         ┌────────────┐
+                         │ API Layer  │
+                         └──────┬─────┘
+                                │
+                  ┌─────────────┼─────────────┐
+                  │             │             │
+                  ▼             ▼             ▼
+                Auth         AI Router     Database
+                                │
+                ┌───────────────┼───────────────┐
+                │               │               │
+                ▼               ▼               ▼
+             Workflow          RAG            Tools
+                │               │               │
+                │          ┌────┴────┐          │
+                │          │         │          │
+                │       Vector     Search       │
+                │         DB       Engine       │
+                │          │         │          │
+                └──────────┼─────────┼──────────┘
+                           │
+                           ▼
+                         LLM
+                           │
+                           ▼
+                      Validation
+                           │
+                           ▼
+                        Response
+```
+
+Around it:
+
+```text
+Observability
+Security
+Evaluation
+Rate Limiting
+Cost Controls
+Caching
+Configuration
+```
+
+---
+
+# Chapter 24 — Frameworks & Abstractions
+
+Now learn why frameworks exist.
+
+---
+
+## 24.1 The Abstraction Problem
+
+Raw APIs can become repetitive:
+
+```text
+model calls
+tool definitions
+retrieval
+state
+workflow
+streaming
+```
+
+Frameworks provide abstractions.
+
+---
+
+## 24.2 Framework Categories
+
+Explore concepts from:
+
+* LangChain
+* LangGraph
+* LlamaIndex
+* provider SDKs
+* Vercel AI SDK
+* Pydantic-based AI tooling
+
+Do not become dependent on any one framework.
+
+---
+
+## 24.3 First Principles Before Frameworks
+
+You should be able to explain:
+
+```text
+framework feature
+        ↓
+underlying mechanism
+```
+
+For example:
+
+```text
+"agent executor"
+```
+
+should map mentally to:
+
+```text
+state
++
+model call
++
+tool selection
++
+tool execution
++
+loop
++
+termination
+```
+
+---
+
+## 24.4 Build Raw First
+
+For important concepts:
+
+1. implement a simple version yourself
+2. understand the architecture
+3. then use a framework
+4. compare the abstraction
+
+---
+
+## 24.5 Framework Lock-In
+
+Understand risks:
+
+* API changes
+* abstraction leaks
+* difficult debugging
+* dependency complexity
+* hidden behavior
+
+---
+
+# Chapter 25 — Professional AI Engineering Workflow
+
+Now turn AI development into an engineering discipline.
+
+---
+
+## 25.1 Development Lifecycle
+
+```text
+Problem
+ ↓
+Requirements
+ ↓
+Architecture
+ ↓
+Baseline
+ ↓
+Implementation
+ ↓
+Evaluation
+ ↓
+Security Review
+ ↓
+Performance
+ ↓
+Release
+ ↓
+Monitoring
+ ↓
+Iteration
+```
+
+---
+
+## 25.2 AI Development Is Experimental
+
+Track:
+
+```text
+model
+prompt
+retrieval
+temperature
+tools
+dataset
+evaluation results
+```
+
+---
+
+## 25.3 Experiment Tracking
+
+Create:
+
+```text
+experiments/
+├── experiment-001.md
+├── experiment-002.md
+└── ...
+```
+
+Each experiment:
+
+```text
+Hypothesis
+Configuration
+Dataset
+Result
+Conclusion
+Next step
+```
+
+---
+
+## 25.4 Prompt Versioning
+
+Treat prompts like source code.
+
+---
+
+## 25.5 Evaluation as CI Input
+
+Eventually:
+
+```text
+Git commit
+ ↓
+Tests
+ ↓
+AI evaluation
+ ↓
+Security checks
+ ↓
+Build
+```
+
+CI/CD itself is learned in V13.
+
+---
+
+## 25.6 Documentation
+
+Every AI system should document:
+
+* architecture
+* model
+* prompts
+* tools
+* retrieval
+* limitations
+* security
+* evaluation
+* cost
+* known failure modes
+
+---
+
+# Chapter 26 — V11 Integration Project & Final Pre-Flagship Review
+
+This is the final project before the flagship milestone.
+
+# 🚀 Main Project
+
+# AI Knowledge & Workflow Platform
+
+Build a complete AI application that combines:
+
+```text
+Authentication
++
+Conversation
++
+RAG
++
+Tools
++
+Structured Outputs
++
+Workflows
++
+Streaming
++
+Evaluation
++
+Security
+```
+
+This is the **largest learning project before the flagship**.
+
+It is still not the flagship.
+
+Its purpose is to prove that you understand the components that will later become part of the flagship architecture.
+
+---
+
+# System Concept
+
+Build a platform where users can:
+
+1. upload knowledge
+2. ask questions
+3. receive grounded answers
+4. inspect sources
+5. interact conversationally
+6. invoke safe tools
+7. execute controlled workflows
+8. receive streamed responses
+9. provide feedback
+10. have the system evaluated
+
+---
+
+# Architecture
+
+```text
+                           ┌──────────────┐
+                           │   React UI   │
+                           └──────┬───────┘
+                                  │
+                              HTTP/SSE
+                                  │
+                                  ▼
+                           ┌──────────────┐
+                           │   FastAPI    │
+                           └──────┬───────┘
+                                  │
+                ┌─────────────────┼─────────────────┐
+                │                 │                 │
+                ▼                 ▼                 ▼
+              Auth          AI Orchestrator       DB
+                                  │
+                  ┌───────────────┼───────────────┐
+                  │               │               │
+                  ▼               ▼               ▼
+                Router           RAG            Tools
+                  │               │               │
+                  │          ┌────┴────┐          │
+                  │          ▼         ▼          │
+                  │       Vector     Keyword      │
+                  │        Search     Search       │
+                  │          │         │           │
+                  │          └────┬────┘           │
+                  │               ▼                │
+                  │           Reranker             │
+                  │               │                │
+                  └───────────────┼────────────────┘
+                                  ▼
+                                 LLM
+                                  │
+                           Structured Output
+                                  │
+                             Validation
+                                  │
+                                  ▼
+                               Response
+```
+
+---
+
+# Core Features
+
+## 1. Authentication
+
+Reuse V08.
+
+```text
+POST /auth/register
+POST /auth/login
+GET  /auth/me
+```
+
+---
+
+# 2. Knowledge Management
+
+```text
+POST   /documents
+GET    /documents
+GET    /documents/{id}
+DELETE /documents/{id}
+POST   /documents/{id}/ingest
+```
+
+Support:
+
+* PDF
+* Markdown
+* TXT
+
+---
+
+# 3. Semantic Search
+
+```text
+POST /search
+```
+
+Return:
+
+```text
+chunk
+score
+source
+page
+document
+```
+
+---
+
+# 4. RAG Chat
+
+```text
+POST /conversations
+POST /conversations/{id}/messages
+```
+
+The system should:
+
+```text
+Question
+ ↓
+Determine whether retrieval is needed
+ ↓
+Retrieve
+ ↓
+Rerank
+ ↓
+Construct context
+ ↓
+Generate
+ ↓
+Validate
+ ↓
+Return answer + citations
+```
+
+---
+
+# 5. Streaming
+
+```text
+POST /conversations/{id}/stream
+```
+
+Stream useful application events such as:
+
+```text
+retrieval_started
+sources_found
+generation_started
+text_delta
+completed
+error
+```
+
+Do not expose private chain-of-thought.
+
+---
+
+# 6. Safe Tools
+
+Implement at least:
+
+```text
+calculator
+current_time
+document_search
+project_lookup
+```
+
+Every tool requires:
+
+```text
+schema
+validation
+authorization
+logging
+timeout
+```
+
+---
+
+# 7. Workflow Engine
+
+Implement at least one explicit workflow.
+
+Example:
+
+```text
+User asks:
+"Analyze this project document."
+```
+
+Workflow:
+
+```text
+Input
+ ↓
+Retrieve relevant sections
+ ↓
+Extract project facts
+ ↓
+Classify risks
+ ↓
+Generate summary
+ ↓
+Validate structured result
+ ↓
+Return report
+```
+
+---
+
+# 8. Structured Output
+
+Create at least one structured workflow.
+
+Example:
+
+```json
+{
+  "summary": "...",
+  "risks": [
+    {
+      "title": "...",
+      "severity": "medium",
+      "evidence": "..."
+    }
+  ],
+  "recommendations": []
+}
+```
+
+Validate using Pydantic.
+
+---
+
+# 9. Conversation State
+
+Store:
+
+```text
+user
+conversation
+messages
+retrieved_sources
+tool_calls
+timestamps
+```
+
+---
+
+# 10. Feedback
+
+Allow:
+
+```text
+thumbs_up
+thumbs_down
+```
+
+and optional feedback text.
+
+Store feedback for evaluation.
+
+---
+
+# 11. Evaluation
+
+Create:
+
+```text
+50+ representative questions
+```
+
+Evaluate:
+
+* retrieval
+* answer quality
+* grounding
+* citations
+* tool usage
+* safety
+
+---
+
+# 12. Security
+
+Implement:
+
+* authentication
+* authorization
+* document ownership
+* tenant isolation if applicable
+* prompt injection defenses
+* tool authorization
+* input validation
+* output validation
+* rate limiting
+* secret management
+* audit logs
+
+---
+
+# 13. Observability
+
+Track:
+
+```text
+request_id
+user_id
+latency
+model
+token usage
+retrieved documents
+tool calls
+errors
+```
+
+Do not log sensitive content unnecessarily.
+
+---
+
+# 14. Cost Tracking
+
+Record estimated:
+
+```text
+input tokens
+output tokens
+embedding usage
+model
+request
+```
+
+Calculate approximate cost where provider pricing is available.
+
+---
+
+# Project Architecture
+
+Recommended:
+
+```text
+ai-platform/
+│
+├── backend/
+│   ├── app/
+│   │   ├── main.py
+│   │   │
+│   │   ├── api/
+│   │   │   └── routes/
+│   │   │
+│   │   ├── core/
+│   │   │   ├── config.py
+│   │   │   ├── security.py
+│   │   │   └── logging.py
+│   │   │
+│   │   ├── auth/
+│   │   ├── users/
+│   │   ├── conversations/
+│   │   ├── documents/
+│   │   ├── rag/
+│   │   ├── ai/
+│   │   │   ├── providers/
+│   │   │   ├── prompts/
+│   │   │   ├── tools/
+│   │   │   └── workflows/
+│   │   │
+│   │   ├── evaluation/
+│   │   └── db/
+│   │
+│   └── tests/
+│
+├── frontend/
+│
+├── evaluation/
+│   ├── datasets/
+│   ├── experiments/
+│   └── reports/
+│
+├── docs/
+│   ├── architecture.md
+│   ├── security.md
+│   ├── evaluation.md
+│   └── decisions/
+│
+└── README.md
+```
+
+Do not create every folder on day one.
+
+Grow the architecture as complexity requires.
+
+---
+
+# 🧪 Project Phases
+
+## Phase 1 — Backend Foundation
+
+Build:
+
+```text
+FastAPI
+PostgreSQL
+Authentication
+```
+
+---
+
+## Phase 2 — Document Management
+
+Implement:
+
+```text
+upload
+metadata
+storage
+ingestion status
+```
+
+---
+
+## Phase 3 — RAG
+
+Implement:
+
+```text
+parse
+chunk
+embed
+store
+retrieve
+```
+
+---
+
+## Phase 4 — Chat
+
+Implement:
+
+```text
+conversation
+messages
+RAG answer
+citations
+```
+
+---
+
+## Phase 5 — Streaming
+
+Implement streaming responses.
+
+---
+
+## Phase 6 — Tools
+
+Add safe tools.
+
+---
+
+## Phase 7 — Workflows
+
+Build one deterministic AI workflow.
+
+---
+
+## Phase 8 — Structured Outputs
+
+Add Pydantic validation.
+
+---
+
+## Phase 9 — Evaluation
+
+Create the evaluation dataset.
+
+---
+
+## Phase 10 — Security
+
+Perform adversarial testing.
+
+---
+
+## Phase 11 — Performance
+
+Measure:
+
+```text
+retrieval latency
+LLM latency
+total latency
+token usage
+```
+
+---
+
+## Phase 12 — UX
+
+Build the React interface.
+
+---
+
+# 🔬 Required Experiments
+
+## Experiment 1 — RAG vs No RAG
+
+Ask questions requiring knowledge from your documents.
+
+Compare:
+
+```text
+LLM alone
+```
+
+vs:
+
+```text
+LLM + RAG
+```
+
+Measure groundedness.
+
+---
+
+# Experiment 2 — Workflow vs Agent
+
+Implement the same task using:
+
+```text
+explicit workflow
+```
+
+and:
+
+```text
+agent loop
+```
+
+Compare:
+
+* reliability
+* latency
+* cost
+* complexity
+* failure modes
+
+---
+
+# Experiment 3 — Tool vs LLM
+
+Ask:
+
+```text
+"What is 284 × 391?"
+```
+
+Compare:
+
+```text
+LLM-generated answer
+```
+
+with:
+
+```text
+calculator tool
+```
+
+Explain why deterministic computation should usually use deterministic software.
+
+---
+
+# Experiment 4 — Prompt Versioning
+
+Compare:
+
+```text
+Prompt V1
+Prompt V2
+Prompt V3
+```
+
+against the same dataset.
+
+---
+
+# Experiment 5 — Context Size
+
+Test:
+
+```text
+small context
+medium context
+large context
+```
+
+Measure:
+
+* answer quality
+* latency
+* token usage
+
+---
+
+# Experiment 6 — Model Routing
+
+Implement:
+
+```text
+simple → cheaper model
+complex → stronger model
+```
+
+Measure cost and quality.
+
+---
+
+# Experiment 7 — Failure Injection
+
+Break:
+
+```text
+LLM
+Vector DB
+Database
+Tool
+Authentication
+Retrieval
+Configuration
+```
+
+Document how the system behaves.
+
+---
+
+# 🔐 Security Challenge
+
+Attempt to attack your own application.
+
+Test:
+
+```text
+1. Prompt injection
+2. Indirect prompt injection
+3. Unauthorized document retrieval
+4. Cross-user conversation access
+5. Tool argument manipulation
+6. Privilege escalation
+7. Excessive tool calls
+8. Context overflow
+9. Malicious document upload
+10. Sensitive information leakage
+```
+
+For each:
+
+```text
+Attack
+ ↓
+Observed behavior
+ ↓
+Root cause
+ ↓
+Mitigation
+ ↓
+Regression test
+```
+
+---
+
+# 🤖 Agent Challenge
+
+Build a small controlled agent.
+
+Available tools:
+
+```text
+search_documents
+calculator
+current_time
+```
+
+Rules:
+
+```text
+Maximum 5 steps
+Maximum 3 tool calls
+No destructive tools
+Validate every argument
+Log every action
+Stop on repeated failure
+```
+
+The agent should be able to answer a question requiring multiple steps.
+
+---
+
+# 🧠 AI Architecture Challenge
+
+Design three versions of the same application.
+
+## Architecture A
+
+```text
+User
+ ↓
+LLM
+ ↓
+Answer
+```
+
+## Architecture B
+
+```text
+User
+ ↓
+Backend
+ ↓
+RAG
+ ↓
+LLM
+ ↓
+Answer
+```
+
+## Architecture C
+
+```text
+User
+ ↓
+Backend
+ ↓
+Router
+ ├── LLM
+ ├── RAG
+ ├── Database
+ └── Tools
+       ↓
+    Validation
+       ↓
+    Response
+```
+
+Explain why each architecture exists and what additional complexity it introduces.
+
+---
+
+# 🧠 V11 Feynman Test
+
+You should be able to explain all of these without notes.
+
+### 1.
+
+What is an AI application?
+
+### 2.
+
+How is it different from an LLM?
+
+### 3.
+
+What is orchestration?
+
+### 4.
+
+What is a workflow?
+
+### 5.
+
+What is an agent?
+
+### 6.
+
+What is the difference between an agent and a workflow?
+
+### 7.
+
+What is tool calling?
+
+### 8.
+
+Who executes a tool?
+
+### 9.
+
+Why must tool arguments be validated?
+
+### 10.
+
+What is short-term conversation context?
+
+### 11.
+
+What is long-term application memory?
+
+### 12.
+
+Why shouldn't the LLM directly control authorization?
+
+### 13.
+
+How does RAG fit into an AI application?
+
+### 14.
+
+Why should some requests bypass the LLM entirely?
+
+### 15.
+
+What is structured output?
+
+### 16.
+
+Why is structured output important?
+
+### 17.
+
+What is human-in-the-loop?
+
+### 18.
+
+What are AI guardrails?
+
+### 19.
+
+How would you evaluate an AI application?
+
+### 20.
+
+How would you debug an AI application that suddenly becomes unreliable?
+
+### 21.
+
+How would you reduce AI cost?
+
+### 22.
+
+How would you reduce AI latency?
+
+### 23.
+
+How would you prevent an agent from looping forever?
+
+### 24.
+
+How would you secure an AI application connected to a database?
+
+### 25.
+
+Explain the complete architecture of your V11 project.
+
+---
+
+# 📝 V11 Notes System
+
+Create:
+
+```text
+V11-notes/
+├── AI-Architecture.md
+├── Orchestration.md
+├── Prompt-Engineering.md
+├── Structured-Outputs.md
+├── Tool-Calling.md
+├── Workflows.md
+├── Agents.md
+├── Agent-Security.md
+├── Memory.md
+├── RAG-Integration.md
+├── Streaming.md
+├── Multimodal.md
+├── AI-Testing.md
+├── AI-Evaluation.md
+├── AI-Security.md
+├── Guardrails.md
+├── AI-Performance.md
+├── AI-UX.md
+├── Frameworks.md
+└── Production-Architecture.md
+```
+
+For each concept:
+
+```text
+What is it?
+Why does it exist?
+How does it work?
+What problem does it solve?
+What are the alternatives?
+What can fail?
+How do I evaluate it?
+How do I secure it?
+When should I avoid it?
+```
+
+---
+
+# 🔗 Integration With Previous Volumes
+
+## V01 — Engineering Foundations
+
+Apply:
+
+* first principles
+* systems thinking
+* debugging
+* experiments
+* documentation
+
+---
+
+## V02 — Computer Architecture
+
+Understand:
+
+* CPU
+* memory
+* processes
+* accelerators
+* resource constraints
+
+---
+
+## V03 — Networking
+
+Understand:
+
+```text
+Frontend
+ ↓
+API
+ ↓
+RAG
+ ↓
+LLM Provider
+ ↓
+External APIs
+```
+
+---
+
+## V04 — Linux
+
+Use Ubuntu for:
+
+* services
+* logs
+* processes
+* network inspection
+* resource monitoring
+
+---
+
+## V05 — Bash
+
+Automate:
+
+* evaluation
+* ingestion
+* testing
+* benchmarking
+
+---
+
+## V06 — Git
+
+Version:
+
+* code
+* prompts
+* evaluation datasets
+* experiments
+* architecture decisions
+
+---
+
+## V07 — Python
+
+Use:
+
+* async
+* HTTP
+* Pydantic
+* CLI
+* testing
+* logging
+* configuration
+
+---
+
+## V08 — Backend
+
+Use:
+
+* FastAPI
+* PostgreSQL
+* JWT
+* authorization
+* middleware
+* streaming
+* API architecture
+
+---
+
+## V09 — AI & LLM
+
+Use:
+
+* tokens
+* transformers
+* LLM APIs
+* structured output
+* tool calling
+* inference
+* evaluation
+
+---
+
+## V10 — RAG
+
+Use:
+
+* embeddings
+* vector search
+* hybrid search
+* reranking
+* chunking
+* citations
+* retrieval evaluation
+
+---
+
+# 🎯 V11 Completion Criteria
+
+You are finished with V11 when you can independently:
+
+* Design an AI application architecture.
+* Explain where the LLM belongs in the system.
+* Build LLM orchestration.
+* Manage prompts as versioned engineering artifacts.
+* Generate structured outputs.
+* Validate model outputs.
+* Define and execute tools.
+* Build deterministic AI workflows.
+* Build a controlled agent.
+* Manage agent state.
+* Implement conversation memory.
+* Integrate RAG.
+* Implement streaming.
+* Understand multimodal application patterns.
+* Design human approval workflows.
+* Build AI-specific tests.
+* Build AI evaluation datasets.
+* Perform regression evaluation.
+* Secure AI applications.
+* Control agent permissions.
+* Implement guardrails.
+* Measure AI latency.
+* Control AI costs.
+* Design model routing.
+* Build AI frontend experiences.
+* Use AI frameworks without becoming dependent on them.
+* Debug failures across the entire AI stack.
+
+---
+
+# 🏆 Final V11 Deliverables
+
+Your repository should contain:
+
+```text
+1. Complete AI application
+2. FastAPI backend
+3. React frontend
+4. PostgreSQL database
+5. Authentication
+6. Authorization
+7. Document ingestion
+8. RAG pipeline
+9. Vector search
+10. Hybrid retrieval
+11. Reranking
+12. Citations
+13. Conversations
+14. Streaming
+15. Structured outputs
+16. Tool calling
+17. Explicit workflow
+18. Controlled agent
+19. Human approval flow
+20. Evaluation dataset
+21. Evaluation pipeline
+22. Security testing
+23. Failure-injection report
+24. Cost analysis
+25. Performance analysis
+26. Architecture diagram
+27. ADRs
+28. README
+```
+
+---
+
+# 🧠 The V11 Final Mental Model
+
+At the end of V11, you should see an AI application as a **system**, not a prompt.
+
+```text
+                              USER
+                                │
+                                ▼
+                         ┌────────────┐
+                         │  FRONTEND  │
+                         └──────┬─────┘
+                                │
+                                ▼
+                         ┌────────────┐
+                         │   API      │
+                         │  FastAPI   │
+                         └──────┬─────┘
+                                │
+                         Authentication
+                         Authorization
+                                │
+                                ▼
+                       ┌────────────────┐
+                       │ AI ORCHESTRATOR│
+                       └───────┬────────┘
+                               │
+                   ┌───────────┼───────────┐
+                   │           │           │
+                   ▼           ▼           ▼
+                 ROUTER       RAG         TOOLS
+                   │           │           │
+                   │       Retrieval       │
+                   │           │           │
+                   │       Reranking       │
+                   │           │           │
+                   └───────────┼───────────┘
+                               │
+                               ▼
+                              LLM
+                               │
+                    ┌──────────┼──────────┐
+                    │          │          │
+                    ▼          ▼          ▼
+                Structured   Tool       Text
+                  Output     Calls      Output
+                    │          │          │
+                    └──────────┼──────────┘
+                               │
+                         VALIDATION
+                               │
+                               ▼
+                            RESPONSE
+```
+
+Around everything:
+
+```text
+┌──────────────────────────────────────────────────────┐
+│ Security                                             │
+│ Evaluation                                           │
+│ Observability                                       │
+│ Cost Control                                         │
+│ Rate Limiting                                        │
+│ Error Handling                                       │
+│ Human Oversight                                      │
+│ Configuration                                        │
+└──────────────────────────────────────────────────────┘
+```
+
+The fundamental lesson of V11:
+
+> **An AI application is not an LLM wrapped in an API. It is a software system in which the LLM is one component.**
+
+---
+
+# 🚨 FLAGSHIP MILESTONE — AFTER V11
+
+**Do not immediately start V12.**
+
+After completing V11, stop the normal volume progression.
+
+The next milestone is:
+
+# 🚀 FLAGSHIP PROJECT DESIGN & MVP
+
+This is deliberately **not Volume 12**.
+
+The sequence is:
+
+```text
+V01
+Engineering Foundations
+        ↓
+V02
+Computer Architecture
+        ↓
+V03
+Networking
+        ↓
+V04
+Linux
+        ↓
+V05
+Bash
+        ↓
+V06
+Git
+        ↓
+V07
+Python
+        ↓
+V08
+Backend/API Engineering
+        ↓
+V09
+AI/LLM Fundamentals
+        ↓
+V10
+RAG
+        ↓
+V11
+AI Application Engineering
+        ↓
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 FLAGSHIP MILESTONE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        ↓
+Choose the problem
+        ↓
+Define requirements
+        ↓
+Architecture
+        ↓
+Build MVP
+        ↓
+Evaluate
+        ↓
+Document
+        ↓
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+V12
+Docker
+        ↓
+V13
+CI/CD
+        ↓
+V14
+AWS
+        ↓
+V15
+Terraform
+        ↓
+V16
+Kubernetes
+        ↓
+V17
+DevSecOps
+        ↓
+V18
+Observability
+        ↓
+V19
+LLMOps
+        ↓
+V20
+Production Engineering + SRE
+        ↓
+V21
+Interview Preparation
+```
+
+The flagship therefore becomes the **long-running engineering system** that later volumes progressively productionize.
+
+---
+
+# 🏔️ What Happens After V11
+
+The flagship milestone will have its own process:
+
+## Step 1 — Problem Discovery
+
+Identify a real problem worth solving.
+
+## Step 2 — Requirements
+
+Define:
+
+* users
+* workflows
+* constraints
+* functional requirements
+* non-functional requirements
+
+## Step 3 — Architecture
+
+Design:
+
+```text
+Frontend
+Backend
+Database
+AI
+RAG
+Tools
+Authentication
+Infrastructure
+```
+
+## Step 4 — MVP Scope
+
+Cut unnecessary features.
+
+Build the smallest meaningful version.
+
+## Step 5 — MVP Implementation
+
+Use everything learned through V11.
+
+## Step 6 — Evaluation
+
+Measure whether the system actually works.
+
+## Step 7 — Documentation
+
+Produce:
+
+* architecture
+* ADRs
+* API documentation
+* AI evaluation
+* security review
+* setup instructions
+
+## Step 8 — Productionization
+
+Then V12 onward transforms that same system:
+
+```text
+MVP
+ ↓
+Docker
+ ↓
+CI/CD
+ ↓
+AWS
+ ↓
+Terraform
+ ↓
+Kubernetes
+ ↓
+Security
+ ↓
+Observability
+ ↓
+LLMOps
+ ↓
+SRE
+```
+
+That is why the flagship is placed **after V11 instead of being another isolated project inside V11**.
+
+---
+
+# 🧭 V01 → V11 Capability Map
+
+By completing the first eleven volumes, you will have built the following foundation:
+
+```text
+                    ENGINEERING
+                         │
+        ┌────────────────┼────────────────┐
+        │                │                │
+        ▼                ▼                ▼
+     SYSTEMS          NETWORKING        LINUX
+        │                │                │
+        └────────────────┼────────────────┘
+                         │
+                         ▼
+                       PYTHON
+                         │
+                         ▼
+                    BACKEND APIs
+                         │
+                         ▼
+                    DATABASES
+                         │
+                         ▼
+                    AI / LLMs
+                         │
+                         ▼
+                     EMBEDDINGS
+                         │
+                         ▼
+                       RAG
+                         │
+                         ▼
+                 AI APPLICATIONS
+                         │
+          ┌──────────────┼──────────────┐
+          │              │              │
+          ▼              ▼              ▼
+        TOOLS         WORKFLOWS       AGENTS
+          │              │              │
+          └──────────────┼──────────────┘
+                         │
+                         ▼
+                 EVALUATION + SECURITY
+                         │
+                         ▼
+                🚀 FLAGSHIP PROJECT
+```
+
+This is the end of the **learning-foundation phase**.
+
+The next stage is no longer about collecting technologies.
+
+It is about **building one serious system and progressively turning it into production infrastructure**.

@@ -1,0 +1,3524 @@
+# 🧰 Volume 06 — Git, GitHub & Collaborative Engineering
+
+## 🎯 Volume Objective
+
+Master Git as an **engineering system**, not merely as a collection of commands.
+
+By the end of this volume, you should understand:
+
+* Why version control exists.
+* How Git actually stores project history.
+* Working directory vs staging area vs repository.
+* Commits and snapshots.
+* Branches and references.
+* `HEAD`, `main`, `origin`, and remote-tracking branches.
+* Merging and merge conflicts.
+* Rebasing and when to use it.
+* Git history and visualization.
+* Git internals and objects.
+* GitHub repositories.
+* SSH authentication.
+* Pull requests.
+* Code review.
+* Collaboration workflows.
+* Tags and releases.
+* Git recovery.
+* Reflog.
+* Stashing.
+* Cherry-picking.
+* Reverting vs resetting.
+* Git hooks.
+* Git workflows used in DevOps.
+* How Git becomes the source of truth for CI/CD.
+
+The fundamental progression is:
+
+```text
+Volume 04
+Linux Administration
+        ↓
+Volume 05
+Bash Automation
+        ↓
+Volume 06
+Git & Collaborative Engineering
+        ↓
+Volume 07
+Python
+```
+
+---
+
+# 🧠 Why Git Matters
+
+You are going to work with:
+
+```text
+Bash scripts
+Python applications
+FastAPI services
+Dockerfiles
+Terraform
+Kubernetes manifests
+CI/CD pipelines
+configuration
+documentation
+```
+
+All of these need controlled change management.
+
+Without version control:
+
+```text
+file-final
+file-final2
+file-final-real
+file-final-real-v2
+file-final-use-this-one
+```
+
+With Git:
+
+```text
+Commit A
+   ↓
+Commit B
+   ↓
+Commit C
+   ↓
+Commit D
+```
+
+You know:
+
+```text
+what changed
+who changed it
+when it changed
+why it changed
+what the previous state was
+```
+
+And importantly:
+
+> Git allows you to experiment without being afraid of losing a known-good state.
+
+---
+
+# 🧭 Learning Philosophy
+
+## Rule 1 — Understand Git's model before memorizing commands
+
+Don't memorize:
+
+```bash
+git add .
+git commit
+git push
+```
+
+as magic commands.
+
+Understand:
+
+```text
+Working Directory
+       ↓
+Staging Area
+       ↓
+Commit
+       ↓
+Local Repository
+       ↓
+Remote Repository
+```
+
+---
+
+## Rule 2 — Visualize history
+
+Use:
+
+```bash
+git log --graph --oneline --decorate --all
+```
+
+and Git Graph in VS Code.
+
+Git becomes much easier once you can **see the commit graph**.
+
+---
+
+## Rule 3 — Learn recovery, not just happy paths
+
+A professional Git user must know what to do after:
+
+```text
+wrong commit
+wrong branch
+bad merge
+bad rebase
+deleted branch
+lost work
+accidental reset
+wrong push
+```
+
+---
+
+## Rule 4 — Git is not GitHub
+
+Understand:
+
+```text
+Git
+↓
+Version control system
+```
+
+while:
+
+```text
+GitHub
+↓
+Hosted Git platform + collaboration ecosystem
+```
+
+---
+
+# 📚 Chapter Structure
+
+1. Version Control Fundamentals
+2. Git Installation & Configuration
+3. Git Repository Fundamentals
+4. Commits & History
+5. Git Diff & Change Inspection
+6. Branches & References
+7. Merging & Conflict Resolution
+8. Rebasing & History Management
+9. Remote Repositories & GitHub
+10. Collaboration & Pull Requests
+11. Git Internals
+12. Stashing, Cherry-Picking & Tags
+13. Git Recovery & Disaster Handling
+14. Git Hooks & Repository Automation
+15. Professional Git Workflows
+16. Git in DevOps & CI/CD
+17. Git Security & Repository Hygiene
+
+---
+
+# Chapter 01 — Version Control Fundamentals
+
+## Objective
+
+Understand why version control exists before learning Git.
+
+---
+
+## 1.1 The Problem Without Version Control
+
+Imagine a project containing:
+
+```text
+project/
+├── app.js
+├── app-final.js
+├── app-final2.js
+├── app-new.js
+├── app-new-fixed.js
+└── app-use-this.js
+```
+
+Problems:
+
+* Which version is correct?
+* Who changed it?
+* What changed?
+* Why?
+* Can we restore yesterday's version?
+* Can two developers work simultaneously?
+* Can we identify who introduced a bug?
+
+---
+
+## 1.2 Manual Versioning
+
+Understand the limitations of:
+
+```text
+copy → rename → modify → repeat
+```
+
+---
+
+## 1.3 Local Version Control
+
+Understand the idea of storing history locally.
+
+---
+
+## 1.4 Centralized Version Control
+
+Concept:
+
+```text
+Developer
+    ↓
+Central Server
+    ↑
+Developer
+```
+
+---
+
+## 1.5 Distributed Version Control
+
+Git:
+
+```text
+Developer A
+    ↕
+Full Repository
+
+Developer B
+    ↕
+Full Repository
+```
+
+Each clone contains repository history.
+
+---
+
+## 1.6 Git
+
+Understand Git as a:
+
+> Distributed Version Control System.
+
+---
+
+## 1.7 Snapshots
+
+Git conceptually stores project states as snapshots rather than thinking only in terms of "file differences."
+
+Understand this mental model carefully.
+
+---
+
+## 🧪 Lab
+
+Create a folder containing:
+
+```text
+file-v1
+file-v2
+file-v3
+```
+
+Pretend three developers are changing the project manually.
+
+Document at least five problems.
+
+Then explain how version control addresses each one.
+
+---
+
+# Chapter 02 — Git Installation & Configuration
+
+## Objective
+
+Set up Git professionally on Ubuntu.
+
+---
+
+## 2.1 Installation
+
+Check:
+
+```bash
+git --version
+```
+
+Install when necessary:
+
+```bash
+sudo apt update
+sudo apt install git
+```
+
+---
+
+## 2.2 Identity
+
+Configure:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+```
+
+Understand why Git records author information.
+
+---
+
+## 2.3 Configuration Levels
+
+Understand:
+
+```text
+system
+global
+local
+```
+
+and precedence.
+
+---
+
+## 2.4 Inspect Configuration
+
+```bash
+git config --list
+```
+
+and:
+
+```bash
+git config --show-origin --list
+```
+
+The second command is especially useful for understanding **where a configuration value came from**.
+
+---
+
+## 2.5 Default Editor
+
+Configure your preferred editor.
+
+---
+
+## 2.6 Git Aliases
+
+Create useful aliases such as:
+
+```bash
+git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.br branch
+```
+
+You may create your own aliases.
+
+Understand what each alias actually expands to.
+
+---
+
+## 2.7 Line Endings
+
+Understand:
+
+```text
+LF
+CRLF
+```
+
+and why teams care about consistent line endings.
+
+---
+
+## 2.8 Git Help
+
+Learn:
+
+```bash
+git help
+git help commit
+git commit --help
+```
+
+The ability to use documentation is more valuable than memorizing every option.
+
+---
+
+## 🧪 Lab
+
+Configure:
+
+* Name
+* Email
+* Editor
+* Useful aliases
+* Appropriate line-ending configuration
+
+Then document your configuration.
+
+---
+
+# Chapter 03 — Git Repository Fundamentals
+
+## Objective
+
+Understand the Git repository model.
+
+---
+
+# 3.1 Creating a Repository
+
+```bash
+git init
+```
+
+---
+
+# 3.2 Cloning
+
+```bash
+git clone
+```
+
+Understand that cloning retrieves a repository and creates a local working environment.
+
+---
+
+# 3.3 Working Directory
+
+Your actual project files.
+
+---
+
+# 3.4 Staging Area
+
+The staging area lets you construct the **next commit**.
+
+This is a very important concept.
+
+You are not simply:
+
+```text
+change → commit
+```
+
+You are:
+
+```text
+change files
+     ↓
+select changes
+     ↓
+staging area
+     ↓
+commit
+```
+
+---
+
+# 3.5 Local Repository
+
+Contains Git history.
+
+---
+
+# 3.6 Remote Repository
+
+A shared repository hosted elsewhere.
+
+For example:
+
+```text
+GitHub
+GitLab
+Bitbucket
+```
+
+---
+
+# 3.7 Git Lifecycle
+
+```text
+Untracked
+    ↓
+git add
+    ↓
+Staged
+    ↓
+git commit
+    ↓
+Committed
+```
+
+A tracked file can then move between:
+
+```text
+clean
+modified
+staged
+committed
+```
+
+---
+
+# 3.8 `.gitignore`
+
+Understand why certain files should not enter Git.
+
+Typical examples:
+
+```text
+node_modules/
+.env
+*.log
+dist/
+build/
+__pycache__/
+.venv/
+```
+
+But don't blindly copy a `.gitignore`.
+
+Understand what each rule protects.
+
+---
+
+# 3.9 `.git` Directory
+
+Inspect:
+
+```bash
+ls -la .git
+```
+
+Understand that this directory contains repository metadata.
+
+Do not modify it manually yet.
+
+---
+
+## 🧪 Lab
+
+Create:
+
+```text
+linux-server-toolkit/
+```
+
+from Volume 05.
+
+Initialize Git:
+
+```bash
+git init
+```
+
+Create a proper `.gitignore`.
+
+Add files selectively.
+
+Inspect:
+
+```bash
+git status
+```
+
+before and after staging.
+
+---
+
+# Chapter 04 — Commits & History
+
+## Objective
+
+Understand commits as meaningful units of project history.
+
+---
+
+# 4.1 Creating Commits
+
+```bash
+git add
+git commit
+```
+
+---
+
+# 4.2 What Makes a Good Commit?
+
+A good commit should represent:
+
+> One logical change.
+
+Bad:
+
+```text
+"stuff"
+```
+
+Better:
+
+```text
+"Add disk health check"
+```
+
+Even better:
+
+```text
+"Add configurable disk usage threshold"
+```
+
+---
+
+# 4.3 Atomic Commits
+
+Understand why:
+
+```text
+one logical change
+```
+
+is preferable to:
+
+```text
+50 unrelated changes
+```
+
+in one commit.
+
+---
+
+# 4.4 Commit Messages
+
+Study useful conventions:
+
+```text
+Add ...
+Fix ...
+Update ...
+Refactor ...
+Remove ...
+```
+
+You don't need to blindly adopt a commit-message framework yet.
+
+---
+
+# 4.5 Inspect History
+
+Learn:
+
+```bash
+git log
+```
+
+```bash
+git log --oneline
+```
+
+```bash
+git log --graph --oneline --decorate --all
+```
+
+---
+
+# 4.6 Show a Commit
+
+```bash
+git show <commit>
+```
+
+---
+
+# 4.7 Commit Metadata
+
+Understand:
+
+```text
+author
+committer
+timestamp
+message
+parent
+tree
+```
+
+---
+
+# 4.8 HEAD
+
+Understand:
+
+```text
+HEAD
+```
+
+as a reference to your current position in repository history.
+
+This becomes critical later.
+
+---
+
+## 🧪 Lab
+
+Make at least 10 meaningful commits to the Linux toolkit.
+
+Then use:
+
+```bash
+git log --graph --oneline --decorate --all
+```
+
+and explain your history.
+
+---
+
+# Chapter 05 — Git Diff & Change Inspection
+
+## Objective
+
+Learn to inspect changes before committing or reviewing them.
+
+---
+
+# 5.1 Working Tree Diff
+
+```bash
+git diff
+```
+
+---
+
+# 5.2 Staged Diff
+
+```bash
+git diff --staged
+```
+
+Understand the difference.
+
+---
+
+# 5.3 Commit Comparison
+
+```bash
+git diff <commit1> <commit2>
+```
+
+---
+
+# 5.4 File-Specific Diff
+
+Inspect only one file.
+
+---
+
+# 5.5 Word-Level Changes
+
+Understand more granular diff inspection.
+
+---
+
+# 5.6 Why Diff Matters
+
+Before committing:
+
+```text
+What exactly am I committing?
+```
+
+Before reviewing somebody else's work:
+
+```text
+What exactly changed?
+```
+
+Before deploying:
+
+```text
+What changed since the last release?
+```
+
+---
+
+## 🧪 Lab
+
+Modify multiple files.
+
+Stage only some.
+
+Use:
+
+```bash
+git diff
+git diff --staged
+```
+
+to explain:
+
+```text
+unstaged changes
+staged changes
+```
+
+Then commit only the intended change.
+
+---
+
+# Chapter 06 — Branches & References
+
+## Objective
+
+Understand Git branches as references to commits.
+
+This is one of the most important Git concepts.
+
+---
+
+# 6.1 What Is a Branch?
+
+A branch is essentially a movable reference pointing to a commit.
+
+Concept:
+
+```text
+A---B---C
+        ↑
+       main
+```
+
+Create another branch:
+
+```text
+A---B---C
+        ↑
+       main
+        \
+         D---E
+             ↑
+          feature
+```
+
+---
+
+# 6.2 Create Branch
+
+```bash
+git branch feature
+```
+
+---
+
+# 6.3 Switch Branch
+
+Modern Git:
+
+```bash
+git switch feature
+```
+
+Also understand older:
+
+```bash
+git checkout feature
+```
+
+---
+
+# 6.4 Create & Switch
+
+```bash
+git switch -c feature
+```
+
+---
+
+# 6.5 List Branches
+
+```bash
+git branch
+```
+
+---
+
+# 6.6 Delete Branch
+
+```bash
+git branch -d feature
+```
+
+---
+
+# 6.7 HEAD
+
+Understand:
+
+```text
+HEAD
+ ↓
+branch
+ ↓
+commit
+```
+
+and detached HEAD:
+
+```text
+HEAD
+ ↓
+commit
+```
+
+---
+
+# 6.8 Detached HEAD
+
+Understand:
+
+* What it means.
+* Why it happens.
+* Why work can appear "lost."
+* How to recover it.
+
+---
+
+# 6.9 Branch Tracking
+
+Understand:
+
+```text
+local branch
+      ↓
+upstream branch
+```
+
+---
+
+# 6.10 Remote-Tracking Branches
+
+Understand:
+
+```text
+origin/main
+origin/feature
+```
+
+as references representing your local knowledge of remote branches.
+
+---
+
+## 🧪 Lab
+
+Create:
+
+```text
+main
+feature-monitoring
+feature-network
+feature-backup
+```
+
+Make different commits on each.
+
+Visualize the graph.
+
+Explain where:
+
+```text
+HEAD
+main
+feature-monitoring
+```
+
+point.
+
+---
+
+# Chapter 07 — Merging & Conflict Resolution
+
+## Objective
+
+Learn how Git combines histories.
+
+---
+
+# 7.1 Fast-Forward Merge
+
+Understand:
+
+```text
+A---B---C
+        ↑
+     feature
+
+main → B
+```
+
+Merging can simply move `main` forward.
+
+---
+
+# 7.2 Three-Way Merge
+
+Understand when histories diverge:
+
+```text
+      D---E
+     /
+A---B---C
+```
+
+Git needs to combine changes based on a common ancestor.
+
+---
+
+# 7.3 Merge Commit
+
+Understand:
+
+```text
+      D---E
+     /     \
+A---B       M
+     \     /
+      C---
+```
+
+---
+
+# 7.4 Merge Conflicts
+
+A conflict happens when Git cannot automatically determine the desired result.
+
+---
+
+# 7.5 Conflict Markers
+
+Understand:
+
+```text
+<<<<<<< HEAD
+current branch
+=======
+incoming branch
+>>>>>>> feature
+```
+
+---
+
+# 7.6 Conflict Resolution
+
+Workflow:
+
+```text
+Merge
+ ↓
+Conflict
+ ↓
+Inspect
+ ↓
+Understand both changes
+ ↓
+Edit final version
+ ↓
+git add
+ ↓
+git commit
+```
+
+---
+
+# 7.7 Abort Merge
+
+Learn:
+
+```bash
+git merge --abort
+```
+
+when appropriate.
+
+---
+
+## 🧪 Lab — Deliberate Conflict
+
+Create two branches.
+
+Modify the same lines differently.
+
+Merge them.
+
+Resolve the conflict manually.
+
+Document:
+
+```text
+What conflicted?
+Why?
+Which final behavior did you choose?
+How did you verify it?
+```
+
+---
+
+# Chapter 08 — Rebasing & History Management
+
+## Objective
+
+Understand rebasing rather than treating it as a dangerous command to memorize.
+
+---
+
+# 8.1 Why Rebase?
+
+Suppose:
+
+```text
+      D---E
+     /
+A---B---C
+```
+
+Rebase can transform the feature history into:
+
+```text
+A---B---C---D'---E'
+```
+
+The commits are recreated on a new base.
+
+---
+
+# 8.2 Merge vs Rebase
+
+Understand the difference:
+
+```text
+merge
+→ preserves divergent history
+
+rebase
+→ replays commits onto another base
+```
+
+Neither should be treated as universally "better."
+
+Choose based on workflow and repository policy.
+
+---
+
+# 8.3 Rebase Changes Commit IDs
+
+This is critical.
+
+Because commits are recreated:
+
+```text
+D
+```
+
+becomes:
+
+```text
+D'
+```
+
+and therefore has a different identity.
+
+---
+
+# 8.4 Interactive Rebase
+
+Learn:
+
+```bash
+git rebase -i
+```
+
+Use it to understand:
+
+```text
+pick
+reword
+edit
+squash
+fixup
+drop
+```
+
+---
+
+# 8.5 Squashing
+
+Understand why several local development commits might be combined before sharing history.
+
+---
+
+# 8.6 Rebase Conflicts
+
+Workflow:
+
+```text
+rebase
+ ↓
+conflict
+ ↓
+resolve
+ ↓
+git add
+ ↓
+git rebase --continue
+```
+
+---
+
+# 8.7 Abort
+
+```bash
+git rebase --abort
+```
+
+---
+
+# 8.8 Golden Rule
+
+Understand the practical principle:
+
+> Be careful rewriting history that other people already depend on.
+
+---
+
+## 🧪 Lab
+
+Create:
+
+```text
+main
+feature
+```
+
+Make several feature commits.
+
+Advance `main`.
+
+Rebase `feature` onto `main`.
+
+Resolve a deliberate conflict.
+
+Then visualize the result using Git Graph.
+
+---
+
+# Chapter 09 — Remote Repositories & GitHub
+
+## Objective
+
+Understand how local Git repositories interact with remote repositories.
+
+---
+
+# 9.1 Remote
+
+Learn:
+
+```bash
+git remote
+git remote -v
+```
+
+---
+
+# 9.2 Origin
+
+Understand why:
+
+```text
+origin
+```
+
+is commonly used as the default remote name.
+
+It is a name, not a special Git protocol.
+
+---
+
+# 9.3 Push
+
+```bash
+git push
+```
+
+Understand:
+
+```text
+local commits
+      ↓
+remote repository
+```
+
+---
+
+# 9.4 Fetch
+
+```bash
+git fetch
+```
+
+Understand that fetch updates your local knowledge of remote state without automatically changing your working branch.
+
+---
+
+# 9.5 Pull
+
+Understand conceptually:
+
+```text
+git pull
+```
+
+as a fetch plus integration operation, depending on configuration.
+
+---
+
+# 9.6 Clone
+
+```bash
+git clone
+```
+
+---
+
+# 9.7 Remote-Tracking Branches
+
+Understand:
+
+```text
+origin/main
+```
+
+and why it is not the same object as your local:
+
+```text
+main
+```
+
+---
+
+# 9.8 origin/HEAD
+
+Understand:
+
+```text
+origin/HEAD
+```
+
+and what it represents.
+
+---
+
+# 9.9 SSH Authentication
+
+Generate an SSH key pair.
+
+Understand:
+
+```text
+private key
+public key
+```
+
+Never upload the private key to GitHub.
+
+---
+
+# 9.10 GitHub Repository
+
+Create a repository for your:
+
+```text
+linux-server-toolkit
+```
+
+Push it.
+
+---
+
+## 🧪 Lab
+
+Connect the local project to GitHub using SSH.
+
+Verify:
+
+```bash
+git remote -v
+```
+
+Push the repository.
+
+Clone it into another directory.
+
+Verify that the cloned repository contains the expected history.
+
+---
+
+# Chapter 10 — Collaboration & Pull Requests
+
+## Objective
+
+Learn the workflow used by teams.
+
+---
+
+# 10.1 Shared Repository Model
+
+Typical workflow:
+
+```text
+main
+  ↓
+feature branch
+  ↓
+changes
+  ↓
+push
+  ↓
+Pull Request
+  ↓
+Code Review
+  ↓
+CI
+  ↓
+Merge
+```
+
+---
+
+# 10.2 Pull Request
+
+A PR is not simply:
+
+> "Please merge my code."
+
+It is a collaboration mechanism for:
+
+```text
+discussion
+review
+testing
+validation
+approval
+integration
+```
+
+---
+
+# 10.3 Code Review
+
+Learn to review:
+
+```text
+correctness
+security
+maintainability
+testing
+performance
+readability
+unnecessary complexity
+```
+
+---
+
+# 10.4 Review Comments
+
+Learn how to:
+
+* Ask questions.
+* Identify defects.
+* Explain reasoning.
+* Suggest alternatives.
+* Avoid personal criticism.
+
+---
+
+# 10.5 Draft Pull Requests
+
+Understand when work is not ready for final review.
+
+---
+
+# 10.6 Branch Protection
+
+Understand conceptually:
+
+```text
+protected main
+required review
+required CI
+status checks
+```
+
+---
+
+# 10.7 CODEOWNERS
+
+Introduction to:
+
+```text
+CODEOWNERS
+```
+
+and ownership-based review.
+
+---
+
+# 10.8 Issues
+
+Understand how GitHub Issues can track:
+
+```text
+bugs
+features
+tasks
+technical debt
+```
+
+---
+
+## 🧪 Lab — Simulated Team Workflow
+
+Use two local clones or two branches to simulate:
+
+```text
+Developer A
+Developer B
+```
+
+Workflow:
+
+```text
+feature branch
+ ↓
+commit
+ ↓
+push
+ ↓
+Pull Request
+ ↓
+review
+ ↓
+change requested
+ ↓
+additional commit
+ ↓
+approval
+ ↓
+merge
+```
+
+Document the workflow.
+
+---
+
+# Chapter 11 — Git Internals
+
+## Objective
+
+Understand what Git is actually doing underneath the commands.
+
+This chapter is essential for advanced Git troubleshooting.
+
+---
+
+# 11.1 Git Object Model
+
+Git stores objects such as:
+
+```text
+blob
+tree
+commit
+tag
+```
+
+---
+
+# 11.2 Blob
+
+A blob stores file content.
+
+---
+
+# 11.3 Tree
+
+A tree represents directory structure and references blobs/trees.
+
+---
+
+# 11.4 Commit
+
+A commit references:
+
+```text
+tree
+parent commit(s)
+author
+committer
+message
+```
+
+---
+
+# 11.5 Tag Object
+
+Understand annotated tags conceptually.
+
+---
+
+# 11.6 Content Addressing
+
+Git uses hashes to identify objects.
+
+Understand the concept:
+
+```text
+content
+ ↓
+hash
+ ↓
+object identity
+```
+
+---
+
+# 11.7 References
+
+Branches and tags are references to objects.
+
+---
+
+# 11.8 HEAD
+
+Again:
+
+```text
+HEAD
+ ↓
+reference
+ ↓
+commit
+```
+
+---
+
+# 11.9 Index
+
+Understand the staging area as Git's index.
+
+---
+
+# 11.10 Inspecting Internals
+
+Use carefully:
+
+```bash
+git cat-file
+git rev-parse
+```
+
+You do not need to memorize every plumbing command.
+
+The goal is to understand Git's model.
+
+---
+
+## 🧪 Lab
+
+Create a small repository.
+
+Inspect:
+
+```text
+.git/objects
+.git/refs
+HEAD
+```
+
+Use:
+
+```bash
+git rev-parse HEAD
+```
+
+Then investigate a commit with:
+
+```bash
+git cat-file -p <hash>
+```
+
+Follow the tree and parent relationships.
+
+Your goal:
+
+> Trace one commit down to the objects Git uses to represent it.
+
+---
+
+# Chapter 12 — Stashing, Cherry-Picking & Tags
+
+## Objective
+
+Learn tools for managing changes between branches and marking important history.
+
+---
+
+# 12.1 Stash
+
+Understand:
+
+```bash
+git stash
+```
+
+Use it when you need to temporarily put aside local changes.
+
+---
+
+# 12.2 Stash List
+
+```bash
+git stash list
+```
+
+---
+
+# 12.3 Apply vs Pop
+
+Understand the difference.
+
+---
+
+# 12.4 Stash With Untracked Files
+
+Understand relevant options.
+
+---
+
+# 12.5 Cherry-Pick
+
+```bash
+git cherry-pick <commit>
+```
+
+Understand:
+
+> Apply the change introduced by a specific commit onto another branch.
+
+---
+
+# 12.6 Cherry-Pick Conflicts
+
+Learn how to resolve and continue/abort.
+
+---
+
+# 12.7 Tags
+
+Understand:
+
+```text
+lightweight tag
+annotated tag
+```
+
+---
+
+# 12.8 Version Tags
+
+Example:
+
+```text
+v1.0.0
+v1.1.0
+v2.0.0
+```
+
+Understand why releases are often tagged.
+
+---
+
+# 12.9 Releases
+
+Understand GitHub Releases conceptually.
+
+---
+
+## 🧪 Lab
+
+On the toolkit repository:
+
+1. Create a feature commit.
+2. Stash unrelated work.
+3. Switch branches.
+4. Apply the stash.
+5. Cherry-pick one useful commit.
+6. Create a version tag.
+7. Push the tag.
+
+---
+
+# Chapter 13 — Git Recovery & Disaster Handling
+
+## Objective
+
+Learn the skills that separate a beginner from someone who can safely use Git.
+
+---
+
+# 13.1 Revert
+
+```bash
+git revert
+```
+
+Understand:
+
+> Create a new commit that reverses an earlier change.
+
+This is usually appropriate for changes already shared in a collaborative branch.
+
+---
+
+# 13.2 Reset
+
+Understand:
+
+```bash
+git reset
+```
+
+modes:
+
+```text
+--soft
+--mixed
+--hard
+```
+
+Do not memorize them without understanding what happens to:
+
+```text
+HEAD
+index
+working tree
+```
+
+---
+
+# 13.3 Reset Mental Model
+
+Think:
+
+```text
+HEAD
+ ↓
+commit
+
+Index
+ ↓
+staged state
+
+Working tree
+ ↓
+files
+```
+
+Different reset modes move different pieces.
+
+---
+
+# 13.4 Reflog
+
+Learn:
+
+```bash
+git reflog
+```
+
+This is one of Git's most important recovery mechanisms.
+
+It records movements of references such as `HEAD`.
+
+---
+
+# 13.5 Recovering a Deleted Branch
+
+Use reflog and references to locate the previous commit.
+
+---
+
+# 13.6 Recovering Lost Work
+
+Understand when recovery is possible and when it is not guaranteed.
+
+---
+
+# 13.7 Restore
+
+Modern Git:
+
+```bash
+git restore
+```
+
+Understand restoring:
+
+```text
+working tree
+staged content
+```
+
+---
+
+# 13.8 Checkout
+
+Understand why `git checkout` historically became overloaded and why modern Git introduced:
+
+```text
+git switch
+git restore
+```
+
+---
+
+## 🧪 Lab — Git Disaster Drill
+
+In a disposable clone:
+
+### Disaster 1
+
+Make an accidental commit.
+
+Recover the desired state.
+
+### Disaster 2
+
+Delete a branch.
+
+Recover it using reflog.
+
+### Disaster 3
+
+Make a bad local reset.
+
+Recover the previous commit.
+
+### Disaster 4
+
+Accidentally modify a file.
+
+Restore it.
+
+### Disaster 5
+
+Create a bad shared change.
+
+Use `git revert`.
+
+Document:
+
+```text
+Disaster
+Evidence
+Recovery command
+Why it worked
+Final verification
+```
+
+---
+
+# Chapter 14 — Git Hooks & Repository Automation
+
+## Objective
+
+Understand how Git can trigger automated checks.
+
+---
+
+# 14.1 What Is a Hook?
+
+A Git hook is a script triggered by a Git event.
+
+Examples include:
+
+```text
+pre-commit
+commit-msg
+pre-push
+post-merge
+```
+
+---
+
+# 14.2 Pre-Commit
+
+Useful for:
+
+```text
+formatting
+linting
+tests
+secret detection
+```
+
+---
+
+# 14.3 Commit Message Validation
+
+Ensure commit messages follow team conventions.
+
+---
+
+# 14.4 Pre-Push
+
+Run tests before pushing.
+
+---
+
+# 14.5 Hooks Are Local
+
+Understand an important limitation:
+
+> Local Git hooks are not automatically transferred through normal repository cloning.
+
+This matters when designing team workflows.
+
+---
+
+# 14.6 Server/Hosted Checks
+
+GitHub-side protections and CI are more reliable for team-wide enforcement.
+
+---
+
+## 🧪 Lab
+
+Create a pre-commit hook that checks:
+
+```text
+Bash syntax
+```
+
+using:
+
+```bash
+bash -n
+```
+
+Optionally run ShellCheck if installed.
+
+Attempt a commit with broken syntax.
+
+Verify that the hook blocks it.
+
+Fix the script.
+
+Commit again.
+
+---
+
+# Chapter 15 — Professional Git Workflows
+
+## Objective
+
+Understand how teams organize branches and releases.
+
+---
+
+# 15.1 Trunk-Based Development
+
+Concept:
+
+```text
+main
+ ↑
+small frequent changes
+```
+
+---
+
+# 15.2 Feature Branch Workflow
+
+```text
+main
+ ↓
+feature
+ ↓
+PR
+ ↓
+main
+```
+
+---
+
+# 15.3 GitHub Flow
+
+Understand the general pattern:
+
+```text
+main
+ ↓
+branch
+ ↓
+change
+ ↓
+PR
+ ↓
+review
+ ↓
+merge
+```
+
+---
+
+# 15.4 Git Flow
+
+Understand the historical model involving:
+
+```text
+main
+develop
+feature
+release
+hotfix
+```
+
+Know it conceptually.
+
+Do not assume every company uses it.
+
+---
+
+# 15.5 Release Branches
+
+Understand why some organizations maintain release branches.
+
+---
+
+# 15.6 Hotfixes
+
+Understand:
+
+```text
+production bug
+ ↓
+hotfix
+ ↓
+test
+ ↓
+release
+```
+
+---
+
+# 15.7 Semantic Versioning
+
+Understand:
+
+```text
+MAJOR.MINOR.PATCH
+```
+
+Example:
+
+```text
+2.4.1
+```
+
+Conceptually:
+
+```text
+MAJOR → breaking changes
+MINOR → backward-compatible features
+PATCH → backward-compatible fixes
+```
+
+---
+
+# 15.8 Commit Strategy
+
+Understand:
+
+```text
+small
+logical
+reviewable
+reversible
+```
+
+commits.
+
+---
+
+# 15.9 History Quality
+
+Do not optimize Git history for aesthetics alone.
+
+Optimize it for:
+
+```text
+understanding
+debugging
+review
+recovery
+release management
+```
+
+---
+
+# Chapter 16 — Git in DevOps & CI/CD
+
+## Objective
+
+Understand why Git becomes the central trigger for modern engineering automation.
+
+---
+
+# 16.1 Git as Source of Truth
+
+Typical system:
+
+```text
+Developer
+   ↓
+Git commit
+   ↓
+GitHub
+   ↓
+CI
+   ↓
+Tests
+   ↓
+Build
+   ↓
+Artifact
+   ↓
+Deployment
+```
+
+---
+
+# 16.2 Push Trigger
+
+A push can trigger:
+
+```text
+lint
+test
+build
+security scan
+```
+
+---
+
+# 16.3 Pull Request Trigger
+
+A PR can trigger:
+
+```text
+tests
+review checks
+security checks
+preview deployment
+```
+
+---
+
+# 16.4 Main Branch
+
+A merge to `main` can trigger:
+
+```text
+build
+package
+release
+deploy
+```
+
+---
+
+# 16.5 Git Tags
+
+Tags can trigger:
+
+```text
+release pipeline
+production deployment
+artifact publishing
+```
+
+---
+
+# 16.6 Git Commit SHA
+
+Understand why deployments often record an immutable commit identifier.
+
+Example:
+
+```text
+Application version:
+commit abc123...
+```
+
+This makes deployments traceable.
+
+---
+
+# 16.7 Git + Infrastructure
+
+Later:
+
+```text
+Git
+ ↓
+Terraform
+ ↓
+Cloud infrastructure
+```
+
+and:
+
+```text
+Git
+ ↓
+Kubernetes manifests
+ ↓
+Cluster
+```
+
+This becomes the basis of GitOps concepts later.
+
+---
+
+# 🧪 Lab — Simulated CI Pipeline
+
+Create a simple local workflow:
+
+```text
+git commit
+    ↓
+pre-commit checks
+    ↓
+push
+    ↓
+validation script
+    ↓
+test
+    ↓
+build/report
+```
+
+You do not need a CI platform yet.
+
+The purpose is understanding the chain.
+
+---
+
+# Chapter 17 — Git Security & Repository Hygiene
+
+## Objective
+
+Learn how Git repositories can accidentally expose sensitive information.
+
+---
+
+# 17.1 Never Commit Secrets
+
+Examples:
+
+```text
+.env
+API keys
+database passwords
+private keys
+cloud credentials
+tokens
+```
+
+---
+
+# 17.2 `.gitignore` Is Not Security
+
+This is critical.
+
+If a secret was already committed:
+
+```text
+adding it to .gitignore
+```
+
+does not automatically remove it from Git history.
+
+---
+
+# 17.3 Secret Removal
+
+Understand conceptually that removing sensitive data from history requires history rewriting or repository-specific remediation.
+
+---
+
+# 17.4 SSH Keys
+
+Never commit:
+
+```text
+~/.ssh/id_rsa
+~/.ssh/id_ed25519
+```
+
+or equivalent private keys.
+
+---
+
+# 17.5 GitHub Secret Scanning
+
+Understand that hosted platforms can detect certain exposed credentials.
+
+Do not rely on detection as your primary defense.
+
+---
+
+# 17.6 Least Privilege
+
+GitHub access should follow:
+
+```text
+minimum required permissions
+```
+
+---
+
+# 17.7 Signed Commits
+
+Introduction to:
+
+```text
+GPG
+SSH signing
+```
+
+Understand why commit signing can provide stronger authorship verification.
+
+Advanced cryptographic configuration can wait.
+
+---
+
+## 🧪 Lab
+
+Create a fake secret such as:
+
+```text
+TEST_API_KEY=not-a-real-secret
+```
+
+Attempt to commit it.
+
+Then:
+
+1. Add it to `.gitignore`.
+2. Understand why the already tracked file remains tracked.
+3. Remove it from tracking.
+4. Verify repository state.
+5. Explain why real secrets require additional remediation.
+
+Never use an actual credential for this exercise.
+
+---
+
+# 🧪 Hands-On Lab Series
+
+Complete these in order.
+
+### Lab 01
+
+Create a Git repository.
+
+### Lab 02
+
+Configure Git professionally.
+
+### Lab 03
+
+Create meaningful commits.
+
+### Lab 04
+
+Practice `.gitignore`.
+
+### Lab 05
+
+Inspect diffs.
+
+### Lab 06
+
+Create branches.
+
+### Lab 07
+
+Visualize Git history.
+
+### Lab 08
+
+Perform fast-forward merge.
+
+### Lab 09
+
+Perform three-way merge.
+
+### Lab 10
+
+Resolve merge conflicts.
+
+### Lab 11
+
+Rebase a feature branch.
+
+### Lab 12
+
+Resolve rebase conflicts.
+
+### Lab 13
+
+Connect GitHub using SSH.
+
+### Lab 14
+
+Push/fetch/pull.
+
+### Lab 15
+
+Simulate a pull request workflow.
+
+### Lab 16
+
+Inspect Git internals.
+
+### Lab 17
+
+Use stash.
+
+### Lab 18
+
+Cherry-pick a commit.
+
+### Lab 19
+
+Create tags.
+
+### Lab 20
+
+Recover deleted work with reflog.
+
+### Lab 21
+
+Use reset/restore/revert correctly.
+
+### Lab 22
+
+Create Git hooks.
+
+### Lab 23
+
+Build a local CI-style validation workflow.
+
+### Lab 24
+
+Perform a Git security audit.
+
+---
+
+# 🚀 Main Mini-Project — Professionalize the Linux Server Toolkit
+
+The main project for this volume is **not a new project**.
+
+You will take:
+
+```text
+linux-server-toolkit
+```
+
+from Volume 05 and manage it as if it were a professional team repository.
+
+This is intentional.
+
+You are learning:
+
+```text
+Version 1
+   ↓
+Improve
+   ↓
+Version 2
+   ↓
+Collaborate
+   ↓
+Review
+   ↓
+Release
+```
+
+rather than creating disposable projects.
+
+---
+
+# Project Phase 01 — Repository Cleanup
+
+Create:
+
+```text
+README.md
+.gitignore
+LICENSE
+docs/
+tests/
+```
+
+Improve the project structure.
+
+---
+
+# Project Phase 02 — Commit Strategy
+
+Review your previous commits.
+
+Identify poor commits.
+
+Create a cleaner history in a separate practice branch if necessary.
+
+Practice:
+
+```text
+atomic commits
+meaningful messages
+```
+
+---
+
+# Project Phase 03 — Feature Branches
+
+Create:
+
+```text
+feature/health-check
+feature/network-diagnostics
+feature/backup
+feature/log-analysis
+```
+
+Develop features separately.
+
+---
+
+# Project Phase 04 — Merge Conflicts
+
+Have two branches modify the same part of:
+
+```text
+README.md
+```
+
+or another controlled file.
+
+Create a conflict.
+
+Resolve it properly.
+
+---
+
+# Project Phase 05 — Rebase
+
+Take one feature branch.
+
+Rebase it onto updated `main`.
+
+Resolve any conflict.
+
+Visualize the result.
+
+---
+
+# Project Phase 06 — GitHub
+
+Push the project to GitHub.
+
+Configure:
+
+```text
+SSH
+README
+issues
+branches
+```
+
+---
+
+# Project Phase 07 — Pull Request
+
+For each major feature:
+
+```text
+feature branch
+ ↓
+push
+ ↓
+PR
+ ↓
+review
+ ↓
+fix
+ ↓
+approval
+ ↓
+merge
+```
+
+---
+
+# Project Phase 08 — Code Review
+
+Create review criteria:
+
+```text
+Correctness
+Security
+Readability
+Testing
+Error handling
+Performance
+Documentation
+```
+
+Perform a self-review before merging.
+
+---
+
+# Project Phase 09 — Git Hook
+
+Add a local pre-commit check.
+
+For Bash files:
+
+```bash
+bash -n
+```
+
+and optionally:
+
+```text
+ShellCheck
+```
+
+---
+
+# Project Phase 10 — Release
+
+Create a release:
+
+```text
+v1.0.0
+```
+
+with:
+
+```text
+tag
+release notes
+known limitations
+```
+
+---
+
+# Project Phase 11 — Recovery Drill
+
+Practice:
+
+```text
+bad commit
+bad branch
+deleted branch
+wrong reset
+revert
+reflog recovery
+```
+
+inside a disposable clone.
+
+---
+
+# 📁 Final Repository Structure
+
+Your repository should look approximately like:
+
+```text
+linux-server-toolkit/
+│
+├── README.md
+├── LICENSE
+├── .gitignore
+│
+├── bin/
+├── lib/
+├── config/
+├── tests/
+│
+├── docs/
+│   ├── architecture.md
+│   ├── usage.md
+│   ├── security.md
+│   └── troubleshooting.md
+│
+└── reports/
+```
+
+---
+
+# 🔥 Project Challenge — Simulated Team
+
+Pretend you are working with two developers.
+
+### Developer A
+
+Works on:
+
+```text
+network diagnostics
+```
+
+### Developer B
+
+Works on:
+
+```text
+backup functionality
+```
+
+Both branches modify:
+
+```text
+README.md
+```
+
+and potentially shared configuration.
+
+You must:
+
+```text
+create branches
+commit
+push
+review
+merge
+resolve conflicts
+rebase when appropriate
+release
+```
+
+Document the entire workflow.
+
+---
+
+# 🧠 Git Graph Requirement
+
+Use Git Graph in VS Code or equivalent visualization.
+
+You should be able to look at a graph such as:
+
+```text
+        D---E---F
+       /         \
+A---B-------------G---H
+     \
+      C---I
+```
+
+and explain:
+
+```text
+Where branches diverged
+Which commits belong to which branch
+Where merges happened
+What HEAD points to
+What main points to
+What origin/main represents
+```
+
+If you cannot explain the graph, your Git understanding is not complete.
+
+---
+
+# 🧠 Git Internals Challenge
+
+Take one commit:
+
+```bash
+git rev-parse HEAD
+```
+
+Trace it.
+
+Understand:
+
+```text
+commit
+ ↓
+tree
+ ↓
+blob
+```
+
+and:
+
+```text
+commit
+ ↓
+parent
+ ↓
+previous commit
+```
+
+You should understand that Git history is essentially a graph of objects and references.
+
+---
+
+# 🧠 Disaster Challenge
+
+In a disposable repository:
+
+### Disaster 1
+
+```text
+You committed to the wrong branch.
+```
+
+Recover.
+
+### Disaster 2
+
+```text
+You deleted a branch.
+```
+
+Recover with reflog.
+
+### Disaster 3
+
+```text
+You made a bad local reset.
+```
+
+Recover.
+
+### Disaster 4
+
+```text
+A shared branch contains a bad commit.
+```
+
+Use revert appropriately.
+
+### Disaster 5
+
+```text
+A feature branch has diverged badly.
+```
+
+Decide whether merging or rebasing is appropriate and execute the chosen workflow.
+
+---
+
+# 🔬 Engineering Challenge
+
+Take one real problem from your toolkit.
+
+Example:
+
+> Disk health check incorrectly reports a healthy disk as critical.
+
+Work through:
+
+```text
+Problem
+ ↓
+Create branch
+ ↓
+Reproduce
+ ↓
+Investigate
+ ↓
+Fix
+ ↓
+Test
+ ↓
+Commit
+ ↓
+Push
+ ↓
+Review
+ ↓
+Merge
+ ↓
+Release
+```
+
+You are practicing the **engineering lifecycle**, not just Git commands.
+
+---
+
+# 🧠 Feynman Checkpoints
+
+You should be able to explain these without looking at notes.
+
+### Git
+
+> What problem does Git solve?
+
+### Repository
+
+> What is the difference between the working directory, staging area, local repository, and remote repository?
+
+### Commit
+
+> What is a Git commit actually pointing to?
+
+### Branch
+
+> What is a Git branch?
+
+### HEAD
+
+> What does HEAD represent?
+
+### origin
+
+> What does `origin` mean?
+
+### origin/main
+
+> How is `origin/main` different from `main`?
+
+### Merge
+
+> What is the difference between fast-forward and three-way merge?
+
+### Rebase
+
+> What does rebase actually do to commits?
+
+### Conflict
+
+> Why can't Git always automatically merge two branches?
+
+### Fetch
+
+> What does `git fetch` change?
+
+### Pull
+
+> What does `git pull` generally do?
+
+### Reset
+
+> What changes when using `--soft`, `--mixed`, and `--hard`?
+
+### Revert
+
+> Why is revert often safer for shared history?
+
+### Reflog
+
+> How can reflog help recover apparently lost commits?
+
+### Staging
+
+> Why does Git have a staging area?
+
+### Internals
+
+> What are blobs, trees, commits, and references?
+
+If you cannot explain these clearly, revisit the relevant chapter.
+
+---
+
+# 🔁 Spaced-Repetition Checklist
+
+Review:
+
+```text
+Day 1
+Day 3
+Day 7
+Day 14
+Day 30
+```
+
+Important concepts:
+
+```text
+Version control
+DVCS
+Repository
+Working tree
+Index
+Staging
+Commit
+Snapshot
+HEAD
+Branch
+Reference
+Merge
+Three-way merge
+Conflict
+Rebase
+Interactive rebase
+Remote
+origin
+origin/main
+fetch
+pull
+push
+Pull Request
+Code review
+Git object model
+blob
+tree
+commit
+tag
+stash
+cherry-pick
+revert
+reset
+restore
+reflog
+hooks
+GitHub
+branch protection
+Git security
+```
+
+---
+
+# 🎯 Completion Criteria
+
+Do not move to Volume 07 simply because you know:
+
+```bash
+git add
+git commit
+git push
+```
+
+You should be able to:
+
+### Fundamentals
+
+* Explain why Git exists.
+* Explain distributed version control.
+* Explain Git's architecture.
+* Explain snapshots.
+
+### Repository
+
+* Create repositories.
+* Clone repositories.
+* Understand working tree/index/repository.
+* Create useful `.gitignore` rules.
+
+### History
+
+* Create meaningful commits.
+* Inspect history.
+* Read diffs.
+* Visualize commit graphs.
+
+### Branches
+
+* Create branches.
+* Switch branches.
+* Delete branches.
+* Explain HEAD.
+* Explain remote-tracking branches.
+
+### Merging
+
+* Fast-forward merge.
+* Three-way merge.
+* Resolve conflicts.
+* Abort a merge.
+
+### Rebasing
+
+* Rebase a branch.
+* Understand rewritten commit IDs.
+* Resolve rebase conflicts.
+* Use interactive rebase locally.
+
+### Remote
+
+* Push.
+* Fetch.
+* Pull.
+* Configure remotes.
+* Use SSH authentication.
+
+### Collaboration
+
+* Create pull requests.
+* Review code.
+* Respond to review comments.
+* Work with protected branches conceptually.
+
+### Advanced Git
+
+* Stash.
+* Cherry-pick.
+* Tags.
+* Reflog.
+* Reset.
+* Restore.
+* Revert.
+
+### Internals
+
+* Explain blob/tree/commit.
+* Explain references.
+* Inspect Git objects at a basic level.
+
+### Automation
+
+* Create hooks.
+* Run validation before commits.
+
+### Security
+
+* Avoid committing secrets.
+* Understand `.gitignore` limitations.
+* Understand basic repository security.
+
+### DevOps
+
+Explain:
+
+```text
+commit
+ ↓
+push
+ ↓
+CI
+ ↓
+test
+ ↓
+build
+ ↓
+artifact
+ ↓
+deploy
+```
+
+---
+
+# 🎤 Interview Checkpoint
+
+You should be able to answer:
+
+### Fundamentals
+
+* What is Git?
+* Git vs GitHub?
+* Why distributed version control?
+* What is a repository?
+
+### Working Area
+
+* Working tree vs staging area?
+* What does `git add` do?
+* What does `git commit` do?
+
+### Branching
+
+* What is a branch?
+* What is HEAD?
+* What is detached HEAD?
+* What is `origin/main`?
+
+### Merging
+
+* Fast-forward vs three-way merge?
+* What causes merge conflicts?
+* How do you resolve one?
+
+### Rebase
+
+* Merge vs rebase?
+* Why does rebase change commit IDs?
+* When should you avoid rebasing shared history?
+
+### Remote
+
+* `fetch` vs `pull`?
+* `push` vs `fetch`?
+* What is upstream tracking?
+
+### Recovery
+
+* `reset` vs `revert`?
+* What is reflog?
+* How would you recover a deleted branch?
+
+### Collaboration
+
+* What is a Pull Request?
+* What happens during code review?
+* What are branch protections?
+
+### Internals
+
+* What is a Git object?
+* Blob vs tree vs commit?
+* What does a branch actually point to?
+
+### DevOps
+
+> How does Git integrate with CI/CD?
+
+A strong answer should show the entire lifecycle:
+
+```text
+Developer
+   ↓
+Branch
+   ↓
+Commit
+   ↓
+Push
+   ↓
+Pull Request
+   ↓
+Review
+   ↓
+CI
+   ↓
+Merge
+   ↓
+Build
+   ↓
+Release
+   ↓
+Deployment
+```
+
+---
+
+# 🏁 Final Mental Model
+
+By the end of this volume, you should stop thinking of Git as:
+
+```text
+add
+commit
+push
+pull
+```
+
+and start thinking of it as:
+
+```text
+                    Git
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+       History               Collaboration
+          │                     │
+       Commits              GitHub / PRs
+          │                     │
+       Branches              Reviews
+          │                     │
+    Merge / Rebase          CI checks
+          │                     │
+       Recovery              Releases
+          │                     │
+          └──────────┬──────────┘
+                     ↓
+               Engineering
+                  Workflow
+                     ↓
+                  DevOps
+```
+
+The most important transformation is:
+
+```text
+"I know Git commands."
+
+        ↓
+
+"I understand Git history."
+
+        ↓
+
+"I can safely manipulate Git history."
+
+        ↓
+
+"I can collaborate using Git."
+
+        ↓
+
+"I can recover from Git mistakes."
+
+        ↓
+
+"I understand how Git becomes the foundation
+for CI/CD and infrastructure automation."
+```
+
+That is the level you should aim for.
+
+---
+
+# 🚦 Next Volume
+
+## Volume 07 — Python for Backend & AI Engineering
+
+This is an important transition.
+
+You have now built the foundation:
+
+```text
+V01  Engineering Foundations
+ ↓
+V02  Computer Architecture
+ ↓
+V03  Networking
+ ↓
+V04  Linux
+ ↓
+V05  Bash
+ ↓
+V06  Git
+```
+
+Now we move into **Python**, but not as a generic beginner programming course.
+
+The purpose of V07 is to make you capable of building the Python systems that later become:
+
+```text
+FastAPI services
+AI applications
+RAG systems
+automation tools
+background workers
+CLI tools
+data-processing pipelines
+LLM infrastructure components
+```
+
+The next major foundation layer is therefore:
+
+**Python → Backend → AI Engineering.**

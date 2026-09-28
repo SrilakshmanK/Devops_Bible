@@ -1,0 +1,4930 @@
+# 🐍 Volume 07 — Python for Backend & AI Engineering
+
+## 🎯 Volume Objective
+
+Learn Python deeply enough to use it as a serious engineering language for:
+
+* Linux automation
+* DevOps tooling
+* Backend services
+* REST APIs
+* Async programming
+* Data processing
+* AI applications
+* RAG systems
+* CLI tools
+* Monitoring
+* Testing
+* Infrastructure automation
+
+This is **not** a generic "learn Python syntax" volume.
+
+You already understand:
+
+```text
+Computer
+Networking
+Linux
+Bash
+Git
+```
+
+Now Python becomes the programming layer that allows you to build systems on top of those foundations.
+
+---
+
+# 🧠 The Transition
+
+Your previous volumes established:
+
+```text
+V01 Engineering
+        ↓
+V02 Computer
+        ↓
+V03 Networking
+        ↓
+V04 Linux
+        ↓
+V05 Bash
+        ↓
+V06 Git
+        ↓
+V07 Python
+```
+
+The important transition is:
+
+```text
+Manual operation
+      ↓
+Bash automation
+      ↓
+Python automation
+      ↓
+Backend services
+      ↓
+AI applications
+```
+
+---
+
+# 🧭 What You Should NOT Do
+
+Do not approach Python like this:
+
+```text
+watch tutorial
+↓
+copy syntax
+↓
+build calculator
+↓
+build to-do app
+↓
+forget everything
+```
+
+Instead:
+
+```text
+Concept
+ ↓
+Mental model
+ ↓
+Small exercise
+ ↓
+Linux-oriented problem
+ ↓
+Real automation
+ ↓
+Testing
+ ↓
+Refactoring
+ ↓
+Reusable tool
+```
+
+---
+
+# 🧠 Python Learning Principles
+
+## 1. Understand before memorizing
+
+Do not memorize:
+
+```python
+for x in items:
+```
+
+without understanding iteration.
+
+---
+
+## 2. Prefer standard library first
+
+Before installing a package, ask:
+
+> Can Python's standard library solve this?
+
+This prevents unnecessary dependencies.
+
+---
+
+## 3. Learn Python through systems
+
+Use Python to interact with:
+
+```text
+Linux
+Files
+Processes
+Network
+HTTP
+APIs
+Git
+Services
+Logs
+```
+
+---
+
+## 4. Learn debugging early
+
+Do not wait until the end of the volume.
+
+Every program should teach you how to answer:
+
+```text
+What failed?
+Where?
+Why?
+What evidence do I have?
+How do I reproduce it?
+How do I verify the fix?
+```
+
+---
+
+# 📚 Chapter Structure
+
+1. Python Environment & Mental Model
+2. Python Fundamentals
+3. Control Flow
+4. Functions
+5. Data Structures
+6. Modules, Packages & Environments
+7. Files, Paths & Configuration
+8. Exceptions & Error Handling
+9. Object-Oriented Python
+10. Python + Linux
+11. HTTP, APIs & API Clients
+12. Data Processing & Validation
+13. Concurrency & Async Programming
+14. Logging, CLI & Configuration
+15. Testing & Debugging
+16. Automation Architecture
+17. Type Hints, Packaging & Code Quality
+18. Python for DevOps
+19. Python for Backend & AI Engineering Foundations
+20. Professional Python Workflow
+
+---
+
+# Chapter 01 — Python Environment & Mental Model
+
+## Objective
+
+Understand how Python exists on your machine before writing serious code.
+
+---
+
+# 1.1 What Is Python?
+
+Understand:
+
+```text
+Python language
+      ↓
+Python interpreter
+      ↓
+Python program
+      ↓
+Operating system
+```
+
+---
+
+# 1.2 Python Interpreter
+
+Understand what happens when:
+
+```bash
+python3 script.py
+```
+
+is executed.
+
+Mental model:
+
+```text
+Shell
+ ↓
+Python executable
+ ↓
+Python interpreter
+ ↓
+Source code
+ ↓
+Python runtime
+ ↓
+OS interaction
+```
+
+---
+
+# 1.3 Python Implementations
+
+Know that Python is a language specification with implementations.
+
+Understand conceptually:
+
+```text
+CPython
+PyPy
+```
+
+CPython is the implementation you will primarily use.
+
+---
+
+# 1.4 Python Versions
+
+Check:
+
+```bash
+python3 --version
+```
+
+Understand why Python versions matter for:
+
+```text
+syntax
+standard library
+dependencies
+framework compatibility
+security
+```
+
+---
+
+# 1.5 Interactive Interpreter
+
+Run:
+
+```bash
+python3
+```
+
+Experiment with:
+
+```python
+2 + 3
+```
+
+and:
+
+```python
+print("hello")
+```
+
+Exit the interpreter.
+
+---
+
+# 1.6 Running Scripts
+
+Create:
+
+```text
+hello.py
+```
+
+Run:
+
+```bash
+python3 hello.py
+```
+
+---
+
+# 1.7 Virtual Environments
+
+Understand why global package installation is problematic.
+
+Mental model:
+
+```text
+System Python
+     │
+     ├── Project A dependencies
+     │
+     └── Project B dependencies
+```
+
+can cause conflicts.
+
+Virtual environments create isolation:
+
+```text
+Project A
+   ↓
+.venv-A
+
+Project B
+   ↓
+.venv-B
+```
+
+---
+
+# 1.8 Create a Virtual Environment
+
+```bash
+python3 -m venv .venv
+```
+
+Activate:
+
+```bash
+source .venv/bin/activate
+```
+
+Deactivate:
+
+```bash
+deactivate
+```
+
+---
+
+# 1.9 pip
+
+Understand:
+
+```text
+Python package
+     ↓
+Package index
+     ↓
+pip
+     ↓
+Environment
+```
+
+Use:
+
+```bash
+python -m pip
+```
+
+rather than blindly assuming the `pip` command points to the intended Python.
+
+---
+
+# 1.10 requirements.txt
+
+Understand dependency declaration.
+
+Example:
+
+```text
+requests==x.y.z
+```
+
+---
+
+# 1.11 pyproject.toml
+
+Introduction to the modern Python project configuration approach.
+
+You do not need to master Python packaging yet.
+
+---
+
+# 1.12 PEP 8
+
+Learn:
+
+* indentation
+* naming
+* line length
+* imports
+* whitespace
+* readability
+
+Style is not the goal.
+
+**Maintainability is the goal.**
+
+---
+
+## 🧪 Lab
+
+Create:
+
+```text
+python-lab/
+├── .venv/
+├── src/
+│   └── hello.py
+├── tests/
+├── README.md
+└── pyproject.toml
+```
+
+Create and activate the virtual environment.
+
+Install one package.
+
+Verify it exists inside the environment.
+
+Document:
+
+```text
+Python version
+environment path
+package
+installation command
+```
+
+---
+
+# Chapter 02 — Python Fundamentals
+
+## Objective
+
+Understand Python's core language model.
+
+---
+
+# 2.1 Variables
+
+Understand:
+
+```python
+name = "Sri"
+age = 22
+```
+
+But understand the deeper model:
+
+> A variable is a name bound to an object.
+
+This becomes important later.
+
+---
+
+# 2.2 Objects
+
+Understand:
+
+```text
+name
+ ↓
+object
+ ↓
+type
+ ↓
+value
+```
+
+Everything in Python is an object.
+
+---
+
+# 2.3 Basic Types
+
+Learn deeply:
+
+```text
+int
+float
+bool
+str
+None
+```
+
+---
+
+# 2.4 Type Checking
+
+```python
+type(value)
+```
+
+Understand that `type()` is useful for investigation, not something you need to use everywhere.
+
+---
+
+# 2.5 Type Conversion
+
+Study:
+
+```python
+int()
+float()
+str()
+bool()
+```
+
+Understand conversion failures.
+
+---
+
+# 2.6 Operators
+
+Arithmetic:
+
+```text
++
+-
+*
+/
+//
+%
+**
+```
+
+Comparison:
+
+```text
+==
+!=
+<
+>
+<=
+>=
+```
+
+Logical:
+
+```text
+and
+or
+not
+```
+
+Identity:
+
+```text
+is
+is not
+```
+
+Membership:
+
+```text
+in
+not in
+```
+
+Understand the difference between:
+
+```python
+==
+```
+
+and:
+
+```python
+is
+```
+
+---
+
+# 2.7 Input and Output
+
+```python
+input()
+print()
+```
+
+Understand that `input()` returns a string.
+
+---
+
+# 2.8 f-Strings
+
+Learn:
+
+```python
+name = "Sri"
+print(f"Hello {name}")
+```
+
+---
+
+# 2.9 Truthiness
+
+Understand which values behave as false:
+
+```text
+False
+None
+0
+0.0
+""
+[]
+{}
+set()
+```
+
+and why this matters in conditions.
+
+---
+
+# 2.10 None
+
+Understand:
+
+> `None` represents the absence of a value.
+
+Do not confuse:
+
+```text
+None
+0
+False
+""
+```
+
+---
+
+# 2.11 Mutable vs Immutable
+
+Introduction to:
+
+```text
+immutable
+int
+float
+str
+tuple
+
+mutable
+list
+dict
+set
+```
+
+This becomes extremely important later.
+
+---
+
+## 🧪 Lab
+
+Build:
+
+```text
+system-info.py
+```
+
+that prints:
+
+```text
+Python version
+Operating system
+Current user
+Current directory
+```
+
+Use Python's standard library rather than shelling out to Bash for everything.
+
+---
+
+# Chapter 03 — Control Flow
+
+## Objective
+
+Teach Python to make decisions and repeat operations.
+
+---
+
+# 3.1 if
+
+```python
+if condition:
+    ...
+```
+
+---
+
+# 3.2 elif / else
+
+Understand decision trees.
+
+---
+
+# 3.3 for
+
+Understand Python iteration.
+
+Do not think of:
+
+```python
+for item in items:
+```
+
+as merely a C-style loop.
+
+Think:
+
+```text
+iterable
+ ↓
+iterator
+ ↓
+next item
+ ↓
+body
+```
+
+---
+
+# 3.4 while
+
+Understand condition-driven repetition.
+
+---
+
+# 3.5 break
+
+Exit a loop.
+
+---
+
+# 3.6 continue
+
+Skip an iteration.
+
+---
+
+# 3.7 pass
+
+Understand why it exists.
+
+---
+
+# 3.8 match
+
+Introduction to:
+
+```python
+match value:
+    case ...:
+        ...
+```
+
+Use it when it improves readability.
+
+---
+
+# 3.9 enumerate
+
+Learn:
+
+```python
+for index, item in enumerate(items):
+```
+
+---
+
+# 3.10 zip
+
+Learn:
+
+```python
+for name, status in zip(names, statuses):
+```
+
+---
+
+# 3.11 range
+
+Understand:
+
+```python
+range()
+```
+
+rather than treating it as a mysterious loop generator.
+
+---
+
+## 🧪 Lab
+
+Build:
+
+```text
+service-checker.py
+```
+
+Given:
+
+```text
+nginx
+ssh
+docker
+postgresql
+```
+
+check each service and print:
+
+```text
+nginx       RUNNING
+ssh         RUNNING
+docker      STOPPED
+postgresql  NOT FOUND
+```
+
+Use Python to make decisions based on actual system state.
+
+---
+
+# Chapter 04 — Functions
+
+## Objective
+
+Learn how to design reusable units of logic.
+
+---
+
+# 4.1 Function Definition
+
+```python
+def check_service():
+    ...
+```
+
+---
+
+# 4.2 Parameters
+
+```python
+def check_service(name):
+```
+
+---
+
+# 4.3 Return Values
+
+Understand:
+
+```python
+return
+```
+
+and why returning a value is different from printing.
+
+---
+
+# 4.4 Default Arguments
+
+```python
+def connect(host="localhost"):
+```
+
+Understand why mutable default arguments are dangerous.
+
+Bad:
+
+```python
+def add_item(item, items=[]):
+```
+
+Understand why.
+
+---
+
+# 4.5 Keyword Arguments
+
+```python
+connect(host="localhost", port=8080)
+```
+
+---
+
+# 4.6 Positional Arguments
+
+Understand positional binding.
+
+---
+
+# 4.7 `*args`
+
+Variable positional arguments.
+
+---
+
+# 4.8 `**kwargs`
+
+Variable keyword arguments.
+
+---
+
+# 4.9 Scope
+
+Understand:
+
+```text
+local
+enclosing
+global
+built-in
+```
+
+The LEGB model.
+
+---
+
+# 4.10 Docstrings
+
+Write:
+
+```python
+def check_disk(path):
+    """Return disk usage information for a filesystem."""
+```
+
+---
+
+# 4.11 Lambda
+
+Understand anonymous functions.
+
+Do not overuse them.
+
+---
+
+# 4.12 Pure Functions
+
+Understand the difference between:
+
+```text
+pure function
+```
+
+and:
+
+```text
+side-effecting function
+```
+
+This becomes useful for testing.
+
+---
+
+## 🧪 Lab
+
+Create:
+
+```text
+system_checks.py
+```
+
+with:
+
+```text
+check_cpu()
+check_memory()
+check_disk()
+check_network()
+```
+
+Return structured information rather than simply printing it.
+
+Then create another file that displays the results.
+
+This teaches:
+
+```text
+logic
+    ≠
+presentation
+```
+
+---
+
+# Chapter 05 — Data Structures
+
+## Objective
+
+Become fluent in Python's core data structures.
+
+---
+
+# 5.1 Lists
+
+Understand:
+
+```python
+servers = ["web1", "web2", "db1"]
+```
+
+Study:
+
+```text
+append
+extend
+insert
+remove
+pop
+sort
+reverse
+```
+
+---
+
+# 5.2 Tuples
+
+Understand when immutability is useful.
+
+---
+
+# 5.3 Dictionaries
+
+This is one of the most important structures for backend and AI work.
+
+```python
+server = {
+    "name": "web1",
+    "status": "healthy",
+    "port": 8000
+}
+```
+
+Study:
+
+```text
+keys
+values
+items
+get
+update
+```
+
+---
+
+# 5.4 Sets
+
+Understand:
+
+```text
+uniqueness
+membership
+set operations
+```
+
+---
+
+# 5.5 Strings
+
+Study:
+
+```text
+split
+join
+strip
+replace
+startswith
+endswith
+lower
+upper
+```
+
+---
+
+# 5.6 Slicing
+
+Understand:
+
+```python
+items[start:stop:step]
+```
+
+---
+
+# 5.7 Nested Structures
+
+Example:
+
+```python
+servers = [
+    {
+        "name": "web1",
+        "status": "healthy"
+    },
+    {
+        "name": "web2",
+        "status": "failed"
+    }
+]
+```
+
+This structure appears constantly in:
+
+```text
+JSON
+API responses
+configuration
+database results
+AI application data
+```
+
+---
+
+# 5.8 Comprehensions
+
+Learn:
+
+```python
+[x for x in items]
+```
+
+and:
+
+```python
+{x["name"]: x["status"] for x in servers}
+```
+
+Use comprehensions for clarity, not cleverness.
+
+---
+
+# 5.9 Shallow vs Deep Copy
+
+Understand:
+
+```python
+copy.copy()
+copy.deepcopy()
+```
+
+and why nested mutable structures can surprise you.
+
+---
+
+# 5.10 Equality vs Identity
+
+Review:
+
+```python
+==
+```
+
+versus:
+
+```python
+is
+```
+
+---
+
+## 🧪 Lab
+
+Take a fake API response containing:
+
+```text
+servers
+users
+services
+metrics
+```
+
+Extract:
+
+```text
+healthy servers
+failed services
+server names
+CPU values
+```
+
+using dictionaries, lists, sets, and comprehensions.
+
+---
+
+# Chapter 06 — Modules, Packages & Environments
+
+## Objective
+
+Move from one-file scripts to real Python projects.
+
+---
+
+# 6.1 Imports
+
+Understand:
+
+```python
+import os
+```
+
+and:
+
+```python
+from pathlib import Path
+```
+
+---
+
+# 6.2 Import Execution
+
+Understand that importing a module can execute module-level code.
+
+This is why:
+
+```python
+if __name__ == "__main__":
+```
+
+exists.
+
+---
+
+# 6.3 `__name__`
+
+Understand:
+
+```python
+__name__
+```
+
+and:
+
+```python
+if __name__ == "__main__":
+```
+
+---
+
+# 6.4 Standard Library
+
+Explore:
+
+```text
+pathlib
+os
+sys
+json
+csv
+logging
+subprocess
+datetime
+shutil
+tempfile
+argparse
+re
+```
+
+---
+
+# 6.5 Custom Modules
+
+Split code into:
+
+```text
+system.py
+network.py
+main.py
+```
+
+---
+
+# 6.6 Packages
+
+Understand:
+
+```text
+package/
+├── __init__.py
+├── system.py
+└── network.py
+```
+
+---
+
+# 6.7 Running Modules
+
+Learn:
+
+```bash
+python -m package.module
+```
+
+Understand why `-m` can be preferable to directly executing nested files.
+
+---
+
+# 6.8 Dependency Management
+
+Learn:
+
+```text
+requirements.txt
+```
+
+and:
+
+```text
+pyproject.toml
+```
+
+conceptually.
+
+---
+
+# 6.9 Virtual Environment Deep Dive
+
+Understand:
+
+```text
+system Python
+    ↓
+virtual environment
+    ↓
+site-packages
+```
+
+---
+
+# 6.10 Dependency Pinning
+
+Understand why production applications should avoid uncontrolled dependency changes.
+
+---
+
+## 🧪 Lab
+
+Refactor your system monitoring scripts into:
+
+```text
+python-system-tool/
+├── pyproject.toml
+├── src/
+│   └── system_tool/
+│       ├── __init__.py
+│       ├── cpu.py
+│       ├── memory.py
+│       ├── disk.py
+│       └── cli.py
+└── tests/
+```
+
+Run the package with:
+
+```bash
+python -m ...
+```
+
+---
+
+# Chapter 07 — Files, Paths & Configuration
+
+## Objective
+
+Learn reliable filesystem and configuration handling.
+
+---
+
+# 7.1 `pathlib`
+
+Prefer:
+
+```python
+from pathlib import Path
+```
+
+for modern path handling.
+
+Understand:
+
+```python
+Path.cwd()
+Path.home()
+Path("/tmp")
+```
+
+---
+
+# 7.2 File Reading
+
+Understand:
+
+```python
+Path("file.txt").read_text()
+```
+
+and explicit `open()` usage.
+
+---
+
+# 7.3 File Writing
+
+Learn:
+
+```text
+write
+append
+encoding
+```
+
+---
+
+# 7.4 Context Managers
+
+Understand:
+
+```python
+with open(...) as file:
+```
+
+and why resources need deterministic cleanup.
+
+---
+
+# 7.5 JSON
+
+Learn:
+
+```python
+json.load()
+json.dump()
+```
+
+and:
+
+```python
+json.loads()
+json.dumps()
+```
+
+Understand:
+
+```text
+load
+```
+
+vs:
+
+```text
+loads
+```
+
+---
+
+# 7.6 YAML
+
+Understand YAML's role in:
+
+```text
+configuration
+Kubernetes
+CI/CD
+automation
+```
+
+Use a suitable package when needed.
+
+---
+
+# 7.7 CSV
+
+Learn:
+
+```python
+csv.reader
+csv.DictReader
+csv.writer
+csv.DictWriter
+```
+
+---
+
+# 7.8 Temporary Files
+
+Learn:
+
+```python
+tempfile
+```
+
+and why predictable temporary filenames can be unsafe.
+
+---
+
+# 7.9 Configuration Files
+
+Understand:
+
+```text
+code
+   +
+configuration
+```
+
+rather than hardcoding operational values.
+
+---
+
+# 7.10 Environment Variables
+
+Learn:
+
+```python
+os.environ
+os.getenv()
+```
+
+Understand their importance for:
+
+```text
+API keys
+database URLs
+environment-specific settings
+deployment configuration
+```
+
+---
+
+## 🧪 Lab
+
+Build a configuration system:
+
+```text
+config/
+├── development.yaml
+├── production.yaml
+└── example.env
+```
+
+Load configuration into Python.
+
+Validate required settings.
+
+Do not commit real secrets.
+
+---
+
+# Chapter 08 — Exceptions & Error Handling
+
+## Objective
+
+Learn to build programs that fail predictably.
+
+---
+
+# 8.1 Exceptions
+
+Understand:
+
+```text
+normal execution
+      ↓
+unexpected condition
+      ↓
+exception
+```
+
+---
+
+# 8.2 try / except
+
+```python
+try:
+    ...
+except SomeError:
+    ...
+```
+
+---
+
+# 8.3 Catch Specific Exceptions
+
+Prefer:
+
+```python
+except FileNotFoundError:
+```
+
+over:
+
+```python
+except Exception:
+```
+
+when you know the expected failure.
+
+---
+
+# 8.4 else
+
+Understand when `else` executes.
+
+---
+
+# 8.5 finally
+
+Use for cleanup.
+
+---
+
+# 8.6 Raising Exceptions
+
+```python
+raise ValueError(...)
+```
+
+---
+
+# 8.7 Custom Exceptions
+
+Create domain-specific errors where useful.
+
+Example:
+
+```python
+class ConfigurationError(Exception):
+    pass
+```
+
+---
+
+# 8.8 Exception Chaining
+
+Understand:
+
+```python
+raise NewError(...) from original_error
+```
+
+This preserves useful context.
+
+---
+
+# 8.9 Error vs Exception
+
+Understand that not every undesirable condition should necessarily be represented the same way.
+
+---
+
+# 8.10 Fail Fast
+
+Understand when it is better to stop immediately rather than continue with invalid state.
+
+---
+
+# 8.11 Cleanup
+
+Understand:
+
+```text
+files
+connections
+temporary resources
+processes
+```
+
+must be cleaned up appropriately.
+
+---
+
+## 🧪 Lab
+
+Create a configuration loader that:
+
+1. Loads YAML.
+2. Detects missing file.
+3. Detects invalid YAML.
+4. Detects missing required fields.
+5. Raises meaningful exceptions.
+6. Logs the error.
+7. Returns a useful result or terminates cleanly.
+
+---
+
+# Chapter 09 — Object-Oriented Python
+
+## Objective
+
+Learn OOP as a tool, not as a mandatory style for every program.
+
+---
+
+# 9.1 Classes
+
+```python
+class Server:
+    ...
+```
+
+---
+
+# 9.2 Objects
+
+Understand instances.
+
+---
+
+# 9.3 Attributes
+
+Understand instance state.
+
+---
+
+# 9.4 Methods
+
+Understand behavior attached to objects.
+
+---
+
+# 9.5 `__init__`
+
+Understand initialization.
+
+---
+
+# 9.6 Encapsulation
+
+Python does not enforce traditional private fields in the same way as some languages.
+
+Understand conventions:
+
+```text
+_name
+__name
+```
+
+and their meanings.
+
+---
+
+# 9.7 Inheritance
+
+Understand:
+
+```text
+parent
+ ↓
+child
+```
+
+but don't use inheritance automatically.
+
+---
+
+# 9.8 Polymorphism
+
+Understand behavior through compatible interfaces.
+
+---
+
+# 9.9 Composition
+
+Learn:
+
+```text
+object
+ ↓
+contains other objects
+```
+
+and why composition is often preferable to deep inheritance.
+
+---
+
+# 9.10 Dataclasses
+
+Learn:
+
+```python
+from dataclasses import dataclass
+```
+
+They are extremely useful for structured configuration and data.
+
+---
+
+# 9.11 Properties
+
+Introduction to:
+
+```python
+@property
+```
+
+---
+
+# 9.12 Class Methods / Static Methods
+
+Understand when they are useful.
+
+---
+
+## 🧪 Lab
+
+Build:
+
+```text
+Server
+Service
+HealthCheck
+```
+
+objects.
+
+For example:
+
+```text
+Server
+ ├── name
+ ├── address
+ └── services
+
+Service
+ ├── name
+ ├── port
+ └── status
+
+HealthCheck
+ └── check()
+```
+
+Use composition rather than creating an unnecessary inheritance hierarchy.
+
+---
+
+# Chapter 10 — Python + Linux
+
+## Objective
+
+Connect Python directly to the operating system.
+
+This chapter builds heavily on Volume 04 and Volume 05.
+
+---
+
+# 10.1 `os`
+
+Learn useful OS interaction.
+
+---
+
+# 10.2 `sys`
+
+Understand:
+
+```python
+sys.argv
+sys.exit()
+sys.path
+```
+
+---
+
+# 10.3 `platform`
+
+Inspect:
+
+```text
+OS
+kernel
+architecture
+processor
+```
+
+---
+
+# 10.4 `shutil`
+
+Use for:
+
+```text
+copy
+move
+disk usage
+file operations
+```
+
+---
+
+# 10.5 `subprocess`
+
+This is extremely important.
+
+Understand:
+
+```python
+subprocess.run()
+```
+
+and:
+
+```text
+Python
+ ↓
+child process
+ ↓
+Linux command
+ ↓
+stdout/stderr
+```
+
+---
+
+# 10.6 `Popen`
+
+Introduction to longer-running processes and streaming output.
+
+---
+
+# 10.7 Avoid Shell Injection
+
+Understand the difference between:
+
+```python
+subprocess.run(["ls", "-la"])
+```
+
+and unsafe construction involving:
+
+```python
+shell=True
+```
+
+with untrusted input.
+
+---
+
+# 10.8 Process Management
+
+Learn:
+
+```text
+PID
+return code
+stdout
+stderr
+timeout
+signals
+```
+
+---
+
+# 10.9 Signals
+
+Introduction to Python's:
+
+```python
+signal
+```
+
+module.
+
+---
+
+# 10.10 Permissions
+
+Use Python to inspect:
+
+```text
+permissions
+ownership
+file metadata
+```
+
+---
+
+## 🧪 Lab
+
+Build:
+
+```text
+linux-runner.py
+```
+
+It should safely execute a predefined set of Linux commands and report:
+
+```text
+command
+exit code
+stdout
+stderr
+execution time
+```
+
+Do not turn it into an arbitrary command execution service.
+
+---
+
+# Chapter 11 — HTTP, REST APIs & API Clients
+
+## Objective
+
+Build the foundation required for FastAPI and AI application development.
+
+This chapter connects directly to Volume 03 networking.
+
+---
+
+# 11.1 HTTP
+
+Review:
+
+```text
+client
+ ↓
+HTTP request
+ ↓
+server
+ ↓
+HTTP response
+```
+
+---
+
+# 11.2 HTTP Methods
+
+Understand:
+
+```text
+GET
+POST
+PUT
+PATCH
+DELETE
+HEAD
+OPTIONS
+```
+
+---
+
+# 11.3 HTTP Status Codes
+
+Understand categories:
+
+```text
+1xx
+2xx
+3xx
+4xx
+5xx
+```
+
+Know common examples:
+
+```text
+200
+201
+204
+400
+401
+403
+404
+409
+422
+429
+500
+502
+503
+504
+```
+
+---
+
+# 11.4 Headers
+
+Understand:
+
+```text
+Content-Type
+Authorization
+Accept
+User-Agent
+Cache-Control
+```
+
+---
+
+# 11.5 Query Parameters
+
+Example:
+
+```text
+/users?page=2&limit=20
+```
+
+---
+
+# 11.6 Path Parameters
+
+Example:
+
+```text
+/users/123
+```
+
+---
+
+# 11.7 JSON
+
+Understand why JSON dominates API communication.
+
+---
+
+# 11.8 REST
+
+Understand REST principles at a practical level.
+
+Do not treat REST as merely:
+
+> "HTTP + JSON."
+
+---
+
+# 11.9 Python HTTP Clients
+
+Learn:
+
+```text
+requests
+```
+
+and understand modern alternatives conceptually.
+
+---
+
+# 11.10 Timeouts
+
+Never create production HTTP calls with unlimited waiting.
+
+Understand:
+
+```text
+connect timeout
+read timeout
+overall behavior
+```
+
+---
+
+# 11.11 Retries
+
+Understand:
+
+```text
+request
+ ↓
+failure
+ ↓
+should retry?
+ ↓
+backoff
+ ↓
+retry
+```
+
+Not every failure should be retried.
+
+For example:
+
+```text
+400
+```
+
+usually isn't fixed by retrying.
+
+---
+
+# 11.12 Authentication
+
+Understand:
+
+```text
+API key
+Basic authentication
+Bearer token
+JWT
+OAuth concept
+```
+
+---
+
+# 11.13 Pagination
+
+Understand:
+
+```text
+page/limit
+offset/limit
+cursor-based pagination
+```
+
+---
+
+# 11.14 Rate Limits
+
+Understand:
+
+```text
+429 Too Many Requests
+```
+
+and why clients must respect service limits.
+
+---
+
+# 11.15 API Errors
+
+Build structured error handling.
+
+---
+
+## 🧪 Lab — API Client
+
+Build:
+
+```text
+api-client/
+├── client.py
+├── config.py
+├── models.py
+└── cli.py
+```
+
+It should support:
+
+```text
+GET request
+headers
+query parameters
+timeout
+error handling
+JSON parsing
+retry for appropriate transient failures
+```
+
+---
+
+# Chapter 12 — Data Processing & Validation
+
+## Objective
+
+Learn to turn raw system/API data into reliable structured information.
+
+---
+
+# 12.1 JSON Parsing
+
+Convert:
+
+```text
+JSON
+ ↓
+Python objects
+```
+
+---
+
+# 12.2 YAML Parsing
+
+Understand configuration-oriented structured data.
+
+---
+
+# 12.3 CSV
+
+Process tabular data.
+
+---
+
+# 12.4 Regular Expressions
+
+Learn:
+
+```python
+import re
+```
+
+Use regex for:
+
+```text
+log parsing
+structured text extraction
+validation
+pattern detection
+```
+
+Do not use regex when a structured parser is available.
+
+---
+
+# 12.5 Log Parsing
+
+Understand:
+
+```text
+raw log
+ ↓
+parse
+ ↓
+structured record
+ ↓
+analysis
+```
+
+---
+
+# 12.6 Validation
+
+Understand the difference between:
+
+```text
+parsing
+```
+
+and:
+
+```text
+validation
+```
+
+---
+
+# 12.7 Serialization
+
+Understand:
+
+```text
+object
+ ↓
+serialized representation
+```
+
+and reverse.
+
+---
+
+# 12.8 Data Normalization
+
+Transform inconsistent input into a predictable internal structure.
+
+---
+
+## 🧪 Lab — Log Analyzer
+
+Input:
+
+```text
+application.log
+```
+
+Extract:
+
+```text
+timestamp
+level
+service
+message
+```
+
+Generate:
+
+```text
+total lines
+INFO count
+WARNING count
+ERROR count
+most common errors
+errors by service
+```
+
+Export:
+
+```text
+report.json
+report.csv
+```
+
+---
+
+# Chapter 13 — Concurrency & Async Programming
+
+## Objective
+
+Understand how Python performs multiple tasks without confusing concurrency with parallelism.
+
+This chapter is foundational for later FastAPI and AI applications.
+
+---
+
+# 13.1 Concurrency vs Parallelism
+
+Understand:
+
+```text
+Concurrency
+→ dealing with multiple tasks
+
+Parallelism
+→ executing multiple tasks simultaneously
+```
+
+---
+
+# 13.2 I/O-Bound vs CPU-Bound
+
+Understand:
+
+```text
+I/O-bound
+→ waiting on network/disk
+
+CPU-bound
+→ spending time computing
+```
+
+This distinction determines which concurrency approach is useful.
+
+---
+
+# 13.3 Threads
+
+Learn:
+
+```python
+threading
+```
+
+conceptually.
+
+---
+
+# 13.4 Processes
+
+Learn:
+
+```python
+multiprocessing
+```
+
+and why separate processes can execute CPU-heavy work differently.
+
+---
+
+# 13.5 Thread Pools
+
+Learn:
+
+```python
+concurrent.futures.ThreadPoolExecutor
+```
+
+---
+
+# 13.6 Process Pools
+
+Understand:
+
+```python
+ProcessPoolExecutor
+```
+
+---
+
+# 13.7 Race Conditions
+
+Understand:
+
+```text
+shared state
+    ↓
+multiple workers
+    ↓
+unexpected result
+```
+
+---
+
+# 13.8 Locks
+
+Introduction to synchronization.
+
+---
+
+# 13.9 GIL
+
+Understand the Python Global Interpreter Lock at a practical level.
+
+Do not reduce it to:
+
+> "Python can't do multithreading."
+
+That is an oversimplification.
+
+Understand how it affects CPU-bound Python threads and why I/O concurrency remains useful.
+
+---
+
+# 13.10 Async Programming
+
+Understand:
+
+```text
+async def
+await
+```
+
+---
+
+# 13.11 Event Loop
+
+Build the mental model:
+
+```text
+              Event Loop
+                  │
+       ┌──────────┼──────────┐
+       ▼          ▼          ▼
+     Task A     Task B     Task C
+       │          │          │
+     waiting    ready      waiting
+```
+
+---
+
+# 13.12 `asyncio`
+
+Learn:
+
+```python
+asyncio.run()
+```
+
+and basic task creation.
+
+---
+
+# 13.13 Async I/O
+
+Understand why async is useful for:
+
+```text
+HTTP clients
+database calls
+network services
+AI APIs
+RAG pipelines
+```
+
+---
+
+# 13.14 Don't Mix Models Blindly
+
+Understand the differences between:
+
+```text
+threading
+multiprocessing
+asyncio
+```
+
+---
+
+## 🧪 Lab
+
+Build three versions of a simulated workload:
+
+### Version 1
+
+Sequential.
+
+### Version 2
+
+Thread pool.
+
+### Version 3
+
+Async.
+
+Measure execution time.
+
+Use an I/O-like workload such as simulated network requests.
+
+Explain why concurrency helps.
+
+---
+
+# Chapter 14 — Logging, CLI & Configuration
+
+## Objective
+
+Turn Python scripts into professional command-line tools.
+
+---
+
+# 14.1 `logging`
+
+Learn:
+
+```python
+logging
+```
+
+instead of relying on:
+
+```python
+print()
+```
+
+for operational diagnostics.
+
+---
+
+# 14.2 Log Levels
+
+Understand:
+
+```text
+DEBUG
+INFO
+WARNING
+ERROR
+CRITICAL
+```
+
+---
+
+# 14.3 Log Format
+
+Include useful information such as:
+
+```text
+timestamp
+level
+module
+message
+```
+
+---
+
+# 14.4 Logging to Files
+
+Understand file handlers.
+
+---
+
+# 14.5 Rotating Logs
+
+Learn:
+
+```text
+RotatingFileHandler
+TimedRotatingFileHandler
+```
+
+conceptually.
+
+---
+
+# 14.6 CLI Arguments
+
+Learn:
+
+```python
+argparse
+```
+
+---
+
+# 14.7 CLI Design
+
+A good CLI should communicate:
+
+```text
+command
+arguments
+options
+help
+errors
+exit code
+```
+
+---
+
+# 14.8 Configuration Precedence
+
+Understand a common model:
+
+```text
+defaults
+   ↓
+configuration file
+   ↓
+environment variables
+   ↓
+CLI arguments
+```
+
+Higher-priority configuration overrides lower-priority configuration.
+
+---
+
+# 14.9 `.env`
+
+Understand `.env` files for development configuration.
+
+Do not treat them as a production secret-management system.
+
+---
+
+## 🧪 Lab
+
+Convert your Log Analyzer into:
+
+```bash
+python -m log_analyzer \
+    --input application.log \
+    --output report.json \
+    --level ERROR
+```
+
+Add:
+
+```text
+help
+validation
+logging
+exit codes
+configuration
+```
+
+---
+
+# Chapter 15 — Testing & Debugging
+
+## Objective
+
+Learn to prove that Python code works instead of assuming it does.
+
+---
+
+# 15.1 Why Testing?
+
+Testing provides:
+
+```text
+repeatability
+confidence
+regression protection
+design feedback
+```
+
+---
+
+# 15.2 Unit Tests
+
+A unit test should test a focused piece of behavior.
+
+---
+
+# 15.3 Assertions
+
+Understand:
+
+```python
+assert
+```
+
+and test framework assertions.
+
+---
+
+# 15.4 unittest
+
+Know Python's standard testing framework.
+
+---
+
+# 15.5 pytest
+
+Learn practical pytest usage.
+
+---
+
+# 15.6 Test Organization
+
+Typical structure:
+
+```text
+project/
+├── src/
+└── tests/
+```
+
+---
+
+# 15.7 Fixtures
+
+Introduction to reusable test setup.
+
+---
+
+# 15.8 Mocking
+
+Understand why external systems such as:
+
+```text
+HTTP APIs
+databases
+filesystem
+cloud services
+```
+
+may need to be mocked in unit tests.
+
+---
+
+# 15.9 Integration Tests
+
+Understand the difference between:
+
+```text
+unit test
+```
+
+and:
+
+```text
+integration test
+```
+
+---
+
+# 15.10 Coverage
+
+Understand what code coverage can tell you.
+
+Do not treat:
+
+> 100% coverage
+
+as proof of correctness.
+
+---
+
+# 15.11 Debugging
+
+Learn:
+
+```text
+tracebacks
+breakpoints
+logging
+pdb
+IDE debugger
+```
+
+---
+
+# 15.12 Test-Driven Thinking
+
+Before implementing:
+
+```text
+What should this function do?
+What inputs are valid?
+What should happen on failure?
+```
+
+---
+
+## 🧪 Lab
+
+Write tests for:
+
+```text
+configuration loader
+log parser
+disk checker
+API client
+```
+
+Include:
+
+```text
+normal case
+invalid input
+failure case
+edge case
+```
+
+Intentionally introduce a bug.
+
+Verify that the tests catch it.
+
+---
+
+# Chapter 16 — Automation Architecture
+
+## Objective
+
+Move from individual scripts to maintainable automation systems.
+
+---
+
+# 16.1 Script vs Tool
+
+A script:
+
+```text
+does one task
+```
+
+A tool:
+
+```text
+has structure
+configuration
+CLI
+logging
+testing
+error handling
+documentation
+```
+
+---
+
+# 16.2 Separation of Concerns
+
+Avoid:
+
+```text
+CLI
+ ↓
+everything
+```
+
+Instead:
+
+```text
+CLI
+ ↓
+Application logic
+ ↓
+Services
+ ↓
+Infrastructure adapters
+```
+
+---
+
+# 16.3 Dependency Direction
+
+Understand why business logic should not be tightly coupled to:
+
+```text
+terminal
+filesystem
+HTTP
+```
+
+where avoidable.
+
+---
+
+# 16.4 Configuration
+
+Separate:
+
+```text
+configuration
+```
+
+from:
+
+```text
+code
+```
+
+---
+
+# 16.5 Logging
+
+Centralize logging configuration.
+
+---
+
+# 16.6 Error Handling
+
+Decide where errors should be:
+
+```text
+handled
+translated
+logged
+propagated
+```
+
+---
+
+# 16.7 Retries
+
+Centralize retry logic rather than copying it everywhere.
+
+---
+
+# 16.8 Idempotency
+
+Automation should safely handle repeated execution.
+
+---
+
+# 16.9 Dry Run
+
+For destructive tools, consider:
+
+```text
+--dry-run
+```
+
+which reports intended actions without performing them.
+
+---
+
+# 16.10 CLI Architecture
+
+Concept:
+
+```text
+CLI
+ ↓
+Command
+ ↓
+Service
+ ↓
+Adapter
+ ↓
+External system
+```
+
+This architecture becomes useful later in backend engineering.
+
+---
+
+## 🧪 Lab
+
+Refactor your Linux toolkit into:
+
+```text
+CLI
+ ├── system service
+ ├── network service
+ ├── log service
+ └── backup service
+```
+
+with separate infrastructure adapters.
+
+---
+
+# Chapter 17 — Type Hints, Packaging & Code Quality
+
+## Objective
+
+Write Python that is easier to understand, review, maintain, and integrate into larger systems.
+
+---
+
+# 17.1 Type Hints
+
+Learn:
+
+```python
+def add(a: int, b: int) -> int:
+```
+
+---
+
+# 17.2 Collections
+
+Understand modern type annotations such as:
+
+```python
+list[str]
+dict[str, int]
+```
+
+---
+
+# 17.3 Optional Values
+
+Understand:
+
+```python
+str | None
+```
+
+conceptually.
+
+---
+
+# 17.4 Dataclasses
+
+Use them for structured data.
+
+---
+
+# 17.5 Documentation
+
+Write useful:
+
+```text
+docstrings
+README
+usage documentation
+architecture notes
+```
+
+---
+
+# 17.6 Linters
+
+Understand tools such as:
+
+```text
+ruff
+```
+
+or equivalent Python linting tools.
+
+---
+
+# 17.7 Formatting
+
+Understand automated formatting and why consistent formatting matters.
+
+---
+
+# 17.8 Packaging
+
+Understand:
+
+```text
+pyproject.toml
+package metadata
+dependencies
+entry points
+```
+
+---
+
+# 17.9 CLI Entry Points
+
+Understand how a Python project can eventually expose:
+
+```bash
+server-tool
+```
+
+rather than requiring:
+
+```bash
+python script.py
+```
+
+---
+
+# 17.10 Reproducibility
+
+A project should allow another developer to recreate the environment.
+
+---
+
+## 🧪 Lab
+
+Take your automation framework.
+
+Add:
+
+```text
+type hints
+docstrings
+linting
+formatting
+pyproject.toml
+CLI entry point
+```
+
+Then run your test suite.
+
+---
+
+# Chapter 18 — Python for DevOps
+
+## Objective
+
+Use Python to automate real infrastructure workflows.
+
+---
+
+# 18.1 Server Automation
+
+Automate:
+
+```text
+system inspection
+service checks
+health checks
+configuration
+reports
+```
+
+---
+
+# 18.2 SSH Automation
+
+Use:
+
+```text
+subprocess + ssh
+```
+
+or:
+
+```text
+Paramiko
+```
+
+when appropriate.
+
+---
+
+# 18.3 Remote Execution
+
+Mental model:
+
+```text
+Python Controller
+       ↓
+SSH
+       ↓
+Linux Server
+       ↓
+Command
+       ↓
+Result
+```
+
+---
+
+# 18.4 Inventory
+
+Understand:
+
+```text
+servers.yaml
+```
+
+containing:
+
+```text
+host
+port
+user
+role
+environment
+```
+
+Never store real passwords/private keys in such inventory files.
+
+---
+
+# 18.5 Parallel Server Checks
+
+Use concurrency to check multiple hosts.
+
+---
+
+# 18.6 Configuration Management
+
+Understand the basic idea:
+
+```text
+desired state
+      ↓
+current state
+      ↓
+difference
+      ↓
+change
+      ↓
+verification
+```
+
+This prepares you for Terraform and configuration-management concepts later.
+
+---
+
+# 18.7 Cloud Automation
+
+Introduction to cloud SDK concepts.
+
+You do not need to master AWS here.
+
+AWS becomes the focus in Volume 14.
+
+---
+
+# 18.8 Docker SDK
+
+Introduction only.
+
+Understand that infrastructure tools can interact with Docker programmatically.
+
+---
+
+# 18.9 Kubernetes Client
+
+Introduction only.
+
+Understand that Kubernetes can also be controlled through APIs and Python clients.
+
+Deep Kubernetes comes in Volume 16.
+
+---
+
+# 18.10 Deployment Automation
+
+Understand:
+
+```text
+build
+ ↓
+package
+ ↓
+transfer
+ ↓
+deploy
+ ↓
+health check
+ ↓
+rollback
+```
+
+---
+
+## 🧪 Lab — Remote Server Manager
+
+Use your Ubuntu VM.
+
+Build:
+
+```text
+remote-manager/
+├── inventory.yaml
+├── client.py
+├── commands.py
+├── health.py
+└── cli.py
+```
+
+It should:
+
+```text
+connect
+execute a safe predefined command
+collect result
+check service health
+generate report
+```
+
+Start with one server.
+
+Then design it so multiple servers could be supported.
+
+---
+
+# Chapter 19 — Python for Backend & AI Engineering Foundations
+
+## Objective
+
+Prepare Python for the next major stages:
+
+```text
+Volume 08
+HTTP, APIs & Backend Engineering
+```
+
+and:
+
+```text
+Volume 09
+AI & LLM Fundamentals
+```
+
+---
+
+# 19.1 Why Python for AI?
+
+Python has a large ecosystem around:
+
+```text
+machine learning
+data processing
+LLMs
+embeddings
+vector databases
+AI APIs
+scientific computing
+```
+
+---
+
+# 19.2 Why Python for Backend?
+
+Python supports:
+
+```text
+FastAPI
+Django
+Flask
+asyncio
+SQL clients
+HTTP clients
+background workers
+```
+
+---
+
+# 19.3 JSON
+
+Backend communication heavily uses:
+
+```text
+Python objects
+      ↕
+JSON
+```
+
+---
+
+# 19.4 HTTP Clients
+
+AI systems frequently communicate with:
+
+```text
+LLM APIs
+embedding APIs
+vector databases
+internal services
+external services
+```
+
+---
+
+# 19.5 Async
+
+AI applications often involve waiting on:
+
+```text
+LLM
+database
+vector search
+external API
+file storage
+```
+
+Async programming therefore becomes important.
+
+---
+
+# 19.6 Pydantic Introduction
+
+You do not need full Pydantic yet.
+
+Understand its role:
+
+```text
+untrusted input
+      ↓
+validation
+      ↓
+structured Python object
+```
+
+This becomes important in FastAPI.
+
+---
+
+# 19.7 Environment Configuration
+
+Understand why AI applications commonly use:
+
+```text
+API keys
+model names
+service URLs
+database URLs
+```
+
+through configuration rather than hardcoding.
+
+---
+
+# 19.8 Structured Data
+
+AI pipelines constantly move structured data between components.
+
+Example:
+
+```text
+document
+ ↓
+metadata
+ ↓
+chunk
+ ↓
+embedding
+ ↓
+retrieval result
+ ↓
+LLM input
+```
+
+Python data structures will be the glue.
+
+---
+
+# 19.9 Error Handling in AI Systems
+
+External AI services can fail due to:
+
+```text
+timeout
+rate limit
+authentication
+server errors
+invalid requests
+network problems
+```
+
+Your Python foundation must handle these explicitly.
+
+---
+
+# 19.10 Logging AI Applications
+
+Later you will need to record:
+
+```text
+request
+latency
+model
+tokens
+errors
+retrieval
+response
+```
+
+while handling sensitive data appropriately.
+
+---
+
+## 🧪 Lab — AI-Service Simulation
+
+Build a small Python program that simulates:
+
+```text
+User request
+     ↓
+API call
+     ↓
+retrieval-like operation
+     ↓
+processing
+     ↓
+response
+```
+
+The goal is not to call an LLM yet.
+
+The goal is to practice the architecture:
+
+```text
+async operations
+structured data
+configuration
+logging
+errors
+retries
+```
+
+---
+
+# Chapter 20 — Professional Python Workflow
+
+## Objective
+
+Combine everything into a professional development workflow.
+
+---
+
+# 20.1 Project Lifecycle
+
+Use:
+
+```text
+Requirement
+ ↓
+Design
+ ↓
+Implementation
+ ↓
+Test
+ ↓
+Lint
+ ↓
+Review
+ ↓
+Commit
+ ↓
+Release
+```
+
+---
+
+# 20.2 Repository Structure
+
+A serious Python project may look like:
+
+```text
+project/
+├── pyproject.toml
+├── README.md
+├── src/
+│   └── project/
+│       ├── __init__.py
+│       ├── cli.py
+│       ├── config.py
+│       ├── logging.py
+│       ├── services/
+│       └── adapters/
+│
+├── tests/
+│   ├── unit/
+│   └── integration/
+│
+├── docs/
+└── .gitignore
+```
+
+Do not blindly copy this structure for every tiny script.
+
+Use structure proportional to project complexity.
+
+---
+
+# 20.3 Dependency Management
+
+Understand:
+
+```text
+direct dependency
+transitive dependency
+version constraints
+lock/reproducibility
+```
+
+---
+
+# 20.4 Environment Separation
+
+Understand:
+
+```text
+development
+testing
+production
+```
+
+---
+
+# 20.5 CI Preparation
+
+Your Python project should eventually support:
+
+```text
+lint
+test
+build
+```
+
+automatically.
+
+---
+
+# 20.6 Documentation
+
+Document:
+
+```text
+installation
+configuration
+usage
+architecture
+testing
+deployment
+troubleshooting
+```
+
+---
+
+# 20.7 Code Review
+
+Review:
+
+```text
+correctness
+security
+error handling
+tests
+performance
+maintainability
+```
+
+---
+
+# 🧪 Hands-On Lab Series
+
+Complete these in order.
+
+### Lab 01
+
+Python environment.
+
+### Lab 02
+
+Variables and types.
+
+### Lab 03
+
+Control flow.
+
+### Lab 04
+
+Functions.
+
+### Lab 05
+
+Data structures.
+
+### Lab 06
+
+Modules.
+
+### Lab 07
+
+Virtual environments.
+
+### Lab 08
+
+Filesystem automation.
+
+### Lab 09
+
+JSON/YAML configuration.
+
+### Lab 10
+
+Exception handling.
+
+### Lab 11
+
+Classes and dataclasses.
+
+### Lab 12
+
+Linux command execution.
+
+### Lab 13
+
+HTTP API client.
+
+### Lab 14
+
+Log parser.
+
+### Lab 15
+
+Thread pool.
+
+### Lab 16
+
+Asyncio.
+
+### Lab 17
+
+Logging.
+
+### Lab 18
+
+CLI with argparse.
+
+### Lab 19
+
+Unit testing.
+
+### Lab 20
+
+Mocking.
+
+### Lab 21
+
+Type hints.
+
+### Lab 22
+
+Packaging.
+
+### Lab 23
+
+SSH automation.
+
+### Lab 24
+
+Multi-server health checks.
+
+### Lab 25
+
+Professional project refactor.
+
+---
+
+# 🚀 Main Mini-Project — Python DevOps Automation Framework
+
+The original roadmap contained five separate projects.
+
+Instead, build **one framework** that gradually absorbs the useful capabilities.
+
+This is the Python successor to your Bash Linux Server Management Toolkit.
+
+---
+
+# Project Goal
+
+Build:
+
+```text
+Python DevOps Automation Framework
+```
+
+that can:
+
+```text
+System Monitoring
+File Management
+Log Analysis
+API Communication
+Configuration Management
+Remote Server Administration
+Backup Automation
+Report Generation
+CLI
+Logging
+Testing
+```
+
+---
+
+# Architecture
+
+```text
+                       CLI
+                        │
+                        ▼
+                 Command Layer
+                        │
+             ┌──────────┼──────────┐
+             ▼          ▼          ▼
+         System      Network      Logs
+         Service     Service      Service
+             │          │          │
+             └──────────┼──────────┘
+                        ▼
+                 Infrastructure
+                    Adapters
+                        │
+        ┌───────────────┼────────────────┐
+        ▼               ▼                ▼
+      Linux            HTTP              SSH
+```
+
+---
+
+# Recommended Repository
+
+```text
+python-devops-framework/
+│
+├── pyproject.toml
+├── README.md
+├── .gitignore
+│
+├── src/
+│   └── devops_tool/
+│       ├── __init__.py
+│       ├── cli.py
+│       ├── config.py
+│       ├── logging_config.py
+│       │
+│       ├── models/
+│       │   ├── server.py
+│       │   ├── health.py
+│       │   └── report.py
+│       │
+│       ├── services/
+│       │   ├── system.py
+│       │   ├── network.py
+│       │   ├── logs.py
+│       │   ├── backup.py
+│       │   └── remote.py
+│       │
+│       └── adapters/
+│           ├── linux.py
+│           ├── http.py
+│           └── ssh.py
+│
+├── tests/
+│   ├── unit/
+│   └── integration/
+│
+├── config/
+│   └── example.yaml
+│
+├── reports/
+│
+└── docs/
+```
+
+---
+
+# Phase 01 — System Information
+
+Collect:
+
+```text
+hostname
+OS
+kernel
+CPU
+memory
+disk
+uptime
+network
+```
+
+---
+
+# Phase 02 — Health Checks
+
+Check:
+
+```text
+CPU
+Memory
+Disk
+Network
+DNS
+Services
+```
+
+Return structured results.
+
+Example:
+
+```python
+{
+    "name": "disk",
+    "status": "healthy",
+    "value": 42,
+    "message": "Disk usage is within threshold"
+}
+```
+
+---
+
+# Phase 03 — Log Analysis
+
+Support:
+
+```text
+read logs
+filter levels
+search patterns
+count errors
+generate summary
+```
+
+---
+
+# Phase 04 — API Monitoring
+
+Monitor configured APIs:
+
+```text
+URL
+method
+timeout
+expected status
+```
+
+Report:
+
+```text
+status
+latency
+failure reason
+```
+
+---
+
+# Phase 05 — Configuration
+
+Read:
+
+```text
+YAML
+environment variables
+CLI overrides
+```
+
+Define precedence.
+
+---
+
+# Phase 06 — Backup
+
+Implement:
+
+```text
+source
+ ↓
+validation
+ ↓
+archive
+ ↓
+compression
+ ↓
+checksum
+ ↓
+destination
+ ↓
+verification
+```
+
+Add:
+
+```text
+--dry-run
+```
+
+---
+
+# Phase 07 — Remote Servers
+
+Inventory:
+
+```yaml
+servers:
+  - name: app-server
+    host: 192.168.50.20
+    user: devops
+```
+
+Never put private keys or passwords into the repository.
+
+---
+
+# Phase 08 — Remote Health Checks
+
+For each configured server:
+
+```text
+SSH
+ ↓
+system information
+ ↓
+disk
+ ↓
+memory
+ ↓
+CPU
+ ↓
+services
+ ↓
+report
+```
+
+---
+
+# Phase 09 — Concurrent Checks
+
+If there are multiple servers:
+
+```text
+Server A ─┐
+Server B ─┤
+Server C ─┼──→ concurrent health checks
+Server D ─┘
+```
+
+Use appropriate concurrency.
+
+---
+
+# Phase 10 — CLI
+
+Example:
+
+```bash
+devops-tool system
+```
+
+```bash
+devops-tool health
+```
+
+```bash
+devops-tool logs --file app.log
+```
+
+```bash
+devops-tool api-check
+```
+
+```bash
+devops-tool backup
+```
+
+```bash
+devops-tool remote-health
+```
+
+---
+
+# Phase 11 — Logging
+
+Use structured logging.
+
+Example:
+
+```text
+2026-09-26 12:10:05 INFO Starting health check
+2026-09-26 12:10:05 INFO Checking disk
+2026-09-26 12:10:06 WARNING Disk usage above threshold
+```
+
+---
+
+# Phase 12 — Testing
+
+Write tests for:
+
+```text
+configuration
+health checks
+log parsing
+API error handling
+backup logic
+CLI validation
+```
+
+Mock external dependencies.
+
+---
+
+# Phase 13 — Packaging
+
+Install your project into the virtual environment.
+
+The goal should eventually be:
+
+```bash
+devops-tool --help
+```
+
+rather than:
+
+```bash
+python some_random_script.py
+```
+
+---
+
+# 🔥 Failure Injection
+
+Your framework must survive controlled failures.
+
+Test:
+
+### Failure 01
+
+Missing configuration.
+
+### Failure 02
+
+Invalid YAML.
+
+### Failure 03
+
+Network timeout.
+
+### Failure 04
+
+HTTP 500.
+
+### Failure 05
+
+HTTP 429.
+
+### Failure 06
+
+SSH authentication failure.
+
+### Failure 07
+
+Remote host unavailable.
+
+### Failure 08
+
+Permission denied.
+
+### Failure 09
+
+Disk threshold exceeded.
+
+### Failure 10
+
+Malformed log.
+
+For every failure:
+
+```text
+input
+ ↓
+failure
+ ↓
+exception/error
+ ↓
+logging
+ ↓
+exit status
+ ↓
+recovery/response
+```
+
+---
+
+# 🔐 Security Requirements
+
+Your Python framework must:
+
+* Never hardcode real secrets.
+* Never commit `.env` secrets.
+* Validate input.
+* Avoid unsafe shell execution.
+* Avoid unnecessary `shell=True`.
+* Use timeouts.
+* Limit privileges.
+* Avoid logging secrets.
+* Protect temporary files.
+* Validate remote targets.
+* Handle SSH credentials safely.
+
+---
+
+# 🧪 Testing Requirements
+
+Test:
+
+```text
+normal operation
+invalid input
+missing files
+permission errors
+network errors
+timeouts
+bad API responses
+malformed configuration
+remote server failure
+empty logs
+large logs
+repeated execution
+```
+
+---
+
+# 🧠 Bash vs Python Decision Framework
+
+You should now be able to answer:
+
+> Should I use Bash or Python?
+
+Use Bash when:
+
+```text
+simple command orchestration
+small Linux automation
+short pipelines
+system glue
+```
+
+Use Python when:
+
+```text
+complex logic
+structured data
+API integration
+multiple modules
+testing
+reusable applications
+concurrency
+large automation
+```
+
+Example:
+
+```text
+Run three Linux commands
+        ↓
+Bash is probably enough.
+```
+
+But:
+
+```text
+Check 50 servers
+ ↓
+SSH
+ ↓
+collect metrics
+ ↓
+parse JSON
+ ↓
+retry failures
+ ↓
+generate report
+ ↓
+send notification
+ ↓
+write tests
+```
+
+Python becomes much more appropriate.
+
+---
+
+# 🧠 Volume Challenge
+
+Build the complete:
+
+> **Python DevOps Automation Framework**
+
+without following a complete tutorial.
+
+You can use:
+
+```text
+official documentation
+man pages
+Python documentation
+package documentation
+search
+AI assistance
+```
+
+But you must understand every major component.
+
+The framework must contain:
+
+```text
+✓ CLI
+✓ Configuration
+✓ Logging
+✓ System monitoring
+✓ File management
+✓ Log analysis
+✓ API client
+✓ Retry handling
+✓ Error handling
+✓ Backup
+✓ SSH
+✓ Remote execution
+✓ Concurrency
+✓ Reports
+✓ Tests
+✓ Type hints
+✓ Packaging
+✓ Documentation
+```
+
+---
+
+# 🔬 Integration Challenge
+
+Connect all previous volumes.
+
+## Volume 04
+
+Use Linux knowledge to understand:
+
+```text
+processes
+filesystem
+permissions
+services
+network
+```
+
+---
+
+## Volume 05
+
+Replace selected Bash automation with Python.
+
+For every script ask:
+
+> Is Python actually better here?
+
+Do not rewrite Bash merely for the sake of rewriting it.
+
+---
+
+## Volume 06
+
+Use Git properly:
+
+```text
+branch
+ ↓
+feature
+ ↓
+commit
+ ↓
+PR
+ ↓
+review
+ ↓
+merge
+```
+
+---
+
+## Volume 03
+
+Use networking knowledge to build:
+
+```text
+DNS checks
+HTTP monitoring
+port checks
+SSH connectivity
+```
+
+---
+
+# 🧠 Feynman Checkpoints
+
+Explain these without notes.
+
+### Python
+
+> What is Python actually doing when you execute a `.py` file?
+
+### Variables
+
+> What does it mean that variables are names bound to objects?
+
+### Data
+
+> Mutable vs immutable?
+
+### Functions
+
+> Why return a value instead of printing it?
+
+### Modules
+
+> What happens when Python imports a module?
+
+### Environment
+
+> Why use a virtual environment?
+
+### Exceptions
+
+> Why catch specific exceptions?
+
+### Linux
+
+> How does Python start a Linux process?
+
+### HTTP
+
+> What happens when Python sends an HTTP request?
+
+### Concurrency
+
+> Why does concurrency help I/O-bound workloads?
+
+### Async
+
+> What is an event loop?
+
+### Testing
+
+> Unit test vs integration test?
+
+### Configuration
+
+> Why should configuration be separated from code?
+
+### Architecture
+
+> Why separate CLI, business logic, and infrastructure adapters?
+
+### Bash vs Python
+
+> When should you choose Bash instead of Python?
+
+If you cannot explain these clearly, revisit the corresponding chapter.
+
+---
+
+# 🔁 Spaced-Repetition Checklist
+
+Review:
+
+```text
+Day 1
+Day 3
+Day 7
+Day 14
+Day 30
+```
+
+Important concepts:
+
+```text
+Python interpreter
+objects
+variables
+types
+mutability
+truthiness
+functions
+scope
+iterables
+modules
+packages
+virtual environments
+pip
+pyproject.toml
+pathlib
+JSON
+YAML
+environment variables
+exceptions
+custom exceptions
+dataclasses
+subprocess
+processes
+HTTP
+REST
+JSON APIs
+timeouts
+retries
+pagination
+threads
+processes
+asyncio
+event loop
+GIL
+logging
+argparse
+configuration
+pytest
+mocking
+type hints
+packaging
+SSH automation
+idempotency
+CLI architecture
+Bash vs Python
+```
+
+---
+
+# 🎯 Completion Criteria
+
+Do not move to Volume 08 until you can:
+
+### Python Fundamentals
+
+* Write Python without a tutorial.
+* Understand variables and objects.
+* Use core data types.
+* Use conditions and loops.
+* Write functions.
+* Understand scope.
+* Work comfortably with lists/dicts/sets/tuples.
+
+### Project Structure
+
+* Create modules.
+* Create packages.
+* Use virtual environments.
+* Manage dependencies.
+* Understand `pyproject.toml`.
+* Run modules with `python -m`.
+
+### Files
+
+* Read/write files.
+* Use `pathlib`.
+* Process JSON.
+* Process YAML.
+* Process CSV.
+* Use temporary files.
+
+### Errors
+
+* Catch specific exceptions.
+* Raise exceptions.
+* Create custom exceptions.
+* Preserve exception context.
+* Design meaningful failure behavior.
+
+### Linux
+
+* Execute commands from Python.
+* Capture stdout/stderr.
+* Inspect exit codes.
+* Handle timeouts.
+* Work with processes.
+
+### APIs
+
+* Send HTTP requests.
+* Work with headers.
+* Query parameters.
+* Authentication.
+* JSON.
+* Pagination.
+* Timeouts.
+* Retries.
+* Rate limits.
+* API errors.
+
+### Concurrency
+
+* Explain threads.
+* Explain processes.
+* Explain async.
+* Explain event loops.
+* Identify I/O-bound vs CPU-bound work.
+* Use `concurrent.futures`.
+* Build basic async programs.
+
+### Professional Code
+
+* Add logging.
+* Build CLI tools.
+* Use configuration.
+* Add type hints.
+* Write tests.
+* Mock external dependencies.
+* Package projects.
+
+### DevOps
+
+* Automate Linux.
+* Automate APIs.
+* Automate SSH.
+* Monitor systems.
+* Generate reports.
+* Build reusable automation.
+
+### Architecture
+
+You should understand:
+
+```text
+CLI
+ ↓
+Service
+ ↓
+Adapter
+ ↓
+External system
+```
+
+rather than putting the entire application inside one `main.py`.
+
+---
+
+# 🎤 Interview Checkpoint
+
+You should be able to answer:
+
+### Python
+
+* What is Python?
+* What is an interpreter?
+* What are Python objects?
+* Mutable vs immutable?
+* `==` vs `is`?
+* List vs tuple?
+* List vs set?
+* Dictionary use cases?
+
+### Functions
+
+* What is scope?
+* What are `*args` and `**kwargs`?
+* What is a closure conceptually?
+* Why avoid mutable default arguments?
+
+### Modules
+
+* Module vs package?
+* What does `__name__ == "__main__"` mean?
+* Why use virtual environments?
+* What is `pyproject.toml`?
+
+### Exceptions
+
+* Why catch specific exceptions?
+* `raise` vs `return`?
+* `finally` use?
+* Exception chaining?
+
+### Linux
+
+* How does Python execute a Linux command?
+* What is `subprocess`?
+* How do you capture stdout/stderr?
+* How do you handle a command timeout?
+
+### APIs
+
+* What is HTTP?
+* GET vs POST?
+* 401 vs 403?
+* 404 vs 500?
+* Why use timeouts?
+* When should an HTTP request be retried?
+* What is pagination?
+
+### Concurrency
+
+* Thread vs process?
+* Concurrency vs parallelism?
+* What is the GIL?
+* What is asyncio?
+* What is an event loop?
+* Why is async useful for I/O?
+
+### Testing
+
+* Unit vs integration test?
+* What is mocking?
+* Why test failure cases?
+* What does code coverage mean?
+
+### Engineering
+
+> When would you choose Bash over Python?
+
+A strong answer should consider:
+
+```text
+complexity
+data structures
+testing
+external APIs
+concurrency
+maintainability
+Linux integration
+```
+
+rather than simply saying:
+
+> Python is better.
+
+---
+
+# 🏁 Final Mental Model
+
+Python should now fit into your infrastructure mental model:
+
+```text
+                 Python
+                    │
+       ┌────────────┼────────────┐
+       ▼            ▼            ▼
+     Linux        Network       APIs
+       │            │            │
+       └────────────┼────────────┘
+                    ▼
+               Automation
+                    │
+          ┌─────────┼─────────┐
+          ▼         ▼         ▼
+        Files     Servers    Services
+          │         │         │
+          └─────────┼─────────┘
+                    ▼
+               Application
+                    │
+          ┌─────────┼─────────┐
+          ▼         ▼         ▼
+       Backend      AI        RAG
+```
+
+The transformation should be:
+
+```text
+"I know Python syntax."
+
+          ↓
+
+"I can write Python programs."
+
+          ↓
+
+"I can build reusable Python tools."
+
+          ↓
+
+"I can automate Linux and network systems."
+
+          ↓
+
+"I can build API clients and services."
+
+          ↓
+
+"I understand concurrency, testing and configuration."
+
+          ↓
+
+"I can build the Python foundation required
+for backend and AI engineering."
+```
+
+---
+
+# 🚦 Next Volume
+
+## Volume 08 — HTTP, APIs & Backend Service Engineering
+
+This is where your previous knowledge starts converging:
+
+```text
+V03 Networking
+       +
+V04 Linux
+       +
+V05 Bash
+       +
+V06 Git
+       +
+V07 Python
+       ↓
+V08 HTTP + APIs + Backend Engineering
+```
+
+We will move from **"Python can make HTTP requests"** to **"I can design and build proper backend services."**
+
+That will establish the foundation needed before entering:
+
+```text
+V09 — AI & LLM Fundamentals
+V10 — Embeddings, Vector Search & RAG
+V11 — AI Application Engineering
+```
+
+And only after V11 will we stop normal progression and design the **flagship project**.

@@ -1,0 +1,3994 @@
+# 🐧 Volume 04 — Linux Fundamentals & System Administration
+
+## 🎯 Volume Objective
+
+Develop a deep, practical understanding of Linux as an operating system and become comfortable **operating, configuring, troubleshooting, securing, and maintaining Linux systems entirely from the command line**.
+
+This volume is **Ubuntu-first** because Ubuntu is your current environment.
+
+By the end of this volume, you should be able to take a fresh Ubuntu machine and turn it into a usable, remotely accessible, reasonably hardened server.
+
+---
+
+# 🧠 Why This Volume Exists
+
+Almost everything you will encounter later in DevOps and AI infrastructure sits on top of Linux:
+
+```text
+Your Application
+      ↓
+Docker
+      ↓
+Kubernetes
+      ↓
+Cloud
+      ↓
+Virtual Machines
+      ↓
+Linux
+      ↓
+CPU / Memory / Storage / Network
+```
+
+Linux is therefore not just another tool to learn.
+
+It is the **operating environment underneath much of modern infrastructure**.
+
+You should eventually be able to look at a Linux server and understand:
+
+```text
+What is running?
+        ↓
+Who is running it?
+        ↓
+Where are its files?
+        ↓
+What permissions does it have?
+        ↓
+What resources is it consuming?
+        ↓
+What network ports does it use?
+        ↓
+What service manages it?
+        ↓
+What logs does it produce?
+        ↓
+What happens when it fails?
+```
+
+That mindset is more important than memorizing commands.
+
+---
+
+# 🧭 Learning Philosophy
+
+Throughout this volume:
+
+### 1. Understand before memorizing
+
+Do not memorize:
+
+```bash
+chmod 755 file
+```
+
+without understanding:
+
+```text
+7 = owner permissions
+5 = group permissions
+5 = others permissions
+```
+
+---
+
+### 2. Use the terminal as the primary interface
+
+GUI tools are allowed for convenience.
+
+But your practical work should primarily use:
+
+```text
+Terminal
+    ↓
+Shell
+    ↓
+Commands
+    ↓
+Kernel
+    ↓
+System
+```
+
+---
+
+### 3. Learn the reason behind every command
+
+For every important command ask:
+
+```text
+What does it do?
+Why does it exist?
+What part of Linux does it interact with?
+What information does it show/change?
+What could go wrong?
+How can I verify the result?
+```
+
+---
+
+### 4. Practice deliberately breaking things
+
+A large part of Linux administration is troubleshooting.
+
+You should intentionally create controlled failures such as:
+
+```text
+Wrong permissions
+Wrong service configuration
+Stopped service
+Blocked port
+Incorrect mount
+Full disk
+Broken DNS
+Invalid configuration
+```
+
+Then diagnose them.
+
+---
+
+# 📚 Chapter Structure
+
+This volume contains:
+
+1. Linux Fundamentals
+2. Linux Environment & Installation
+3. Linux Architecture
+4. Linux Filesystem
+5. Files & Directories
+6. Users & Groups
+7. Permissions & Ownership
+8. Processes & Job Control
+9. Package Management
+10. systemd & Services
+11. Storage Management
+12. Linux Networking & SSH
+13. Shell Environment
+14. Logging & Journaling
+15. Scheduling
+16. System Monitoring
+17. Linux Security
+18. Linux Troubleshooting
+19. Linux Administration Workflow
+
+---
+
+# Chapter 01 — Linux Fundamentals
+
+## Objective
+
+Understand what Linux actually is and why it became the dominant operating system in servers and infrastructure.
+
+## Topics
+
+### 1.1 What is an Operating System?
+
+Understand:
+
+* Hardware
+* Operating system
+* Kernel
+* Applications
+* Users
+
+Basic architecture:
+
+```text
+User
+ ↓
+Application
+ ↓
+Libraries / System APIs
+ ↓
+Kernel
+ ↓
+Hardware
+```
+
+---
+
+### 1.2 Unix
+
+Study:
+
+* Unix origins
+* Unix philosophy
+* Multi-user systems
+* Multi-tasking
+* Unix-like systems
+
+Understand why Linux inherited many Unix concepts.
+
+---
+
+### 1.3 Linux
+
+Understand the distinction between:
+
+```text
+Linux kernel
+```
+
+and:
+
+```text
+Linux distribution
+```
+
+For example:
+
+```text
+Ubuntu
+Debian
+Fedora
+Arch
+RHEL
+```
+
+are distributions built around the Linux kernel.
+
+---
+
+### 1.4 GNU
+
+Understand:
+
+* GNU project
+* GNU utilities
+* GNU/Linux terminology
+* Shell utilities
+* Core command-line tools
+
+---
+
+### 1.5 Open Source
+
+Understand:
+
+* Source code
+* Open source
+* Licensing
+* Community development
+* Package ecosystems
+* Why open source matters for infrastructure
+
+---
+
+### 1.6 Linux Distributions
+
+Understand:
+
+```text
+Ubuntu
+Debian
+Fedora
+RHEL
+Arch
+Alpine
+```
+
+and why different distributions exist.
+
+---
+
+### 1.7 Why Linux Dominates Servers
+
+Study:
+
+* Stability
+* Automation
+* Remote administration
+* Resource efficiency
+* Security model
+* Networking
+* Open-source ecosystem
+* Containers
+* Cloud infrastructure
+
+Do not memorize "Linux is better."
+
+Understand **why Linux fits server workloads**.
+
+---
+
+## 🧪 Lab
+
+On Ubuntu:
+
+```bash
+uname -a
+```
+
+```bash
+cat /etc/os-release
+```
+
+```bash
+hostnamectl
+```
+
+Determine:
+
+```text
+Kernel
+Distribution
+Version
+Architecture
+Hostname
+```
+
+---
+
+# Chapter 02 — Linux Environment & Installation
+
+## Objective
+
+Understand the different environments in which Linux can run.
+
+## Topics
+
+### 2.1 Installation Methods
+
+Understand:
+
+* Bare metal
+* Dual boot
+* Virtual machine
+* WSL
+* Cloud VM
+* Container
+
+---
+
+### 2.2 Desktop vs Server
+
+Understand why:
+
+```text
+Ubuntu Desktop
+```
+
+and:
+
+```text
+Ubuntu Server
+```
+
+have different purposes.
+
+---
+
+### 2.3 Terminal vs Shell
+
+Important distinction:
+
+```text
+Terminal
+    ↓
+Shell
+    ↓
+Commands
+```
+
+A terminal is an interface.
+
+A shell interprets commands.
+
+---
+
+### 2.4 TTY
+
+Understand:
+
+* TTY
+* Virtual terminals
+* Console
+* Terminal emulator
+* Login sessions
+
+---
+
+### 2.5 Boot Modes
+
+Understand conceptually:
+
+```text
+Firmware
+ ↓
+Bootloader
+ ↓
+Kernel
+ ↓
+init/systemd
+ ↓
+Services
+ ↓
+Login
+```
+
+This connects directly to Volume 02.
+
+---
+
+## 🧪 Lab
+
+Identify your environment:
+
+```bash
+uname -a
+```
+
+```bash
+hostnamectl
+```
+
+```bash
+tty
+```
+
+```bash
+who
+```
+
+```bash
+w
+```
+
+Document:
+
+```text
+Where am I running?
+What terminal am I using?
+Which shell am I using?
+Which kernel?
+Which distribution?
+```
+
+---
+
+# Chapter 03 — Linux Architecture
+
+## Objective
+
+Understand the major components inside a Linux system.
+
+## Topics
+
+### 3.1 Kernel
+
+Understand the kernel's responsibilities:
+
+* CPU scheduling
+* Memory management
+* Process management
+* Networking
+* Filesystems
+* Device management
+* Security
+
+---
+
+### 3.2 User Space vs Kernel Space
+
+Understand:
+
+```text
+User Space
+    ↓
+System Calls
+    ↓
+Kernel Space
+    ↓
+Hardware
+```
+
+---
+
+### 3.3 System Calls
+
+Understand conceptually:
+
+```text
+Application
+    ↓
+System call
+    ↓
+Kernel
+    ↓
+Hardware/resource
+```
+
+Examples:
+
+```text
+open()
+read()
+write()
+fork()
+exec()
+socket()
+```
+
+---
+
+### 3.4 Linux Architecture
+
+Build the mental model:
+
+```text
+Applications
+     ↓
+Shell / Libraries
+     ↓
+System Calls
+     ↓
+Kernel
+ ┌───┼─────────────┐
+CPU Memory Network Filesystem
+ └───┼─────────────┘
+     ↓
+Hardware
+```
+
+---
+
+## 🧪 Lab
+
+Investigate:
+
+```bash
+ps aux
+```
+
+```bash
+ls /proc
+```
+
+```bash
+cat /proc/cpuinfo
+```
+
+```bash
+cat /proc/meminfo
+```
+
+```bash
+cat /proc/uptime
+```
+
+Understand that `/proc` exposes kernel/process information.
+
+---
+
+# Chapter 04 — Linux Filesystem
+
+## Objective
+
+Understand Linux's filesystem hierarchy rather than treating it like a collection of random folders.
+
+## Topics
+
+### 4.1 Root Directory
+
+Understand:
+
+```text
+/
+```
+
+Everything begins from `/`.
+
+---
+
+### 4.2 Important Directories
+
+Learn the purpose of:
+
+```text
+/bin
+/boot
+/dev
+/etc
+/home
+/lib
+/media
+/mnt
+/opt
+/proc
+/root
+/run
+/sbin
+/srv
+/sys
+/tmp
+/usr
+/var
+```
+
+Pay particular attention to:
+
+```text
+/etc  → configuration
+/var  → changing data
+/home → user data
+/usr  → installed software/resources
+/opt  → optional applications
+/tmp  → temporary files
+/proc → process/kernel information
+/sys  → device/kernel information
+/dev  → devices
+/boot → boot-related files
+```
+
+---
+
+### 4.3 Absolute vs Relative Paths
+
+Understand:
+
+```text
+/home/user/file.txt
+```
+
+versus:
+
+```text
+./file.txt
+```
+
+and:
+
+```text
+../file.txt
+```
+
+---
+
+### 4.4 Hidden Files
+
+Understand:
+
+```text
+.filename
+```
+
+and why Linux uses hidden files extensively for configuration.
+
+---
+
+### 4.5 Mount Points
+
+Understand:
+
+```text
+Device
+   ↓
+Filesystem
+   ↓
+Mount point
+   ↓
+Directory tree
+```
+
+---
+
+### 4.6 Inodes
+
+Understand:
+
+```text
+Filename
+   ↓
+Directory entry
+   ↓
+inode
+   ↓
+metadata + data blocks
+```
+
+Study:
+
+* inode number
+* permissions
+* ownership
+* timestamps
+* file size
+* links
+
+---
+
+### 4.7 Symbolic vs Hard Links
+
+Understand deeply:
+
+```text
+Hard link
+    ↓
+same inode
+```
+
+versus:
+
+```text
+Symbolic link
+    ↓
+points to another path
+```
+
+---
+
+## 🧪 Lab
+
+Use:
+
+```bash
+pwd
+```
+
+```bash
+ls -la /
+```
+
+```bash
+find /etc -maxdepth 1 -type d
+```
+
+Inspect:
+
+```bash
+ls -li
+```
+
+Create:
+
+```text
+original.txt
+hardlink.txt
+symlink.txt
+```
+
+Delete the original and observe the difference.
+
+Document **why** each behaves differently.
+
+---
+
+# Chapter 05 — Files & Directories
+
+## Objective
+
+Become comfortable manipulating the filesystem entirely through the command line.
+
+## Topics
+
+### File Operations
+
+```bash
+touch
+cp
+mv
+rm
+```
+
+### Directory Operations
+
+```bash
+mkdir
+rmdir
+```
+
+### Navigation
+
+```bash
+cd
+pwd
+ls
+```
+
+### Viewing
+
+```bash
+cat
+less
+head
+tail
+```
+
+### Searching
+
+```bash
+find
+grep
+```
+
+### File Information
+
+```bash
+file
+stat
+```
+
+### Comparison
+
+```bash
+diff
+cmp
+```
+
+### Archives
+
+```bash
+tar
+```
+
+### Compression
+
+Understand:
+
+```text
+gzip
+bzip2
+xz
+```
+
+and the distinction between:
+
+```text
+archiving
+```
+
+and:
+
+```text
+compression
+```
+
+---
+
+### Checksums
+
+Understand:
+
+```bash
+sha256sum
+```
+
+and why checksums are useful for:
+
+* Integrity
+* Downloads
+* Backups
+* Artifacts
+* Deployment verification
+
+---
+
+## 🧪 Lab
+
+Create:
+
+```text
+linux-lab/
+├── docs/
+│   ├── notes/
+│   └── reports/
+├── data/
+└── backups/
+```
+
+Create files.
+
+Copy them.
+
+Move them.
+
+Search them.
+
+Compare them.
+
+Archive them:
+
+```bash
+tar
+```
+
+Compress them.
+
+Calculate checksums.
+
+Then document the complete workflow.
+
+---
+
+# Chapter 06 — Users & Groups
+
+## Objective
+
+Understand Linux as a multi-user operating system.
+
+## Topics
+
+### Users
+
+Understand:
+
+* User account
+* UID
+* Home directory
+* Shell
+* Password
+* Account state
+
+---
+
+### Groups
+
+Understand:
+
+* Primary group
+* Supplementary groups
+* GID
+* Group-based access
+
+---
+
+### Important Files
+
+Study:
+
+```text
+/etc/passwd
+/etc/group
+/etc/shadow
+```
+
+Understand what each contains conceptually.
+
+---
+
+### User Management
+
+Learn:
+
+```bash
+useradd
+usermod
+userdel
+passwd
+```
+
+---
+
+### Group Management
+
+Learn:
+
+```bash
+groupadd
+groupmod
+groupdel
+```
+
+---
+
+### Identity
+
+Use:
+
+```bash
+id
+whoami
+groups
+```
+
+---
+
+### Sudo
+
+Understand:
+
+```text
+Normal User
+     ↓
+sudo
+     ↓
+Privileged operation
+```
+
+Understand why administrators should avoid working permanently as root.
+
+---
+
+## 🧪 Lab
+
+Inside a disposable VM:
+
+1. Create a user.
+2. Create a group.
+3. Add the user to the group.
+4. Set a password.
+5. Verify UID/GID.
+6. Test group access.
+7. Grant controlled sudo access.
+8. Remove access.
+
+Verify everything rather than assuming commands succeeded.
+
+---
+
+# Chapter 07 — Permissions & Ownership
+
+## Objective
+
+Understand Linux's permission model deeply.
+
+## Topics
+
+### Permission Model
+
+```text
+User
+Group
+Others
+```
+
+Permissions:
+
+```text
+r
+w
+x
+```
+
+---
+
+### Numeric Permissions
+
+Understand:
+
+```text
+r = 4
+w = 2
+x = 1
+```
+
+Therefore:
+
+```text
+7 = rwx
+6 = rw-
+5 = r-x
+4 = r--
+```
+
+---
+
+### Common Modes
+
+Understand why:
+
+```text
+755
+644
+700
+600
+```
+
+are common.
+
+---
+
+### Ownership
+
+Learn:
+
+```bash
+chown
+chgrp
+```
+
+---
+
+### Permission Modification
+
+Learn:
+
+```bash
+chmod
+```
+
+both:
+
+```bash
+chmod 750 file
+```
+
+and:
+
+```bash
+chmod u=rwx,g=rx,o= file
+```
+
+---
+
+### umask
+
+Understand how default permissions are derived.
+
+---
+
+### Directory Permissions
+
+This is important.
+
+Understand what:
+
+```text
+r
+w
+x
+```
+
+mean for a **directory**, not just a file.
+
+---
+
+### Special Permissions
+
+Study:
+
+```text
+SUID
+SGID
+Sticky Bit
+```
+
+Understand why `/tmp` commonly uses the sticky bit.
+
+---
+
+### ACL
+
+Study:
+
+```bash
+getfacl
+setfacl
+```
+
+Understand when traditional owner/group/other permissions are insufficient.
+
+---
+
+### File Attributes
+
+Introduction to:
+
+```bash
+lsattr
+chattr
+```
+
+---
+
+## 🧪 Lab
+
+Create a shared directory:
+
+```text
+/shared-project
+```
+
+Create:
+
+```text
+developer1
+developer2
+admin
+```
+
+Configure permissions so that:
+
+```text
+developers → can work together
+outsiders → cannot access
+admin → full access
+```
+
+Test the configuration using different users.
+
+Document every permission decision.
+
+---
+
+# Chapter 08 — Processes & Job Control
+
+## Objective
+
+Understand how Linux runs programs.
+
+## Topics
+
+### Process
+
+Understand:
+
+```text
+Program ≠ Process
+```
+
+A program is code.
+
+A process is a running instance.
+
+---
+
+### Process Information
+
+Learn:
+
+```bash
+ps
+top
+htop
+pgrep
+pidof
+```
+
+---
+
+### Process Hierarchy
+
+Understand:
+
+```text
+Parent
+  ↓
+Child
+  ↓
+Grandchild
+```
+
+Use:
+
+```bash
+pstree
+```
+
+---
+
+### Process Lifecycle
+
+Study:
+
+```text
+Created
+  ↓
+Ready
+  ↓
+Running
+  ↓
+Sleeping
+  ↓
+Stopped
+  ↓
+Terminated
+```
+
+---
+
+### Signals
+
+Understand:
+
+```text
+SIGTERM
+SIGKILL
+SIGINT
+SIGHUP
+```
+
+Use:
+
+```bash
+kill
+pkill
+```
+
+---
+
+### Foreground & Background
+
+Understand:
+
+```bash
+&
+```
+
+```bash
+jobs
+```
+
+```bash
+fg
+```
+
+```bash
+bg
+```
+
+---
+
+### Priority
+
+Study:
+
+```bash
+nice
+renice
+```
+
+Understand why CPU scheduling priority matters.
+
+---
+
+### Daemons
+
+Understand the difference between:
+
+```text
+interactive process
+```
+
+and:
+
+```text
+background service/daemon
+```
+
+---
+
+### Zombies & Orphans
+
+Understand:
+
+```text
+Zombie
+```
+
+and:
+
+```text
+Orphan
+```
+
+conceptually and how they arise.
+
+---
+
+## 🧪 Lab
+
+Run:
+
+```bash
+sleep 300 &
+```
+
+Find it.
+
+Inspect it.
+
+Bring it to foreground.
+
+Stop it.
+
+Restart it.
+
+Terminate it.
+
+Then investigate:
+
+```bash
+pstree
+```
+
+and identify parent/child relationships.
+
+---
+
+# Chapter 09 — Package Management
+
+## Objective
+
+Understand how Linux software is installed, updated, removed, and managed.
+
+## Topics
+
+### Package
+
+Understand:
+
+```text
+Application
+ ↓
+Package
+ ↓
+Dependencies
+```
+
+---
+
+### Repositories
+
+Understand:
+
+```text
+Local system
+      ↓
+Package manager
+      ↓
+Repository
+      ↓
+Package
+```
+
+---
+
+### APT
+
+Ubuntu focus:
+
+```bash
+apt update
+apt upgrade
+apt install
+apt remove
+apt purge
+apt search
+apt show
+```
+
+---
+
+### Dependencies
+
+Understand why installing one package can install multiple additional packages.
+
+---
+
+### Package Files
+
+Understand:
+
+```text
+.deb
+.rpm
+```
+
+conceptually.
+
+---
+
+### Other Package Managers
+
+Know the purpose of:
+
+```text
+DNF
+YUM
+Pacman
+Snap
+Flatpak
+```
+
+You do not need to master all of them.
+
+---
+
+### Building From Source
+
+Understand:
+
+```text
+Source code
+ ↓
+Build system
+ ↓
+Binary
+ ↓
+Installation
+```
+
+and why package managers are generally preferred when suitable packages exist.
+
+---
+
+## 🧪 Lab
+
+Install a real package:
+
+```bash
+sudo apt update
+sudo apt install <package>
+```
+
+Inspect:
+
+```bash
+apt show <package>
+```
+
+Find dependencies.
+
+Remove it.
+
+Verify what changed.
+
+---
+
+# Chapter 10 — systemd & Linux Services
+
+## Objective
+
+Understand how modern Ubuntu systems start, manage, monitor, and restart services.
+
+## Topics
+
+### What is systemd?
+
+Understand its role as:
+
+```text
+PID 1
+```
+
+on modern Ubuntu systems.
+
+---
+
+### Units
+
+Study:
+
+```text
+service
+socket
+target
+timer
+mount
+```
+
+---
+
+### Service Lifecycle
+
+Understand:
+
+```text
+start
+stop
+restart
+reload
+enable
+disable
+status
+```
+
+---
+
+### systemctl
+
+Learn:
+
+```bash
+systemctl status
+systemctl start
+systemctl stop
+systemctl restart
+systemctl enable
+systemctl disable
+```
+
+---
+
+### Enable vs Start
+
+This distinction is critical.
+
+```text
+start
+```
+
+means:
+
+> Run now.
+
+```text
+enable
+```
+
+means:
+
+> Configure it to start automatically according to its unit configuration.
+
+---
+
+### Service Dependencies
+
+Understand that services can depend on:
+
+```text
+network
+storage
+other services
+```
+
+---
+
+## 🧪 Lab — Create Your Own Service
+
+Create a simple script.
+
+Example concept:
+
+```text
+/usr/local/bin/hello-service.sh
+```
+
+Create a systemd unit:
+
+```text
+/etc/systemd/system/hello.service
+```
+
+Configure it to:
+
+* start
+* stop
+* restart
+* enable at boot
+
+Then inspect:
+
+```bash
+systemctl status hello
+```
+
+This is an important practical exercise because later you will deploy real applications as services.
+
+---
+
+# Chapter 11 — Storage Management
+
+## Objective
+
+Understand how Linux interacts with disks, partitions, filesystems, mounts, and persistent storage.
+
+## Topics
+
+### Storage Hierarchy
+
+Understand:
+
+```text
+Physical Disk
+      ↓
+Partition
+      ↓
+Filesystem
+      ↓
+Mount Point
+      ↓
+Files
+```
+
+---
+
+### Disk Identification
+
+Learn:
+
+```bash
+lsblk
+blkid
+```
+
+---
+
+### Disk Usage
+
+Learn:
+
+```bash
+df -h
+du -sh
+du -h
+```
+
+Understand the difference between:
+
+```text
+filesystem capacity
+```
+
+and:
+
+```text
+directory/file usage
+```
+
+---
+
+### Filesystems
+
+Study:
+
+```text
+ext4
+XFS
+Btrfs
+```
+
+Know their general characteristics.
+
+---
+
+### Mounting
+
+Learn:
+
+```bash
+mount
+umount
+```
+
+Understand:
+
+```text
+device → mount point
+```
+
+---
+
+### `/etc/fstab`
+
+Understand persistent mounts.
+
+Important concepts:
+
+```text
+UUID
+mount point
+filesystem type
+mount options
+```
+
+---
+
+### Swap
+
+Understand:
+
+* Why swap exists
+* RAM vs swap
+* Swap performance
+* When swap is useful
+
+---
+
+### LVM
+
+Introduction to:
+
+```text
+Physical Volume
+     ↓
+Volume Group
+     ↓
+Logical Volume
+```
+
+---
+
+### RAID
+
+Understand conceptually:
+
+```text
+RAID 0
+RAID 1
+RAID 5
+RAID 6
+RAID 10
+```
+
+Do not go deeply into hardware RAID administration yet.
+
+---
+
+### Disk Health
+
+Introduction to:
+
+```text
+SMART
+```
+
+and:
+
+```bash
+smartctl
+```
+
+---
+
+## 🧪 Lab
+
+Use a disposable VM or loop device.
+
+Create a filesystem.
+
+Mount it.
+
+Verify:
+
+```bash
+lsblk
+df -h
+mount
+```
+
+Then configure persistent mounting through `/etc/fstab`.
+
+Test the configuration carefully.
+
+**Never experiment with `/etc/fstab` on your primary system without understanding how to recover from a bad entry.**
+
+---
+
+# Chapter 12 — Linux Networking & SSH
+
+## Objective
+
+Connect the networking concepts from Volume 03 to the actual Linux operating system.
+
+## Topics
+
+### Network Interfaces
+
+Learn:
+
+```bash
+ip addr
+ip link
+```
+
+---
+
+### Routing
+
+Learn:
+
+```bash
+ip route
+```
+
+Understand:
+
+```text
+Destination
+Gateway
+Interface
+```
+
+---
+
+### DNS
+
+Understand how Linux resolves domain names.
+
+Study:
+
+```text
+/etc/hosts
+DNS
+resolv.conf / resolver configuration
+```
+
+---
+
+### Hostname
+
+Learn:
+
+```bash
+hostname
+hostnamectl
+```
+
+---
+
+### Sockets
+
+Use:
+
+```bash
+ss
+```
+
+Understand:
+
+```text
+LISTEN
+ESTABLISHED
+TIME-WAIT
+```
+
+and:
+
+```text
+IP:PORT
+```
+
+---
+
+### Firewall
+
+Introduction to:
+
+```bash
+ufw
+```
+
+Understand:
+
+```text
+allow
+deny
+port
+protocol
+source
+destination
+```
+
+---
+
+### SSH
+
+This is one of the most important Linux administration skills.
+
+Understand:
+
+```text
+SSH Client
+     ↓
+Network
+     ↓
+SSH Server
+     ↓
+Linux machine
+```
+
+---
+
+### SSH Authentication
+
+Study:
+
+```text
+Password authentication
+```
+
+and:
+
+```text
+Public/private key authentication
+```
+
+Understand:
+
+```text
+Private key → stays secret
+Public key  → placed on server
+```
+
+---
+
+### SCP & SFTP
+
+Understand remote file transfer.
+
+---
+
+## 🧪 Lab
+
+Create an Ubuntu VM.
+
+From your host machine:
+
+```bash
+ssh user@server
+```
+
+Then configure:
+
+```text
+SSH key authentication
+```
+
+Verify that key-based authentication works.
+
+Then, on the disposable VM, test disabling password authentication.
+
+Verify access **before closing your existing session**.
+
+This habit prevents locking yourself out of servers.
+
+---
+
+# Chapter 13 — Shell Environment
+
+## Objective
+
+Understand how the shell environment controls command execution and application configuration.
+
+## Topics
+
+### Shells
+
+Understand:
+
+```text
+sh
+bash
+zsh
+```
+
+---
+
+### Environment Variables
+
+Learn:
+
+```bash
+env
+printenv
+echo
+```
+
+Important variables:
+
+```text
+PATH
+HOME
+USER
+SHELL
+PWD
+```
+
+---
+
+### Shell Variables
+
+Understand the difference between:
+
+```text
+shell variable
+```
+
+and:
+
+```text
+environment variable
+```
+
+---
+
+### PATH
+
+Understand why:
+
+```bash
+echo $PATH
+```
+
+is extremely important.
+
+Mental model:
+
+```text
+You type:
+python
+
+Shell searches directories in PATH
+        ↓
+Finds executable
+        ↓
+Runs it
+```
+
+---
+
+### Shell Startup Files
+
+Understand:
+
+```text
+~/.bashrc
+~/.profile
+/etc/profile
+```
+
+and when they are loaded.
+
+---
+
+### Aliases
+
+Create useful aliases.
+
+---
+
+### Command History
+
+Learn:
+
+```bash
+history
+```
+
+and understand why shell history is useful for troubleshooting and administration.
+
+---
+
+## 🧪 Lab
+
+Create:
+
+* one custom environment variable
+* one alias
+* one PATH addition
+
+Restart the terminal.
+
+Verify persistence.
+
+Then document **which configuration file caused the behavior**.
+
+---
+
+# Chapter 14 — Logging & Journaling
+
+## Objective
+
+Learn to treat logs as evidence rather than blindly reading them.
+
+## Topics
+
+### Why Logs Matter
+
+A failed application may tell you:
+
+```text
+Something went wrong.
+```
+
+The logs may tell you:
+
+```text
+What
+When
+Where
+Why
+```
+
+---
+
+### Linux Logging
+
+Understand:
+
+```text
+system logs
+application logs
+kernel logs
+service logs
+authentication logs
+```
+
+---
+
+### journald
+
+Learn:
+
+```bash
+journalctl
+```
+
+Important patterns:
+
+```bash
+journalctl
+journalctl -u service
+journalctl -f
+journalctl -b
+journalctl --since
+```
+
+---
+
+### Log Levels
+
+Understand concepts such as:
+
+```text
+debug
+info
+warning
+error
+critical
+```
+
+---
+
+### Log Rotation
+
+Understand why logs cannot grow forever.
+
+Study:
+
+```text
+logrotate
+```
+
+---
+
+### Kernel Logs
+
+Introduction to:
+
+```bash
+dmesg
+```
+
+---
+
+## 🧪 Lab
+
+Create a controlled service failure.
+
+For example:
+
+```text
+invalid service configuration
+```
+
+Attempt to start it.
+
+Then investigate using:
+
+```bash
+systemctl status
+journalctl -u
+```
+
+Find:
+
+```text
+timestamp
+failure
+error
+root cause
+```
+
+Document the investigation.
+
+---
+
+# Chapter 15 — Scheduling Tasks
+
+## Objective
+
+Understand how Linux executes work automatically.
+
+## Topics
+
+### Cron
+
+Understand:
+
+```text
+cron daemon
+crontab
+cron expression
+```
+
+---
+
+### Crontab
+
+Learn:
+
+```bash
+crontab -e
+crontab -l
+```
+
+Understand:
+
+```text
+minute
+hour
+day
+month
+weekday
+```
+
+---
+
+### Anacron
+
+Understand why it exists and when it differs from cron.
+
+---
+
+### systemd Timers
+
+Introduction to:
+
+```text
+.timer
+.service
+```
+
+Understand why modern Linux systems can use systemd timers instead of cron.
+
+---
+
+### Scheduling Best Practices
+
+Study:
+
+* Logging
+* Absolute paths
+* Environment differences
+* Permissions
+* Failure handling
+* Idempotency
+
+---
+
+## 🧪 Lab
+
+Create a cron job that writes a timestamp to a file every minute.
+
+Verify execution.
+
+Inspect the output.
+
+Then remove the cron entry.
+
+---
+
+# Chapter 16 — System Monitoring
+
+## Objective
+
+Understand how to determine what a Linux system is doing and where its resources are going.
+
+## Topics
+
+### CPU
+
+Learn:
+
+```bash
+top
+htop
+uptime
+```
+
+Understand:
+
+```text
+CPU utilization
+load average
+process CPU usage
+```
+
+---
+
+### Memory
+
+Learn:
+
+```bash
+free -h
+```
+
+Understand:
+
+```text
+used
+free
+available
+buffers
+cache
+swap
+```
+
+Do not assume:
+
+> "Used RAM = bad."
+
+Understand Linux memory caching.
+
+---
+
+### Disk
+
+Learn:
+
+```bash
+df -h
+du -sh
+```
+
+---
+
+### I/O
+
+Introduction to:
+
+```text
+iostat
+iotop
+```
+
+---
+
+### Network Monitoring
+
+Connect back to Volume 03:
+
+```bash
+ss
+ip
+```
+
+---
+
+### Resource Bottlenecks
+
+Understand:
+
+```text
+CPU-bound
+Memory-bound
+I/O-bound
+Network-bound
+```
+
+This is an extremely important infrastructure concept.
+
+---
+
+### Resource Limits
+
+Introduction to:
+
+```text
+ulimit
+```
+
+and process/resource constraints.
+
+---
+
+## 🧪 Lab
+
+Take a complete system snapshot:
+
+```bash
+uptime
+```
+
+```bash
+free -h
+```
+
+```bash
+df -h
+```
+
+```bash
+top
+```
+
+```bash
+ss -tulpn
+```
+
+Determine:
+
+```text
+CPU condition
+Memory condition
+Disk condition
+Network listeners
+System load
+Top resource-consuming processes
+```
+
+Write a short health report.
+
+---
+
+# Chapter 17 — Linux Security Fundamentals
+
+## Objective
+
+Build a basic security mindset for Linux administration.
+
+This is not yet advanced DevSecOps.
+
+That comes later.
+
+## Topics
+
+### Least Privilege
+
+Understand:
+
+```text
+Only give a user/process the permissions it actually needs.
+```
+
+---
+
+### User Security
+
+Study:
+
+* Strong authentication
+* Account management
+* Sudo
+* Root access
+* Disabled unused accounts
+
+---
+
+### SSH Security
+
+Study:
+
+* Key authentication
+* Root login restrictions
+* Password authentication
+* SSH configuration
+* Allowed users
+* Port exposure
+
+---
+
+### Firewall
+
+Understand:
+
+```text
+default deny
+explicit allow
+```
+
+conceptually.
+
+---
+
+### File Security
+
+Review:
+
+```text
+ownership
+permissions
+ACL
+sensitive configuration files
+```
+
+---
+
+### Automatic Updates
+
+Understand why security patches matter.
+
+---
+
+### Fail2ban
+
+Introduction only.
+
+Understand the problem it attempts to solve.
+
+---
+
+### AppArmor
+
+Understand:
+
+```text
+Mandatory Access Control
+```
+
+and Ubuntu's use of AppArmor.
+
+---
+
+### SELinux
+
+Understand conceptually:
+
+```text
+SELinux
+```
+
+and how it differs from traditional Unix permissions.
+
+You do **not** need to become an SELinux administrator in this volume.
+
+---
+
+### Security Mindset
+
+Always ask:
+
+```text
+Who can access this?
+What can they access?
+Why?
+From where?
+For how long?
+What happens if compromised?
+Where is it logged?
+```
+
+---
+
+## 🧪 Lab — Basic Server Hardening
+
+On a disposable Ubuntu VM:
+
+1. Create an administrative user.
+2. Create a non-administrative user.
+3. Configure SSH keys.
+4. Disable direct root SSH login.
+5. Restrict unnecessary access.
+6. Configure UFW.
+7. Verify listening ports.
+8. Review authentication logs.
+9. Confirm you can still access the machine.
+
+Never perform risky SSH changes on a remote server without keeping an existing working session open.
+
+---
+
+# Chapter 18 — Linux Troubleshooting
+
+## Objective
+
+Develop the ability to diagnose Linux problems systematically.
+
+This chapter is more important than memorizing 100 commands.
+
+---
+
+# The Linux Troubleshooting Framework
+
+Use:
+
+```text
+1. Observe
+      ↓
+2. Define the symptom
+      ↓
+3. Scope the problem
+      ↓
+4. Gather evidence
+      ↓
+5. Form hypotheses
+      ↓
+6. Test one hypothesis
+      ↓
+7. Identify root cause
+      ↓
+8. Apply fix
+      ↓
+9. Verify
+      ↓
+10. Document
+```
+
+---
+
+## Problem 1 — Service Not Running
+
+Investigate:
+
+```bash
+systemctl status
+```
+
+```bash
+journalctl -u
+```
+
+Check:
+
+```text
+configuration
+permissions
+dependencies
+ports
+process
+```
+
+---
+
+## Problem 2 — Permission Denied
+
+Investigate:
+
+```bash
+ls -l
+```
+
+```bash
+id
+```
+
+```bash
+namei
+```
+
+Check:
+
+```text
+owner
+group
+permissions
+ACL
+parent directory permissions
+```
+
+---
+
+## Problem 3 — Disk Full
+
+Investigate:
+
+```bash
+df -h
+```
+
+then:
+
+```bash
+du -sh
+```
+
+Find:
+
+```text
+filesystem
+directory
+large files
+logs
+```
+
+Also understand that:
+
+```text
+df
+```
+
+and:
+
+```text
+du
+```
+
+can sometimes disagree because of deleted-but-still-open files.
+
+---
+
+## Problem 4 — High CPU
+
+Investigate:
+
+```bash
+top
+```
+
+Identify:
+
+```text
+process
+PID
+CPU usage
+parent
+```
+
+Then determine what the process is doing.
+
+---
+
+## Problem 5 — High Memory
+
+Investigate:
+
+```bash
+free -h
+```
+
+and:
+
+```bash
+top
+```
+
+Understand the difference between:
+
+```text
+application memory
+cache
+available memory
+swap
+```
+
+---
+
+## Problem 6 — Network Failure
+
+Use the methodology from Volume 03:
+
+```text
+Interface
+ ↓
+IP
+ ↓
+Route
+ ↓
+Gateway
+ ↓
+DNS
+ ↓
+Port
+ ↓
+Service
+```
+
+Useful tools:
+
+```bash
+ip addr
+ip route
+ping
+dig
+ss
+curl
+nc
+```
+
+---
+
+## Problem 7 — Boot Failure
+
+Understand the investigation path:
+
+```text
+Firmware
+ ↓
+Bootloader
+ ↓
+Kernel
+ ↓
+systemd
+ ↓
+Services
+```
+
+Use logs and recovery environments conceptually.
+
+---
+
+# Chapter 19 — Linux Administration Workflow
+
+## Objective
+
+Combine everything into a repeatable operational workflow.
+
+When receiving a fresh Linux server, think:
+
+```text
+1. Identify system
+        ↓
+2. Update packages
+        ↓
+3. Create users
+        ↓
+4. Configure SSH
+        ↓
+5. Configure permissions
+        ↓
+6. Configure firewall
+        ↓
+7. Configure hostname/network
+        ↓
+8. Configure storage
+        ↓
+9. Configure services
+        ↓
+10. Configure logging
+        ↓
+11. Configure scheduling
+        ↓
+12. Configure monitoring
+        ↓
+13. Test failure recovery
+        ↓
+14. Document system
+```
+
+This workflow will later evolve into:
+
+```text
+Manual administration
+        ↓
+Bash automation
+        ↓
+Configuration management
+        ↓
+Infrastructure as Code
+        ↓
+CI/CD
+        ↓
+Containers
+        ↓
+Kubernetes
+```
+
+---
+
+# 🧪 Hands-On Lab Series
+
+Complete these labs in order.
+
+### Lab 01 — System Discovery
+
+Identify:
+
+* OS
+* Kernel
+* CPU
+* Memory
+* Storage
+* Network
+* Users
+* Running services
+
+---
+
+### Lab 02 — Filesystem Navigation
+
+Navigate the complete filesystem hierarchy.
+
+---
+
+### Lab 03 — File Operations
+
+Create, copy, move, delete, search, archive and checksum files.
+
+---
+
+### Lab 04 — Links
+
+Experiment with:
+
+```text
+hard links
+symbolic links
+```
+
+---
+
+### Lab 05 — Users & Groups
+
+Create multiple users and groups.
+
+---
+
+### Lab 06 — Permissions
+
+Build a shared workspace with controlled access.
+
+---
+
+### Lab 07 — Processes
+
+Start, inspect, signal and terminate processes.
+
+---
+
+### Lab 08 — Package Management
+
+Install, inspect, update and remove packages.
+
+---
+
+### Lab 09 — systemd
+
+Create and manage your own service.
+
+---
+
+### Lab 10 — Storage
+
+Create and mount a filesystem.
+
+---
+
+### Lab 11 — SSH
+
+Configure secure key-based SSH.
+
+---
+
+### Lab 12 — Shell Environment
+
+Configure aliases, variables and PATH.
+
+---
+
+### Lab 13 — Logs
+
+Diagnose a deliberately failed service.
+
+---
+
+### Lab 14 — Scheduling
+
+Create and verify a cron task.
+
+---
+
+### Lab 15 — Monitoring
+
+Produce a complete Linux health snapshot.
+
+---
+
+### Lab 16 — Security
+
+Perform basic server hardening.
+
+---
+
+### Lab 17 — Troubleshooting
+
+Break a controlled environment and recover it.
+
+---
+
+# 🚀 Main Mini-Project — Linux Server Administration Lab
+
+Instead of three unrelated projects, build **one reusable Linux administration environment**.
+
+This environment becomes the foundation for later DevOps work.
+
+## Project Goal
+
+Take a fresh Ubuntu VM and configure it as a small production-like Linux server.
+
+Architecture:
+
+```text
+Your Ubuntu Host
+       │
+       │
+       ▼
+┌──────────────────────┐
+│   Ubuntu Server VM   │
+│                      │
+│ Users & Groups       │
+│ SSH                  │
+│ Firewall             │
+│ Filesystem           │
+│ systemd              │
+│ Logs                 │
+│ Monitoring           │
+│ Scheduled Tasks      │
+│ Health Check Script   │
+└──────────────────────┘
+```
+
+---
+
+# Project Requirements
+
+## 1. Users
+
+Create:
+
+```text
+admin
+developer
+ops
+```
+
+Configure appropriate privileges.
+
+---
+
+## 2. Groups
+
+Create groups such as:
+
+```text
+developers
+operations
+```
+
+Configure shared access.
+
+---
+
+## 3. Filesystem
+
+Create an organized structure:
+
+```text
+/opt/lab-app
+/etc/lab-app
+/var/log/lab-app
+/var/lib/lab-app
+```
+
+Understand why different types of data belong in different locations.
+
+---
+
+## 4. SSH
+
+Configure:
+
+```text
+SSH key authentication
+```
+
+Restrict unnecessary access.
+
+---
+
+## 5. Firewall
+
+Allow only required ports.
+
+For example:
+
+```text
+SSH
+HTTP
+HTTPS
+```
+
+depending on what your lab actually uses.
+
+Do not open ports without a reason.
+
+---
+
+## 6. Application Service
+
+Create a very small application or script that runs continuously.
+
+For example:
+
+```text
+Python HTTP service
+```
+
+or another simple server.
+
+Do not build a major application.
+
+The goal is **Linux administration**, not application development.
+
+---
+
+## 7. systemd
+
+Run the application through:
+
+```text
+systemd
+```
+
+It should:
+
+* start
+* stop
+* restart
+* automatically start
+* produce logs
+
+---
+
+## 8. Logging
+
+Configure and inspect application/service logs.
+
+You should be able to answer:
+
+```text
+When did it fail?
+Why did it fail?
+What happened immediately before failure?
+```
+
+---
+
+## 9. Scheduled Maintenance
+
+Create a scheduled task that performs something useful.
+
+Example:
+
+```text
+health check
+log cleanup
+status report
+```
+
+---
+
+## 10. Monitoring
+
+Create a basic health report containing:
+
+```text
+Hostname
+Uptime
+CPU
+Memory
+Disk
+Network
+Running services
+Listening ports
+Recent errors
+```
+
+---
+
+# 🛠 Linux Health Check Toolkit
+
+This is the second major deliverable inside the project.
+
+Create:
+
+```text
+linux-health-check/
+├── README.md
+├── health-check.sh
+├── reports/
+└── docs/
+```
+
+The script should eventually report:
+
+```text
+=========================
+Linux Health Check
+=========================
+
+Hostname:
+Uptime:
+
+CPU:
+Memory:
+Disk:
+
+IP Address:
+Default Route:
+
+Listening Ports:
+
+Running Services:
+
+Recent Errors:
+
+System Load:
+```
+
+At this stage, the script can be simple.
+
+Do **not** turn this into a Bash project yet.
+
+Volume 05 will teach you how to make it substantially better.
+
+---
+
+# 🔥 Failure Injection
+
+Your server is not complete until you can troubleshoot it.
+
+Deliberately introduce controlled failures.
+
+## Failure 01
+
+Stop your service.
+
+Observe:
+
+```text
+What does the user see?
+What does systemctl show?
+What does journalctl show?
+```
+
+Fix it.
+
+---
+
+## Failure 02
+
+Change a file permission incorrectly.
+
+Diagnose:
+
+```text
+Who owns the file?
+What permissions exist?
+Which process is accessing it?
+```
+
+---
+
+## Failure 03
+
+Block an application port.
+
+Diagnose from:
+
+```text
+client
+ ↓
+network
+ ↓
+firewall
+ ↓
+server
+ ↓
+service
+```
+
+---
+
+## Failure 04
+
+Break the service configuration.
+
+Use:
+
+```bash
+systemctl
+journalctl
+```
+
+to find the root cause.
+
+---
+
+## Failure 05
+
+Fill a test filesystem.
+
+Diagnose using:
+
+```bash
+df
+du
+```
+
+and recover it.
+
+---
+
+# 📁 Recommended Repository
+
+Create a repository such as:
+
+```text
+linux-administration-lab/
+│
+├── README.md
+│
+├── architecture/
+│   ├── system-architecture.md
+│   └── network-diagram.md
+│
+├── users/
+│   └── users-and-groups.md
+│
+├── filesystem/
+│   └── filesystem-layout.md
+│
+├── services/
+│   ├── service-file
+│   └── service-notes.md
+│
+├── security/
+│   └── hardening.md
+│
+├── monitoring/
+│   └── health-check.sh
+│
+├── troubleshooting/
+│   ├── service-failure.md
+│   ├── permission-failure.md
+│   ├── disk-failure.md
+│   └── network-failure.md
+│
+└── reports/
+    └── final-report.md
+```
+
+This repository should demonstrate that you can actually administer Linux.
+
+---
+
+# 🧠 Volume Challenge
+
+Start with a fresh Ubuntu Server VM.
+
+Your mission:
+
+> **Turn it into a usable Linux server entirely from the terminal.**
+
+It must have:
+
+```text
+✓ Multiple users
+✓ Groups
+✓ Controlled permissions
+✓ SSH access
+✓ SSH key authentication
+✓ Firewall
+✓ Persistent storage
+✓ A systemd-managed service
+✓ Service logs
+✓ Scheduled maintenance
+✓ Resource monitoring
+✓ Health-check tooling
+✓ Basic security hardening
+✓ Troubleshooting documentation
+```
+
+Then intentionally break at least **three things** and recover them.
+
+---
+
+# 🧪 Engineering Challenge
+
+Do not follow a tutorial from beginning to end.
+
+You may use:
+
+```text
+man pages
+official documentation
+search engines
+ChatGPT
+Stack Overflow
+community documentation
+```
+
+But use them as **reference material**, not as instructions to blindly copy.
+
+For every problem:
+
+```text
+Problem
+ ↓
+Hypothesis
+ ↓
+Research
+ ↓
+Experiment
+ ↓
+Evidence
+ ↓
+Solution
+ ↓
+Verification
+```
+
+Document important failures in your Volume 01 Engineer's Technical Lab.
+
+---
+
+# 🧠 Feynman Checkpoints
+
+At the end of every major section, explain the concept without looking at your notes.
+
+You should be able to explain:
+
+### Filesystem
+
+> Why does Linux have `/etc`, `/var`, `/usr`, `/home`, `/proc`, and `/dev`?
+
+### Permissions
+
+> Why does `755` mean what it means?
+
+### Processes
+
+> What is the difference between a program and a process?
+
+### systemd
+
+> What happens when you run `systemctl start nginx`?
+
+### Storage
+
+> What happens between attaching a disk and accessing `/data/file.txt`?
+
+### SSH
+
+> How does SSH key authentication work?
+
+### Logs
+
+> How would you investigate a service that suddenly stopped?
+
+### Monitoring
+
+> How would you determine whether a server is CPU-bound, memory-bound, disk-bound, or network-bound?
+
+If you cannot explain these, revisit the chapter.
+
+---
+
+# 🔁 Spaced-Repetition Checklist
+
+Review these at:
+
+```text
+Day 1
+Day 3
+Day 7
+Day 14
+Day 30
+```
+
+Important concepts:
+
+```text
+Linux architecture
+Filesystem hierarchy
+inode
+hard vs symbolic link
+users/groups
+permissions
+ACL
+process
+signal
+daemon
+systemd
+package manager
+mount
+fstab
+SSH
+environment variables
+PATH
+journald
+cron
+CPU/memory/disk monitoring
+least privilege
+Linux troubleshooting methodology
+```
+
+---
+
+# 🔗 Connection to Previous Volumes
+
+## Volume 01 — Engineering Foundations
+
+You now apply:
+
+```text
+first principles
+systems thinking
+debugging
+documentation
+experimentation
+```
+
+to a real operating system.
+
+---
+
+## Volume 02 — Computer Architecture
+
+You now see the practical implementation of:
+
+```text
+CPU
+memory
+storage
+processes
+kernel
+I/O
+```
+
+---
+
+## Volume 03 — Networking
+
+You now interact with networking directly through:
+
+```bash
+ip
+ss
+ping
+dig
+curl
+```
+
+and SSH.
+
+---
+
+# 🔗 Connection to Future Volumes
+
+## Volume 05 — Bash
+
+You will automate the administration tasks you currently perform manually.
+
+```text
+Manual Linux administration
+          ↓
+Bash automation
+```
+
+---
+
+## Volume 06 — Git
+
+Your Linux projects and scripts become version-controlled engineering artifacts.
+
+---
+
+## Volume 07 — Python
+
+You will eventually build more sophisticated system and backend tooling.
+
+---
+
+## Volume 08 — Backend Engineering
+
+Your Linux server will host actual backend services.
+
+---
+
+## Volume 12 — Docker
+
+You will need to understand:
+
+```text
+processes
+filesystem
+networking
+permissions
+resources
+namespaces
+```
+
+before Docker makes complete sense.
+
+---
+
+## Volume 14 — AWS
+
+Cloud VMs are still computers.
+
+A typical cloud server eventually becomes:
+
+```text
+AWS EC2
+   ↓
+Linux
+   ↓
+systemd
+   ↓
+application
+```
+
+---
+
+## Volume 16 — Kubernetes
+
+Kubernetes ultimately runs workloads on Linux infrastructure.
+
+Linux knowledge becomes even more important here.
+
+---
+
+# 🎯 Completion Criteria
+
+Do not move to Volume 05 merely because you finished reading.
+
+You should be able to do the following without a tutorial:
+
+### Filesystem
+
+* Navigate Linux confidently.
+* Explain major filesystem directories.
+* Create and manage files.
+* Explain hard and symbolic links.
+* Understand mount points.
+
+### Users
+
+* Create users.
+* Create groups.
+* Understand UID/GID.
+* Configure sudo access.
+
+### Permissions
+
+* Read `ls -l`.
+* Explain `rwx`.
+* Use numeric and symbolic permissions.
+* Understand directory permissions.
+* Understand ACLs.
+
+### Processes
+
+* Find processes.
+* Understand PIDs.
+* Understand parent/child relationships.
+* Send signals.
+* Manage foreground/background processes.
+
+### Packages
+
+* Install packages.
+* Remove packages.
+* Inspect dependencies.
+* Update repositories.
+
+### Services
+
+* Understand systemd.
+* Start/stop/restart services.
+* Enable/disable services.
+* Read service logs.
+* Create a basic systemd service.
+
+### Storage
+
+* Inspect disks.
+* Understand partitions.
+* Understand filesystems.
+* Mount/unmount storage.
+* Understand `/etc/fstab`.
+
+### Networking
+
+* Inspect interfaces.
+* Inspect routes.
+* Inspect listening ports.
+* Configure basic firewall rules.
+* Use SSH.
+* Use SSH keys.
+
+### Logging
+
+* Use `journalctl`.
+* Find service errors.
+* Investigate system problems through logs.
+
+### Scheduling
+
+* Create cron jobs.
+* Understand systemd timers conceptually.
+
+### Monitoring
+
+* Inspect CPU.
+* Inspect memory.
+* Inspect disk.
+* Inspect network.
+* Identify basic resource bottlenecks.
+
+### Security
+
+* Apply least privilege.
+* Harden SSH.
+* Configure a basic firewall.
+* Understand Linux security boundaries.
+
+### Troubleshooting
+
+Given:
+
+> "The application isn't working."
+
+you should know how to systematically investigate rather than randomly trying commands.
+
+---
+
+# 🎤 Interview Checkpoint
+
+You should be able to answer questions such as:
+
+### Linux
+
+* What is Linux?
+* What is the kernel?
+* What is user space vs kernel space?
+* What happens when you execute a command?
+* What is a system call?
+
+### Filesystem
+
+* What is `/etc`?
+* What is `/var`?
+* What is `/proc`?
+* What is an inode?
+* Hard link vs symbolic link?
+* What is a mount point?
+
+### Permissions
+
+* What does `755` mean?
+* What does `644` mean?
+* What is `umask`?
+* What is SUID?
+* What is SGID?
+* What is the sticky bit?
+* What is ACL?
+
+### Processes
+
+* Program vs process?
+* What is a PID?
+* What is a daemon?
+* What is a zombie process?
+* What is an orphan process?
+* What is SIGTERM?
+* SIGTERM vs SIGKILL?
+
+### systemd
+
+* What is systemd?
+* What is PID 1?
+* `start` vs `enable`?
+* How do you troubleshoot a failed service?
+
+### Storage
+
+* Partition vs filesystem?
+* What does mounting mean?
+* What is `/etc/fstab`?
+* What is swap?
+* What is LVM?
+
+### Networking
+
+* How do you find the server's IP?
+* How do you inspect routes?
+* How do you find listening ports?
+* How does SSH authentication work?
+* How do you troubleshoot a connection failure?
+
+### Troubleshooting
+
+> A service is not responding. What do you check?
+
+A strong answer should follow a structured investigation rather than listing random commands.
+
+---
+
+# 🏁 Final Mental Model
+
+By the end of Volume 04, you should see a Linux server like this:
+
+```text
+                    Linux Server
+                         │
+        ┌────────────────┼────────────────┐
+        │                │                │
+     Users           Processes         Storage
+        │                │                │
+ Permissions         systemd          Filesystems
+        │                │                │
+        └───────────────┼────────────────┘
+                        │
+                    Networking
+                        │
+                       SSH
+                        │
+                    Firewall
+                        │
+                     Logging
+                        │
+                   Monitoring
+                        │
+                  Troubleshooting
+```
+
+And the operational mindset should become:
+
+```text
+Observe
+  ↓
+Understand
+  ↓
+Change
+  ↓
+Verify
+  ↓
+Monitor
+  ↓
+Document
+```
+
+That is Linux administration.
+
+Not memorizing commands.
+
+---
+
+# 🚦 Next Volume
+
+After completing this volume:
+
+**Volume 05 — Bash & Shell Automation**
+
+will take the manual work you performed here and teach you to automate it.
+
+The progression becomes:
+
+```text
+Volume 04
+Manual Linux Administration
+        ↓
+Volume 05
+Bash Automation
+        ↓
+Volume 06
+Git & Collaborative Engineering
+        ↓
+Volume 07
+Python for Backend & AI Engineering
+```
+
+The goal is to move from:
+
+> **"I know how to operate a Linux server."**
+
+to:
+
+> **"I can make the Linux server perform repetitive operational work automatically."**

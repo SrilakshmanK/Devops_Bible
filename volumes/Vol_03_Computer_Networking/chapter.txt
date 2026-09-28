@@ -1,0 +1,2136 @@
+# 📘 Volume 03 — Computer Networking & Internet Fundamentals
+
+## 🎯 Objective
+
+Build a strong mental model of how computers communicate, how packets travel across networks, how Internet services work, and how to troubleshoot network failures.
+
+By the end of this volume, you should be able to reason about a network from:
+
+```text
+Application
+    ↓
+Transport
+    ↓
+Internet
+    ↓
+Network Interface
+    ↓
+Local Network
+    ↓
+Router
+    ↓
+ISP
+    ↓
+Internet
+    ↓
+Remote Server
+```
+
+You should understand not only **what** each component does, but **why it exists**.
+
+---
+
+# Volume Philosophy
+
+Do not memorize:
+
+> "TCP is reliable and UDP is fast."
+
+Instead understand:
+
+* What problem does TCP solve?
+* What information must be maintained to provide reliability?
+* What does that maintenance cost?
+* Why might an application choose UDP?
+* What happens when packets are lost?
+* Who handles the loss?
+
+Similarly, don't memorize:
+
+> "DNS converts domain names into IP addresses."
+
+Understand:
+
+```text
+Browser
+ ↓
+DNS Resolver
+ ↓
+DNS hierarchy
+ ↓
+Authoritative DNS
+ ↓
+IP address
+ ↓
+Connection
+```
+
+The goal is to build a **packet-level mental model**.
+
+---
+
+# Chapter 1 — Networking Fundamentals
+
+## Concepts
+
+### 1.1 What Is a Network?
+
+### 1.2 Why Networking Exists
+
+### 1.3 Communication Between Computers
+
+### 1.4 Network Components
+
+* Host
+* Client
+* Server
+* Switch
+* Router
+* Firewall
+* Access Point
+* Modem
+* Network Interface
+
+### 1.5 Types of Networks
+
+* PAN
+* LAN
+* WLAN
+* MAN
+* WAN
+* Internet
+
+### 1.6 Client-Server Architecture
+
+### 1.7 Peer-to-Peer Architecture
+
+### 1.8 Internet vs Intranet
+
+### 1.9 Bandwidth
+
+### 1.10 Latency
+
+### 1.11 Throughput
+
+### 1.12 Jitter
+
+### 1.13 Packet Loss
+
+### 1.14 Availability
+
+### 1.15 Network Performance
+
+Understand the difference between:
+
+```text
+Bandwidth
+Latency
+Throughput
+Jitter
+Packet Loss
+```
+
+These are not interchangeable.
+
+## Practical Exercise
+
+Use your Ubuntu machine to investigate your current network.
+
+Find:
+
+* Network interfaces
+* Local IP address
+* Default gateway
+* DNS configuration
+* Network connectivity
+
+Useful tools:
+
+```bash
+ip addr
+ip route
+resolvectl status
+ping
+```
+
+Do not just run the commands.
+
+Understand what every important field means.
+
+## Mini Task
+
+Compare:
+
+```text
+High bandwidth + high latency
+Low bandwidth + low latency
+```
+
+Give a real-world example where each could be useful.
+
+---
+
+# Chapter 2 — Network Models
+
+## Concepts
+
+### 2.1 Why Network Models Exist
+
+### 2.2 Abstraction Layers
+
+### 2.3 OSI Model
+
+The seven layers:
+
+```text
+7. Application
+6. Presentation
+5. Session
+4. Transport
+3. Network
+2. Data Link
+1. Physical
+```
+
+Understand the responsibility of each layer.
+
+Do not simply memorize the names.
+
+### 2.4 TCP/IP Model
+
+Understand the practical Internet stack.
+
+### 2.5 OSI vs TCP/IP
+
+### 2.6 Encapsulation
+
+Understand:
+
+```text
+Application Data
+      ↓
+Transport Segment
+      ↓
+IP Packet
+      ↓
+Ethernet Frame
+      ↓
+Bits
+```
+
+### 2.7 Decapsulation
+
+Understand the reverse process.
+
+### 2.8 Protocol Stack
+
+### 2.9 Data Flow Through Layers
+
+## Practical Exercise
+
+Draw:
+
+```text
+Application
+    ↓
+TCP
+    ↓
+IP
+    ↓
+Ethernet
+    ↓
+Physical transmission
+```
+
+Then draw the reverse process on the receiving machine.
+
+## Mini Task
+
+Explain why a web application developer doesn't normally need to manually construct Ethernet frames.
+
+---
+
+# Chapter 3 — Physical Layer & Data Link Layer
+
+## Concepts
+
+### 3.1 Physical Layer
+
+Understand:
+
+* Signals
+* Cables
+* Fiber
+* Radio
+* Bits
+* Transmission
+
+### 3.2 Network Interface Card
+
+### 3.3 MAC Address
+
+### 3.4 Ethernet
+
+### 3.5 Ethernet Frames
+
+Understand the high-level frame structure.
+
+### 3.6 Switches
+
+Understand how a switch forwards frames.
+
+### 3.7 MAC Address Table
+
+### 3.8 Broadcast
+
+### 3.9 Broadcast Domain
+
+### 3.10 Collision Domain
+
+### 3.11 ARP
+
+Understand:
+
+```text
+IP address
+   ↓
+ARP
+   ↓
+MAC address
+```
+
+### 3.12 ARP Cache
+
+### 3.13 VLAN Introduction
+
+Understand why VLANs exist.
+
+## Ubuntu Practical Exercise
+
+Use:
+
+```bash
+ip link
+ip neigh
+```
+
+Investigate:
+
+* Your network interface
+* MAC address
+* Neighbor entries
+
+## Packet Investigation
+
+Use Wireshark to observe ARP traffic.
+
+Identify:
+
+* ARP request
+* ARP response
+* Source MAC
+* Destination MAC
+* Source IP
+* Destination IP
+
+## Mini Task
+
+Explain:
+
+> Why does a device need both an IP address and a MAC address?
+
+---
+
+# Chapter 4 — IP Addressing & Routing
+
+This is one of the most important chapters in the entire volume.
+
+## Concepts
+
+### 4.1 IP Address
+
+### 4.2 IPv4
+
+### 4.3 IPv6
+
+### 4.4 Public vs Private IP
+
+Private IPv4 ranges:
+
+```text
+10.0.0.0/8
+
+172.16.0.0/12
+
+192.168.0.0/16
+```
+
+Understand why private addresses exist.
+
+### 4.5 Network ID
+
+### 4.6 Host ID
+
+### 4.7 Subnet Mask
+
+### 4.8 CIDR
+
+Examples:
+
+```text
+192.168.1.0/24
+10.0.0.0/8
+172.16.0.0/16
+```
+
+### 4.9 Subnetting
+
+Learn:
+
+* Network address
+* Broadcast address
+* Usable addresses
+* Prefix length
+* Number of subnets
+* Number of hosts
+
+### 4.10 Default Gateway
+
+### 4.11 Routing
+
+### 4.12 Routing Tables
+
+### 4.13 Routers
+
+### 4.14 Static Routing
+
+### 4.15 Dynamic Routing — Introduction
+
+### 4.16 ICMP
+
+### 4.17 NAT
+
+### 4.18 PAT
+
+Understand:
+
+```text
+Private network
+      ↓
+NAT
+      ↓
+Public Internet
+```
+
+## Ubuntu Practical Exercise
+
+Run:
+
+```bash
+ip addr
+ip route
+```
+
+Identify:
+
+* Your IP
+* Prefix
+* Network
+* Default gateway
+* Interface
+
+## Subnetting Practice
+
+Solve progressively harder problems:
+
+```text
+192.168.1.0/24
+
+192.168.1.0/26
+
+10.10.0.0/16
+
+172.16.20.0/20
+```
+
+Calculate:
+
+* Network address
+* Broadcast
+* Host range
+* Number of hosts
+
+## Mini Task
+
+Explain what happens when your Ubuntu machine wants to communicate with:
+
+1. Another device on the same subnet.
+2. A device on another network.
+
+---
+
+# Chapter 5 — Transport Layer
+
+## Concepts
+
+### 5.1 Why Transport Layer Exists
+
+### 5.2 TCP
+
+### 5.3 UDP
+
+### 5.4 Ports
+
+### 5.5 Sockets
+
+### 5.6 TCP Connection
+
+### 5.7 Three-Way Handshake
+
+```text
+Client                Server
+
+  SYN  ────────────────→
+       ←──────────── SYN-ACK
+  ACK  ────────────────→
+```
+
+### 5.8 TCP Sequence Numbers
+
+### 5.9 Acknowledgements
+
+### 5.10 Retransmission
+
+### 5.11 Reliability
+
+### 5.12 Flow Control
+
+### 5.13 Congestion Control
+
+### 5.14 TCP Connection Termination
+
+### 5.15 UDP
+
+### 5.16 TCP vs UDP
+
+### 5.17 Ports
+
+Understand:
+
+```text
+IP address
+     +
+Port
+     ↓
+Service endpoint
+```
+
+### 5.18 Sockets
+
+Understand the relationship between:
+
+```text
+IP
++
+Port
++
+Protocol
+```
+
+## Ubuntu Practical Exercise
+
+Find listening ports:
+
+```bash
+ss -tulpn
+```
+
+Investigate:
+
+* Which process owns a port?
+* TCP or UDP?
+* Local address?
+* Listening state?
+
+## Practical Experiment
+
+Start a simple server.
+
+Connect to it from another terminal.
+
+Observe the connection.
+
+## Packet Capture
+
+Use Wireshark to capture a TCP connection.
+
+Identify:
+
+* SYN
+* SYN-ACK
+* ACK
+* Data
+* FIN
+
+## Mini Task
+
+Explain why two applications can use the same port number on different machines.
+
+---
+
+# Chapter 6 — Application Layer Protocols
+
+## Concepts
+
+### 6.1 DNS
+
+Understand:
+
+```text
+Domain
+ ↓
+Resolver
+ ↓
+DNS hierarchy
+ ↓
+Authoritative server
+ ↓
+IP address
+```
+
+### 6.2 DNS Records
+
+Understand:
+
+* A
+* AAAA
+* CNAME
+* MX
+* TXT
+* NS
+
+### 6.3 TTL
+
+### 6.4 DHCP
+
+Understand:
+
+```text
+Discover
+Offer
+Request
+Acknowledgement
+```
+
+### 6.5 HTTP
+
+Understand:
+
+* Request
+* Response
+* Methods
+* Headers
+* Body
+* Status codes
+
+### 6.6 HTTPS
+
+Understand how HTTP gets protected by TLS.
+
+### 6.7 TLS
+
+Understand at a conceptual level:
+
+* Encryption
+* Certificates
+* Authentication
+* Key exchange
+* Secure session
+
+### 6.8 SSH
+
+### 6.9 SFTP
+
+### 6.10 FTP
+
+Understand why FTP differs from SFTP.
+
+### 6.11 SMTP
+
+### 6.12 POP3
+
+### 6.13 IMAP
+
+### 6.14 NTP
+
+### 6.15 Telnet
+
+Understand why Telnet is insecure for modern administration.
+
+### 6.16 WebSockets
+
+Introduction to persistent bidirectional communication.
+
+## Ubuntu Practical Exercises
+
+### DNS
+
+```bash
+dig example.com
+```
+
+Investigate:
+
+* A
+* AAAA
+* CNAME
+* MX
+* TTL
+
+### HTTP
+
+```bash
+curl -v https://example.com
+```
+
+Inspect:
+
+* DNS resolution
+* Connection
+* TLS
+* HTTP request
+* HTTP response
+
+### SSH
+
+Connect to a Linux machine or VM using SSH.
+
+## Mini Task
+
+Explain the complete sequence when you type:
+
+```text
+https://example.com
+```
+
+into a browser.
+
+---
+
+# Chapter 7 — The Complete Website Journey
+
+This chapter connects everything you've learned so far.
+
+## Concepts
+
+Trace:
+
+```text
+User
+ ↓
+Browser
+ ↓
+DNS
+ ↓
+IP
+ ↓
+Routing
+ ↓
+TCP
+ ↓
+TLS
+ ↓
+HTTP
+ ↓
+Server
+ ↓
+Application
+ ↓
+Database
+ ↓
+Response
+```
+
+Understand every stage.
+
+## Detailed Sequence
+
+For:
+
+```text
+https://example.com
+```
+
+reason through:
+
+### Step 1
+
+Browser checks local information/cache.
+
+### Step 2
+
+DNS resolution.
+
+### Step 3
+
+Determine destination IP.
+
+### Step 4
+
+Determine local route.
+
+### Step 5
+
+ARP if required.
+
+### Step 6
+
+TCP connection.
+
+### Step 7
+
+TLS handshake.
+
+### Step 8
+
+HTTP request.
+
+### Step 9
+
+Server processes request.
+
+### Step 10
+
+Server returns response.
+
+### Step 11
+
+Browser processes response.
+
+## Practical Exercise
+
+Use:
+
+```bash
+curl -v https://example.com
+```
+
+and:
+
+```bash
+dig example.com
+```
+
+Then draw the complete journey.
+
+## Mini Task
+
+Explain where each of these occurs:
+
+```text
+DNS
+TCP
+TLS
+HTTP
+IP
+Ethernet
+```
+
+---
+
+# Chapter 8 — Internet Infrastructure
+
+## Concepts
+
+### 8.1 How the Internet Is Connected
+
+### 8.2 Internet Service Providers
+
+### 8.3 Autonomous Systems
+
+### 8.4 AS Numbers
+
+### 8.5 BGP — Introduction
+
+Understand BGP as the protocol used to exchange routing information between autonomous systems.
+
+Do not attempt to become a BGP engineer here.
+
+### 8.6 Internet Exchange Points
+
+### 8.7 Undersea Cables
+
+### 8.8 Data Centers
+
+### 8.9 CDNs
+
+### 8.10 Edge Computing
+
+### 8.11 Anycast — Introduction
+
+### 8.12 Global Traffic Routing
+
+## Practical Exercise
+
+Run:
+
+```bash
+traceroute example.com
+```
+
+or:
+
+```bash
+tracepath example.com
+```
+
+on Ubuntu.
+
+Observe the path.
+
+Understand that not every hop will necessarily reveal itself.
+
+## Mini Task
+
+Explain why a request from India to a server in the US does not travel through one giant direct connection.
+
+---
+
+# Chapter 9 — Network Security Fundamentals
+
+## Concepts
+
+### 9.1 Why Network Security Exists
+
+### 9.2 Threat Surface
+
+### 9.3 Firewall
+
+### 9.4 Stateless Firewall
+
+### 9.5 Stateful Firewall
+
+### 9.6 Access Control Lists
+
+### 9.7 Ports and Exposure
+
+### 9.8 VPN
+
+### 9.9 Proxy
+
+### 9.10 Reverse Proxy
+
+### 9.11 Network Segmentation
+
+### 9.12 DMZ
+
+### 9.13 IDS
+
+### 9.14 IPS
+
+### 9.15 Zero Trust — Introduction
+
+### 9.16 Encryption in Transit
+
+### 9.17 Least Privilege
+
+## Ubuntu Practical Exercise
+
+Inspect firewall status.
+
+If using Ubuntu's standard firewall tooling:
+
+```bash
+sudo ufw status
+```
+
+Understand the output.
+
+Do not blindly add firewall rules to your primary system.
+
+Use a VM for destructive or risky experiments.
+
+## Mini Task
+
+Explain the difference between:
+
+```text
+Firewall
+Proxy
+Reverse Proxy
+VPN
+```
+
+---
+
+# Chapter 10 — Reverse Proxies & Load Balancing
+
+This chapter prepares you directly for later:
+
+* Nginx
+* AWS
+* Kubernetes
+* production deployments
+
+## Concepts
+
+### 10.1 Why Load Balancers Exist
+
+### 10.2 Reverse Proxy
+
+### 10.3 Forward Proxy
+
+### 10.4 Layer 4 Load Balancing
+
+### 10.5 Layer 7 Load Balancing
+
+### 10.6 Health Checks
+
+### 10.7 Load Balancing Algorithms
+
+* Round robin
+* Least connections
+* Weighted routing
+* Hash-based approaches
+
+### 10.8 Sticky Sessions
+
+### 10.9 High Availability
+
+### 10.10 Failover
+
+### 10.11 Reverse Proxy vs Load Balancer
+
+### 10.12 TLS Termination
+
+### 10.13 Connection to Application Servers
+
+Understand:
+
+```text
+Client
+   ↓
+Reverse Proxy / Load Balancer
+   ↓
+Backend Server
+```
+
+## Practical Exercise
+
+Create two simple local services:
+
+```text
+localhost:3000
+localhost:3001
+```
+
+Put a reverse proxy in front of them.
+
+Observe the request flow.
+
+## Mini Task
+
+Explain why a production system might place Nginx or a cloud load balancer in front of an application.
+
+---
+
+# Chapter 11 — Cloud Networking Fundamentals
+
+We introduce cloud networking here conceptually.
+
+The detailed AWS implementation comes later.
+
+## Concepts
+
+### 11.1 Physical Network vs Virtual Network
+
+### 11.2 VPC
+
+### 11.3 Subnets
+
+### 11.4 Route Tables
+
+### 11.5 Internet Gateway
+
+### 11.6 NAT Gateway
+
+### 11.7 Security Groups
+
+### 11.8 Network ACLs
+
+### 11.9 Public Subnet
+
+### 11.10 Private Subnet
+
+### 11.11 Bastion Host
+
+### 11.12 Private Endpoints
+
+### 11.13 Availability Zones
+
+### 11.14 Basic Cloud Network Architecture
+
+Understand:
+
+```text
+Internet
+   ↓
+Load Balancer
+   ↓
+Public / Application Layer
+   ↓
+Private Services
+   ↓
+Database
+```
+
+## Practical Exercise
+
+Draw a basic cloud network:
+
+```text
+Internet
+   ↓
+Public Subnet
+   ↓
+Application
+   ↓
+Private Subnet
+   ↓
+Database
+```
+
+Identify which components should generally be publicly accessible and which should not.
+
+## Mini Task
+
+Explain why a production database generally should not be directly exposed to the public Internet.
+
+---
+
+# Chapter 12 — Network Troubleshooting
+
+This is one of the most important practical chapters.
+
+## Concepts
+
+### 12.1 Troubleshooting Methodology
+
+Use:
+
+```text
+Observe
+ ↓
+Define the failure
+ ↓
+Determine scope
+ ↓
+Check local configuration
+ ↓
+Check connectivity
+ ↓
+Check DNS
+ ↓
+Check routing
+ ↓
+Check ports
+ ↓
+Check application
+ ↓
+Check TLS
+ ↓
+Identify root cause
+```
+
+### 12.2 DNS Failures
+
+### 12.3 Connectivity Failures
+
+### 12.4 Routing Failures
+
+### 12.5 Port Failures
+
+### 12.6 Firewall Failures
+
+### 12.7 TLS Failures
+
+### 12.8 Packet Loss
+
+### 12.9 Latency
+
+### 12.10 Network Performance
+
+### 12.11 Application vs Network Failure
+
+### 12.12 Using Evidence Instead of Guessing
+
+## Ubuntu Diagnostic Toolkit
+
+Become comfortable with:
+
+```bash
+ip
+ping
+ss
+ip neigh
+ip route
+dig
+curl
+traceroute
+tracepath
+nc
+tcpdump
+```
+
+And later:
+
+```bash
+wireshark
+```
+
+## Practical Exercise
+
+Create controlled failures.
+
+Examples:
+
+* Wrong DNS server
+* Closed port
+* Wrong route
+* Firewall blocking traffic
+* Service not listening
+* Wrong hostname
+
+Then diagnose them systematically.
+
+## Mini Task
+
+For each failure, document:
+
+```text
+Symptom
+Evidence
+Hypothesis
+Command/Test
+Result
+Root Cause
+Fix
+```
+
+---
+
+# Chapter 13 — Network Performance
+
+## Concepts
+
+### 13.1 Latency
+
+### 13.2 Bandwidth
+
+### 13.3 Throughput
+
+### 13.4 Packet Loss
+
+### 13.5 Jitter
+
+### 13.6 Round Trip Time
+
+### 13.7 Network Bottlenecks
+
+### 13.8 Connection Overhead
+
+### 13.9 TCP Performance
+
+### 13.10 HTTP Connection Reuse
+
+### 13.11 Keep-Alive
+
+### 13.12 Compression
+
+### 13.13 CDN and Edge Effects
+
+## AI Connection
+
+Later, AI applications will have additional latency components:
+
+```text
+User
+ ↓
+API latency
+ ↓
+Retrieval latency
+ ↓
+Vector database latency
+ ↓
+LLM API latency
+ ↓
+Response
+```
+
+Understanding ordinary network latency now will make AI latency analysis much easier later.
+
+## Practical Exercise
+
+Measure latency to several destinations.
+
+Compare:
+
+* Local
+* Same country
+* Different continent
+
+Record:
+
+```text
+Destination
+RTT
+Packet loss
+Approximate route
+Observations
+```
+
+---
+
+# 🧪 Hands-on Labs
+
+Complete these throughout the volume.
+
+## Lab 1 — Interface Investigation
+
+Inspect Ubuntu network interfaces.
+
+## Lab 2 — IP Configuration
+
+Identify:
+
+* IP
+* CIDR
+* Gateway
+* DNS
+
+## Lab 3 — ARP Investigation
+
+Inspect the neighbor table.
+
+## Lab 4 — Subnetting
+
+Complete progressively harder subnetting problems.
+
+## Lab 5 — Routing
+
+Inspect and understand:
+
+```bash
+ip route
+```
+
+## Lab 6 — TCP Investigation
+
+Capture a TCP handshake.
+
+## Lab 7 — DNS Investigation
+
+Use `dig` to inspect multiple domains.
+
+## Lab 8 — HTTP Investigation
+
+Use:
+
+```bash
+curl -v
+```
+
+to inspect an HTTPS connection.
+
+## Lab 9 — SSH
+
+Connect between Ubuntu machines/VMs.
+
+## Lab 10 — Packet Capture
+
+Use Wireshark/tcpdump.
+
+Capture:
+
+* ARP
+* DNS
+* TCP
+* HTTP where safely possible
+
+## Lab 11 — Reverse Proxy
+
+Create a simple local reverse proxy.
+
+## Lab 12 — Firewall
+
+Create and test controlled firewall rules inside a VM.
+
+## Lab 13 — Routing Failure
+
+Break a controlled network configuration and diagnose it.
+
+## Lab 14 — DNS Failure
+
+Simulate DNS failure and troubleshoot it.
+
+## Lab 15 — Port Failure
+
+Stop a service and diagnose why the connection fails.
+
+---
+
+# 🚀 Volume Mini-Project
+
+# Project — Virtual Network & Packet Journey Lab
+
+Instead of three unrelated projects, build **one small virtual network laboratory** that lets you demonstrate the concepts from the entire volume.
+
+## Objective
+
+Create multiple Ubuntu virtual machines connected through a virtual network.
+
+You will configure and investigate:
+
+```text
+Network Interfaces
+      ↓
+IP Addressing
+      ↓
+Subnetting
+      ↓
+ARP
+      ↓
+Routing
+      ↓
+TCP
+      ↓
+DNS
+      ↓
+HTTP
+      ↓
+SSH
+      ↓
+Firewall
+      ↓
+Reverse Proxy
+      ↓
+Packet Capture
+```
+
+---
+
+# Architecture
+
+Start with:
+
+```text
+                    Host Ubuntu
+                         │
+                Virtual Network
+                         │
+          ┌──────────────┼──────────────┐
+          │              │              │
+          ▼              ▼              ▼
+       VM-Client      VM-Server       VM-Router
+          │              │              │
+          │              └──────┬───────┘
+          │                     │
+          └─────────────────────┘
+```
+
+The exact VM topology can be adjusted based on your computer's resources.
+
+Do not build an unnecessarily complicated topology.
+
+---
+
+# Phase 1 — Create the Virtual Machines
+
+Create at least:
+
+```text
+VM 1 — Client
+VM 2 — Server
+```
+
+A third router VM is optional depending on your machine's resources.
+
+---
+
+# Phase 2 — Configure Networking
+
+Assign addresses using a deliberate subnet.
+
+Example:
+
+```text
+Network:
+192.168.50.0/24
+
+Client:
+192.168.50.10
+
+Server:
+192.168.50.20
+
+Router:
+192.168.50.1
+```
+
+You may use different addresses.
+
+The important thing is that you understand them.
+
+---
+
+# Phase 3 — Verify Connectivity
+
+From the client:
+
+```bash
+ping <server-ip>
+```
+
+Verify:
+
+* Connectivity
+* ARP
+* Routing
+
+Inspect:
+
+```bash
+ip addr
+ip route
+ip neigh
+```
+
+---
+
+# Phase 4 — Run a Service
+
+Run a simple HTTP service on the server.
+
+For example, a minimal Python HTTP server.
+
+Then access it from the client.
+
+```text
+Client
+  ↓
+TCP
+  ↓
+Server
+  ↓
+HTTP Service
+```
+
+---
+
+# Phase 5 — SSH
+
+Configure SSH between the machines.
+
+Eventually use SSH key authentication.
+
+Understand:
+
+```text
+Client
+ ↓
+TCP
+ ↓
+Port 22
+ ↓
+SSH
+ ↓
+Server
+```
+
+---
+
+# Phase 6 — Capture Packets
+
+Use:
+
+```text
+Wireshark
+```
+
+or:
+
+```bash
+tcpdump
+```
+
+Capture:
+
+### ARP
+
+Observe:
+
+```text
+Who has X.X.X.X?
+```
+
+### DNS
+
+Observe DNS queries.
+
+### TCP
+
+Observe:
+
+```text
+SYN
+SYN-ACK
+ACK
+```
+
+### HTTP
+
+Observe HTTP request/response where appropriate.
+
+### SSH
+
+Observe the connection without expecting to see encrypted application contents.
+
+---
+
+# Phase 7 — Reverse Proxy
+
+Add a reverse proxy.
+
+Architecture:
+
+```text
+Client
+  ↓
+Reverse Proxy
+  ↓
+Application Server
+```
+
+The proxy should forward traffic to your HTTP service.
+
+---
+
+# Phase 8 — Introduce Failures
+
+Deliberately break the system.
+
+Examples:
+
+### Failure 1
+
+Stop the HTTP service.
+
+### Failure 2
+
+Block the application port.
+
+### Failure 3
+
+Use an incorrect IP.
+
+### Failure 4
+
+Break DNS resolution.
+
+### Failure 5
+
+Change a route.
+
+### Failure 6
+
+Use an incorrect proxy destination.
+
+Then troubleshoot each failure.
+
+---
+
+# Phase 9 — Network Investigation Report
+
+For every failure record:
+
+```text
+Failure
+ ↓
+Observed symptom
+ ↓
+Initial hypothesis
+ ↓
+Evidence
+ ↓
+Commands used
+ ↓
+Packet evidence
+ ↓
+Root cause
+ ↓
+Fix
+ ↓
+Verification
+```
+
+This is where Volume 01's debugging methodology gets applied.
+
+---
+
+# 📊 Final Project Deliverables
+
+Your repository should contain:
+
+```text
+virtual-network-lab/
+│
+├── README.md
+│
+├── architecture/
+│   ├── network-diagram.png
+│   └── packet-flow.md
+│
+├── configuration/
+│   ├── client.md
+│   ├── server.md
+│   └── network.md
+│
+├── captures/
+│   ├── arp/
+│   ├── dns/
+│   ├── tcp/
+│   └── http/
+│
+├── troubleshooting/
+│   ├── dns-failure.md
+│   ├── port-failure.md
+│   ├── routing-failure.md
+│   └── service-failure.md
+│
+└── report/
+    └── final-report.md
+```
+
+---
+
+# 🧠 Volume Challenge
+
+## Explain the Complete Journey of a Web Request
+
+You should be able to explain this without notes:
+
+```text
+User enters URL
+        ↓
+Browser
+        ↓
+DNS resolution
+        ↓
+Destination IP
+        ↓
+Routing decision
+        ↓
+ARP / local network
+        ↓
+Ethernet frame
+        ↓
+Router
+        ↓
+ISP
+        ↓
+Internet
+        ↓
+Remote network
+        ↓
+Server
+        ↓
+TCP connection
+        ↓
+TLS
+        ↓
+HTTP request
+        ↓
+Application
+        ↓
+Database / other services
+        ↓
+HTTP response
+        ↓
+TLS
+        ↓
+TCP
+        ↓
+Internet
+        ↓
+Client
+        ↓
+Browser
+```
+
+For every major step, you should be able to answer:
+
+1. What is happening?
+2. Which protocol is involved?
+3. Which layer is responsible?
+4. What could fail?
+5. How would you troubleshoot it?
+
+---
+
+# 🎯 Volume Completion Criteria
+
+Do not move to Volume 04 until you can:
+
+### Fundamentals
+
+* Explain what a network is.
+* Explain bandwidth vs latency vs throughput.
+* Explain packet loss and jitter.
+
+### Models
+
+* Explain OSI.
+* Explain TCP/IP.
+* Explain encapsulation/decapsulation.
+
+### Data Link
+
+* Explain MAC addresses.
+* Explain Ethernet frames.
+* Explain switches.
+* Explain ARP.
+* Explain broadcast domains.
+
+### IP
+
+* Understand IPv4.
+* Understand IPv6 at a foundational level.
+* Understand private/public IP.
+* Calculate basic subnets.
+* Understand CIDR.
+* Understand routing tables.
+* Understand default gateways.
+* Understand NAT/PAT.
+
+### Transport
+
+* Explain TCP.
+* Explain UDP.
+* Explain ports.
+* Explain sockets.
+* Explain TCP handshake.
+* Explain TCP termination.
+* Explain reliability.
+
+### Application
+
+* Explain DNS.
+* Explain DHCP.
+* Explain HTTP.
+* Explain HTTPS.
+* Explain TLS conceptually.
+* Explain SSH.
+* Explain WebSockets at a high level.
+
+### Infrastructure
+
+* Explain ISP.
+* Explain autonomous systems.
+* Explain BGP conceptually.
+* Explain CDN.
+* Explain reverse proxy.
+* Explain load balancer.
+
+### Security
+
+* Explain firewalls.
+* Explain VPN.
+* Explain proxy vs reverse proxy.
+* Explain network segmentation.
+* Explain public vs private services.
+
+### Cloud
+
+* Explain VPC.
+* Explain subnets.
+* Explain route tables.
+* Explain Internet Gateway.
+* Explain NAT Gateway.
+* Explain Security Groups conceptually.
+
+### Troubleshooting
+
+Given a broken service, you should know how to investigate:
+
+```text
+DNS
+ ↓
+IP
+ ↓
+Route
+ ↓
+Port
+ ↓
+Firewall
+ ↓
+TLS
+ ↓
+Application
+```
+
+---
+
+# 🎤 Volume Interview Checkpoint
+
+You should eventually be able to answer:
+
+### Fundamentals
+
+* What is a network?
+* Bandwidth vs latency?
+* What is throughput?
+* What is packet loss?
+* What is jitter?
+
+### OSI/TCP-IP
+
+* Explain the OSI model.
+* What is encapsulation?
+* Why do we need layers?
+
+### IP
+
+* What is an IP address?
+* Public vs private IP?
+* What is CIDR?
+* What is a subnet?
+* What is a default gateway?
+* What is NAT?
+* What is PAT?
+
+### TCP
+
+* TCP vs UDP?
+* Explain the TCP three-way handshake.
+* What happens when a TCP packet is lost?
+* What is a port?
+* What is a socket?
+
+### DNS
+
+* What happens when you enter a domain name?
+* What is an A record?
+* What is a CNAME?
+* What is TTL?
+* Recursive vs authoritative DNS?
+
+### HTTP/TLS
+
+* HTTP vs HTTPS?
+* What happens during TLS?
+* What is a reverse proxy?
+* What is TLS termination?
+
+### Infrastructure
+
+* What does a load balancer do?
+* Layer 4 vs Layer 7?
+* What is a CDN?
+* What is BGP at a high level?
+
+### Troubleshooting
+
+* A website isn't loading. How do you investigate?
+* DNS works but the website doesn't. What could be wrong?
+* Port 443 is unreachable. What would you check?
+* Ping works but HTTP doesn't. What could that mean?
+
+You should answer using **reasoning and packet flow**, not memorized definitions.
+
+---
+
+# 🔗 Connection to Later Volumes
+
+This volume becomes a prerequisite for almost everything that follows.
+
+```text
+Volume 03 — Networking
+          │
+          ├────────→ Linux
+          │
+          ├────────→ Python / FastAPI
+          │
+          ├────────→ Docker
+          │
+          ├────────→ CI/CD
+          │
+          ├────────→ AWS
+          │
+          ├────────→ Terraform
+          │
+          ├────────→ Kubernetes
+          │
+          ├────────→ Security
+          │
+          ├────────→ Observability
+          │
+          └────────→ AI Infrastructure
+```
+
+### Docker
+
+You'll understand:
+
+* Container networking
+* Ports
+* Bridge networks
+* Host networking
+* Service discovery
+
+### FastAPI
+
+You'll understand:
+
+```text
+Client
+ ↓
+IP
+ ↓
+Port
+ ↓
+TCP
+ ↓
+HTTP
+ ↓
+FastAPI
+```
+
+### AWS
+
+You'll understand:
+
+* VPC
+* Subnets
+* Routes
+* Security Groups
+* Load Balancers
+
+### Kubernetes
+
+You'll understand:
+
+* Services
+* Cluster networking
+* Ingress
+* DNS
+* Network policies
+
+### AI/RAG
+
+You'll understand:
+
+```text
+Frontend
+ ↓
+API
+ ↓
+AI Service
+ ↓
+Vector Database
+ ↓
+LLM API
+```
+
+and the network path between every service.
+
+---
+
+# 🚫 What We Do NOT Go Deep Into Yet
+
+Do not turn this volume into a networking-specialist curriculum.
+
+We will not deeply study:
+
+* Advanced BGP
+* MPLS
+* Advanced routing protocols
+* Advanced switching
+* SD-WAN
+* Carrier networking
+* Advanced IPv6 engineering
+* Deep TLS cryptography
+* Advanced Wireshark analysis
+* Network engineering automation
+
+Those can be explored later if your career direction requires them.
+
+Our goal is:
+
+> **Strong networking fundamentals for software, DevOps, cloud, distributed systems, and AI infrastructure.**
+
+---
+
+# 🏁 Final Outcome
+
+After Volume 03, you should be able to look at a deployed application and mentally trace:
+
+```text
+User
+ ↓
+DNS
+ ↓
+IP
+ ↓
+Route
+ ↓
+TCP
+ ↓
+TLS
+ ↓
+HTTP
+ ↓
+Reverse Proxy / Load Balancer
+ ↓
+Application
+ ↓
+Database / AI Service
+```
+
+and reason about what is happening at every major layer.
+
+That mental model will become one of the most valuable foundations for the rest of this roadmap.
+
+---
+
+# Volume 03 Completion Checklist
+
+* [ ] Networking fundamentals understood
+* [ ] OSI model understood
+* [ ] TCP/IP model understood
+* [ ] Encapsulation understood
+* [ ] Ethernet understood
+* [ ] MAC addresses understood
+* [ ] ARP understood
+* [ ] IPv4 understood
+* [ ] CIDR understood
+* [ ] Subnetting practiced
+* [ ] Routing understood
+* [ ] NAT/PAT understood
+* [ ] TCP understood
+* [ ] UDP understood
+* [ ] Ports/sockets understood
+* [ ] DNS understood
+* [ ] HTTP understood
+* [ ] HTTPS/TLS understood
+* [ ] SSH understood
+* [ ] Internet infrastructure understood
+* [ ] Firewalls understood
+* [ ] Reverse proxies understood
+* [ ] Load balancing understood
+* [ ] Cloud networking fundamentals understood
+* [ ] Ubuntu networking tools practiced
+* [ ] Wireshark/tcpdump practiced
+* [ ] Virtual Network Lab completed
+* [ ] Network failures intentionally created and diagnosed
+* [ ] Website journey explained from memory
+* [ ] Interview checkpoint passed

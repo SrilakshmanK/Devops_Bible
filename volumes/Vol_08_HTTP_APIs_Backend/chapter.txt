@@ -1,0 +1,3564 @@
+# 📘 Volume 08 — HTTP, APIs & Backend Service Engineering
+
+## 🎯 Objective
+
+Build a deep understanding of how backend services communicate over networks and learn how to design, implement, test, secure, document, and operate production-quality APIs.
+
+This volume connects everything you have learned so far:
+
+* **V02** → computer and OS fundamentals
+* **V03** → networking and the Internet
+* **V04** → Linux and system administration
+* **V05** → Bash automation
+* **V06** → Git and collaborative engineering
+* **V07** → Python programming, HTTP clients, async programming, testing, logging, and automation
+
+You will now move from:
+
+> "I can write Python programs."
+
+to:
+
+> "I can build a backend service that other programs can reliably communicate with."
+
+---
+
+# 🧠 What You Should Be Able to Do After V08
+
+By the end of this volume, you should be able to:
+
+* Explain HTTP from first principles.
+* Explain what happens when a client calls an API.
+* Understand URLs, DNS, TCP, TLS, HTTP, and application data as one complete system.
+* Design REST APIs.
+* Understand HTTP methods and status codes correctly.
+* Design resources, routes, query parameters, and request bodies.
+* Build APIs with FastAPI.
+* Use Pydantic for validation and serialization.
+* Understand dependency injection.
+* Implement middleware.
+* Handle errors consistently.
+* Implement authentication and authorization fundamentals.
+* Understand JWT authentication.
+* Build asynchronous endpoints.
+* Connect APIs to databases without mixing responsibilities.
+* Handle pagination, filtering, sorting, and searching.
+* Implement rate limiting concepts.
+* Understand caching.
+* Handle background work.
+* Test APIs properly.
+* Generate and use OpenAPI documentation.
+* Log API activity safely.
+* Design APIs that are observable and maintainable.
+* Understand WebSockets at a conceptual and practical level.
+* Identify common API security vulnerabilities.
+* Debug API failures systematically.
+* Structure a backend project professionally.
+* Prepare a backend service for later Docker, CI/CD, AWS, and Kubernetes work.
+
+---
+
+# 🗺️ Volume Structure
+
+## Chapter 01 — Backend Engineering From First Principles
+
+## Chapter 02 — HTTP From the Ground Up
+
+## Chapter 03 — URLs, DNS, TCP, TLS & The Complete Request Journey
+
+## Chapter 04 — HTTP Methods, Status Codes, Headers & Content
+
+## Chapter 05 — REST & Resource-Oriented API Design
+
+## Chapter 06 — API Parameters, Request Bodies & Validation
+
+## Chapter 07 — FastAPI Fundamentals
+
+## Chapter 08 — Pydantic & Data Modeling
+
+## Chapter 09 — FastAPI Application Architecture
+
+## Chapter 10 — Dependency Injection & Middleware
+
+## Chapter 11 — Error Handling & API Contracts
+
+## Chapter 12 — Authentication & Authorization
+
+## Chapter 13 — JWT Authentication Deep Dive
+
+## Chapter 14 — Database Integration & Service Boundaries
+
+## Chapter 15 — Pagination, Filtering, Sorting & Searching
+
+## Chapter 16 — Async Programming & Background Work
+
+## Chapter 17 — API Testing & Quality Engineering
+
+## Chapter 18 — OpenAPI, Documentation & Developer Experience
+
+## Chapter 19 — API Security
+
+## Chapter 20 — Caching, Rate Limiting & Performance
+
+## Chapter 21 — WebSockets & Real-Time Communication
+
+## Chapter 22 — Logging, Observability & Production Readiness
+
+## Chapter 23 — API Debugging & Failure Engineering
+
+## Chapter 24 — Professional Backend Architecture
+
+## Chapter 25 — Production API Engineering
+
+## Chapter 26 — V08 Integration Project & Engineering Review
+
+---
+
+# Chapter 01 — Backend Engineering From First Principles
+
+## 1.1 What Is a Backend?
+
+Understand:
+
+* frontend
+* backend
+* client
+* server
+* database
+* API
+* service
+* network
+* request
+* response
+
+Do not memorize these as isolated definitions.
+
+Build the complete mental model:
+
+```text
+User
+  ↓
+Frontend
+  ↓
+HTTP Request
+  ↓
+Backend API
+  ↓
+Business Logic
+  ↓
+Database
+  ↓
+Backend API
+  ↓
+HTTP Response
+  ↓
+Frontend
+  ↓
+User
+```
+
+---
+
+## 1.2 Why Backend Services Exist
+
+Study why we don't put everything inside the frontend.
+
+Understand:
+
+* centralized business rules
+* data persistence
+* authentication
+* authorization
+* validation
+* security
+* integrations
+* background processing
+* shared access
+* auditing
+
+---
+
+## 1.3 What Is an API?
+
+Understand API as:
+
+> A defined interface through which software components communicate.
+
+Compare:
+
+* function call
+* library API
+* operating system API
+* database API
+* HTTP API
+* REST API
+
+---
+
+## 1.4 Backend Request Lifecycle
+
+Trace:
+
+```text
+Client
+ ↓
+DNS
+ ↓
+Network
+ ↓
+TCP
+ ↓
+TLS
+ ↓
+HTTP
+ ↓
+Web Server / Reverse Proxy
+ ↓
+Application
+ ↓
+Router
+ ↓
+Middleware
+ ↓
+Authentication
+ ↓
+Business Logic
+ ↓
+Database
+ ↓
+Response
+```
+
+You should already recognize most of these layers from V02/V03/V07.
+
+---
+
+## 1.5 Backend Engineering vs Writing Endpoints
+
+Understand the difference between:
+
+```python
+@app.get("/users")
+def users():
+    return []
+```
+
+and an actual production service.
+
+A production service needs:
+
+* validation
+* authentication
+* authorization
+* error handling
+* logging
+* testing
+* documentation
+* configuration
+* security
+* performance
+* maintainability
+* observability
+
+---
+
+## 🧪 Lab
+
+Draw the complete architecture of a request from your browser to a backend API.
+
+Label every layer.
+
+---
+
+# Chapter 02 — HTTP From the Ground Up
+
+This chapter is extremely important.
+
+Do not treat HTTP as:
+
+> GET = retrieve
+> POST = create
+
+Go deeper.
+
+---
+
+## 2.1 Why HTTP Exists
+
+Understand:
+
+* distributed systems
+* client/server communication
+* application-layer protocols
+* stateless communication
+* request/response architecture
+
+---
+
+## 2.2 HTTP Message Structure
+
+Understand:
+
+```text
+Request
+-----------------
+Request Line
+Headers
+Blank Line
+Body
+```
+
+Example:
+
+```http
+GET /users/42 HTTP/1.1
+Host: example.com
+Accept: application/json
+Authorization: Bearer token
+```
+
+---
+
+## 2.3 HTTP Response
+
+```text
+Response
+-----------------
+Status Line
+Headers
+Blank Line
+Body
+```
+
+Example:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+
+---
+
+## 2.4 HTTP Versions
+
+Understand the evolution:
+
+* HTTP/1.0
+* HTTP/1.1
+* HTTP/2
+* HTTP/3
+
+Study:
+
+* persistent connections
+* multiplexing
+* header compression
+* binary framing
+* QUIC
+* HTTP over TCP vs HTTP over QUIC
+
+You do not need protocol implementation expertise.
+
+You need architectural understanding.
+
+---
+
+## 2.5 Statelessness
+
+Understand what:
+
+> HTTP is stateless
+
+actually means.
+
+Also understand why applications still have:
+
+* sessions
+* cookies
+* tokens
+* authentication state
+
+---
+
+## 🧪 Lab
+
+Use:
+
+```bash
+curl -v https://example.com
+```
+
+Study:
+
+* DNS resolution
+* connection
+* TLS
+* request
+* response
+* headers
+
+---
+
+# Chapter 03 — URLs, DNS, TCP, TLS & The Complete Request Journey
+
+Connect V03 networking with backend engineering.
+
+---
+
+## 3.1 URL Anatomy
+
+Study:
+
+```text
+https://api.example.com:443/users/42?active=true
+```
+
+Break it into:
+
+* scheme
+* host
+* port
+* path
+* query string
+
+---
+
+## 3.2 DNS
+
+Understand:
+
+```text
+api.example.com
+       ↓
+DNS
+       ↓
+IP address
+```
+
+Study:
+
+* A
+* AAAA
+* CNAME
+* DNS caching
+* recursive resolvers
+* authoritative DNS
+
+---
+
+## 3.3 TCP
+
+Understand:
+
+* connection establishment
+* reliability
+* ordering
+* ports
+* connection termination
+
+---
+
+## 3.4 TLS
+
+Understand:
+
+* encryption
+* certificates
+* certificate authorities
+* public/private keys
+* handshake
+* HTTPS
+
+---
+
+## 3.5 Complete API Request
+
+Trace:
+
+```text
+Browser
+ ↓
+DNS
+ ↓
+IP
+ ↓
+TCP / QUIC
+ ↓
+TLS
+ ↓
+HTTP
+ ↓
+Reverse Proxy
+ ↓
+Application
+```
+
+---
+
+## 🧪 Lab
+
+Use:
+
+```bash
+dig example.com
+curl -v https://example.com
+ss -tulnp
+```
+
+Explain what each tool reveals.
+
+---
+
+# Chapter 04 — HTTP Methods, Status Codes, Headers & Content
+
+## 4.1 HTTP Methods
+
+Deeply understand:
+
+* GET
+* POST
+* PUT
+* PATCH
+* DELETE
+* HEAD
+* OPTIONS
+
+---
+
+## 4.2 Safe vs Idempotent
+
+Study:
+
+### Safe
+
+Does not intentionally modify server state.
+
+### Idempotent
+
+Repeating the same operation produces the same intended final state.
+
+Understand why:
+
+```text
+GET
+PUT
+DELETE
+```
+
+have different semantics from:
+
+```text
+POST
+```
+
+---
+
+## 4.3 Status Codes
+
+Study:
+
+### 1xx
+
+Informational
+
+### 2xx
+
+Success
+
+* 200
+* 201
+* 202
+* 204
+
+### 3xx
+
+Redirection
+
+### 4xx
+
+Client-side errors
+
+* 400
+* 401
+* 403
+* 404
+* 405
+* 409
+* 422
+* 429
+
+### 5xx
+
+Server-side errors
+
+* 500
+* 502
+* 503
+* 504
+
+Understand **when each should actually be used**.
+
+---
+
+## 4.4 Headers
+
+Study:
+
+* Host
+* Content-Type
+* Accept
+* Authorization
+* User-Agent
+* Cache-Control
+* Location
+* Cookie
+* Set-Cookie
+* Content-Length
+* ETag
+* If-None-Match
+
+---
+
+## 4.5 Content Types
+
+Understand:
+
+```text
+application/json
+application/x-www-form-urlencoded
+multipart/form-data
+text/plain
+```
+
+---
+
+## 🧪 Lab
+
+Use `curl` to manually construct requests with different:
+
+* methods
+* headers
+* content types
+* status responses
+
+---
+
+# Chapter 05 — REST & Resource-Oriented API Design
+
+## 5.1 What REST Actually Means
+
+Study:
+
+* resources
+* representations
+* statelessness
+* uniform interface
+* client/server separation
+* cacheability
+* layered systems
+
+---
+
+## 5.2 Resource Modeling
+
+Bad:
+
+```text
+POST /getUsers
+POST /createUser
+POST /deleteUser
+```
+
+Resource-oriented design:
+
+```text
+GET    /users
+POST   /users
+GET    /users/{id}
+PATCH  /users/{id}
+DELETE /users/{id}
+```
+
+---
+
+## 5.3 Nested Resources
+
+Understand:
+
+```text
+/users/{user_id}/orders
+/orders/{order_id}
+```
+
+and when nesting becomes excessive.
+
+---
+
+## 5.4 API Versioning
+
+Study:
+
+```text
+/api/v1/users
+/api/v2/users
+```
+
+Compare:
+
+* URL versioning
+* header versioning
+* content negotiation
+
+---
+
+## 5.5 API Naming
+
+Learn professional conventions for:
+
+* nouns
+* plural resources
+* paths
+* query parameters
+* actions
+
+---
+
+## 🧪 Design Exercise
+
+Design an API for:
+
+```text
+Users
+Projects
+Tasks
+Comments
+```
+
+Do not write code yet.
+
+First design the resources.
+
+---
+
+# Chapter 06 — API Parameters, Request Bodies & Validation
+
+Study the difference between:
+
+### Path parameters
+
+```text
+/users/42
+```
+
+### Query parameters
+
+```text
+/users?page=2&limit=20
+```
+
+### Headers
+
+```http
+Authorization: Bearer ...
+```
+
+### Request body
+
+```json
+{
+  "name": "Sri",
+  "email": "example@example.com"
+}
+```
+
+---
+
+## 6.1 Validation
+
+Understand why validation must happen at system boundaries.
+
+Validate:
+
+* types
+* required fields
+* ranges
+* formats
+* enums
+* lengths
+* nested objects
+
+---
+
+## 6.2 Input Validation vs Business Rules
+
+Example:
+
+```text
+age must be integer
+```
+
+is validation.
+
+```text
+employee cannot request leave after resignation
+```
+
+is business logic.
+
+Do not mix them.
+
+---
+
+## 🧪 Lab
+
+Design validation rules for:
+
+```text
+CreateUser
+CreateProject
+CreateTask
+```
+
+---
+
+# Chapter 07 — FastAPI Fundamentals
+
+Now begin practical backend development.
+
+---
+
+## 7.1 Why FastAPI?
+
+Study:
+
+* Python type hints
+* ASGI
+* Starlette
+* Pydantic
+* automatic OpenAPI
+* async support
+* dependency injection
+
+---
+
+## 7.2 Project Setup
+
+Ubuntu:
+
+```bash
+mkdir api-service
+cd api-service
+
+python3 -m venv .venv
+source .venv/bin/activate
+
+pip install fastapi uvicorn
+```
+
+---
+
+## 7.3 First Application
+
+Build:
+
+```text
+GET /
+GET /health
+GET /users
+POST /users
+```
+
+---
+
+## 7.4 Running the Server
+
+Understand:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Study:
+
+* host
+* port
+* reload
+* workers
+* development vs production
+
+---
+
+## 7.5 Routing
+
+Study:
+
+* route decorators
+* path parameters
+* query parameters
+* request methods
+* route ordering
+
+---
+
+## 🧪 Lab
+
+Build a small API with:
+
+```text
+GET /
+GET /health
+GET /users/{id}
+```
+
+Then test it with:
+
+```bash
+curl
+```
+
+and Swagger UI.
+
+---
+
+# Chapter 08 — Pydantic & Data Modeling
+
+## 8.1 Why Pydantic?
+
+Understand the boundary:
+
+```text
+Untrusted external data
+        ↓
+Validation
+        ↓
+Trusted application model
+```
+
+---
+
+## 8.2 Models
+
+Study:
+
+* BaseModel
+* field types
+* defaults
+* optional fields
+* nested models
+* enums
+* constraints
+
+---
+
+## 8.3 Request Models
+
+Example concept:
+
+```text
+CreateUserRequest
+```
+
+---
+
+## 8.4 Response Models
+
+Why the server should not blindly return database objects.
+
+Study:
+
+* response schemas
+* field selection
+* serialization
+* preventing accidental data leakage
+
+---
+
+## 8.5 Serialization
+
+Understand:
+
+```text
+Python Object
+     ↓
+Pydantic
+     ↓
+JSON
+```
+
+and the reverse direction.
+
+---
+
+## 🧪 Lab
+
+Create:
+
+```text
+UserCreate
+UserUpdate
+UserResponse
+```
+
+with appropriate validation.
+
+---
+
+# Chapter 09 — FastAPI Application Architecture
+
+Avoid putting everything inside:
+
+```text
+main.py
+```
+
+---
+
+## 9.1 Layered Architecture
+
+Study:
+
+```text
+Router
+   ↓
+Service
+   ↓
+Repository
+   ↓
+Database
+```
+
+---
+
+## 9.2 Responsibilities
+
+### Router
+
+HTTP concerns.
+
+### Service
+
+Business logic.
+
+### Repository
+
+Data access.
+
+### Model
+
+Data representation.
+
+---
+
+## 9.3 Separation of Concerns
+
+Understand why this is bad:
+
+```python
+@app.post("/users")
+def create_user():
+    # validate
+    # authenticate
+    # business rules
+    # database query
+    # email
+    # logging
+    # response
+```
+
+---
+
+## 9.4 Project Structure
+
+Build toward:
+
+```text
+app/
+├── main.py
+├── api/
+│   └── routes/
+├── core/
+│   ├── config.py
+│   └── security.py
+├── models/
+├── schemas/
+├── services/
+├── repositories/
+├── middleware/
+└── utils/
+```
+
+Do not blindly copy structures.
+
+Understand why each layer exists.
+
+---
+
+# Chapter 10 — Dependency Injection & Middleware
+
+## 10.1 Dependency Injection
+
+Understand:
+
+> A component receives what it needs instead of constructing everything itself.
+
+Study:
+
+* dependencies
+* reusable dependencies
+* request-scoped dependencies
+* authentication dependencies
+* database session dependencies
+
+---
+
+## 10.2 Why DI Matters
+
+Benefits:
+
+* testing
+* separation
+* reuse
+* configuration
+* maintainability
+
+---
+
+## 10.3 Middleware
+
+Understand:
+
+```text
+Request
+ ↓
+Middleware
+ ↓
+Router
+ ↓
+Response
+ ↓
+Middleware
+ ↓
+Client
+```
+
+Use cases:
+
+* request logging
+* CORS
+* timing
+* request IDs
+* authentication-related infrastructure
+* security headers
+
+---
+
+## 🧪 Lab
+
+Create middleware that records:
+
+```text
+HTTP method
+path
+status code
+request duration
+request ID
+```
+
+Do not log secrets.
+
+---
+
+# Chapter 11 — Error Handling & API Contracts
+
+## 11.1 Why Errors Are Part of API Design
+
+Clients need predictable errors.
+
+---
+
+## 11.2 Error Categories
+
+Separate:
+
+```text
+Validation error
+Authentication error
+Authorization error
+Not found
+Conflict
+Rate limit
+Dependency failure
+Internal server error
+```
+
+---
+
+## 11.3 Consistent Error Schema
+
+Design:
+
+```json
+{
+  "error": {
+    "code": "USER_NOT_FOUND",
+    "message": "User was not found",
+    "request_id": "..."
+  }
+}
+```
+
+---
+
+## 11.4 Exception Handling
+
+Study:
+
+* HTTPException
+* custom exceptions
+* global exception handlers
+* exception chaining
+* logging internal details without exposing them
+
+---
+
+## 11.5 Never Leak Internals
+
+Do not expose:
+
+```text
+database passwords
+stack traces
+SQL statements
+filesystem paths
+internal architecture
+tokens
+secret configuration
+```
+
+---
+
+# Chapter 12 — Authentication & Authorization
+
+These are different concepts.
+
+### Authentication
+
+> Who are you?
+
+### Authorization
+
+> What are you allowed to do?
+
+---
+
+## 12.1 Authentication Models
+
+Study:
+
+* sessions
+* cookies
+* tokens
+* API keys
+* OAuth concept
+
+---
+
+## 12.2 Authorization Models
+
+Study:
+
+* role-based access control
+* permission-based access control
+* resource-based authorization
+
+---
+
+## 12.3 RBAC
+
+Example:
+
+```text
+Admin
+Manager
+Employee
+```
+
+Permissions:
+
+```text
+user:create
+user:read
+user:update
+user:delete
+```
+
+Understand why permission-based authorization scales better than scattering role checks everywhere.
+
+---
+
+## 🧪 Design Exercise
+
+Design an authorization model for:
+
+```text
+Admin
+HR
+Manager
+Employee
+```
+
+with:
+
+```text
+employee:read
+employee:update
+leave:approve
+leave:create
+attendance:read
+```
+
+Do not implement it yet.
+
+---
+
+# Chapter 13 — JWT Authentication Deep Dive
+
+## 13.1 JWT Structure
+
+Understand:
+
+```text
+Header.Payload.Signature
+```
+
+---
+
+## 13.2 Claims
+
+Study:
+
+* sub
+* exp
+* iat
+* iss
+* aud
+
+---
+
+## 13.3 Access Tokens
+
+Understand:
+
+```text
+Login
+ ↓
+Credentials validated
+ ↓
+Access token issued
+ ↓
+Client stores token
+ ↓
+Client sends token
+ ↓
+Backend validates token
+```
+
+---
+
+## 13.4 Password Security
+
+Understand:
+
+* hashing
+* salts
+* bcrypt/Argon2 concepts
+* password verification
+* why passwords must never be stored directly
+
+---
+
+## 13.5 Token Expiration
+
+Study:
+
+* short-lived access tokens
+* refresh tokens
+* rotation concepts
+* revocation limitations
+
+---
+
+## 13.6 JWT Misconceptions
+
+Understand:
+
+* JWT is not encryption by default.
+* Anyone possessing a valid token can generally use it until invalidated/expired.
+* Signing verifies integrity; it does not make payload contents secret.
+
+---
+
+## 🧪 Lab
+
+Build:
+
+```text
+POST /auth/register
+POST /auth/login
+GET /auth/me
+```
+
+with password hashing and JWT authentication.
+
+Use fake development credentials only.
+
+---
+
+# Chapter 14 — Database Integration & Service Boundaries
+
+Database engineering remains a separate roadmap.
+
+This chapter only teaches the **API ↔ database boundary**.
+
+---
+
+## 14.1 Why the Router Should Not Own Database Logic
+
+Understand:
+
+```text
+Router
+ ↓
+Service
+ ↓
+Repository
+ ↓
+Database
+```
+
+---
+
+## 14.2 Database Sessions
+
+Study:
+
+* connection
+* connection pooling
+* session lifecycle
+* transaction boundaries
+
+---
+
+## 14.3 CRUD
+
+Implement:
+
+```text
+Create
+Read
+Update
+Delete
+```
+
+---
+
+## 14.4 Transactions
+
+Understand:
+
+* atomicity
+* commit
+* rollback
+* consistency boundaries
+
+---
+
+## 14.5 N+1 Problem
+
+Understand what happens when an API accidentally executes hundreds of database queries for one request.
+
+---
+
+## 🧪 Lab
+
+Connect the API to a development PostgreSQL database from your separate DB roadmap.
+
+Build one complete resource:
+
+```text
+API
+ ↓
+Service
+ ↓
+Repository
+ ↓
+PostgreSQL
+```
+
+---
+
+# Chapter 15 — Pagination, Filtering, Sorting & Searching
+
+Real APIs rarely return:
+
+```text
+every record
+```
+
+---
+
+## 15.1 Pagination
+
+Study:
+
+### Offset pagination
+
+```text
+?page=2&limit=20
+```
+
+### Cursor pagination
+
+```text
+?cursor=abc123
+```
+
+Understand tradeoffs.
+
+---
+
+## 15.2 Filtering
+
+```text
+/users?status=active
+```
+
+---
+
+## 15.3 Sorting
+
+```text
+/users?sort=created_at&order=desc
+```
+
+---
+
+## 15.4 Searching
+
+Understand:
+
+* exact matching
+* partial matching
+* case sensitivity
+* database indexes
+* full-text search concepts
+
+---
+
+## 15.5 API Response Metadata
+
+Design:
+
+```json
+{
+  "data": [],
+  "pagination": {
+    "page": 1,
+    "limit": 20,
+    "total": 120
+  }
+}
+```
+
+---
+
+## 🧪 Lab
+
+Add:
+
+* pagination
+* filtering
+* sorting
+* searching
+
+to one API resource.
+
+---
+
+# Chapter 16 — Async Programming & Background Work
+
+Connect directly to V07.
+
+---
+
+## 16.1 Async API
+
+Understand:
+
+```python
+async def endpoint():
+    ...
+```
+
+---
+
+## 16.2 I/O-Bound Work
+
+Examples:
+
+* database calls
+* HTTP calls
+* file operations
+* network operations
+
+---
+
+## 16.3 Async vs Sync
+
+Understand when async helps and when it doesn't.
+
+---
+
+## 16.4 Blocking the Event Loop
+
+Learn why this is dangerous:
+
+```python
+async def endpoint():
+    time.sleep(10)
+```
+
+---
+
+## 16.5 Background Work
+
+Understand:
+
+```text
+Request
+ ↓
+Accept job
+ ↓
+Background worker
+ ↓
+Long-running task
+```
+
+Examples:
+
+* email
+* report generation
+* file processing
+* notifications
+
+---
+
+## 16.6 Queues
+
+Learn the concept of:
+
+```text
+Producer
+ ↓
+Queue
+ ↓
+Worker
+```
+
+Later this becomes important for production architecture.
+
+---
+
+# Chapter 17 — API Testing & Quality Engineering
+
+## 17.1 Testing Levels
+
+Study:
+
+* unit tests
+* integration tests
+* API tests
+* end-to-end tests
+
+---
+
+## 17.2 What Should Be Tested?
+
+Test:
+
+* success cases
+* validation failures
+* authentication
+* authorization
+* not-found behavior
+* conflicts
+* database failures
+* malformed input
+* edge cases
+
+---
+
+## 17.3 FastAPI Testing
+
+Learn:
+
+* pytest
+* TestClient
+* dependency overrides
+* fixtures
+
+---
+
+## 17.4 Test Isolation
+
+Understand why tests should not depend unpredictably on:
+
+* production databases
+* external APIs
+* current time
+* random values
+* network availability
+
+---
+
+## 17.5 Mocking
+
+Understand what should and should not be mocked.
+
+---
+
+## 🧪 Lab
+
+Build a meaningful test suite for your API.
+
+Minimum:
+
+```text
+10+ meaningful tests
+```
+
+including both success and failure cases.
+
+---
+
+# Chapter 18 — OpenAPI, Documentation & Developer Experience
+
+## 18.1 Why Documentation Is an Engineering Feature
+
+An API without usable documentation creates unnecessary dependency on the backend developer.
+
+---
+
+## 18.2 OpenAPI
+
+Understand:
+
+* schema
+* paths
+* parameters
+* request bodies
+* responses
+* authentication schemes
+
+---
+
+## 18.3 Swagger UI
+
+Use FastAPI's generated documentation.
+
+Understand what FastAPI generates automatically.
+
+---
+
+## 18.4 ReDoc
+
+Understand its purpose and differences from Swagger UI.
+
+---
+
+## 18.5 API Documentation Quality
+
+Document:
+
+* purpose
+* authentication
+* parameters
+* examples
+* errors
+* pagination
+* rate limits
+* versioning
+
+---
+
+## 18.6 Postman
+
+Use Postman to create:
+
+* environments
+* collections
+* authentication
+* test requests
+
+---
+
+## 🧪 Lab
+
+Produce a complete API collection and developer README.
+
+---
+
+# Chapter 19 — API Security
+
+This chapter should connect backend engineering with security.
+
+---
+
+## 19.1 OWASP API Security Concepts
+
+Study:
+
+* broken object-level authorization
+* broken authentication
+* excessive data exposure
+* unrestricted resource consumption
+* security misconfiguration
+* improper inventory management
+
+---
+
+## 19.2 Input Security
+
+Never trust:
+
+```text
+URL
+query
+headers
+body
+cookies
+uploaded files
+```
+
+---
+
+## 19.3 SQL Injection
+
+Understand the vulnerability conceptually and why parameterized queries prevent it.
+
+---
+
+## 19.4 Command Injection
+
+Connect to V07.
+
+Never construct unsafe shell commands from user input.
+
+---
+
+## 19.5 CORS
+
+Understand:
+
+* browser security model
+* origin
+* CORS headers
+* preflight
+* credentials
+
+---
+
+## 19.6 CSRF
+
+Understand when CSRF matters, particularly with cookie-based authentication.
+
+---
+
+## 19.7 Secrets
+
+Never hard-code:
+
+```text
+JWT secret
+database password
+API key
+cloud credentials
+```
+
+Use configuration/environment mechanisms.
+
+---
+
+## 19.8 File Upload Security
+
+Study:
+
+* file size limits
+* MIME validation
+* extension validation
+* filename sanitization
+* storage isolation
+* malware scanning concepts
+
+---
+
+## 🧪 Security Lab
+
+Perform a controlled security review of your own API.
+
+Find at least:
+
+```text
+3 security weaknesses
+```
+
+and fix them.
+
+---
+
+# Chapter 20 — Caching, Rate Limiting & Performance
+
+## 20.1 Why APIs Become Slow
+
+Possible causes:
+
+```text
+database
+network
+external API
+CPU
+memory
+serialization
+large responses
+N+1 queries
+```
+
+---
+
+## 20.2 Caching
+
+Understand:
+
+```text
+Client cache
+CDN cache
+Reverse proxy cache
+Application cache
+Database cache
+```
+
+---
+
+## 20.3 Cache Invalidation
+
+Study why:
+
+> There are hard problems in computer science, and cache invalidation is one of them.
+
+Understand:
+
+* TTL
+* stale data
+* invalidation
+* cache keys
+
+---
+
+## 20.4 Rate Limiting
+
+Why:
+
+* abuse prevention
+* resource protection
+* fairness
+* cost control
+
+Understand:
+
+* fixed window
+* sliding window
+* token bucket
+
+---
+
+## 20.5 Performance Measurements
+
+Measure:
+
+* latency
+* throughput
+* requests per second
+* error rate
+* database time
+
+---
+
+## 🧪 Lab
+
+Benchmark an endpoint.
+
+Record:
+
+```text
+baseline latency
+optimized latency
+```
+
+Explain why performance changed.
+
+---
+
+# Chapter 21 — WebSockets & Real-Time Communication
+
+REST is not the only communication model.
+
+---
+
+## 21.1 HTTP Polling
+
+```text
+Client → Request
+Server → Response
+
+Client → Request
+Server → Response
+```
+
+---
+
+## 21.2 Long Polling
+
+Understand the concept.
+
+---
+
+## 21.3 WebSockets
+
+Understand:
+
+```text
+HTTP Upgrade
+      ↓
+Persistent connection
+      ↓
+Bidirectional communication
+```
+
+---
+
+## 21.4 Use Cases
+
+Examples:
+
+* chat
+* live notifications
+* dashboards
+* collaborative applications
+* real-time bidding
+
+---
+
+## 21.5 WebSocket Architecture
+
+Understand:
+
+```text
+Client
+  ↕
+WebSocket Server
+  ↕
+Connection Manager
+  ↕
+Application State
+```
+
+---
+
+## 🧪 Lab
+
+Build a simple authenticated WebSocket notification service.
+
+Do not turn it into a large application.
+
+The goal is understanding the communication model.
+
+---
+
+# Chapter 22 — Logging, Observability & Production Readiness
+
+Connect this chapter with V07 logging and later V18 observability.
+
+---
+
+## 22.1 Structured Logging
+
+Prefer structured information such as:
+
+```text
+timestamp
+request_id
+method
+path
+status
+duration
+user_id
+```
+
+where appropriate.
+
+---
+
+## 22.2 Request IDs
+
+Understand:
+
+```text
+Client Request
+      ↓
+request_id
+      ↓
+logs
+      ↓
+database operations
+      ↓
+external services
+```
+
+This becomes extremely useful during debugging.
+
+---
+
+## 22.3 Metrics
+
+Understand:
+
+* request count
+* latency
+* error rate
+* active connections
+* resource usage
+
+---
+
+## 22.4 Health Endpoints
+
+Design:
+
+```text
+/health
+/readiness
+/liveness
+```
+
+Understand that health checks answer different questions.
+
+---
+
+## 22.5 Graceful Shutdown
+
+Study:
+
+* signal handling
+* cleanup
+* active requests
+* database connections
+* background tasks
+
+---
+
+# Chapter 23 — API Debugging & Failure Engineering
+
+You already learned debugging in V01.
+
+Now apply it to distributed services.
+
+---
+
+## 23.1 Failure Categories
+
+Study:
+
+```text
+Client failure
+DNS failure
+Network failure
+TLS failure
+Proxy failure
+Application failure
+Database failure
+External API failure
+Timeout
+Resource exhaustion
+```
+
+---
+
+## 23.2 Timeout Chains
+
+Understand why:
+
+```text
+Client timeout
+≠
+API timeout
+≠
+Database timeout
+≠
+External service timeout
+```
+
+---
+
+## 23.3 Retry Problems
+
+Retries can cause:
+
+```text
+duplicate operations
+traffic amplification
+cascading failures
+```
+
+---
+
+## 23.4 Retry Strategy
+
+Study:
+
+* retry only appropriate failures
+* exponential backoff
+* jitter
+* retry limits
+* idempotency
+
+---
+
+## 23.5 Failure Injection
+
+Deliberately create:
+
+* invalid input
+* database unavailable
+* slow endpoint
+* timeout
+* 500 response
+* 429 response
+* missing environment variable
+* invalid JWT
+* permission denial
+
+Then debug systematically.
+
+---
+
+## 🧪 Lab
+
+For each failure:
+
+```text
+Symptom
+ ↓
+Hypothesis
+ ↓
+Evidence
+ ↓
+Root cause
+ ↓
+Fix
+ ↓
+Prevention
+```
+
+Record the result in your engineering journal from V01.
+
+---
+
+# Chapter 24 — Professional Backend Architecture
+
+Now step back.
+
+---
+
+## 24.1 Monolith
+
+Understand:
+
+```text
+One application
+ ├── API
+ ├── business logic
+ ├── database access
+ └── background tasks
+```
+
+---
+
+## 24.2 Modular Monolith
+
+Understand:
+
+```text
+Application
+ ├── Auth
+ ├── Users
+ ├── Projects
+ ├── Tasks
+ └── Notifications
+```
+
+with strong internal boundaries.
+
+---
+
+## 24.3 Microservices
+
+Understand:
+
+```text
+Service A
+Service B
+Service C
+```
+
+and:
+
+* independent deployment
+* service communication
+* service ownership
+* failure boundaries
+* operational complexity
+
+---
+
+## 24.4 Why Not Microservices Everywhere?
+
+Study the costs:
+
+* networking
+* observability
+* deployment
+* distributed transactions
+* debugging
+* service discovery
+* versioning
+* infrastructure
+
+---
+
+## 24.5 Architecture Decision Making
+
+Learn to ask:
+
+```text
+What problem are we solving?
+What constraints exist?
+What complexity are we introducing?
+What happens when it fails?
+Can we keep it simpler?
+```
+
+---
+
+# Chapter 25 — Production API Engineering
+
+Bring everything together.
+
+---
+
+## 25.1 Configuration
+
+Implement:
+
+```text
+defaults
+ ↓
+config file
+ ↓
+environment variables
+ ↓
+runtime configuration
+```
+
+Never commit secrets.
+
+---
+
+## 25.2 Environment Separation
+
+Understand:
+
+```text
+development
+testing
+staging
+production
+```
+
+---
+
+## 25.3 API Lifecycle
+
+Understand:
+
+```text
+Design
+ ↓
+Implement
+ ↓
+Test
+ ↓
+Document
+ ↓
+Review
+ ↓
+Release
+ ↓
+Observe
+ ↓
+Maintain
+```
+
+---
+
+## 25.4 Deployment Awareness
+
+You do not learn Docker yet.
+
+Instead understand what a production API eventually needs:
+
+```text
+Internet
+ ↓
+DNS
+ ↓
+Load Balancer / Reverse Proxy
+ ↓
+Application Server
+ ↓
+API
+ ↓
+Database
+```
+
+Docker comes in V12.
+
+AWS comes in V14.
+
+Kubernetes comes in V16.
+
+Observability becomes deeper in V18.
+
+---
+
+## 25.5 Production Checklist
+
+Your API should have:
+
+* configuration management
+* authentication
+* authorization
+* validation
+* structured errors
+* logging
+* request IDs
+* health checks
+* tests
+* documentation
+* secure secrets
+* timeouts
+* safe retries
+* pagination
+* rate limiting concepts
+* database boundaries
+* graceful shutdown
+* clear project structure
+
+---
+
+# Chapter 26 — V08 Integration Project & Engineering Review
+
+# 🚀 Main Practical Project
+
+## Production API Service
+
+This is a **reusable backend engineering project**, not the flagship project.
+
+Its purpose is to become your reference backend codebase that you will later understand how to:
+
+```text
+Dockerize       → V12
+CI/CD           → V13
+Deploy to AWS   → V14
+Terraform       → V15
+Kubernetes      → V16
+Secure          → V17
+Observe         → V18
+LLMOps          → V19
+Scale           → V20
+```
+
+The actual flagship project remains a separate milestone after V11.
+
+---
+
+# Project Objective
+
+Build a professional backend API using:
+
+```text
+Python
+FastAPI
+Pydantic
+PostgreSQL
+SQLAlchemy or equivalent ORM
+pytest
+OpenAPI
+JWT
+Git
+Linux
+```
+
+---
+
+# Project Domain
+
+Build a:
+
+## **Project & Task Management API**
+
+This domain is deliberately simple enough to understand while still exposing real backend engineering problems.
+
+---
+
+# Core Resources
+
+```text
+Users
+Projects
+Tasks
+Comments
+```
+
+---
+
+# Authentication
+
+Implement:
+
+```text
+POST /auth/register
+POST /auth/login
+GET  /auth/me
+```
+
+---
+
+# Users
+
+```text
+GET    /users
+GET    /users/{id}
+PATCH  /users/{id}
+```
+
+Authorization must prevent users from modifying resources they do not own or have permission to manage.
+
+---
+
+# Projects
+
+```text
+POST   /projects
+GET    /projects
+GET    /projects/{id}
+PATCH  /projects/{id}
+DELETE /projects/{id}
+```
+
+---
+
+# Tasks
+
+```text
+POST   /projects/{project_id}/tasks
+GET    /projects/{project_id}/tasks
+GET    /tasks/{id}
+PATCH  /tasks/{id}
+DELETE /tasks/{id}
+```
+
+---
+
+# Comments
+
+```text
+POST   /tasks/{task_id}/comments
+GET    /tasks/{task_id}/comments
+DELETE /comments/{id}
+```
+
+---
+
+# Required Features
+
+Your project must include:
+
+### Authentication
+
+* password hashing
+* JWT
+* protected endpoints
+
+### Authorization
+
+* ownership checks
+* permission checks
+
+### Validation
+
+* Pydantic schemas
+* input validation
+* business-rule validation
+
+### Database
+
+* PostgreSQL
+* migrations
+* transactions
+* repository/service separation
+
+### API Design
+
+* resource-oriented routes
+* correct HTTP methods
+* appropriate status codes
+* pagination
+* filtering
+* sorting
+
+### Error Handling
+
+* consistent error schema
+* custom exceptions
+* global handlers
+
+### Documentation
+
+* OpenAPI
+* Swagger
+* README
+* API usage examples
+
+### Testing
+
+* unit tests
+* integration tests
+* API tests
+* authentication tests
+* authorization tests
+
+### Security
+
+* no plaintext passwords
+* no secrets in Git
+* safe configuration
+* input validation
+* secure headers where appropriate
+* CORS configuration
+* rate limiting concept
+* safe error responses
+
+### Observability
+
+* structured logs
+* request IDs
+* request duration
+* health endpoint
+
+---
+
+# Recommended Architecture
+
+```text
+project-api/
+│
+├── app/
+│   ├── main.py
+│   │
+│   ├── api/
+│   │   ├── dependencies.py
+│   │   └── routes/
+│   │
+│   ├── core/
+│   │   ├── config.py
+│   │   ├── security.py
+│   │   └── logging.py
+│   │
+│   ├── models/
+│   │
+│   ├── schemas/
+│   │
+│   ├── services/
+│   │
+│   ├── repositories/
+│   │
+│   ├── middleware/
+│   │
+│   └── db/
+│
+├── tests/
+│   ├── unit/
+│   └── integration/
+│
+├── migrations/
+│
+├── .env.example
+├── .gitignore
+├── pyproject.toml
+├── README.md
+└── Makefile
+```
+
+You are not expected to memorize this structure.
+
+You must understand why it exists.
+
+---
+
+# Project Development Phases
+
+## Phase 1 — HTTP Foundation
+
+Build:
+
+```text
+/
+ /health
+```
+
+Understand request/response flow.
+
+---
+
+## Phase 2 — Users
+
+Implement:
+
+```text
+register
+login
+profile
+```
+
+---
+
+## Phase 3 — Authentication
+
+Implement:
+
+```text
+JWT
+password hashing
+protected routes
+```
+
+---
+
+## Phase 4 — Projects
+
+Implement project CRUD.
+
+---
+
+## Phase 5 — Tasks
+
+Implement:
+
+```text
+create
+read
+update
+delete
+```
+
+with project relationships.
+
+---
+
+## Phase 6 — Comments
+
+Implement task comments.
+
+---
+
+## Phase 7 — Authorization
+
+Test:
+
+```text
+User A
+ ↓
+tries to modify
+ ↓
+User B's resource
+```
+
+The API must reject unauthorized access.
+
+---
+
+## Phase 8 — Pagination & Filtering
+
+Add:
+
+```text
+?page=
+?limit=
+?status=
+?sort=
+```
+
+---
+
+## Phase 9 — Error Architecture
+
+Implement consistent errors.
+
+---
+
+## Phase 10 — Testing
+
+Build a serious automated test suite.
+
+---
+
+## Phase 11 — Documentation
+
+Complete:
+
+* README
+* architecture diagram
+* API documentation
+* setup instructions
+* environment configuration
+* testing instructions
+
+---
+
+## Phase 12 — Failure Engineering
+
+Break the system deliberately.
+
+Test:
+
+```text
+Database unavailable
+Invalid JWT
+Expired JWT
+Missing environment variable
+Malformed JSON
+Invalid input
+Unauthorized resource
+Slow database
+External API timeout
+```
+
+Document every failure.
+
+---
+
+# 🔬 Required Engineering Experiments
+
+Do not just build the project.
+
+Perform experiments.
+
+---
+
+## Experiment 1 — Sync vs Async
+
+Create two endpoints.
+
+Compare:
+
+```text
+synchronous I/O
+```
+
+vs
+
+```text
+asynchronous I/O
+```
+
+Measure the behavior under concurrent requests.
+
+Explain the result.
+
+---
+
+## Experiment 2 — Database Query Performance
+
+Compare:
+
+```text
+unoptimized query
+```
+
+with:
+
+```text
+indexed query
+```
+
+Measure the difference.
+
+---
+
+## Experiment 3 — Pagination
+
+Compare:
+
+```text
+return everything
+```
+
+with:
+
+```text
+paginated response
+```
+
+Observe:
+
+* response size
+* latency
+* memory
+* database behavior
+
+---
+
+## Experiment 4 — Failure Injection
+
+Deliberately break:
+
+```text
+database
+JWT
+configuration
+external API
+```
+
+and document the debugging process.
+
+---
+
+# 🔐 Security Challenge
+
+Attempt to break your own API.
+
+Test:
+
+```text
+Unauthorized access
+IDOR / BOLA
+Invalid JWT
+Expired JWT
+Malformed input
+Oversized input
+SQL injection attempts
+Command injection attempts
+CORS misconfiguration
+Sensitive information leakage
+Rate-limit abuse
+```
+
+The objective is not exploitation.
+
+The objective is learning how defensive backend engineering works.
+
+---
+
+# 📊 Performance Challenge
+
+Create a basic benchmark.
+
+Measure:
+
+```text
+Requests/sec
+Average latency
+Error rate
+```
+
+Test:
+
+```text
+10 requests
+100 requests
+1000 requests
+```
+
+where your machine can safely handle the workload.
+
+Do not chase meaningless benchmark numbers.
+
+Understand what changed and why.
+
+---
+
+# 🧠 Architecture Challenge
+
+Create a diagram:
+
+```text
+                    ┌──────────────┐
+                    │    Client    │
+                    └──────┬───────┘
+                           │
+                         HTTP
+                           │
+                    ┌──────▼───────┐
+                    │    Router    │
+                    └──────┬───────┘
+                           │
+                    ┌──────▼───────┐
+                    │   Service    │
+                    └──────┬───────┘
+                           │
+                    ┌──────▼───────┐
+                    │  Repository  │
+                    └──────┬───────┘
+                           │
+                    ┌──────▼───────┐
+                    │  PostgreSQL  │
+                    └──────────────┘
+```
+
+Then add:
+
+```text
+Authentication
+Authorization
+Middleware
+Logging
+Configuration
+```
+
+---
+
+# 🧪 Failure Scenarios You Must Be Able to Explain
+
+By the end of V08, you should be able to reason through:
+
+### Scenario 1
+
+```text
+Client receives 404.
+```
+
+Possible causes?
+
+---
+
+### Scenario 2
+
+```text
+Client receives 401.
+```
+
+What does that tell you?
+
+---
+
+### Scenario 3
+
+```text
+Client receives 403.
+```
+
+How is this different from 401?
+
+---
+
+### Scenario 4
+
+```text
+API is returning 500.
+```
+
+How do you investigate?
+
+---
+
+### Scenario 5
+
+```text
+API suddenly becomes slow.
+```
+
+What layers could be responsible?
+
+---
+
+### Scenario 6
+
+```text
+Database is healthy but API is slow.
+```
+
+What would you investigate?
+
+---
+
+### Scenario 7
+
+```text
+API works locally but not remotely.
+```
+
+What layers do you inspect?
+
+---
+
+### Scenario 8
+
+```text
+JWT is valid but user can access another user's resource.
+```
+
+What category of security failure is this?
+
+---
+
+# 🔄 Integration With Previous Volumes
+
+## V01
+
+Apply:
+
+* first principles
+* debugging
+* documentation
+* experiments
+* system thinking
+
+---
+
+## V02
+
+Apply:
+
+* processes
+* memory
+* OS
+* files
+* sockets
+
+---
+
+## V03
+
+Apply:
+
+* DNS
+* IP
+* TCP
+* TLS
+* HTTP
+* ports
+* routing
+
+---
+
+## V04
+
+Use:
+
+```text
+Ubuntu
+systemctl
+journalctl
+ss
+curl
+permissions
+process inspection
+```
+
+---
+
+## V05
+
+Automate API operations with Bash.
+
+---
+
+## V06
+
+Use Git professionally:
+
+```text
+feature branches
+commits
+pull requests
+code review
+tags
+```
+
+---
+
+## V07
+
+Use:
+
+```text
+Python
+venv
+Pydantic
+asyncio
+logging
+pytest
+HTTP clients
+configuration
+```
+
+---
+
+# 🧠 V08 Feynman Test
+
+Without looking at notes, explain:
+
+### Question 1
+
+What happens when you enter:
+
+```text
+https://api.example.com/users/42
+```
+
+into a browser?
+
+---
+
+### Question 2
+
+What is the difference between:
+
+```text
+HTTP
+REST
+API
+FastAPI
+```
+
+?
+
+---
+
+### Question 3
+
+Why do we separate:
+
+```text
+Router
+Service
+Repository
+```
+
+?
+
+---
+
+### Question 4
+
+What is the difference between:
+
+```text
+Authentication
+Authorization
+```
+
+?
+
+---
+
+### Question 5
+
+Why isn't JWT encryption?
+
+---
+
+### Question 6
+
+Why is:
+
+```text
+401
+```
+
+different from:
+
+```text
+403
+```
+
+?
+
+---
+
+### Question 7
+
+Why can async programming improve API throughput for I/O-heavy workloads?
+
+---
+
+### Question 8
+
+Why shouldn't a router contain all business logic?
+
+---
+
+### Question 9
+
+What happens if a database becomes unavailable while an API request is running?
+
+---
+
+### Question 10
+
+How would you debug:
+
+```text
+API works locally
+but fails in production?
+```
+
+---
+
+# 📝 V08 Notes System
+
+Create:
+
+```text
+V08-notes/
+├── HTTP.md
+├── REST.md
+├── FastAPI.md
+├── Pydantic.md
+├── Authentication.md
+├── Authorization.md
+├── JWT.md
+├── API-Security.md
+├── Async.md
+├── Testing.md
+├── Architecture.md
+└── Debugging.md
+```
+
+Do not copy tutorial text.
+
+For every concept record:
+
+```text
+Concept
+Why it exists
+How it works
+Example
+Common mistake
+How to debug it
+When to use it
+When not to use it
+```
+
+---
+
+# 🎯 V08 Completion Criteria
+
+You are finished with V08 when you can independently:
+
+* Explain HTTP from first principles.
+* Trace an API request through the network.
+* Design REST resources.
+* Choose HTTP methods correctly.
+* Choose appropriate status codes.
+* Design request and response schemas.
+* Build FastAPI applications.
+* Use Pydantic properly.
+* Structure a backend professionally.
+* Implement authentication.
+* Implement authorization.
+* Explain JWT correctly.
+* Connect an API to PostgreSQL.
+* Separate routers, services, and repositories.
+* Implement pagination.
+* Implement filtering and sorting.
+* Write meaningful API tests.
+* Generate OpenAPI documentation.
+* Handle errors consistently.
+* Apply fundamental API security.
+* Explain async API behavior.
+* Implement structured logging.
+* Diagnose API failures.
+* Explain caching and rate limiting.
+* Understand WebSockets.
+* Build and document the complete integration project.
+
+---
+
+# 🏆 V08 Final Deliverables
+
+At the end, your repository should contain:
+
+```text
+1. Production-style FastAPI service
+2. PostgreSQL integration
+3. Authentication
+4. Authorization
+5. CRUD resources
+6. Pagination/filtering/sorting
+7. Consistent error handling
+8. Structured logging
+9. Request IDs
+10. Health endpoint
+11. Automated tests
+12. OpenAPI documentation
+13. Postman collection
+14. Architecture diagram
+15. Security review
+16. Performance experiment
+17. Failure-injection report
+18. README
+19. Engineering decision records
+```
+
+---
+
+# 🚦 Important Roadmap Boundary
+
+Do **not** jump ahead to Docker because this project is now working.
+
+The roadmap intentionally separates the concerns.
+
+You first learn:
+
+```text
+V08
+Backend/API Engineering
+        ↓
+V09
+AI & LLM Fundamentals
+        ↓
+V10
+Embeddings, Vector Search & RAG
+        ↓
+V11
+AI Application Engineering
+        ↓
+🚀 FLAGSHIP PROJECT MILESTONE
+        ↓
+V12
+Docker
+        ↓
+V13
+CI/CD
+        ↓
+V14
+AWS
+        ↓
+V15
+Terraform
+        ↓
+V16
+Kubernetes
+        ↓
+V17
+DevSecOps
+        ↓
+V18
+Observability
+        ↓
+V19
+LLMOps
+        ↓
+V20
+Production Engineering & SRE
+        ↓
+V21
+Interviews
+```
+
+The purpose of V08 is therefore to make sure that when you eventually containerize and deploy an application, you actually understand **the backend inside the container** rather than merely knowing Docker commands.
+
+---
+
+# 🧭 V08 Mental Model
+
+Keep this entire model in your head:
+
+```text
+                    INTERNET
+                       │
+                       ▼
+                  ┌─────────┐
+                  │  DNS    │
+                  └────┬────┘
+                       │
+                       ▼
+                ┌─────────────┐
+                │ TCP / QUIC  │
+                └──────┬──────┘
+                       │
+                       ▼
+                   ┌───────┐
+                   │ TLS   │
+                   └───┬───┘
+                       │
+                       ▼
+                  ┌─────────┐
+                  │  HTTP   │
+                  └────┬────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │ Reverse Proxy   │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │    FastAPI      │
+              ├─────────────────┤
+              │ Middleware      │
+              │ Authentication  │
+              │ Authorization   │
+              │ Router          │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │ Business Logic  │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │ Repository      │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │   PostgreSQL    │
+              └─────────────────┘
+```
+
+And around the entire system:
+
+```text
+Security
+Logging
+Testing
+Configuration
+Monitoring
+Error Handling
+Performance
+```
+
+That is the real subject of **Volume 08**.

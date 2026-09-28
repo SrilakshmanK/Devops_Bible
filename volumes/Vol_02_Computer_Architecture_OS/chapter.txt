@@ -1,0 +1,1801 @@
+# 📘 Volume 02 — Computer Architecture & Operating System Fundamentals
+
+## 🎯 Objective
+
+Understand what happens inside a computer from the moment it powers on to the moment a program executes.
+
+This volume establishes the hardware and operating-system mental models required for the later DevOps and AI infrastructure volumes.
+
+By the end of this volume, you should understand:
+
+* How computers represent data.
+* How CPU, RAM, storage, and I/O work together.
+* How a CPU executes instructions.
+* What registers, caches, RAM, and storage actually do.
+* How programs become executable processes.
+* How the operating system manages hardware.
+* What kernels and system calls are.
+* How processes and threads work.
+* How memory is managed.
+* How filesystems organize persistent data.
+* How computers boot.
+* Why virtualization exists.
+* What a virtual machine actually is.
+* What a server really is.
+* Why Linux became dominant in server environments.
+* Why containers can exist on top of operating-system primitives.
+* Why these concepts matter for Docker, Kubernetes, cloud, databases, and AI workloads.
+
+---
+
+# 🧠 Learning Principle
+
+Do not memorize:
+
+> "RAM is temporary memory."
+
+Instead understand:
+
+```text
+CPU needs data
+      ↓
+Registers / Cache
+      ↓
+RAM
+      ↓
+Storage
+```
+
+Ask:
+
+* Why are there multiple levels?
+* Why isn't everything RAM?
+* Why isn't everything storage?
+* Why is cache faster?
+* What happens when the needed data isn't available?
+* What does the operating system do?
+
+The goal is to understand the **reasoning behind the architecture**.
+
+---
+
+# Chapter 1 — What Is a Computer?
+
+## Concepts
+
+### 1.1 What Is a Computer?
+
+Understand a computer as a system that:
+
+```text
+Input
+  ↓
+Processing
+  ↓
+Storage / State
+  ↓
+Output
+```
+
+### 1.2 Hardware vs Software
+
+Understand:
+
+* Hardware
+* Software
+* Firmware
+* Operating system
+* Applications
+
+### 1.3 Evolution of Computers
+
+High-level evolution:
+
+* Mechanical computation
+* Vacuum tubes
+* Transistors
+* Integrated circuits
+* Microprocessors
+* Personal computers
+* Servers
+* Mobile devices
+* Cloud computing
+
+Do not turn this into a history-memorization exercise.
+
+Understand the engineering progression.
+
+### 1.4 Types of Computers
+
+* Embedded systems
+* Personal computers
+* Workstations
+* Servers
+* Mainframes
+* Supercomputers
+* Mobile devices
+* Cloud infrastructure
+
+### 1.5 Data Representation
+
+Understand why computers use binary.
+
+### 1.6 Bits and Bytes
+
+* Bit
+* Byte
+* KB
+* MB
+* GB
+* TB
+* KiB
+* MiB
+* GiB
+
+Understand decimal vs binary-based units.
+
+### 1.7 Number Systems
+
+* Binary
+* Decimal
+* Hexadecimal
+
+### 1.8 Character and Data Representation
+
+High-level understanding of:
+
+* ASCII
+* Unicode
+* UTF-8
+* Numbers
+* Boolean values
+* Images
+* Text
+* Audio
+
+### Practical Exercises
+
+1. Convert decimal numbers to binary.
+2. Convert binary to decimal.
+3. Convert hexadecimal to decimal.
+4. Convert binary to hexadecimal.
+5. Determine the approximate storage required for a small dataset.
+
+### Mini Task
+
+Take:
+
+* Your age
+* A three-digit number
+* A small text string
+
+Represent them in binary/hexadecimal where appropriate and verify your calculations using Python.
+
+---
+
+# Chapter 2 — Computer Hardware
+
+## Concepts
+
+### 2.1 Motherboard
+
+Understand the motherboard as the interconnection platform for major hardware components.
+
+### 2.2 CPU
+
+High-level CPU architecture.
+
+### 2.3 RAM
+
+What RAM provides and why it is required.
+
+### 2.4 ROM / Firmware Storage
+
+Understand the difference between volatile memory and firmware storage.
+
+### 2.5 Storage
+
+* HDD
+* SATA SSD
+* NVMe SSD
+
+### 2.6 GPU
+
+Understand:
+
+* Why GPUs exist
+* CPU vs GPU
+* Parallel workloads
+* Why GPUs are important for AI workloads
+
+Do not go deep into CUDA yet.
+
+### 2.7 Power Supply
+
+Basic understanding of power delivery.
+
+### 2.8 Cooling
+
+Why heat exists and why thermal management matters.
+
+### 2.9 Expansion Devices
+
+* Network cards
+* GPUs
+* Storage controllers
+* Other expansion hardware
+
+### 2.10 Buses and Interconnects
+
+High-level understanding of:
+
+* PCIe
+* Memory bus
+* Storage interfaces
+* USB
+
+### 2.11 I/O Devices
+
+* Keyboard
+* Mouse
+* Display
+* Network interface
+* Storage devices
+
+### Practical Exercise
+
+Inspect your own computer.
+
+Record:
+
+```text
+CPU:
+CPU cores:
+CPU threads:
+RAM:
+GPU:
+Storage:
+Storage interface:
+Network interface:
+Operating system:
+```
+
+Use actual system information rather than guessing.
+
+### Mini Task
+
+Explain:
+
+> Why can't the CPU simply use the SSD as if it were RAM?
+
+---
+
+# Chapter 3 — CPU Architecture & Instruction Execution
+
+## Concepts
+
+### 3.1 What Does a CPU Actually Do?
+
+Understand the CPU as an instruction-execution engine.
+
+### 3.2 CPU Components
+
+* Control Unit
+* ALU
+* Registers
+* Instruction-related components
+* Cache
+
+### 3.3 Registers
+
+Why registers exist and why they are extremely fast.
+
+### 3.4 ALU
+
+Arithmetic and logical operations.
+
+### 3.5 Control Unit
+
+High-level coordination of instruction execution.
+
+### 3.6 Clock
+
+Understand:
+
+* Clock cycles
+* Frequency
+* Why clock speed alone does not determine performance
+
+### 3.7 CPU Cores
+
+* Single-core
+* Multi-core
+
+### 3.8 Threads
+
+Understand hardware threads at a high level.
+
+### 3.9 CPU Cache
+
+* L1
+* L2
+* L3
+* Cache locality
+
+### 3.10 Instruction Cycle
+
+```text
+Fetch
+ ↓
+Decode
+ ↓
+Execute
+ ↓
+Memory access if necessary
+ ↓
+Write result
+```
+
+### 3.11 Machine Instructions
+
+Understand that software eventually becomes instructions the processor can execute.
+
+### 3.12 Interrupts
+
+Understand why CPUs need interrupts.
+
+Examples:
+
+* Keyboard input
+* Network packet
+* Timer
+* Hardware event
+
+### Practical Exercise
+
+Run a CPU-intensive operation and monitor:
+
+* CPU utilization
+* Per-core utilization
+* Frequency if available
+* Process consuming CPU
+
+### Mini Task
+
+Explain:
+
+> Why does adding more CPU cores not automatically make every program twice as fast?
+
+---
+
+# Chapter 4 — Programs, Compilation & Execution
+
+This chapter is added because understanding **how source code becomes a running process** is essential before studying operating systems deeply.
+
+## Concepts
+
+### 4.1 Source Code
+
+What programmers write.
+
+### 4.2 Compiled Languages
+
+High-level flow:
+
+```text
+Source Code
+ ↓
+Compiler
+ ↓
+Object / Machine Code
+ ↓
+Executable
+```
+
+### 4.3 Interpreted / Runtime-Based Execution
+
+Understand at a high level how languages such as Python and JavaScript use runtimes/interpreters/JIT mechanisms.
+
+Do not get trapped in terminology debates.
+
+### 4.4 Linking
+
+High-level understanding of:
+
+* Libraries
+* Static linking
+* Dynamic linking
+
+### 4.5 Loading
+
+Understand how an executable gets loaded into memory.
+
+### 4.6 Program vs Process
+
+Critical distinction:
+
+```text
+Program
+=
+stored instructions
+
+Process
+=
+running instance of a program
+```
+
+### 4.7 Process Memory
+
+High-level layout:
+
+```text
+Process
+│
+├── Code / Text
+├── Data
+├── Heap
+├── Stack
+└── Other mappings
+```
+
+### Practical Exercise
+
+Take a simple program you wrote.
+
+Trace:
+
+```text
+Source
+ ↓
+Runtime/compiler
+ ↓
+Executable/code
+ ↓
+Process
+ ↓
+CPU
+ ↓
+Memory
+```
+
+### Mini Task
+
+Explain why opening the same application twice can create multiple processes or multiple execution contexts.
+
+---
+
+# Chapter 5 — Memory Architecture
+
+## Concepts
+
+### 5.1 What Is Memory?
+
+### 5.2 Memory Hierarchy
+
+Understand:
+
+```text
+Registers
+   ↓
+L1 Cache
+   ↓
+L2 Cache
+   ↓
+L3 Cache
+   ↓
+RAM
+   ↓
+SSD
+   ↓
+HDD / Remote Storage
+```
+
+Generally:
+
+```text
+Higher in hierarchy
+→ faster
+→ smaller
+→ more expensive
+
+Lower in hierarchy
+→ slower
+→ larger
+→ cheaper
+```
+
+### 5.3 RAM
+
+* Volatile memory
+* Memory access
+* Capacity
+* Bandwidth
+
+### 5.4 Virtual Memory
+
+Why operating systems create an abstraction over physical memory.
+
+### 5.5 Virtual Address vs Physical Address
+
+Understand the basic idea.
+
+### 5.6 Paging
+
+Why memory is divided into pages.
+
+### 5.7 Page Tables
+
+High-level understanding.
+
+### 5.8 Swapping
+
+What happens when memory pressure occurs.
+
+### 5.9 Stack
+
+Typical use:
+
+* Function calls
+* Local variables
+* Call frames
+
+### 5.10 Heap
+
+Typical use:
+
+* Dynamic allocation
+* Objects/data structures
+
+### 5.11 Memory Allocation
+
+Understand the basic idea of allocating and releasing memory.
+
+### 5.12 Memory Leaks
+
+Understand what a memory leak is conceptually.
+
+### 5.13 Shared Memory
+
+Why processes may sometimes share memory.
+
+### Practical Exercise
+
+Monitor your computer while:
+
+1. Opening a browser.
+2. Opening many tabs.
+3. Running a development server.
+4. Running a database.
+
+Observe:
+
+* RAM usage
+* Swap usage
+* Process memory
+* CPU usage
+
+### Mini Task
+
+Explain:
+
+> What happens when a program needs more memory than is immediately available in RAM?
+
+---
+
+# Chapter 6 — Storage & I/O
+
+## Concepts
+
+### 6.1 Persistent vs Volatile Storage
+
+### 6.2 HDD
+
+* Mechanical operation
+* Seek
+* Rotation
+* Latency
+
+### 6.3 SSD
+
+* Flash storage
+* No mechanical seek
+
+### 6.4 NVMe
+
+Why NVMe SSDs can provide much higher performance than traditional storage interfaces.
+
+### 6.5 Storage Capacity vs Performance
+
+Understand:
+
+* Throughput
+* Latency
+* IOPS
+
+### 6.6 Partitions
+
+Why disks can be divided into logical regions.
+
+### 6.7 Volumes
+
+High-level distinction between physical devices and logical storage.
+
+### 6.8 Filesystems
+
+Why raw storage isn't enough.
+
+### 6.9 Read / Write Operations
+
+Understand:
+
+```text
+Application
+ ↓
+OS
+ ↓
+Filesystem
+ ↓
+Storage driver
+ ↓
+Storage device
+```
+
+### 6.10 I/O Bottlenecks
+
+Understand why a program can be CPU-light but still slow.
+
+### Practical Exercise
+
+Inspect your storage:
+
+* Device
+* Capacity
+* Filesystem
+* Used space
+* Free space
+* Mount point
+
+### Mini Task
+
+Compare:
+
+```text
+CPU-bound
+vs
+Memory-bound
+vs
+I/O-bound
+```
+
+with a practical example of each.
+
+---
+
+# Chapter 7 — Boot Process
+
+## Concepts
+
+Understand the complete boot sequence.
+
+```text
+Power On
+ ↓
+Firmware
+ ↓
+POST
+ ↓
+Boot Device Selection
+ ↓
+Bootloader
+ ↓
+Kernel
+ ↓
+System Initialization
+ ↓
+Services
+ ↓
+Login
+ ↓
+User Space
+```
+
+### 7.1 BIOS
+
+### 7.2 UEFI
+
+### 7.3 POST
+
+### 7.4 Bootloader
+
+### 7.5 Kernel Loading
+
+### 7.6 Initial System Process
+
+High-level understanding of system initialization.
+
+### 7.7 Services
+
+### 7.8 Login
+
+### 7.9 User Space
+
+### Practical Exercise
+
+Inspect your system's boot configuration where safely possible.
+
+On Linux, investigate:
+
+* Boot mode
+* Kernel version
+* System initialization
+* Boot logs
+
+### Mini Task
+
+Explain what would happen if the bootloader worked but the operating system kernel could not be loaded.
+
+---
+
+# Chapter 8 — Operating System Fundamentals
+
+## Concepts
+
+### 8.1 What Is an Operating System?
+
+Understand the OS as an abstraction and resource-management layer between applications and hardware.
+
+### 8.2 OS Responsibilities
+
+* Process management
+* Memory management
+* Filesystems
+* Device management
+* Networking
+* Security
+* Resource allocation
+
+### 8.3 Kernel
+
+Understand:
+
+```text
+Applications
+      ↓
+System Calls
+      ↓
+Kernel
+      ↓
+Hardware
+```
+
+### 8.4 User Space
+
+### 8.5 Kernel Space
+
+### 8.6 System Calls
+
+Understand why applications don't normally access hardware directly.
+
+Examples:
+
+* File operations
+* Process creation
+* Memory operations
+* Network operations
+
+### 8.7 Processes
+
+### 8.8 Threads
+
+### 8.9 Scheduling
+
+### 8.10 Context Switching
+
+### 8.11 Multitasking
+
+### 8.12 Resource Management
+
+### Practical Exercise
+
+Inspect running processes on your machine.
+
+Identify:
+
+* PID
+* Parent process
+* CPU usage
+* Memory usage
+* Process state
+
+### Mini Task
+
+Explain:
+
+> What happens when a program wants to read a file from disk?
+
+Trace:
+
+```text
+Application
+ ↓
+System Call
+ ↓
+Kernel
+ ↓
+Filesystem
+ ↓
+Storage Driver
+ ↓
+Storage Device
+ ↓
+Data
+ ↓
+Kernel
+ ↓
+Application
+```
+
+---
+
+# Chapter 9 — Processes, Threads & IPC
+
+## Concepts
+
+### 9.1 Process Lifecycle
+
+High-level states:
+
+```text
+Created
+ ↓
+Ready
+ ↓
+Running
+ ↓
+Waiting / Blocked
+ ↓
+Running
+ ↓
+Terminated
+```
+
+### 9.2 Parent and Child Processes
+
+### 9.3 Process IDs
+
+### 9.4 Daemons / Background Services
+
+### 9.5 Threads
+
+Understand:
+
+* Shared address space
+* Concurrency
+* Scheduling
+
+### 9.6 Processes vs Threads
+
+Compare:
+
+* Memory
+* Isolation
+* Communication
+* Creation cost
+* Failure impact
+
+### 9.7 Context Switching
+
+### 9.8 Inter-Process Communication
+
+Introduction to:
+
+* Pipes
+* Signals
+* Shared memory
+* Sockets
+
+Do not go deeply into distributed messaging yet.
+
+### 9.9 Signals
+
+Understand common concepts such as:
+
+* Termination
+* Interrupt
+* Stop
+* Continue
+
+### Practical Exercise
+
+Start a process.
+
+Find its PID.
+
+Inspect it.
+
+Send it a signal.
+
+Observe the result.
+
+### Mini Task
+
+Explain why a process crashing is different from one thread crashing inside a multi-threaded process.
+
+---
+
+# Chapter 10 — Filesystems
+
+## Concepts
+
+### 10.1 What Is a Filesystem?
+
+### 10.2 Files
+
+### 10.3 Directories
+
+### 10.4 Metadata
+
+### 10.5 Paths
+
+### 10.6 File Descriptors
+
+This is important for later Linux learning.
+
+Understand the basic idea that processes interact with files and other resources through descriptors.
+
+### 10.7 Inodes
+
+High-level understanding.
+
+### 10.8 Directory Entries
+
+### 10.9 Journaling
+
+Why filesystems use journals.
+
+### 10.10 Mount Points
+
+### 10.11 Linux Filesystems
+
+Introduction to:
+
+* ext4
+* XFS
+* Btrfs
+
+### 10.12 Windows Filesystems
+
+High-level:
+
+* NTFS
+* FAT32
+* exFAT
+
+### 10.13 Permissions
+
+Only introductory understanding here.
+
+Detailed Linux permissions come in Volume 04.
+
+### Practical Exercise
+
+Explore the filesystem hierarchy of a Linux system or Linux VM.
+
+Identify:
+
+```text
+/
+├── etc
+├── home
+├── var
+├── usr
+├── tmp
+├── dev
+├── proc
+└── ...
+```
+
+Do not memorize directories.
+
+Understand what categories of resources they contain.
+
+### Mini Task
+
+Explain the difference between:
+
+```text
+File
+Directory
+Path
+Inode
+Mount Point
+Filesystem
+```
+
+---
+
+# Chapter 11 — Virtualization Fundamentals
+
+## Concepts
+
+### 11.1 Why Virtualization Exists
+
+Understand the problems virtualization helps solve:
+
+* Hardware utilization
+* Isolation
+* Resource allocation
+* Portability
+* Server consolidation
+* Testing
+
+### 11.2 Physical Machine
+
+### 11.3 Virtual Machine
+
+### 11.4 Hypervisor
+
+### 11.5 Type 1 Hypervisor
+
+### 11.6 Type 2 Hypervisor
+
+### 11.7 Host OS
+
+### 11.8 Guest OS
+
+### 11.9 Virtual CPU
+
+### 11.10 Virtual Memory
+
+### 11.11 Virtual Storage
+
+### 11.12 Virtual Networking
+
+### 11.13 Resource Allocation
+
+### 11.14 VM Isolation
+
+### 11.15 Virtualization Overhead
+
+### 11.16 Why Containers Came Later
+
+This is the important bridge to Volume 12.
+
+Understand conceptually:
+
+```text
+Virtual Machine
+
+Hardware
+   ↓
+Hypervisor
+   ↓
+Guest OS
+   ↓
+Application
+```
+
+versus:
+
+```text
+Container
+
+Hardware
+   ↓
+Host OS / Kernel
+   ↓
+Container Runtime
+   ↓
+Container
+   ↓
+Application
+```
+
+Do NOT learn Docker yet.
+
+The goal is simply to understand **why containers are different from virtual machines**.
+
+---
+
+# Chapter 12 — Servers & Compute Infrastructure
+
+## Concepts
+
+### 12.1 What Is a Server?
+
+A server is fundamentally a system providing resources or services to other systems.
+
+### 12.2 Server vs Personal Computer
+
+Understand the difference in:
+
+* Workload
+* Reliability
+* Availability
+* Hardware
+* Management
+* Networking
+
+### 12.3 Bare-Metal Servers
+
+### 12.4 Rack Servers
+
+### 12.5 Blade Servers
+
+### 12.6 Virtual Servers
+
+### 12.7 Cloud Compute
+
+High-level introduction only.
+
+### 12.8 Headless Systems
+
+Why servers often operate without a graphical interface.
+
+### 12.9 Server Resources
+
+* CPU
+* RAM
+* Storage
+* Network
+* GPU
+
+### 12.10 Resource Bottlenecks
+
+Understand:
+
+```text
+CPU bottleneck
+Memory bottleneck
+Storage/I/O bottleneck
+Network bottleneck
+```
+
+### 12.11 Why Linux Dominates Server Environments
+
+Understand the engineering reasons:
+
+* Open source
+* Automation
+* Resource efficiency
+* Ecosystem
+* Networking tools
+* Server software support
+* Customizability
+* Cloud support
+
+Avoid reducing the answer to simply:
+
+> "Linux is free."
+
+There are multiple reasons.
+
+### Practical Exercise
+
+Take a cloud VM specification from a provider.
+
+Interpret:
+
+```text
+vCPU
+RAM
+Disk
+Network
+```
+
+and explain what workload each resource affects.
+
+---
+
+# Chapter 13 — Computer Architecture in Modern Infrastructure
+
+This chapter connects the fundamentals to the roadmap ahead.
+
+## Concepts
+
+### 13.1 Resource Abstraction
+
+Understand how:
+
+```text
+Physical CPU
+      ↓
+Virtual CPU
+      ↓
+Container CPU limit
+      ↓
+Application workload
+```
+
+can represent different abstraction layers.
+
+### 13.2 Physical vs Virtual Resources
+
+### 13.3 Resource Allocation
+
+### 13.4 Resource Limits
+
+### 13.5 Resource Contention
+
+### 13.6 CPU-bound Workloads
+
+### 13.7 Memory-bound Workloads
+
+### 13.8 I/O-bound Workloads
+
+### 13.9 Network-bound Workloads
+
+### 13.10 Why This Matters for Cloud Computing
+
+### 13.11 Why This Matters for Containers
+
+### 13.12 Why This Matters for Kubernetes
+
+### 13.13 Why This Matters for AI
+
+AI workloads introduce additional resource considerations:
+
+```text
+CPU
+RAM
+GPU
+VRAM
+Storage
+Network
+```
+
+Understand these concepts now.
+
+GPU programming and AI hardware optimization come much later.
+
+### Practical Exercise
+
+Take three workloads:
+
+1. Web API
+2. Database
+3. AI inference
+
+For each, identify the likely major resource constraints.
+
+---
+
+# 🧪 Hands-on Labs
+
+Complete these during the volume.
+
+## Lab 1 — Hardware Inspection
+
+Document your actual machine.
+
+## Lab 2 — CPU Investigation
+
+Inspect:
+
+* Cores
+* Threads
+* Frequency
+* Utilization
+
+## Lab 3 — Memory Investigation
+
+Inspect:
+
+* RAM
+* Swap
+* Process memory
+
+## Lab 4 — Storage Investigation
+
+Inspect:
+
+* Disk
+* Partitions
+* Filesystem
+* Capacity
+* Free space
+
+## Lab 5 — Process Investigation
+
+Inspect:
+
+* Process tree
+* PID
+* Parent process
+* CPU
+* Memory
+
+## Lab 6 — Filesystem Investigation
+
+Explore a Linux filesystem.
+
+## Lab 7 — Boot Investigation
+
+Investigate the boot process and system initialization.
+
+## Lab 8 — Virtual Machine
+
+Create a Linux VM.
+
+Compare:
+
+```text
+Host
+vs
+Guest
+```
+
+## Lab 9 — Resource Allocation
+
+Change the VM's:
+
+* CPU allocation
+* RAM allocation
+* Storage allocation
+
+Observe the effect.
+
+## Lab 10 — Workload Classification
+
+Classify several workloads as:
+
+* CPU-bound
+* Memory-bound
+* I/O-bound
+* Network-bound
+
+Explain your reasoning.
+
+---
+
+# 🚀 Volume Mini-Project
+
+# Project — Personal Computer & Virtual Infrastructure Lab
+
+This is the **single main mini-project for Volume 02**.
+
+We are combining the original "My Computer Blueprint" and "Build a Virtual Lab" into one meaningful project.
+
+The goal is to create a technical dossier of your physical computer and then build a small virtual environment on top of it.
+
+---
+
+## Part A — Physical Machine Blueprint
+
+Document:
+
+```text
+CPU
+CPU cores
+CPU threads
+CPU architecture
+RAM
+GPU
+Storage
+Storage interface
+Filesystem
+Partitions
+Boot mode
+Operating system
+Kernel
+Network interface
+```
+
+---
+
+## Part B — Architecture Diagram
+
+Create a diagram:
+
+```text
+                    PHYSICAL COMPUTER
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+         CPU              RAM            Storage
+          │                │                │
+       Cores/             Memory          SSD/NVMe
+       Threads            Pages             │
+          │                │                │
+          └────────────────┼────────────────┘
+                           │
+                        Firmware
+                           │
+                         Kernel
+                           │
+                      Operating System
+                           │
+                    User Applications
+```
+
+Your diagram should reflect your actual machine where possible.
+
+---
+
+## Part C — Linux Virtual Machine
+
+Create a Linux VM using a suitable hypervisor.
+
+Configure:
+
+```text
+vCPU
+RAM
+Virtual Disk
+Network
+```
+
+Then install Linux.
+
+---
+
+## Part D — Compare Physical and Virtual Resources
+
+Create a table:
+
+| Resource | Physical Machine | Virtual Machine |
+| -------- | ---------------- | --------------- |
+| CPU      |                  |                 |
+| RAM      |                  |                 |
+| Storage  |                  |                 |
+| Network  |                  |                 |
+| OS       |                  |                 |
+| Kernel   |                  |                 |
+
+Explain:
+
+* What is physically real?
+* What is virtualized?
+* What does the guest OS believe it has?
+* What does the host actually provide?
+
+---
+
+## Part E — Run Workloads
+
+Inside the VM:
+
+1. Run a CPU workload.
+2. Monitor CPU.
+3. Run a memory workload.
+4. Monitor memory.
+5. Perform disk operations.
+6. Monitor storage usage.
+7. Inspect processes.
+
+Document what happened.
+
+---
+
+## Part F — Technical Report
+
+Write a final report:
+
+```text
+1. Physical machine
+2. Hardware architecture
+3. Boot process
+4. Operating system
+5. Process model
+6. Memory model
+7. Filesystem
+8. Virtualization architecture
+9. Resource allocation
+10. Observations
+11. Bottlenecks
+12. Lessons learned
+```
+
+---
+
+# 🧠 Volume Challenge
+
+## Trace a Program From Power-On to Exit
+
+You must be able to explain this entire chain:
+
+```text
+Power Button
+    ↓
+BIOS / UEFI
+    ↓
+POST
+    ↓
+Bootloader
+    ↓
+Kernel
+    ↓
+System Initialization
+    ↓
+User Space
+    ↓
+User Login
+    ↓
+Application Launch
+    ↓
+Program Loaded Into Memory
+    ↓
+Process Created
+    ↓
+CPU Executes Instructions
+    ↓
+Memory Access
+    ↓
+Filesystem / Storage Access
+    ↓
+System Calls
+    ↓
+Program Continues
+    ↓
+Process Terminates
+    ↓
+Resources Released
+```
+
+You do NOT need to explain every microscopic hardware detail.
+
+You need to understand the major transitions and what each layer is responsible for.
+
+---
+
+# 🎯 Volume Completion Criteria
+
+Do not move to Volume 03 simply because you finished reading the chapters.
+
+You should be able to explain, in your own words:
+
+### Computer Fundamentals
+
+* What a computer actually does.
+* Binary, bits, bytes and hexadecimal.
+* Hardware vs software.
+* Firmware vs operating system.
+
+### CPU
+
+* CPU cores vs threads.
+* Registers.
+* ALU.
+* Control unit.
+* Cache.
+* Fetch-decode-execute.
+* Interrupts.
+
+### Memory
+
+* Registers vs cache vs RAM vs storage.
+* Virtual memory.
+* Paging.
+* Stack vs heap.
+* Swapping.
+* Memory leaks.
+
+### Programs
+
+* Source code.
+* Compilation/interpreting/runtime.
+* Linking.
+* Loading.
+* Program vs process.
+
+### Operating Systems
+
+* Kernel.
+* User space.
+* System calls.
+* Processes.
+* Threads.
+* Scheduling.
+* Context switching.
+* Resource management.
+
+### Storage
+
+* HDD vs SSD vs NVMe.
+* Filesystems.
+* Partitions.
+* Mount points.
+* Inodes.
+* I/O.
+
+### Boot
+
+* BIOS/UEFI.
+* POST.
+* Bootloader.
+* Kernel.
+* System initialization.
+* User space.
+
+### Virtualization
+
+* Hypervisor.
+* Type 1 vs Type 2.
+* Host vs guest.
+* Virtual CPU.
+* Virtual memory.
+* Virtual storage.
+* Why virtualization exists.
+* VM vs container at a high level.
+
+### Servers
+
+* Server vs personal computer.
+* Bare metal.
+* Virtual server.
+* Cloud compute.
+* Resource bottlenecks.
+* Why Linux is widely used for servers.
+
+---
+
+# 🎤 Volume Interview Checkpoint
+
+You should be able to answer questions such as:
+
+### Fundamentals
+
+* What happens when you turn on a computer?
+* What is the difference between RAM and storage?
+* Why is RAM faster than SSD storage?
+* What is a CPU core?
+* What is a thread?
+* What is CPU cache?
+
+### Operating System
+
+* What is a kernel?
+* What is a process?
+* What is a thread?
+* What is a system call?
+* What is context switching?
+* What happens when a process reads a file?
+
+### Memory
+
+* What is virtual memory?
+* What is paging?
+* Stack vs heap?
+* What is swapping?
+* What is a memory leak?
+
+### Storage
+
+* HDD vs SSD?
+* SSD vs NVMe?
+* What is a filesystem?
+* What is an inode?
+* What is a mount point?
+
+### Virtualization
+
+* What is a virtual machine?
+* What is a hypervisor?
+* Type 1 vs Type 2?
+* Why do we use virtualization?
+* VM vs container?
+
+### Infrastructure
+
+* What is a server?
+* Why are servers often headless?
+* Why is Linux common on servers?
+* What does CPU-bound mean?
+* What does I/O-bound mean?
+
+You should explain these conceptually rather than reciting definitions.
+
+---
+
+# 🔗 Connection to Later Volumes
+
+This volume provides the foundation for:
+
+```text
+Volume 02
+Computer Architecture
+        │
+        ├──────────────→ Volume 04 Linux
+        │
+        ├──────────────→ Volume 03 Networking
+        │
+        ├──────────────→ Volume 05 Bash
+        │
+        ├──────────────→ Volume 07 Python
+        │
+        ├──────────────→ Volume 12 Docker
+        │
+        ├──────────────→ Volume 16 Kubernetes
+        │
+        ├──────────────→ Volume 14 AWS
+        │
+        └──────────────→ Volume 19 AI Infrastructure
+```
+
+### Why it matters later
+
+When you learn Docker, you'll understand why containers depend on the host kernel.
+
+When you learn Kubernetes, you'll understand why resource requests and limits exist.
+
+When you learn AWS, you'll understand what a virtual CPU and virtual machine actually represent.
+
+When you learn databases, you'll understand memory and I/O bottlenecks.
+
+When you learn AI infrastructure, you'll understand why GPU, VRAM, CPU, RAM, storage and network resources all matter.
+
+---
+
+# 🚫 What We Deliberately Do NOT Go Deep Into Yet
+
+Do not turn this volume into an advanced computer-science degree.
+
+We will NOT deeply study:
+
+* CPU microarchitecture
+* Out-of-order execution
+* Branch prediction internals
+* CPU pipeline optimization
+* Assembly programming
+* Kernel development
+* Device-driver development
+* NUMA internals
+* Advanced memory models
+* GPU architecture
+* CUDA
+* Distributed systems
+* Container internals
+
+Those subjects can be introduced later when they become useful.
+
+The objective is **strong engineering fundamentals**, not unnecessary depth for its own sake.
+
+---
+
+# 🏁 Final Outcome
+
+After completing Volume 02, you should be able to look at a machine and reason:
+
+```text
+Application
+    ↓
+Process
+    ↓
+Virtual Memory
+    ↓
+System Call
+    ↓
+Kernel
+    ↓
+Filesystem / Network / Device
+    ↓
+Hardware
+```
+
+And you should understand what is happening at each major layer.
+
+That mental model will become one of the foundations of everything that follows.
+
+---
+
+# Volume 02 Completion Checklist
+
+* [ ] Computer fundamentals understood
+* [ ] Binary/hexadecimal understood
+* [ ] Hardware components understood
+* [ ] CPU architecture understood
+* [ ] Memory hierarchy understood
+* [ ] Program execution understood
+* [ ] Process/thread model understood
+* [ ] OS/kernel/system calls understood
+* [ ] Storage/filesystems understood
+* [ ] Boot process understood
+* [ ] Virtualization understood
+* [ ] Server fundamentals understood
+* [ ] Physical machine documented
+* [ ] Linux VM created
+* [ ] Resource experiments completed
+* [ ] Volume mini-project completed
+* [ ] Volume challenge completed
+* [ ] Interview checkpoint passed
+* [ ] Can explain concepts without memorized definitions

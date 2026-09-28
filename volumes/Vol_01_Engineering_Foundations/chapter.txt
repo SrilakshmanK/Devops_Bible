@@ -1,0 +1,1094 @@
+# 📘 Volume 01 — Engineering Foundations & Mindset
+
+## 🎯 Objective
+
+Build the mental models, problem-solving habits, research skills, debugging discipline, and engineering workflow required before learning Linux, networking, Python, cloud, Docker, AI, Kubernetes, and production infrastructure.
+
+This volume is intentionally **tool-light**.
+
+The goal is not to memorize DevOps terminology.
+
+The goal is to learn **how to think and work like an engineer**.
+
+By the end of this volume, you should be able to:
+
+* Break unfamiliar technical problems into smaller problems.
+* Distinguish symptoms from root causes.
+* Think from first principles instead of memorizing solutions.
+* Understand systems at a high level.
+* Debug unfamiliar problems methodically.
+* Read official documentation independently.
+* Research technical topics without relying on tutorials.
+* Form hypotheses and test them.
+* Create minimal reproducible examples.
+* Ask high-quality technical questions.
+* Use AI as an engineering assistant without becoming dependent on it.
+* Maintain useful technical notes and a learning journal.
+* Work with Git and a structured engineering repository.
+* Approach an unfamiliar technology without feeling lost.
+* Explain technical concepts in your own words.
+
+---
+
+# Chapter 1 — What Engineering Actually Means
+
+## Concepts
+
+### 1.1 What is Engineering?
+
+* Engineering as applied problem solving
+* Engineering constraints
+* Requirements vs implementation
+* Correctness vs convenience
+* Trade-offs
+* Reliability
+* Maintainability
+* Simplicity vs complexity
+
+### 1.2 Software Engineering vs Programming
+
+* Writing code vs solving problems
+* Local correctness vs system correctness
+* Features vs systems
+* Technical debt
+* Maintainability
+
+### 1.3 What Does a DevOps Engineer Actually Do?
+
+* Development
+* Operations
+* Infrastructure
+* Automation
+* Reliability
+* Deployment
+* Security
+* Observability
+* Collaboration
+
+### 1.4 What Does an AI/LLM Engineer Actually Do?
+
+* Using models vs building models
+* AI application engineering
+* AI infrastructure
+* RAG systems
+* Model/API integration
+* Evaluation
+* AI observability
+* LLMOps
+
+### 1.5 Understanding the Big Picture
+
+Understand this eventual path:
+
+```text
+Application
+    ↓
+Backend
+    ↓
+Database
+    ↓
+Operating System
+    ↓
+Networking
+    ↓
+Infrastructure
+    ↓
+Cloud
+    ↓
+Containers
+    ↓
+Orchestration
+    ↓
+Observability
+    ↓
+AI Systems
+    ↓
+AI Infrastructure
+```
+
+Do not memorize the technologies yet.
+
+Understand that each layer exists because the layer below it solves a particular problem.
+
+## Practical Exercise
+
+Choose a familiar application such as your MERN project and identify:
+
+* User
+* Frontend
+* Backend
+* Database
+* Network
+* Operating system
+* Server
+* Deployment
+* External services
+
+Draw the system on paper.
+
+---
+
+# Chapter 2 — First-Principles Thinking
+
+## Concepts
+
+### 2.1 What is First-Principles Thinking?
+
+### 2.2 Assumptions vs Facts
+
+### 2.3 Breaking Problems Down
+
+### 2.4 Reasoning From Fundamental Components
+
+### 2.5 Questioning "Why?"
+
+### 2.6 Avoiding Cargo-Cult Engineering
+
+### 2.7 Understanding Before Using
+
+### 2.8 Framework Knowledge vs Fundamental Knowledge
+
+## Example
+
+Instead of memorizing:
+
+> "Docker isolates applications."
+
+Ask:
+
+* What is a process?
+* What does a process need?
+* What does isolation mean?
+* What does the operating system provide?
+* What problem was Docker trying to solve?
+
+This mindset will become extremely important later when learning:
+
+* Docker
+* Kubernetes
+* cloud
+* databases
+* networking
+* AI infrastructure
+
+## Practical Exercise
+
+Choose one technology you already use.
+
+Explain:
+
+1. What problem does it solve?
+2. What existed before it?
+3. Why was that insufficient?
+4. What abstraction does it provide?
+5. What trade-offs does it introduce?
+
+---
+
+# Chapter 3 — Systems Thinking
+
+## Concepts
+
+### 3.1 What is a System?
+
+### 3.2 Components and Boundaries
+
+### 3.3 Inputs and Outputs
+
+### 3.4 Dependencies
+
+### 3.5 Feedback Loops
+
+### 3.6 Bottlenecks
+
+### 3.7 Failure Propagation
+
+### 3.8 Single Points of Failure
+
+### 3.9 Coupling
+
+### 3.10 Abstraction Layers
+
+### 3.11 Local vs System-Level Problems
+
+### 3.12 Understanding Distributed Systems at a High Level
+
+## Example
+
+A simple API request:
+
+```text
+User
+ ↓
+Browser
+ ↓
+DNS
+ ↓
+Network
+ ↓
+Load Balancer
+ ↓
+Backend
+ ↓
+Database
+ ↓
+Response
+```
+
+If the request fails, **"the backend is broken"** is not an explanation.
+
+Any layer could be responsible.
+
+This thinking becomes fundamental later for:
+
+* Kubernetes
+* AWS
+* microservices
+* distributed systems
+* AI pipelines
+* RAG
+* observability
+
+## Practical Exercise
+
+Take one request from one of your existing applications and trace it from:
+
+```text
+User → Response
+```
+
+List every component involved.
+
+---
+
+# Chapter 4 — Problem Solving & Decomposition
+
+## Concepts
+
+### 4.1 What is Problem Solving?
+
+### 4.2 Defining the Actual Problem
+
+### 4.3 Requirements vs Symptoms
+
+### 4.4 Breaking Large Problems Into Smaller Problems
+
+### 4.5 Decomposition
+
+### 4.6 Abstraction
+
+### 4.7 Pattern Recognition
+
+### 4.8 Constraints
+
+### 4.9 Inputs, Outputs, and State
+
+### 4.10 Algorithmic Thinking
+
+### 4.11 Edge Cases
+
+### 4.12 Building a Solution Incrementally
+
+## Problem-Solving Framework
+
+Use:
+
+```text
+1. What exactly is the problem?
+2. What do I know?
+3. What don't I know?
+4. What are the constraints?
+5. What are the possible causes?
+6. What evidence do I have?
+7. What can I test?
+8. What result do I expect?
+9. What actually happened?
+10. What did I learn?
+```
+
+## Practical Exercise
+
+Take a real technical problem you previously solved.
+
+Do NOT look at the old solution.
+
+Reconstruct the problem from scratch using the framework above.
+
+---
+
+# Chapter 5 — Debugging Fundamentals
+
+## Concepts
+
+### 5.1 What is Debugging?
+
+### 5.2 Debugging vs Guessing
+
+### 5.3 Error Messages
+
+### 5.4 Logs
+
+### 5.5 Reproduction
+
+### 5.6 Isolation
+
+### 5.7 Hypothesis Formation
+
+### 5.8 Binary Search Debugging
+
+### 5.9 Rubber Duck Debugging
+
+### 5.10 Minimal Reproducible Examples
+
+### 5.11 Root Cause Analysis
+
+### 5.12 Regression
+
+### 5.13 Fix vs Workaround
+
+## Debugging Loop
+
+```text
+Observe
+   ↓
+Reproduce
+   ↓
+Collect Evidence
+   ↓
+Form Hypothesis
+   ↓
+Test Hypothesis
+   ↓
+Identify Root Cause
+   ↓
+Apply Fix
+   ↓
+Verify
+   ↓
+Prevent Recurrence
+```
+
+## Practical Exercise
+
+Take an old bug from one of your projects.
+
+Document:
+
+```text
+Problem
+Expected behavior
+Actual behavior
+Reproduction steps
+Evidence
+Hypothesis
+Experiments
+Root cause
+Fix
+Verification
+Prevention
+```
+
+---
+
+# Chapter 6 — Documentation & Technical Research
+
+## Concepts
+
+### 6.1 Why Official Documentation Matters
+
+### 6.2 Types of Technical Documentation
+
+* Tutorials
+* Guides
+* References
+* Specifications
+* API documentation
+* Architecture documentation
+* Release notes
+* Changelogs
+
+### 6.3 Reading Documentation Efficiently
+
+### 6.4 Searching Documentation
+
+### 6.5 Understanding Examples
+
+### 6.6 Version Differences
+
+### 6.7 Breaking Changes
+
+### 6.8 Reading Error Messages Alongside Documentation
+
+### 6.9 Source Code as Documentation
+
+### 6.10 Primary Sources vs Secondary Sources
+
+## Research Hierarchy
+
+Prefer:
+
+```text
+Official documentation
+        ↓
+Official specifications
+        ↓
+Source code
+        ↓
+Official issue tracker
+        ↓
+Technical articles
+        ↓
+Community discussions
+        ↓
+Random tutorials
+```
+
+This doesn't mean tutorials are useless.
+
+It means you should not become dependent on them.
+
+## Practical Exercise
+
+Choose one unfamiliar feature from:
+
+* Linux
+* Git
+* Node.js
+* Docker
+
+Learn it using only official documentation.
+
+Write:
+
+* What it does
+* Why it exists
+* Basic usage
+* One example
+* One limitation
+
+---
+
+# Chapter 7 — Asking Technical Questions
+
+## Concepts
+
+### 7.1 Good Questions vs Bad Questions
+
+### 7.2 Context
+
+### 7.3 Expected vs Actual Behavior
+
+### 7.4 Minimal Reproducible Examples
+
+### 7.5 Logs and Evidence
+
+### 7.6 What You Already Tried
+
+### 7.7 Avoiding XY Problems
+
+### 7.8 Asking Questions on GitHub Issues
+
+### 7.9 Asking Questions in Teams
+
+### 7.10 Using AI to Investigate Problems
+
+## AI-Assisted Engineering
+
+Learn to use AI for:
+
+* Explaining unfamiliar concepts
+* Generating hypotheses
+* Reviewing approaches
+* Finding edge cases
+* Debugging
+* Creating test cases
+* Comparing alternatives
+
+But always verify important technical claims.
+
+The goal is:
+
+```text
+AI
+ ↓
+Accelerates thinking
+```
+
+not:
+
+```text
+AI
+ ↓
+Replaces thinking
+```
+
+## Practical Exercise
+
+Take one real technical problem.
+
+Write a high-quality question containing:
+
+```text
+Context
+Problem
+Expected result
+Actual result
+Environment
+What you tried
+Relevant logs
+Minimal reproduction
+Specific question
+```
+
+---
+
+# Chapter 8 — Scientific Method for Engineering
+
+## Concepts
+
+### 8.1 Observation
+
+### 8.2 Hypothesis
+
+### 8.3 Experiment
+
+### 8.4 Prediction
+
+### 8.5 Measurement
+
+### 8.6 Results
+
+### 8.7 Validation
+
+### 8.8 Iteration
+
+### 8.9 Documenting Experiments
+
+## Example
+
+Claim:
+
+> "Caching this API response will make it faster."
+
+Don't assume.
+
+Test:
+
+```text
+Without cache
+    ↓
+Measure latency
+
+With cache
+    ↓
+Measure latency
+```
+
+Then compare.
+
+This mindset will become extremely important later for:
+
+* database optimization
+* Docker performance
+* Kubernetes scaling
+* cloud infrastructure
+* RAG retrieval
+* LLM latency
+* AI cost optimization
+
+## Practical Exercise
+
+Choose one technical claim and test it experimentally.
+
+Document:
+
+```text
+Hypothesis
+Setup
+Variables
+Expected result
+Actual result
+Conclusion
+```
+
+---
+
+# Chapter 9 — Engineering Workflow & Personal Knowledge System
+
+## Concepts
+
+### 9.1 Project Organization
+
+### 9.2 Folder Structures
+
+### 9.3 Naming Conventions
+
+### 9.4 README Files
+
+### 9.5 Technical Notes
+
+### 9.6 Learning Journal
+
+### 9.7 Decision Logs
+
+### 9.8 Experiment Logs
+
+### 9.9 Versioning
+
+### 9.10 Meaningful Git Commits
+
+### 9.11 Keeping Work Reproducible
+
+### 9.12 Building a Personal Knowledge Base
+
+## Recommended Learning Repository
+
+Create:
+
+```text
+engineering-learning/
+│
+├── README.md
+│
+├── learning-journal/
+│
+├── notes/
+│
+├── experiments/
+│
+├── labs/
+│
+├── mini-projects/
+│
+├── troubleshooting/
+│
+└── references/
+```
+
+This repository will continue growing throughout the roadmap.
+
+---
+
+# Chapter 10 — Engineering Discipline & Learning Strategy
+
+## Concepts
+
+### 10.1 Active Learning
+
+### 10.2 Passive Learning
+
+### 10.3 Feynman Technique
+
+### 10.4 Spaced Repetition
+
+### 10.5 Deliberate Practice
+
+### 10.6 Retrieval Practice
+
+### 10.7 Learning From Mistakes
+
+### 10.8 Avoiding Tutorial Hell
+
+### 10.9 Managing Cognitive Load
+
+### 10.10 Knowing When You Actually Understand Something
+
+## Understanding Test
+
+For every major concept, ask yourself:
+
+```text
+Can I explain it?
+Can I draw it?
+Can I implement a simple version?
+Can I debug it?
+Can I explain why it exists?
+Can I explain when NOT to use it?
+Can I answer "what happens underneath?"
+```
+
+If the answer is no, you probably don't fully understand it yet.
+
+---
+
+# 🧪 Hands-on Labs
+
+Complete these throughout the volume.
+
+### Lab 1 — System Mapping
+
+Choose an existing application and map:
+
+```text
+Client
+ ↓
+Network
+ ↓
+Server
+ ↓
+Application
+ ↓
+Database
+ ↓
+External Services
+```
+
+---
+
+### Lab 2 — Debugging Investigation
+
+Take a real bug and perform a complete root-cause investigation.
+
+---
+
+### Lab 3 — Documentation-Only Learning
+
+Learn an unfamiliar CLI feature using official documentation only.
+
+---
+
+### Lab 4 — Minimal Reproduction
+
+Take a complicated problem and reduce it to the smallest reproducible example.
+
+---
+
+### Lab 5 — Technical Experiment
+
+Form a technical hypothesis and test it experimentally.
+
+---
+
+### Lab 6 — Documentation Research
+
+Read an official technical document and produce your own explanation.
+
+---
+
+### Lab 7 — AI-Assisted Investigation
+
+Use an AI assistant to investigate an unfamiliar technical problem.
+
+Record:
+
+* Your initial hypothesis
+* AI suggestions
+* What you verified
+* What the AI got wrong or right
+* Final conclusion
+
+The purpose is to learn **verification**, not blind trust.
+
+---
+
+# 🚀 Volume Mini-Project
+
+# Engineer's Technical Lab
+
+Build a permanent engineering laboratory repository that you will continue using throughout the entire roadmap.
+
+This is NOT a software application.
+
+It is your personal engineering workspace and evidence of how you learn, investigate, experiment, and solve technical problems.
+
+## Repository
+
+```text
+engineering-lab/
+│
+├── README.md
+│
+├── learning-journal/
+│
+├── troubleshooting/
+│
+├── experiments/
+│
+├── documentation-notes/
+│
+├── system-maps/
+│
+├── reproducible-examples/
+│
+├── labs/
+│
+└── scripts/
+```
+
+## Requirements
+
+### 1. Learning Journal
+
+Every study session records:
+
+```text
+Date
+Topic
+What I learned
+What confused me
+What I tested
+What I got wrong
+What I need to revisit
+```
+
+### 2. Troubleshooting Reports
+
+Create at least **3 complete debugging reports**.
+
+### 3. System Maps
+
+Create at least **2 system diagrams**.
+
+### 4. Documentation Investigations
+
+Complete at least **3 documentation-only investigations**.
+
+### 5. Technical Experiments
+
+Complete at least **3 experiments** using:
+
+```text
+Hypothesis
+Experiment
+Measurement
+Result
+Conclusion
+```
+
+### 6. Minimal Reproducible Examples
+
+Create at least **2 reproducible examples** for technical problems.
+
+### 7. Engineering Decision Records
+
+Create at least **2 decision records**.
+
+Example:
+
+```text
+Decision:
+Use X instead of Y.
+
+Context:
+...
+
+Options:
+...
+
+Reason:
+...
+
+Trade-offs:
+...
+
+Consequences:
+...
+```
+
+### 8. Personal Engineering README
+
+Write a README explaining:
+
+* What this repository is
+* How you organize your learning
+* How you document problems
+* How you perform experiments
+* How you verify information
+* How you use AI during engineering work
+
+---
+
+# 🏆 Volume Challenge
+
+Complete an unfamiliar technical task without following a tutorial.
+
+You may use:
+
+* Official documentation
+* Man pages
+* Source code
+* Search
+* AI assistance
+
+But you must solve the problem yourself.
+
+Document:
+
+```text
+Problem
+What I knew
+What I didn't know
+Research
+Hypotheses
+Experiments
+Failures
+Solution
+What I learned
+```
+
+The challenge is considered complete only when you can explain **why your solution works**.
+
+---
+
+# 🎯 Volume Completion Criteria
+
+Do NOT move forward simply because you finished reading the chapters.
+
+You should be able to:
+
+* Explain first-principles thinking.
+* Explain systems thinking.
+* Break a complex problem into smaller components.
+* Perform a structured debugging investigation.
+* Read unfamiliar documentation.
+* Research without immediately searching for tutorials.
+* Create a minimal reproducible example.
+* Form and test technical hypotheses.
+* Document engineering decisions.
+* Explain how AI can assist engineering without replacing verification.
+* Maintain your engineering laboratory repository.
+
+---
+
+# 💼 Career Layer
+
+This volume is not about adding a flashy project to your resume.
+
+Instead, it establishes your **engineering evidence system**.
+
+Your Git history should show meaningful progress.
+
+Examples:
+
+```text
+docs: add debugging methodology
+docs: document first-principles investigation
+lab: add documentation-only investigation
+experiment: compare two approaches
+docs: add system architecture map
+docs: add engineering decision record
+```
+
+Later volumes will produce projects that become much more directly portfolio-worthy.
+
+---
+
+# 🎤 Volume Interview Checkpoint
+
+This is NOT the final interview-preparation volume.
+
+You should simply be able to explain:
+
+### Engineering
+
+* What is engineering?
+* Programming vs software engineering?
+* What is a trade-off?
+* What is technical debt?
+* What is first-principles thinking?
+* What is systems thinking?
+
+### Problem Solving
+
+* How do you approach an unfamiliar technical problem?
+* How do you distinguish a symptom from a root cause?
+* How do you debug something you don't understand?
+* What is a minimal reproducible example?
+* How do you form a debugging hypothesis?
+
+### Research
+
+* Why prefer official documentation?
+* How do you deal with version differences?
+* How do you verify a technical claim?
+* How do you approach an unfamiliar technology?
+
+### AI-Assisted Engineering
+
+* How do you use AI while debugging?
+* How do you verify an AI-generated technical answer?
+* What are the risks of relying blindly on AI?
+
+You should answer these in your own words, not memorize definitions.
+
+---
+
+# 🔗 Connection to Later Volumes
+
+This volume establishes the habits used throughout the entire roadmap.
+
+```text
+Volume 01
+Engineering mindset
+        ↓
+Volume 02
+Computer Architecture
+        ↓
+Volume 03
+Networking
+        ↓
+Volume 04
+Linux
+        ↓
+Volume 05
+Bash
+        ↓
+Volume 06
+Git/GitHub
+        ↓
+Volume 07
+Python
+        ↓
+AI Engineering
+        ↓
+Docker
+        ↓
+CI/CD
+        ↓
+Cloud
+        ↓
+Terraform
+        ↓
+Kubernetes
+        ↓
+Observability
+        ↓
+AI Infrastructure
+```
+
+The Engineer's Technical Lab created in this volume remains with you throughout the roadmap.
+
+---
+
+# 🚫 What This Volume Deliberately Does NOT Teach
+
+Do not try to learn these technologies deeply yet:
+
+* Docker
+* Kubernetes
+* AWS
+* Terraform
+* Ansible
+* FastAPI
+* LangChain
+* RAG
+* LLM APIs
+* Vector databases
+
+You will encounter them later in the correct order.
+
+The purpose of Volume 01 is to make you capable of **learning those technologies properly when you reach them**.
+
+---
+
+# 🏁 Final Outcome
+
+After Volume 01, you should not feel like:
+
+> "I know DevOps."
+
+You should feel:
+
+> **"I know how to learn, investigate, debug, reason about, and understand technical systems."**
+
+That is the foundation on which the rest of this roadmap will be built.

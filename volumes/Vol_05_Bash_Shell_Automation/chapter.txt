@@ -1,0 +1,3464 @@
+# 🐚 Volume 05 — Bash & Shell Automation
+
+## 🎯 Volume Objective
+
+Learn to turn the Linux administration skills from Volume 04 into **reliable, repeatable automation**.
+
+By the end of this volume, you should be able to:
+
+* Write Bash scripts from scratch.
+* Understand how the shell executes commands.
+* Work with variables, arguments, arrays, conditions, loops, and functions.
+* Process files and logs.
+* Build command pipelines.
+* Automate Linux administration.
+* Automate networking and remote operations.
+* Handle errors properly.
+* Validate input safely.
+* Protect secrets.
+* Debug Bash scripts.
+* Schedule automation.
+* Build reusable command-line tools.
+* Write maintainable production-oriented shell scripts.
+
+The fundamental progression is:
+
+```text
+Volume 04
+Manual Linux Administration
+        ↓
+Volume 05
+Bash Automation
+        ↓
+Volume 06
+Git & Collaborative Engineering
+        ↓
+Volume 07
+Python
+```
+
+---
+
+# 🧠 Why Bash Matters
+
+You are going to learn Python later.
+
+So why learn Bash?
+
+Because Bash operates extremely close to the Linux environment.
+
+Consider:
+
+```text
+Linux
+ ↓
+Shell
+ ↓
+Commands
+ ↓
+Processes
+ ↓
+Files
+ ↓
+Services
+ ↓
+Networking
+```
+
+Bash lets you combine these primitives into automation.
+
+For example:
+
+```bash
+systemctl status nginx
+df -h
+free -h
+ss -tulpn
+```
+
+are useful individually.
+
+A Bash script can turn them into:
+
+```text
+Server Health Check
+        ↓
+CPU
+Memory
+Disk
+Network
+Services
+Logs
+        ↓
+One report
+```
+
+That is the beginning of automation engineering.
+
+---
+
+# 🧭 Learning Philosophy
+
+## Rule 1 — Don't memorize Bash syntax
+
+Understand what the shell is doing.
+
+---
+
+## Rule 2 — Learn commands before combining them
+
+First understand:
+
+```bash
+grep
+awk
+sed
+find
+xargs
+```
+
+Then combine them.
+
+---
+
+## Rule 3 — Every automation needs verification
+
+Never think:
+
+> "The command ran, so it worked."
+
+Instead:
+
+```text
+Command
+ ↓
+Exit status
+ ↓
+Output
+ ↓
+Expected state
+ ↓
+Verification
+```
+
+---
+
+## Rule 4 — Automation should reduce human error
+
+A good script is not:
+
+> A long list of commands.
+
+A good script is:
+
+```text
+Input
+ ↓
+Validation
+ ↓
+Decision
+ ↓
+Action
+ ↓
+Error handling
+ ↓
+Verification
+ ↓
+Report
+```
+
+---
+
+# 📚 Chapter Structure
+
+1. Shell & Bash Fundamentals
+2. Scripts, Variables & Arguments
+3. Bash Data & Operators
+4. Control Flow
+5. Functions & Modularity
+6. Files & Directories
+7. Text Processing
+8. Streams, Pipes & Redirection
+9. Processes & Automation
+10. System Administration Automation
+11. Networking & Remote Automation
+12. Security & Safe Scripting
+13. Debugging & Testing
+14. Professional Bash Engineering
+15. Advanced Shell Concepts
+
+---
+
+# Chapter 01 — Shell & Bash Fundamentals
+
+## Objective
+
+Understand exactly what Bash is and what happens when you execute a command.
+
+---
+
+## 1.1 What Is a Shell?
+
+A shell is a program that:
+
+```text
+accepts commands
+      ↓
+interprets them
+      ↓
+starts programs
+      ↓
+connects input/output
+      ↓
+reports results
+```
+
+---
+
+## 1.2 Bash
+
+Understand:
+
+```text
+Bourne Again SHell
+```
+
+and why Bash became widely used on Linux.
+
+---
+
+## 1.3 Shell vs Terminal
+
+Remember:
+
+```text
+Terminal
+    ↓
+Shell
+    ↓
+Command
+    ↓
+Program
+```
+
+The terminal is not the shell.
+
+---
+
+## 1.4 Interactive Shell vs Script
+
+Interactive:
+
+```bash
+ls
+pwd
+cd /tmp
+```
+
+Script:
+
+```bash
+#!/bin/bash
+
+ls
+pwd
+cd /tmp
+```
+
+A script turns a sequence of instructions into a reusable artifact.
+
+---
+
+## 1.5 Shebang
+
+Understand:
+
+```bash
+#!/bin/bash
+```
+
+and why the interpreter matters.
+
+Also understand:
+
+```bash
+#!/usr/bin/env bash
+```
+
+conceptually.
+
+---
+
+## 1.6 Executing a Script
+
+These are not identical:
+
+```bash
+./script.sh
+```
+
+and:
+
+```bash
+bash script.sh
+```
+
+Understand why executable permissions matter for the first form.
+
+---
+
+## 🧪 Lab
+
+Create:
+
+```bash
+#!/bin/bash
+
+echo "Hello from Bash"
+```
+
+Save it.
+
+Then:
+
+```bash
+chmod +x script.sh
+```
+
+Run:
+
+```bash
+./script.sh
+```
+
+and:
+
+```bash
+bash script.sh
+```
+
+Document the difference.
+
+---
+
+# Chapter 02 — Scripts, Variables & Arguments
+
+## Objective
+
+Learn how Bash stores and receives data.
+
+---
+
+## 2.1 Variables
+
+Understand:
+
+```bash
+name="Sri"
+```
+
+and:
+
+```bash
+echo "$name"
+```
+
+---
+
+## 2.2 Quoting
+
+This is extremely important.
+
+Understand:
+
+```bash
+"double quotes"
+'single quotes'
+unquoted
+```
+
+and how expansion differs.
+
+---
+
+## 2.3 Command Substitution
+
+Understand:
+
+```bash
+today=$(date)
+```
+
+versus treating the command text as literal text.
+
+---
+
+## 2.4 Environment Variables
+
+Review:
+
+```bash
+env
+printenv
+echo "$PATH"
+```
+
+Understand:
+
+```text
+Shell variable
+      vs
+Environment variable
+```
+
+---
+
+## 2.5 User Input
+
+Learn:
+
+```bash
+read
+```
+
+Example concept:
+
+```bash
+read -r name
+```
+
+---
+
+## 2.6 Positional Arguments
+
+Understand:
+
+```text
+$0
+$1
+$2
+$3
+```
+
+and:
+
+```text
+$#
+$@
+$?
+```
+
+These are fundamental to command-line tools.
+
+---
+
+## 2.7 Exit Status
+
+Understand:
+
+```bash
+$?
+```
+
+and why:
+
+```text
+0
+```
+
+normally means success.
+
+Non-zero generally indicates failure.
+
+---
+
+## 2.8 Explicit Exit
+
+Learn:
+
+```bash
+exit 0
+exit 1
+```
+
+and when meaningful exit codes matter.
+
+---
+
+## 🧪 Lab
+
+Build:
+
+```text
+greet.sh
+```
+
+Usage:
+
+```bash
+./greet.sh Sri
+```
+
+Output:
+
+```text
+Hello Sri
+```
+
+Then extend it so the script also asks interactively for another value.
+
+Finally add proper exit codes.
+
+---
+
+# Chapter 03 — Bash Data & Operators
+
+## Objective
+
+Understand Bash's data model and operations.
+
+---
+
+## 3.1 Strings
+
+Understand:
+
+```bash
+name="Sri"
+```
+
+---
+
+## 3.2 Integers
+
+Arithmetic:
+
+```bash
+((a + b))
+```
+
+and:
+
+```bash
+$((a + b))
+```
+
+---
+
+## 3.3 Arrays
+
+Learn:
+
+```bash
+servers=("server1" "server2" "server3")
+```
+
+Access:
+
+```bash
+${servers[0]}
+```
+
+Length:
+
+```bash
+${#servers[@]}
+```
+
+---
+
+## 3.4 Associative Arrays
+
+Understand:
+
+```bash
+declare -A servers
+```
+
+and key/value relationships.
+
+---
+
+## 3.5 String Operations
+
+Study:
+
+```text
+length
+substring
+replacement
+prefix/suffix matching
+case conversion
+```
+
+---
+
+## 3.6 Comparison Operators
+
+Understand numeric comparisons:
+
+```text
+-eq
+-ne
+-lt
+-le
+-gt
+-ge
+```
+
+and string comparisons.
+
+---
+
+## 3.7 File Tests
+
+Learn:
+
+```text
+-f
+-d
+-e
+-r
+-w
+-x
+-s
+```
+
+---
+
+## 🧪 Lab
+
+Create an array containing several services:
+
+```text
+nginx
+ssh
+docker
+postgresql
+```
+
+Loop through them and display:
+
+```text
+index
+service name
+```
+
+Then check whether each service exists on your Ubuntu system.
+
+---
+
+# Chapter 04 — Control Flow
+
+## Objective
+
+Teach scripts to make decisions.
+
+---
+
+## 4.1 if
+
+```bash
+if ...
+then
+    ...
+fi
+```
+
+---
+
+## 4.2 if / else
+
+Understand branching.
+
+---
+
+## 4.3 elif
+
+Build multiple conditions.
+
+---
+
+## 4.4 Nested Conditions
+
+Understand when nesting is appropriate and when it makes scripts difficult to maintain.
+
+---
+
+## 4.5 case
+
+Use:
+
+```bash
+case "$choice" in
+```
+
+for menu-style decisions.
+
+---
+
+## 4.6 for
+
+```bash
+for item in ...
+do
+    ...
+done
+```
+
+---
+
+## 4.7 while
+
+Use when something should continue while a condition remains true.
+
+---
+
+## 4.8 until
+
+Understand the inverse logic of `while`.
+
+---
+
+## 4.9 break
+
+Exit a loop.
+
+---
+
+## 4.10 continue
+
+Skip the current iteration.
+
+---
+
+## 4.11 Menus
+
+Build simple command-line menus.
+
+---
+
+## 🧪 Lab — Disk Warning Script
+
+Create:
+
+```text
+disk-check.sh
+```
+
+It should:
+
+1. Determine disk usage.
+2. Compare it against a threshold.
+3. Print:
+
+```text
+OK
+WARNING
+CRITICAL
+```
+
+depending on usage.
+
+Do not hardcode the result.
+
+The script must obtain the real system state.
+
+---
+
+# Chapter 05 — Functions & Modularity
+
+## Objective
+
+Stop writing giant Bash scripts.
+
+Learn to create reusable components.
+
+---
+
+## 5.1 Functions
+
+```bash
+check_disk() {
+    ...
+}
+```
+
+---
+
+## 5.2 Function Arguments
+
+Understand:
+
+```bash
+$1
+$2
+```
+
+inside functions.
+
+---
+
+## 5.3 Local Variables
+
+Use:
+
+```bash
+local
+```
+
+to avoid accidental global state.
+
+---
+
+## 5.4 Return Values
+
+Understand the difference between:
+
+```text
+return status
+```
+
+and:
+
+```text
+printing output
+```
+
+A Bash function does not return arbitrary strings using `return`.
+
+---
+
+## 5.5 Function Libraries
+
+Separate reusable functions from the main script.
+
+Concept:
+
+```text
+main.sh
+lib/
+   logging.sh
+   system.sh
+   network.sh
+```
+
+---
+
+## 5.6 Main Function Pattern
+
+Learn the structure:
+
+```bash
+main() {
+    ...
+}
+
+main "$@"
+```
+
+This is useful for maintainability.
+
+---
+
+## 🧪 Lab
+
+Take the disk monitoring script from Chapter 04.
+
+Refactor it into:
+
+```text
+check_disk()
+get_disk_usage()
+print_status()
+main()
+```
+
+Then make the threshold configurable.
+
+---
+
+# Chapter 06 — Files & Directories
+
+## Objective
+
+Automate real filesystem operations.
+
+---
+
+## Topics
+
+### Reading
+
+```bash
+cat
+less
+read
+```
+
+---
+
+### Writing
+
+```bash
+>
+```
+
+---
+
+### Appending
+
+```bash
+>>
+```
+
+---
+
+### Line-by-Line Processing
+
+Learn the safe general pattern:
+
+```bash
+while IFS= read -r line
+do
+    ...
+done < file
+```
+
+Understand why quoting and `IFS` matter.
+
+---
+
+### File Validation
+
+Check:
+
+```text
+Does it exist?
+Is it a file?
+Is it a directory?
+Is it readable?
+```
+
+---
+
+### Directory Traversal
+
+Learn:
+
+```bash
+find
+```
+
+and safe handling of filenames.
+
+---
+
+### Temporary Files
+
+Understand why blindly using:
+
+```text
+/tmp/myfile
+```
+
+can be unsafe.
+
+Introduction to:
+
+```bash
+mktemp
+```
+
+---
+
+### Recursive Operations
+
+Understand:
+
+```bash
+find
+```
+
+and controlled recursion.
+
+---
+
+## 🧪 Lab
+
+Create a script that:
+
+1. Accepts a file.
+2. Validates that it exists.
+3. Reads it line-by-line.
+4. Searches for a keyword.
+5. Counts matching lines.
+6. Produces a report.
+7. Returns an appropriate exit code.
+
+---
+
+# Chapter 07 — Text Processing
+
+## Objective
+
+Master the command-line text-processing ecosystem.
+
+This is one of Bash's biggest strengths.
+
+---
+
+# 7.1 grep
+
+Learn:
+
+```bash
+grep
+```
+
+for searching text.
+
+Understand:
+
+```text
+pattern
+input
+match
+```
+
+---
+
+# 7.2 Regular Expressions
+
+Introduction to:
+
+```text
+literal matching
+character classes
+anchors
+quantifiers
+groups
+```
+
+Do not try to become a regex expert here.
+
+Learn enough to process operational data.
+
+---
+
+# 7.3 sed
+
+Understand:
+
+```bash
+sed
+```
+
+for stream editing.
+
+Common operations:
+
+```text
+substitute
+delete
+print
+```
+
+---
+
+# 7.4 awk
+
+Understand `awk` as a field-oriented text processing language.
+
+Example conceptual structure:
+
+```text
+input line
+ ↓
+fields
+ ↓
+condition
+ ↓
+action
+```
+
+---
+
+# 7.5 cut
+
+Extract columns.
+
+---
+
+# 7.6 sort
+
+Sort data.
+
+---
+
+# 7.7 uniq
+
+Identify/count adjacent duplicate lines.
+
+Understand why sorting is often required before `uniq`.
+
+---
+
+# 7.8 tr
+
+Transform characters.
+
+---
+
+# 7.9 head / tail
+
+Inspect the beginning/end of files.
+
+Especially:
+
+```bash
+tail -f
+```
+
+for live logs.
+
+---
+
+# 7.10 wc
+
+Count:
+
+```text
+lines
+words
+bytes
+characters
+```
+
+---
+
+# 7.11 xargs
+
+Understand:
+
+```text
+input
+ ↓
+xargs
+ ↓
+command arguments
+```
+
+Be especially careful with filenames and shell interpretation.
+
+---
+
+# 7.12 paste
+
+Combine columns.
+
+---
+
+# 7.13 column
+
+Produce readable tabular output.
+
+---
+
+## 🧪 Lab — Log Analysis
+
+Create or use a fake application log.
+
+Example:
+
+```text
+INFO request completed
+ERROR database unavailable
+INFO request completed
+WARNING slow request
+ERROR database unavailable
+ERROR database unavailable
+```
+
+Build a pipeline that determines:
+
+```text
+number of errors
+number of warnings
+most common error
+```
+
+Use several tools together:
+
+```text
+grep
+awk
+sort
+uniq
+head
+```
+
+---
+
+# Chapter 08 — Streams, Pipes & Redirection
+
+## Objective
+
+Understand one of the most fundamental Unix concepts:
+
+> Everything is connected through streams.
+
+---
+
+# 8.1 Standard Input
+
+```text
+stdin
+```
+
+---
+
+# 8.2 Standard Output
+
+```text
+stdout
+```
+
+---
+
+# 8.3 Standard Error
+
+```text
+stderr
+```
+
+Understand that stdout and stderr are separate streams.
+
+---
+
+# 8.4 Redirection
+
+```bash
+>
+>>
+<
+```
+
+---
+
+# 8.5 Pipes
+
+```bash
+command1 | command2
+```
+
+Mental model:
+
+```text
+stdout of command 1
+          ↓
+stdin of command 2
+```
+
+---
+
+# 8.6 stderr Redirection
+
+Understand:
+
+```bash
+2>
+```
+
+and:
+
+```bash
+2>&1
+```
+
+---
+
+# 8.7 tee
+
+Understand:
+
+```bash
+command | tee output.log
+```
+
+which allows output to be viewed and saved.
+
+---
+
+# 8.8 Here Documents
+
+```bash
+<<EOF
+...
+EOF
+```
+
+---
+
+# 8.9 Here Strings
+
+```bash
+<<<
+```
+
+---
+
+# 8.10 Process Substitution
+
+Introduction to:
+
+```bash
+<(command)
+```
+
+Understand the problem it solves conceptually.
+
+---
+
+## 🧪 Lab
+
+Create a script that:
+
+```text
+runs a command
+      ↓
+stdout → output.log
+stderr → error.log
+      ↓
+combined report
+```
+
+Use `tee` where appropriate.
+
+---
+
+# Chapter 09 — Processes & Automation
+
+## Objective
+
+Use Bash to control processes and automate operations.
+
+---
+
+## Topics
+
+### Execute Commands
+
+Run external programs from scripts.
+
+---
+
+### Background Jobs
+
+Understand:
+
+```bash
+&
+```
+
+---
+
+### PID
+
+Capture:
+
+```bash
+$!
+```
+
+Understand what it represents.
+
+---
+
+### Waiting
+
+Learn:
+
+```bash
+wait
+```
+
+---
+
+### Process Monitoring
+
+Use:
+
+```bash
+ps
+pgrep
+kill
+```
+
+from scripts.
+
+---
+
+### Signals
+
+Understand graceful termination.
+
+Prefer:
+
+```text
+SIGTERM
+```
+
+before:
+
+```text
+SIGKILL
+```
+
+when appropriate.
+
+---
+
+### Retry Logic
+
+Understand:
+
+```text
+attempt
+ ↓
+failure?
+ ↓
+wait
+ ↓
+retry
+ ↓
+maximum attempts
+ ↓
+failure
+```
+
+---
+
+### Logging
+
+Every meaningful automation should produce useful logs.
+
+---
+
+### Cron
+
+Automate scripts with cron.
+
+---
+
+### Idempotency
+
+This is extremely important.
+
+A good automation should be safe to run repeatedly when possible.
+
+Example:
+
+Bad:
+
+```text
+Always create the same user.
+```
+
+Better:
+
+```text
+Check whether the user exists.
+If not, create it.
+Otherwise, leave it unchanged.
+```
+
+---
+
+## 🧪 Lab
+
+Create a script that:
+
+1. Starts a background task.
+2. Captures its PID.
+3. Logs the PID.
+4. Waits for completion.
+5. Detects failure.
+6. Retries a limited number of times.
+7. Logs the final result.
+
+---
+
+# Chapter 10 — System Administration Automation
+
+## Objective
+
+Automate the Linux administration tasks from Volume 04.
+
+---
+
+## 10.1 User Management
+
+Automate:
+
+```text
+user creation
+group creation
+group membership
+```
+
+But always validate whether the account already exists.
+
+---
+
+## 10.2 Permission Automation
+
+Automate controlled:
+
+```text
+ownership
+permissions
+directories
+```
+
+---
+
+## 10.3 Package Management
+
+Automate:
+
+```bash
+apt update
+apt install
+```
+
+but understand the risks of blindly running package changes.
+
+---
+
+## 10.4 Service Management
+
+Automate:
+
+```bash
+systemctl
+```
+
+operations.
+
+---
+
+## 10.5 Disk Monitoring
+
+Generate disk reports.
+
+---
+
+## 10.6 CPU Monitoring
+
+Collect CPU/load information.
+
+---
+
+## 10.7 Memory Monitoring
+
+Generate memory reports.
+
+---
+
+## 10.8 Network Monitoring
+
+Check:
+
+```text
+interfaces
+routes
+connectivity
+ports
+DNS
+```
+
+---
+
+## 10.9 Log Management
+
+Automate safe log handling.
+
+Understand the difference between:
+
+```text
+deleting logs
+```
+
+and:
+
+```text
+proper log rotation
+```
+
+---
+
+## 🧪 Lab — Server Report
+
+Build:
+
+```text
+server-report.sh
+```
+
+Output:
+
+```text
+========================
+SERVER REPORT
+========================
+
+Hostname:
+Uptime:
+CPU:
+Memory:
+Disk:
+IP:
+Default Route:
+
+Running Services:
+Failed Services:
+
+Listening Ports:
+
+Logged-in Users:
+```
+
+This becomes the foundation of the final project.
+
+---
+
+# Chapter 11 — Networking & Remote Automation
+
+## Objective
+
+Automate networking tasks using the concepts from Volume 03.
+
+---
+
+# 11.1 Connectivity Checks
+
+Use:
+
+```bash
+ping
+```
+
+where appropriate.
+
+---
+
+# 11.2 DNS Automation
+
+Use:
+
+```bash
+dig
+```
+
+or other appropriate tools.
+
+---
+
+# 11.3 Port Checks
+
+Use:
+
+```bash
+nc
+```
+
+for targeted connectivity tests.
+
+Understand that checking a specific known port is different from performing broad port scanning.
+
+---
+
+# 11.4 HTTP Automation
+
+Use:
+
+```bash
+curl
+```
+
+to:
+
+* make requests
+* inspect status codes
+* download resources
+* test APIs
+* test health endpoints
+
+---
+
+# 11.5 Downloading Files
+
+Understand:
+
+```bash
+curl
+wget
+```
+
+and verify downloaded files where integrity information is available.
+
+---
+
+# 11.6 SSH Automation
+
+Use:
+
+```bash
+ssh
+```
+
+from scripts.
+
+---
+
+# 11.7 SCP
+
+Transfer files.
+
+---
+
+# 11.8 Remote Commands
+
+Concept:
+
+```text
+Local script
+    ↓
+SSH
+    ↓
+Remote command
+    ↓
+Result
+```
+
+---
+
+# 11.9 Health Checks
+
+Build checks such as:
+
+```text
+DNS works?
+Host reachable?
+Port reachable?
+HTTP returns expected status?
+Service running?
+```
+
+---
+
+## 🧪 Lab — Service Health Checker
+
+Create:
+
+```text
+service-health.sh
+```
+
+Given:
+
+```text
+host
+port
+URL
+```
+
+it should report:
+
+```text
+DNS       PASS/FAIL
+PING      PASS/FAIL
+PORT      PASS/FAIL
+HTTP      PASS/FAIL
+```
+
+Use proper exit codes.
+
+---
+
+# Chapter 12 — Bash Security & Safe Scripting
+
+## Objective
+
+Learn how Bash scripts can become dangerous and how to write them safely.
+
+This chapter is critical.
+
+A script with root privileges can potentially destroy a system.
+
+---
+
+# 12.1 Input Validation
+
+Never assume input is safe.
+
+Validate:
+
+```text
+format
+type
+allowed values
+paths
+```
+
+---
+
+# 12.2 Command Injection
+
+Understand why constructing commands from untrusted strings can be dangerous.
+
+Conceptually dangerous:
+
+```bash
+eval "$user_input"
+```
+
+Avoid `eval` unless you have a very specific, well-understood reason.
+
+---
+
+# 12.3 Quoting
+
+Use:
+
+```bash
+"$variable"
+```
+
+when appropriate.
+
+Understand why unquoted variables can cause:
+
+```text
+word splitting
+pathname expansion
+unexpected behavior
+```
+
+---
+
+# 12.4 Secrets
+
+Never hardcode:
+
+```text
+passwords
+API keys
+tokens
+private keys
+```
+
+into scripts.
+
+Understand safer mechanisms such as:
+
+```text
+environment variables
+protected files
+secret-management systems
+```
+
+The latter will become more important later.
+
+---
+
+# 12.5 Temporary Files
+
+Use:
+
+```bash
+mktemp
+```
+
+rather than predictable temporary filenames.
+
+---
+
+# 12.6 File Permissions
+
+Sensitive scripts should not be world-writable.
+
+---
+
+# 12.7 Least Privilege
+
+Avoid:
+
+```bash
+sudo
+```
+
+for the entire script unless genuinely necessary.
+
+Prefer narrowly scoped privileged operations.
+
+---
+
+# 12.8 Safe Deletion
+
+Be extremely careful with:
+
+```bash
+rm
+```
+
+especially:
+
+```bash
+rm -rf
+```
+
+Before destructive operations:
+
+```text
+validate
+confirm target
+use absolute paths where appropriate
+log action
+```
+
+---
+
+## 🧪 Lab — Secure Input
+
+Create a script that accepts a user-provided path.
+
+It must:
+
+1. Validate the input.
+2. Confirm the target exists.
+3. Refuse dangerous values.
+4. Avoid `eval`.
+5. Quote variables correctly.
+6. Perform the operation safely.
+
+---
+
+# Chapter 13 — Debugging & Testing Bash
+
+## Objective
+
+Learn how to investigate Bash failures instead of guessing.
+
+---
+
+# 13.1 Bash Debug Mode
+
+Use:
+
+```bash
+bash -x script.sh
+```
+
+Understand what tracing reveals.
+
+---
+
+# 13.2 Syntax Checking
+
+Use:
+
+```bash
+bash -n script.sh
+```
+
+This checks syntax without executing the script.
+
+---
+
+# 13.3 ShellCheck
+
+Use ShellCheck to identify common problems.
+
+Understand that:
+
+> A linter finds potential problems; it does not prove your script is correct.
+
+---
+
+# 13.4 Error Messages
+
+Learn to read:
+
+```text
+command not found
+permission denied
+no such file
+bad substitution
+syntax error
+unbound variable
+```
+
+rather than immediately searching the entire error message blindly.
+
+---
+
+# 13.5 Logging
+
+Build structured logging:
+
+```text
+INFO
+WARN
+ERROR
+```
+
+---
+
+# 13.6 Strict Mode
+
+Study:
+
+```bash
+set -e
+set -u
+set -o pipefail
+```
+
+and the commonly used combination:
+
+```bash
+set -euo pipefail
+```
+
+But **do not blindly treat it as magic**.
+
+Understand the edge cases and exceptions.
+
+---
+
+# 13.7 Error Handling
+
+Learn patterns for:
+
+```text
+checking command status
+handling expected failures
+cleanup
+trap
+```
+
+---
+
+# 13.8 trap
+
+Understand how to execute cleanup or handling code when:
+
+```text
+EXIT
+ERR
+INT
+TERM
+```
+
+events occur.
+
+---
+
+## 🧪 Lab — Break & Repair
+
+Take one of your earlier scripts.
+
+Intentionally introduce:
+
+* syntax error
+* wrong variable
+* missing file
+* incorrect path
+* failed command
+
+Then diagnose using:
+
+```bash
+bash -n
+bash -x
+ShellCheck
+```
+
+Document:
+
+```text
+Symptom
+Cause
+Evidence
+Fix
+Verification
+```
+
+---
+
+# Chapter 14 — Professional Bash Engineering
+
+## Objective
+
+Move from "scripts that work" to maintainable automation.
+
+---
+
+# 14.1 Script Structure
+
+Use a consistent structure:
+
+```bash
+#!/usr/bin/env bash
+
+# Configuration
+
+# Logging functions
+
+# Validation functions
+
+# Business/automation functions
+
+# Main function
+
+main "$@"
+```
+
+---
+
+# 14.2 Naming
+
+Use meaningful names:
+
+```text
+check_disk_usage
+backup_directory
+restart_service
+```
+
+instead of:
+
+```text
+x()
+foo()
+test1()
+```
+
+---
+
+# 14.3 Configuration
+
+Separate configuration from logic where useful.
+
+Example:
+
+```text
+config.env
+```
+
+or:
+
+```text
+config.conf
+```
+
+---
+
+# 14.4 Logging
+
+Make logs useful.
+
+Include:
+
+```text
+timestamp
+level
+message
+```
+
+---
+
+# 14.5 Exit Codes
+
+Design meaningful failure states.
+
+---
+
+# 14.6 Idempotency
+
+Whenever practical:
+
+```text
+run once
+```
+
+and:
+
+```text
+run again
+```
+
+should not produce unintended damage.
+
+---
+
+# 14.7 Documentation
+
+Every reusable script should explain:
+
+```text
+Purpose
+Requirements
+Usage
+Arguments
+Environment variables
+Examples
+Exit codes
+Known limitations
+```
+
+---
+
+# 14.8 Version Control
+
+Every serious script should live in Git.
+
+This prepares you for Volume 06.
+
+---
+
+# 14.9 Testing
+
+At minimum test:
+
+```text
+normal input
+invalid input
+missing files
+missing commands
+permission errors
+network failure
+partial failure
+repeat execution
+```
+
+---
+
+# 14.10 Performance
+
+Understand that spawning hundreds or thousands of processes can be expensive.
+
+Prefer appropriate tools and avoid unnecessary command chains.
+
+---
+
+# Chapter 15 — Advanced Shell Concepts
+
+This chapter introduces concepts you should understand before leaving Bash, without turning this volume into an advanced shell-programming course.
+
+---
+
+## 15.1 Command Resolution
+
+Understand:
+
+```bash
+type
+which
+command -v
+```
+
+and why `command -v` is generally useful for checking command availability.
+
+---
+
+## 15.2 Globbing
+
+Understand:
+
+```text
+*
+?
+[...]
+```
+
+and distinguish globbing from regular expressions.
+
+---
+
+## 15.3 Expansion
+
+Understand the major stages conceptually:
+
+```text
+parameter expansion
+command substitution
+arithmetic expansion
+pathname expansion
+word splitting
+quote handling
+```
+
+You do not need to memorize an exact parser implementation.
+
+You need to understand why Bash sometimes produces surprising results.
+
+---
+
+## 15.4 Subshells
+
+Understand:
+
+```bash
+(command)
+```
+
+and:
+
+```bash
+$(command)
+```
+
+conceptually.
+
+Know that a subshell can have its own execution context.
+
+---
+
+## 15.5 Shell Pipelines
+
+Understand that commands connected by `|` execute as a pipeline rather than as one giant command.
+
+---
+
+## 15.6 Exit Status of Pipelines
+
+Understand why:
+
+```bash
+set -o pipefail
+```
+
+can matter.
+
+---
+
+## 15.7 Process Substitution
+
+Understand:
+
+```bash
+<(command)
+```
+
+as a way of providing command output through a file-like interface.
+
+---
+
+## 15.8 Command Substitution vs Process Substitution
+
+Be able to explain:
+
+```text
+$(command)
+```
+
+versus:
+
+```text
+<(command)
+```
+
+conceptually.
+
+---
+
+# 🧪 Hands-On Lab Series
+
+Complete these in order.
+
+### Lab 01
+
+First Bash script.
+
+### Lab 02
+
+Variables and input.
+
+### Lab 03
+
+Command-line arguments.
+
+### Lab 04
+
+Arrays.
+
+### Lab 05
+
+Conditions.
+
+### Lab 06
+
+Loops.
+
+### Lab 07
+
+Functions.
+
+### Lab 08
+
+File processing.
+
+### Lab 09
+
+grep/sed/awk pipeline.
+
+### Lab 10
+
+Pipes and redirection.
+
+### Lab 11
+
+Process management.
+
+### Lab 12
+
+Cron automation.
+
+### Lab 13
+
+Linux system report.
+
+### Lab 14
+
+Network health checker.
+
+### Lab 15
+
+SSH automation.
+
+### Lab 16
+
+Secure input handling.
+
+### Lab 17
+
+Debugging with `bash -x`.
+
+### Lab 18
+
+ShellCheck.
+
+### Lab 19
+
+Failure handling and `trap`.
+
+### Lab 20
+
+Refactor a script into a professional structure.
+
+---
+
+# 🚀 Main Mini-Project — Linux Server Management Toolkit
+
+Instead of four disconnected projects, combine the strongest ideas from the original roadmap into one reusable project.
+
+You will build:
+
+```text
+linux-server-toolkit/
+│
+├── README.md
+│
+├── bin/
+│   └── server-toolkit
+│
+├── lib/
+│   ├── logging.sh
+│   ├── system.sh
+│   ├── network.sh
+│   ├── services.sh
+│   ├── users.sh
+│   ├── backup.sh
+│   └── files.sh
+│
+├── config/
+│   └── toolkit.conf.example
+│
+├── logs/
+│
+├── reports/
+│
+├── tests/
+│
+└── docs/
+    └── troubleshooting.md
+```
+
+---
+
+# 🎯 Toolkit Capabilities
+
+Your toolkit should eventually support:
+
+```text
+System Information
+Disk Monitoring
+Memory Monitoring
+CPU Monitoring
+Network Diagnostics
+Service Management
+User Management
+Package Management
+Log Analysis
+Backup Management
+File Operations
+Health Checks
+```
+
+---
+
+# 🖥 Example Interface
+
+Running:
+
+```bash
+./server-toolkit
+```
+
+could produce:
+
+```text
+=================================
+ Linux Server Management Toolkit
+=================================
+
+1. System Information
+2. Disk Status
+3. Memory Status
+4. CPU Status
+5. Network Diagnostics
+6. Service Management
+7. User Management
+8. Package Management
+9. Log Analysis
+10. Backup
+11. Full Health Check
+0. Exit
+
+Select:
+```
+
+---
+
+# Module 01 — System Information
+
+Display:
+
+```text
+Hostname
+OS
+Kernel
+Architecture
+Uptime
+CPU
+Memory
+```
+
+---
+
+# Module 02 — Disk
+
+Display:
+
+```text
+Filesystem
+Capacity
+Used
+Available
+Usage %
+```
+
+Add configurable thresholds.
+
+---
+
+# Module 03 — CPU
+
+Display:
+
+```text
+Load
+CPU information
+Top processes
+```
+
+---
+
+# Module 04 — Memory
+
+Display:
+
+```text
+Total
+Used
+Available
+Swap
+```
+
+---
+
+# Module 05 — Network Diagnostics
+
+Check:
+
+```text
+Interfaces
+IP addresses
+Default route
+DNS
+Connectivity
+Listening ports
+```
+
+---
+
+# Module 06 — Services
+
+Allow controlled:
+
+```text
+status
+start
+stop
+restart
+```
+
+for explicitly allowed services.
+
+Do not allow arbitrary user input to become an unchecked `systemctl` command.
+
+---
+
+# Module 07 — Users
+
+Provide controlled operations:
+
+```text
+list users
+list groups
+create user
+inspect user
+```
+
+Be careful with destructive operations.
+
+---
+
+# Module 08 — Packages
+
+Support:
+
+```text
+search
+inspect
+install
+```
+
+with confirmation where appropriate.
+
+---
+
+# Module 09 — Log Analysis
+
+Allow:
+
+```text
+recent errors
+recent warnings
+service logs
+kernel messages
+```
+
+Use:
+
+```text
+journalctl
+grep
+awk
+sort
+uniq
+```
+
+---
+
+# Module 10 — Backup
+
+Build a backup workflow:
+
+```text
+source
+ ↓
+validation
+ ↓
+archive
+ ↓
+compression
+ ↓
+checksum
+ ↓
+destination
+ ↓
+verification
+ ↓
+retention
+```
+
+---
+
+# Module 11 — Full Health Check
+
+Combine everything.
+
+Output:
+
+```text
+=================================
+ SERVER HEALTH REPORT
+=================================
+
+System       PASS
+CPU          PASS
+Memory       PASS
+Disk         PASS
+Network      PASS
+DNS          PASS
+Services     PASS
+SSH          PASS
+
+Overall      HEALTHY
+```
+
+If something fails:
+
+```text
+Overall      WARNING
+```
+
+and provide useful details.
+
+---
+
+# 🔥 Failure Injection
+
+A real automation project needs failure testing.
+
+Deliberately introduce controlled failures.
+
+## Failure 01 — Service
+
+Stop a service.
+
+Run the health check.
+
+Expected:
+
+```text
+Service → FAIL/WARNING
+```
+
+---
+
+## Failure 02 — Disk
+
+Use a disposable filesystem and intentionally approach its threshold.
+
+Verify that the toolkit detects it.
+
+---
+
+## Failure 03 — Network
+
+Temporarily break connectivity inside the lab environment.
+
+Verify:
+
+```text
+Network → FAIL
+```
+
+---
+
+## Failure 04 — DNS
+
+Use an intentionally invalid DNS configuration in a disposable environment.
+
+Verify that:
+
+```text
+connectivity
+```
+
+and:
+
+```text
+DNS
+```
+
+are reported separately.
+
+---
+
+## Failure 05 — Permission
+
+Make a test directory inaccessible.
+
+Verify that the toolkit reports the problem rather than silently continuing.
+
+---
+
+# 🔐 Security Requirements
+
+Your toolkit must:
+
+* Avoid `eval`.
+* Quote variables appropriately.
+* Validate input.
+* Avoid unnecessary root privileges.
+* Avoid hardcoded secrets.
+* Use safe temporary files.
+* Avoid unsafe `rm -rf`.
+* Return meaningful exit codes.
+* Log important operations.
+* Fail safely.
+
+---
+
+# 🧪 Testing Requirements
+
+Test:
+
+```text
+valid input
+invalid input
+missing command
+missing file
+permission denied
+service unavailable
+network unavailable
+disk threshold exceeded
+empty input
+unexpected input
+repeat execution
+```
+
+---
+
+# 📋 Documentation Requirements
+
+README must contain:
+
+```text
+Project purpose
+Installation
+Requirements
+Usage
+Commands
+Configuration
+Examples
+Security considerations
+Exit codes
+Testing
+Known limitations
+```
+
+---
+
+# 🧠 Volume Challenge
+
+Build the toolkit **without copying a complete existing Bash project**.
+
+You may use documentation, search, AI, and man pages.
+
+But you must understand every important line.
+
+Your final toolkit should contain:
+
+```text
+✓ Menu/CLI
+✓ Functions
+✓ Modular libraries
+✓ Configuration
+✓ Logging
+✓ Exit codes
+✓ Input validation
+✓ Error handling
+✓ Health checks
+✓ File processing
+✓ Text processing
+✓ Networking checks
+✓ Service management
+✓ Backup
+✓ Testing
+✓ Documentation
+```
+
+---
+
+# 🔬 Engineering Challenge
+
+Take one task that you perform manually.
+
+For example:
+
+```text
+Check server health
+```
+
+Perform it manually first.
+
+Then identify every step:
+
+```text
+CPU
+Memory
+Disk
+Network
+Services
+Logs
+```
+
+Then automate it.
+
+Then test the automation against failures.
+
+Then ask:
+
+> Did the automation actually reproduce my manual reasoning?
+
+This is the transition from:
+
+```text
+operator
+```
+
+to:
+
+```text
+automation engineer
+```
+
+---
+
+# 🧠 Feynman Checkpoints
+
+You should be able to explain:
+
+### Bash
+
+> What happens when you execute `./script.sh`?
+
+### Variables
+
+> What is the difference between a shell variable and an environment variable?
+
+### Arguments
+
+> What are `$0`, `$1`, `$@`, `$#`, and `$?`?
+
+### Streams
+
+> What are stdin, stdout, and stderr?
+
+### Pipes
+
+> What exactly happens when you execute `command1 | command2`?
+
+### Text Processing
+
+> When would you use `grep`, `sed`, and `awk`?
+
+### Functions
+
+> Why should a large Bash script be divided into functions?
+
+### Errors
+
+> How does a Bash script know whether a command succeeded?
+
+### Security
+
+> Why is `eval "$input"` dangerous?
+
+### Strict Mode
+
+> What does `set -euo pipefail` attempt to accomplish, and why isn't it a magic safety switch?
+
+### Automation
+
+> What makes an automation idempotent?
+
+If you cannot explain these without notes, revisit the relevant chapter.
+
+---
+
+# 🔁 Spaced-Repetition Checklist
+
+Review:
+
+```text
+Day 1
+Day 3
+Day 7
+Day 14
+Day 30
+```
+
+Important concepts:
+
+```text
+Shell
+Bash
+Shebang
+Variables
+Quoting
+Command substitution
+Arguments
+Exit status
+Arrays
+Conditions
+Loops
+Functions
+File tests
+grep
+sed
+awk
+Pipes
+stdin
+stdout
+stderr
+Redirection
+Process management
+Cron
+SSH automation
+Input validation
+Command injection
+ShellCheck
+bash -x
+trap
+set -euo pipefail
+Idempotency
+```
+
+---
+
+# 🔗 Connection to Previous Volumes
+
+## Volume 01
+
+You apply:
+
+```text
+first principles
+debugging
+experimentation
+documentation
+```
+
+to automation.
+
+---
+
+## Volume 02
+
+You automate operations involving:
+
+```text
+CPU
+memory
+processes
+storage
+I/O
+```
+
+---
+
+## Volume 03
+
+You automate:
+
+```text
+DNS
+HTTP
+ports
+SSH
+connectivity
+network diagnostics
+```
+
+---
+
+## Volume 04
+
+This is the most important connection:
+
+```text
+Manual Linux Administration
+             ↓
+        Bash Scripts
+             ↓
+      Repeatable Automation
+```
+
+---
+
+# 🔗 Connection to Future Volumes
+
+## Volume 06 — Git
+
+Your scripts become version-controlled engineering artifacts.
+
+You will learn:
+
+```text
+branching
+commits
+pull requests
+code review
+```
+
+and your toolkit will live in Git.
+
+---
+
+## Volume 07 — Python
+
+You will eventually discover where Bash starts becoming uncomfortable.
+
+For example:
+
+```text
+Simple system command
+       ↓
+Bash
+       ↓
+Complex application logic
+       ↓
+Python
+```
+
+Bash is excellent for orchestration and system glue.
+
+Python becomes increasingly useful for larger application logic.
+
+---
+
+## Volume 08 — Backend Engineering
+
+Your Bash health checks will evolve into proper:
+
+```text
+HTTP APIs
+services
+workers
+backend systems
+```
+
+---
+
+## Volume 12 — Docker
+
+Bash will help you understand:
+
+```text
+entrypoints
+startup scripts
+container commands
+automation
+```
+
+---
+
+## Volume 13 — CI/CD
+
+Many CI/CD systems execute shell commands underneath.
+
+You will use Bash for:
+
+```text
+build
+test
+package
+deploy
+verify
+rollback
+```
+
+---
+
+## Volume 14 — AWS
+
+Bash becomes useful for:
+
+```text
+AWS CLI
+EC2 administration
+deployment
+server setup
+diagnostics
+```
+
+---
+
+## Volume 15 — Terraform
+
+Terraform will automate infrastructure declaration.
+
+The progression becomes:
+
+```text
+Bash
+"Do these commands."
+        ↓
+Terraform
+"Make infrastructure reach this desired state."
+```
+
+That distinction will matter.
+
+---
+
+# 🎯 Completion Criteria
+
+Do not move to Volume 06 simply because you finished the chapters.
+
+You should be able to:
+
+### Bash Fundamentals
+
+* Write a Bash script from scratch.
+* Execute scripts correctly.
+* Use variables.
+* Use arguments.
+* Read input.
+* Use exit codes.
+
+### Logic
+
+* Write conditions.
+* Write loops.
+* Use arrays.
+* Write functions.
+* Build menus.
+
+### Files
+
+* Read files safely.
+* Write files.
+* Process directories.
+* Search files.
+* Handle temporary files.
+
+### Text Processing
+
+* Use `grep`.
+* Use `sed`.
+* Use `awk`.
+* Use `sort`.
+* Use `uniq`.
+* Build pipelines.
+
+### Streams
+
+* Understand stdin.
+* Understand stdout.
+* Understand stderr.
+* Use pipes.
+* Redirect output.
+* Use `tee`.
+
+### Automation
+
+* Start background processes.
+* Track PIDs.
+* Wait for processes.
+* Implement retries.
+* Schedule scripts.
+* Automate Linux administration.
+
+### Networking
+
+* Test connectivity.
+* Test ports.
+* Query DNS.
+* Make HTTP requests.
+* Automate SSH.
+* Perform remote health checks.
+
+### Security
+
+* Validate input.
+* Avoid command injection.
+* Protect secrets.
+* Use least privilege.
+* Handle temporary files safely.
+
+### Debugging
+
+* Use `bash -n`.
+* Use `bash -x`.
+* Use ShellCheck.
+* Read error messages.
+* Use logging.
+* Use `trap`.
+
+### Professional Practices
+
+* Structure scripts.
+* Use functions.
+* Separate configuration.
+* Document usage.
+* Use meaningful exit codes.
+* Test failure conditions.
+* Make automation idempotent where appropriate.
+
+---
+
+# 🎤 Interview Checkpoint
+
+You should be able to answer:
+
+### Bash
+
+* What is Bash?
+* Shell vs Bash?
+* What is a shebang?
+* What is `$PATH`?
+* What is `$@`?
+* What is `$?`?
+* What is command substitution?
+
+### Linux Automation
+
+* How would you automate restarting a service?
+* How would you check disk usage from Bash?
+* How would you check whether a process is running?
+* How would you schedule a script?
+* How would you monitor a log continuously?
+
+### Text Processing
+
+* grep vs sed vs awk?
+* What does a pipe do?
+* What are stdin/stdout/stderr?
+* What does `2>&1` mean?
+* Why use `sort | uniq`?
+
+### Security
+
+* Why is `eval` dangerous?
+* Why quote variables?
+* How do you handle secrets?
+* Why use `mktemp`?
+* Why avoid running everything as root?
+
+### Reliability
+
+* What is an exit status?
+* How do you implement retry logic?
+* What does idempotency mean?
+* How would you make a script safe to run repeatedly?
+
+### Debugging
+
+* How do you debug a Bash script?
+* What does `bash -x` do?
+* What does ShellCheck do?
+* What is `set -euo pipefail`?
+
+---
+
+# 🏁 Final Mental Model
+
+You should finish this volume seeing Bash as:
+
+```text
+                  Linux
+                    │
+                    ▼
+                  Bash
+                    │
+       ┌────────────┼────────────┐
+       ▼            ▼            ▼
+    Commands      Files       Processes
+       │            │            │
+       └────────────┼────────────┘
+                    ▼
+                 Pipes
+                    │
+                    ▼
+              Automation
+                    │
+       ┌────────────┼────────────┐
+       ▼            ▼            ▼
+    Servers       Network      Services
+       │            │            │
+       └────────────┼────────────┘
+                    ▼
+             Repeatability
+                    │
+                    ▼
+              Reliability
+```
+
+The fundamental transformation is:
+
+```text
+"I know Linux commands."
+
+             ↓
+
+"I can combine Linux commands."
+
+             ↓
+
+"I can automate Linux tasks."
+
+             ↓
+
+"I can build reusable operational tools."
+
+             ↓
+
+"I can reason about automation failures."
+```
+
+That final ability is the important one.
+
+---
+
+# 🚦 Next Volume
+
+## Volume 06 — Git, GitHub & Collaborative Engineering
+
+The progression now becomes:
+
+```text
+V01  Engineering Mindset
+ ↓
+V02  Computer Architecture
+ ↓
+V03  Networking
+ ↓
+V04  Linux Administration
+ ↓
+V05  Bash Automation
+ ↓
+V06  Git & Collaborative Engineering
+```
+
+In Volume 06, the focus shifts from **operating and automating systems** to **engineering and collaborating on the code/configuration/scripts that operate those systems**.
+
+The Linux Server Management Toolkit from this volume should become one of the first serious repositories you manage through Git.

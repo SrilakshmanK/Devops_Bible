@@ -1,0 +1,3485 @@
+# 📘 Volume 10 — Embeddings, Vector Search & RAG
+
+## 🎯 Objective
+
+Learn how AI applications give LLMs access to external knowledge.
+
+By the end of this volume, you should understand and be able to build:
+
+```text
+Documents
+   ↓
+Parsing
+   ↓
+Chunking
+   ↓
+Embedding
+   ↓
+Vector Storage
+   ↓
+Query Embedding
+   ↓
+Retrieval
+   ↓
+Reranking
+   ↓
+Context Construction
+   ↓
+LLM
+   ↓
+Grounded Answer
+```
+
+This is the foundation of **Retrieval-Augmented Generation (RAG)**.
+
+The goal is not simply:
+
+> "Build a PDF chatbot."
+
+The goal is to understand **why retrieval works, when it fails, how to measure it, and how to engineer a reliable retrieval system.**
+
+---
+
+# 🧠 Core Mental Model
+
+An LLM has knowledge encoded in its learned parameters.
+
+But your application may need information that is:
+
+* private
+* proprietary
+* frequently changing
+* too large to put directly into a prompt
+* specific to one organization
+* unavailable during model training
+
+RAG introduces an external knowledge path:
+
+```text
+                         ┌──────────────┐
+                         │  Knowledge   │
+                         │    Base      │
+                         └──────┬───────┘
+                                │
+                         Indexing Pipeline
+                                │
+                  ┌─────────────▼────────────┐
+                  │      Vector Store        │
+                  └─────────────┬────────────┘
+                                │
+User Question ───────► Retrieval
+                                │
+                                ▼
+                         Relevant Context
+                                │
+                                ▼
+                              LLM
+                                │
+                                ▼
+                           Answer
+```
+
+The most important principle:
+
+> **RAG is not a model. It is an application architecture.**
+
+---
+
+# 🗺️ Volume Structure
+
+## Chapter 01 — Why Retrieval Exists
+
+## Chapter 02 — Embeddings From First Principles
+
+## Chapter 03 — Vector Similarity & Distance
+
+## Chapter 04 — Vector Databases & Indexes
+
+## Chapter 05 — Document Ingestion
+
+## Chapter 06 — Document Parsing & Normalization
+
+## Chapter 07 — Chunking Strategies
+
+## Chapter 08 — Metadata & Document Modeling
+
+## Chapter 09 — Building an Embedding Pipeline
+
+## Chapter 10 — Vector Search
+
+## Chapter 11 — Retrieval Strategies
+
+## Chapter 12 — Keyword Search & Full-Text Search
+
+## Chapter 13 — Hybrid Search
+
+## Chapter 14 — Reranking
+
+## Chapter 15 — Query Transformation
+
+## Chapter 16 — Context Construction
+
+## Chapter 17 — RAG Generation
+
+## Chapter 18 — Citations, Grounding & Source Attribution
+
+## Chapter 19 — RAG Failure Modes
+
+## Chapter 20 — RAG Evaluation
+
+## Chapter 21 — Advanced Retrieval
+
+## Chapter 22 — RAG Security & Multi-Tenancy
+
+## Chapter 23 — RAG Performance, Cost & Scaling
+
+## Chapter 24 — RAG Architecture Patterns
+
+## Chapter 25 — Production RAG Engineering
+
+## Chapter 26 — V10 Integration Project & Engineering Review
+
+---
+
+# Chapter 01 — Why Retrieval Exists
+
+Start with the problem.
+
+---
+
+## 1.1 LLM Knowledge Has Boundaries
+
+A model may know general information.
+
+But your application might contain:
+
+```text
+company policies
+private documentation
+customer records
+internal APIs
+product manuals
+legal documents
+technical specifications
+recent events
+```
+
+You cannot expect the model's parameters to automatically contain all of this information.
+
+---
+
+## 1.2 The Context Problem
+
+Suppose you have:
+
+```text
+10,000 pages of documentation
+```
+
+You cannot simply put all of it into every prompt.
+
+Problems include:
+
+* context limits
+* latency
+* cost
+* irrelevant information
+* noise
+* poor attention allocation
+
+---
+
+## 1.3 Retrieval as Information Selection
+
+Instead:
+
+```text
+10,000 pages
+     ↓
+Search
+     ↓
+Top relevant passages
+     ↓
+LLM
+```
+
+The LLM receives a much smaller amount of relevant information.
+
+---
+
+## 1.4 RAG vs Fine-Tuning
+
+### Fine-tuning
+
+Changes model parameters.
+
+Useful for:
+
+* behavior
+* style
+* task specialization
+* domain adaptation
+
+### RAG
+
+Provides external information at inference time.
+
+Useful for:
+
+* private knowledge
+* changing information
+* document question answering
+* knowledge bases
+
+---
+
+## 1.5 RAG Is Not Always Necessary
+
+Sometimes normal application logic is better.
+
+For example:
+
+```text
+"What is the user's account balance?"
+```
+
+This should usually be:
+
+```text
+Database query
+```
+
+not semantic retrieval.
+
+---
+
+## 🧪 Lab
+
+For 10 example application requirements, decide:
+
+```text
+RAG
+Database query
+API call
+Fine-tuning
+Normal code
+Combination
+```
+
+Explain every decision.
+
+---
+
+# Chapter 02 — Embeddings From First Principles
+
+You encountered embeddings in V09.
+
+Now go much deeper.
+
+---
+
+## 2.1 Representation
+
+Computers ultimately work with numbers.
+
+An embedding converts an object into a numerical vector:
+
+```text
+Text
+ ↓
+Embedding Model
+ ↓
+Vector
+```
+
+Example:
+
+```text
+"PostgreSQL database"
+        ↓
+[0.12, -0.38, 0.71, ...]
+```
+
+Real embeddings may contain hundreds or thousands of dimensions.
+
+---
+
+## 2.2 Semantic Representation
+
+The objective is to place semantically related items in useful regions of vector space.
+
+Conceptually:
+
+```text
+             database
+              ●
+             ● PostgreSQL
+          ● SQL
+     
+                                  ● mountain
+                                  ● climbing
+```
+
+The actual geometry is high-dimensional.
+
+---
+
+## 2.3 Embedding Models
+
+Study:
+
+* sentence embeddings
+* document embeddings
+* query embeddings
+* multimodal embeddings
+
+Understand that different embedding models produce different vector spaces.
+
+---
+
+## 2.4 Same Model Requirement
+
+If documents are embedded with one embedding model and queries with an incompatible embedding model, similarity search may not work properly.
+
+---
+
+## 2.5 Dimensions
+
+Understand:
+
+```text
+vector = [x₁, x₂, x₃, ..., xₙ]
+```
+
+where `n` is the embedding dimension.
+
+Do not confuse:
+
+```text
+embedding dimension
+```
+
+with:
+
+```text
+number of documents
+```
+
+---
+
+## 🧪 Lab
+
+Generate embeddings for at least 20 sentences.
+
+Group them manually into semantic categories.
+
+Compare the numerical similarity with your human judgment.
+
+---
+
+# Chapter 03 — Vector Similarity & Distance
+
+Retrieval depends on comparing vectors.
+
+---
+
+## 3.1 Cosine Similarity
+
+Conceptually:
+
+```text
+similarity(A, B)
+```
+
+measures the angle between vectors.
+
+---
+
+## 3.2 Dot Product
+
+Understand:
+
+```text
+A · B
+```
+
+and why vector magnitude can affect the result.
+
+---
+
+## 3.3 Euclidean Distance
+
+Understand:
+
+```text
+distance(A, B)
+```
+
+as geometric distance.
+
+---
+
+## 3.4 Normalization
+
+Study vector normalization and why normalized embeddings can make cosine similarity and dot product closely related.
+
+---
+
+## 3.5 Similarity Is Not Truth
+
+Very important:
+
+```text
+high similarity
+      ≠
+factually correct
+```
+
+A retrieved document can be semantically similar but still irrelevant to the exact question.
+
+---
+
+## 🧪 Lab
+
+Implement:
+
+```python
+cosine_similarity()
+dot_product()
+euclidean_distance()
+```
+
+using NumPy.
+
+Compare your implementation with a library implementation.
+
+---
+
+# Chapter 04 — Vector Databases & Indexes
+
+A vector database stores and searches vectors efficiently.
+
+---
+
+## 4.1 Why Not Just Use Python Lists?
+
+For:
+
+```text
+100 vectors
+```
+
+a simple loop may be sufficient.
+
+For:
+
+```text
+10 million vectors
+```
+
+brute-force comparison becomes expensive.
+
+---
+
+## 4.2 Vector Search
+
+Conceptually:
+
+```text
+Query Vector
+     ↓
+Vector Index
+     ↓
+Nearest Neighbors
+     ↓
+Top K
+```
+
+---
+
+## 4.3 Approximate Nearest Neighbor Search
+
+Study the idea behind:
+
+```text
+ANN
+```
+
+Instead of checking every vector, an index efficiently searches likely candidates.
+
+---
+
+## 4.4 HNSW
+
+Understand the high-level concept of:
+
+> Hierarchical Navigable Small World graphs.
+
+You do not need to implement HNSW from scratch.
+
+Understand:
+
+* graph-based search
+* approximate search
+* recall
+* speed
+* memory tradeoffs
+
+---
+
+## 4.5 Vector Database Options
+
+Explore:
+
+* PostgreSQL + pgvector
+* Qdrant
+* Chroma
+* Pinecone
+* Weaviate
+
+Do not memorize APIs.
+
+Understand architectural differences.
+
+---
+
+## 4.6 Database Selection
+
+Consider:
+
+* scale
+* latency
+* filtering
+* operational complexity
+* hosting
+* cost
+* existing infrastructure
+
+---
+
+## 🧪 Lab
+
+Start locally with one vector storage option.
+
+For your learning environment, PostgreSQL + pgvector is especially useful because it connects naturally with your database roadmap.
+
+---
+
+# Chapter 05 — Document Ingestion
+
+RAG begins before retrieval.
+
+You first need to get knowledge into the system.
+
+---
+
+## 5.1 Ingestion Pipeline
+
+```text
+Source
+ ↓
+Loader
+ ↓
+Parser
+ ↓
+Normalizer
+ ↓
+Chunker
+ ↓
+Metadata
+ ↓
+Embedding
+ ↓
+Vector Store
+```
+
+---
+
+## 5.2 Sources
+
+Study ingestion from:
+
+* PDF
+* Markdown
+* TXT
+* HTML
+* CSV
+* JSON
+* web pages
+* database records
+* API responses
+
+---
+
+## 5.3 Batch vs Incremental Ingestion
+
+### Batch
+
+Reprocess everything.
+
+### Incremental
+
+Only process changed/new content.
+
+---
+
+## 5.4 Idempotency
+
+Running ingestion twice should not accidentally create duplicate knowledge records.
+
+---
+
+## 5.5 Document Identity
+
+Each document should have an identifier.
+
+Example:
+
+```text
+document_id
+source
+version
+checksum
+created_at
+updated_at
+```
+
+---
+
+# Chapter 06 — Document Parsing & Normalization
+
+Bad extraction produces bad retrieval.
+
+---
+
+## 6.1 PDF Reality
+
+PDFs can contain:
+
+* text
+* tables
+* images
+* headers
+* footers
+* multiple columns
+* scanned pages
+
+---
+
+## 6.2 Extraction Errors
+
+A visually correct PDF can produce terrible extracted text.
+
+Examples:
+
+```text
+wrong reading order
+missing table structure
+broken words
+repeated headers
+missing characters
+```
+
+---
+
+## 6.3 Normalization
+
+Study:
+
+* whitespace cleanup
+* repeated header removal
+* encoding normalization
+* line-break cleanup
+* boilerplate removal
+
+---
+
+## 6.4 Preserve Meaning
+
+Do not aggressively clean text if the cleanup destroys structure.
+
+For example:
+
+```text
+"Step 1:"
+"Install PostgreSQL"
+```
+
+should not accidentally become:
+
+```text
+"Step 1 Install PostgreSQL"
+```
+
+if structure matters to retrieval.
+
+---
+
+## 🧪 Lab
+
+Take one PDF.
+
+Compare:
+
+```text
+raw extracted text
+```
+
+with:
+
+```text
+cleaned text
+```
+
+Document extraction failures.
+
+---
+
+# Chapter 07 — Chunking Strategies
+
+This is one of the most important RAG chapters.
+
+---
+
+## 7.1 Why Chunk?
+
+Documents are often too large to retrieve as a whole.
+
+You want smaller units:
+
+```text
+Document
+ ↓
+Sections
+ ↓
+Chunks
+```
+
+---
+
+## 7.2 Fixed-Size Chunking
+
+Example:
+
+```text
+500 tokens
+```
+
+with overlap:
+
+```text
+50 tokens
+```
+
+Easy but not always semantically appropriate.
+
+---
+
+## 7.3 Sentence Chunking
+
+Split by sentences.
+
+---
+
+## 7.4 Paragraph Chunking
+
+Preserves natural structure.
+
+---
+
+## 7.5 Semantic Chunking
+
+Split based on meaning or topic boundaries.
+
+---
+
+## 7.6 Recursive Chunking
+
+Try larger structural boundaries first:
+
+```text
+document
+ ↓
+section
+ ↓
+paragraph
+ ↓
+sentence
+```
+
+---
+
+## 7.7 Chunk Overlap
+
+Why overlap exists:
+
+```text
+Chunk A
+───────────────
+         overlap
+              ───────────────
+              Chunk B
+```
+
+It helps prevent important context from being split exactly at the boundary.
+
+---
+
+## 7.8 Chunk Size Tradeoff
+
+Small chunks:
+
+* precise
+* less context
+* potentially incomplete
+
+Large chunks:
+
+* more context
+* more noise
+* fewer precise matches
+
+---
+
+## 7.9 Chunking Is a Retrieval Decision
+
+Do not ask:
+
+> "What chunk size is standard?"
+
+Ask:
+
+> "What unit of information should be retrievable for this application?"
+
+---
+
+## 🧪 Experiment
+
+Create three versions of the same corpus:
+
+```text
+small chunks
+medium chunks
+large chunks
+```
+
+Run the same evaluation questions.
+
+Compare retrieval quality.
+
+---
+
+# Chapter 08 — Metadata & Document Modeling
+
+Vector similarity alone is not enough.
+
+---
+
+## 8.1 Metadata
+
+Store information such as:
+
+```text
+document_id
+chunk_id
+source
+title
+section
+page
+created_at
+tenant_id
+document_type
+version
+```
+
+---
+
+## 8.2 Metadata Filtering
+
+Example:
+
+```text
+search:
+"leave policy"
+
+filter:
+department = HR
+country = India
+```
+
+---
+
+## 8.3 Why Filtering Matters
+
+Without filtering, semantically similar information from the wrong source can be retrieved.
+
+---
+
+## 8.4 Parent-Child Relationships
+
+A chunk can belong to:
+
+```text
+Document
+ ↓
+Section
+ ↓
+Chunk
+```
+
+This lets you retrieve a small chunk while retaining information about the larger document.
+
+---
+
+## 8.5 Versioning
+
+Documents change.
+
+Your retrieval system must know which version is current.
+
+---
+
+# Chapter 09 — Building an Embedding Pipeline
+
+Build the indexing pipeline.
+
+---
+
+## 9.1 Pipeline
+
+```text
+Document
+ ↓
+Parse
+ ↓
+Normalize
+ ↓
+Chunk
+ ↓
+Embed
+ ↓
+Store
+```
+
+---
+
+## 9.2 Batch Processing
+
+Do not send thousands of individual requests if the embedding provider supports batching.
+
+---
+
+## 9.3 Retry Handling
+
+Handle:
+
+* rate limits
+* network failures
+* timeouts
+* provider errors
+
+---
+
+## 9.4 Checkpointing
+
+If ingestion fails halfway through:
+
+```text
+10,000 chunks
+      ↓
+failure at chunk 6,300
+```
+
+you should not necessarily restart from zero.
+
+---
+
+## 9.5 Idempotent Upserts
+
+Use stable IDs so the same document can be reprocessed safely.
+
+---
+
+## 🧪 Lab
+
+Build an ingestion CLI:
+
+```bash
+python -m rag.ingest ./documents
+```
+
+It should:
+
+* detect documents
+* extract text
+* chunk
+* embed
+* store
+* report progress
+* handle failures
+* avoid duplicates
+
+---
+
+# Chapter 10 — Vector Search
+
+Now implement the query side.
+
+---
+
+## 10.1 Query Pipeline
+
+```text
+User Question
+ ↓
+Query Embedding
+ ↓
+Vector Search
+ ↓
+Top K
+ ↓
+Retrieved Chunks
+```
+
+---
+
+## 10.2 Top K
+
+Example:
+
+```text
+top_k = 5
+```
+
+The system returns the five highest-ranked candidates.
+
+---
+
+## 10.3 Similarity Threshold
+
+Instead of blindly returning results:
+
+```text
+if similarity < threshold:
+    reject
+```
+
+But thresholds require evaluation.
+
+---
+
+## 10.4 Recall vs Precision
+
+### Precision
+
+How many retrieved results are relevant?
+
+### Recall
+
+How many relevant results did retrieval successfully find?
+
+---
+
+## 10.5 Retrieval Quality
+
+A retrieval system can fail even when the LLM is excellent.
+
+Therefore:
+
+```text
+bad retrieval
+ ↓
+bad context
+ ↓
+bad answer
+```
+
+---
+
+## 🧪 Lab
+
+Create at least:
+
+```text
+30 questions
+```
+
+and manually identify which document chunks should be retrieved.
+
+Measure retrieval performance.
+
+---
+
+# Chapter 11 — Retrieval Strategies
+
+Vector search is only one strategy.
+
+---
+
+## 11.1 Semantic Retrieval
+
+Uses embeddings.
+
+Good for:
+
+```text
+conceptual similarity
+paraphrases
+meaning
+```
+
+---
+
+## 11.2 Keyword Retrieval
+
+Good for:
+
+```text
+exact terms
+IDs
+names
+error codes
+technical symbols
+```
+
+---
+
+## 11.3 Metadata Retrieval
+
+Good for:
+
+```text
+date
+department
+document type
+tenant
+version
+```
+
+---
+
+## 11.4 Filter Before Search
+
+Sometimes:
+
+```text
+metadata filter
+ ↓
+vector search
+```
+
+is better than searching everything first.
+
+---
+
+## 11.5 Search Query Rewriting
+
+Transform:
+
+```text
+"how much leave?"
+```
+
+into something more explicit:
+
+```text
+"employee annual leave entitlement policy"
+```
+
+---
+
+# Chapter 12 — Keyword Search & Full-Text Search
+
+You need traditional search knowledge.
+
+---
+
+## 12.1 Exact Search
+
+```text
+"JWT"
+```
+
+should find documents containing JWT.
+
+---
+
+## 12.2 Inverted Index
+
+Understand the fundamental structure:
+
+```text
+term
+ ↓
+documents containing term
+```
+
+---
+
+## 12.3 TF-IDF
+
+Understand the historical idea behind term importance.
+
+---
+
+## 12.4 BM25
+
+Understand BM25 at a conceptual level.
+
+It remains important in search systems.
+
+---
+
+## 12.5 Semantic vs Lexical Search
+
+Example:
+
+Query:
+
+```text
+"HTTP 502"
+```
+
+Keyword search may be excellent.
+
+Query:
+
+```text
+"Why is my gateway returning a server error?"
+```
+
+Semantic retrieval may be more useful.
+
+---
+
+# Chapter 13 — Hybrid Search
+
+The strongest retrieval systems often combine methods.
+
+---
+
+## 13.1 Hybrid Architecture
+
+```text
+                    Query
+                      │
+             ┌────────┴────────┐
+             │                 │
+             ▼                 ▼
+       Vector Search      Keyword Search
+             │                 │
+             └────────┬────────┘
+                      ▼
+                Result Fusion
+                      │
+                      ▼
+                  Reranking
+```
+
+---
+
+## 13.2 Why Hybrid?
+
+Vector search captures:
+
+```text
+meaning
+```
+
+Keyword search captures:
+
+```text
+exact lexical matches
+```
+
+---
+
+## 13.3 Reciprocal Rank Fusion
+
+Understand the idea of combining ranked result lists.
+
+You do not need to memorize the exact formula initially.
+
+---
+
+## 13.4 Hybrid Search Evaluation
+
+Compare:
+
+```text
+vector only
+keyword only
+hybrid
+```
+
+on the same evaluation dataset.
+
+---
+
+## 🧪 Lab
+
+Build all three.
+
+Measure:
+
+* precision
+* recall
+* latency
+
+---
+
+# Chapter 14 — Reranking
+
+Initial retrieval is usually candidate generation.
+
+Reranking performs a second, more expensive relevance assessment.
+
+---
+
+## 14.1 Two-Stage Retrieval
+
+```text
+Query
+ ↓
+Fast Retrieval
+ ↓
+Top 50 candidates
+ ↓
+Reranker
+ ↓
+Top 5
+```
+
+---
+
+## 14.2 Why Not Rerank Everything?
+
+Cost.
+
+The first stage narrows the search space.
+
+---
+
+## 14.3 Bi-Encoder vs Cross-Encoder
+
+Understand:
+
+### Bi-encoder
+
+Embeddings generated independently.
+
+Fast retrieval.
+
+### Cross-encoder
+
+Query and candidate are considered together.
+
+Usually more expensive but potentially more precise.
+
+---
+
+## 14.4 Reranking Tradeoff
+
+```text
+more retrieval candidates
+        ↓
+better recall
+        ↓
+more reranking cost
+```
+
+---
+
+## 🧪 Experiment
+
+Compare:
+
+```text
+vector top-5
+vector top-20 → rerank → top-5
+```
+
+Measure whether the extra complexity improves evaluation results.
+
+---
+
+# Chapter 15 — Query Transformation
+
+The user's question isn't always the best search query.
+
+---
+
+## 15.1 Query Rewriting
+
+Example:
+
+```text
+User:
+"Can I take leave next month?"
+```
+
+Possible retrieval query:
+
+```text
+employee leave eligibility
+annual leave policy
+advance leave request requirements
+```
+
+---
+
+## 15.2 Query Expansion
+
+Generate multiple search formulations.
+
+---
+
+## 15.3 Multi-Query Retrieval
+
+```text
+Original question
+ ↓
+Query A
+Query B
+Query C
+ ↓
+Search each
+ ↓
+Merge
+ ↓
+Rerank
+```
+
+---
+
+## 15.4 HyDE
+
+Understand the concept of generating a hypothetical answer/document representation to improve retrieval.
+
+You do not need to implement every advanced technique.
+
+---
+
+## 15.5 Query Transformation Risks
+
+The transformation model can introduce:
+
+* incorrect assumptions
+* lost entities
+* altered meaning
+
+Therefore query transformation must also be evaluated.
+
+---
+
+# Chapter 16 — Context Construction
+
+Retrieving documents is not the final step.
+
+You must construct useful context.
+
+---
+
+## 16.1 Naive Context
+
+```text
+Chunk 1
+Chunk 2
+Chunk 3
+Chunk 4
+Chunk 5
+```
+
+---
+
+## 16.2 Better Context
+
+Include:
+
+* source
+* title
+* section
+* chunk text
+* metadata where useful
+
+---
+
+## 16.3 Ordering
+
+Retrieved results may need ordering.
+
+Possible strategies:
+
+* relevance order
+* chronological order
+* document structure
+* grouped by source
+
+---
+
+## 16.4 Context Compression
+
+If retrieved chunks are too large:
+
+```text
+retrieved chunks
+ ↓
+compress / summarize
+ ↓
+LLM context
+```
+
+But compression can lose important details.
+
+---
+
+## 16.5 Context Budget
+
+Your system should explicitly control:
+
+```text
+maximum chunks
+maximum tokens
+maximum source count
+```
+
+---
+
+# Chapter 17 — RAG Generation
+
+Now connect retrieval with the LLM.
+
+---
+
+## 17.1 Basic RAG
+
+```text
+Question
+ ↓
+Retrieve
+ ↓
+Context
+ ↓
+Prompt
+ ↓
+LLM
+ ↓
+Answer
+```
+
+---
+
+## 17.2 Grounded Prompt
+
+Tell the model:
+
+* use provided context
+* distinguish missing information
+* avoid inventing unsupported claims
+* cite sources where required
+
+---
+
+## 17.3 Context Delimiters
+
+Separate:
+
+```text
+trusted instructions
+```
+
+from:
+
+```text
+retrieved untrusted content
+```
+
+Example:
+
+```text
+SYSTEM INSTRUCTIONS
+
+<retrieved_context>
+...
+</retrieved_context>
+
+USER QUESTION
+...
+```
+
+---
+
+## 17.4 "I Don't Know"
+
+A good RAG system should be capable of saying:
+
+> The provided documents do not contain enough information to answer this question.
+
+This is often better than generating a confident unsupported answer.
+
+---
+
+# Chapter 18 — Citations, Grounding & Source Attribution
+
+A production knowledge system should often explain where its answer came from.
+
+---
+
+## 18.1 Citation Metadata
+
+Each chunk should retain:
+
+```text
+document
+page
+section
+URL
+chunk_id
+```
+
+where available.
+
+---
+
+## 18.2 Citation Pipeline
+
+```text
+Retrieved Chunk
+ ↓
+Context
+ ↓
+LLM
+ ↓
+Answer
+ +
+Source References
+```
+
+---
+
+## 18.3 Grounded Answer
+
+A grounded answer should be traceable to retrieved evidence.
+
+---
+
+## 18.4 Citation Validation
+
+Do not assume:
+
+```text
+LLM citation
+=
+correct citation
+```
+
+Your application should validate that cited source IDs actually exist in the retrieved context.
+
+---
+
+## 🧪 Lab
+
+Build answers containing:
+
+```text
+Source:
+Document X
+Page:
+12
+Section:
+Authentication
+```
+
+Then verify citations programmatically.
+
+---
+
+# Chapter 19 — RAG Failure Modes
+
+RAG systems can fail at many layers.
+
+---
+
+## Failure 1 — Bad Parsing
+
+```text
+PDF
+ ↓
+corrupted text
+ ↓
+bad chunks
+ ↓
+bad retrieval
+```
+
+---
+
+## Failure 2 — Bad Chunking
+
+Important information split across chunks.
+
+---
+
+## Failure 3 — Wrong Embedding Model
+
+Semantic similarity becomes poor.
+
+---
+
+## Failure 4 — Retrieval Miss
+
+Relevant document exists but isn't retrieved.
+
+---
+
+## Failure 5 — Retrieval Noise
+
+Irrelevant documents are retrieved.
+
+---
+
+## Failure 6 — Context Overload
+
+Too much irrelevant context is provided.
+
+---
+
+## Failure 7 — Model Ignores Context
+
+The LLM generates an answer that isn't supported by retrieved information.
+
+---
+
+## Failure 8 — Stale Knowledge
+
+The index contains an old document version.
+
+---
+
+## Failure 9 — Tenant Leakage
+
+One customer's documents are retrieved for another customer.
+
+---
+
+## Failure 10 — Prompt Injection
+
+A retrieved document contains malicious instructions.
+
+---
+
+## Failure 11 — Citation Failure
+
+The answer cites the wrong source.
+
+---
+
+## Failure 12 — "No Answer" Failure
+
+The system should have said:
+
+```text
+"I don't have enough information."
+```
+
+but generated an unsupported answer.
+
+---
+
+# Chapter 20 — RAG Evaluation
+
+This is the most important engineering chapter after retrieval fundamentals.
+
+---
+
+# 20.1 Evaluate Retrieval Separately
+
+Do not only evaluate the final answer.
+
+Measure:
+
+```text
+retrieval quality
+```
+
+and:
+
+```text
+generation quality
+```
+
+separately.
+
+---
+
+## 20.2 Retrieval Metrics
+
+Study:
+
+* Precision@K
+* Recall@K
+* Hit Rate
+* MRR
+* nDCG
+
+You don't need research-level mathematics.
+
+Understand what each metric tells you.
+
+---
+
+## 20.3 Generation Metrics
+
+Evaluate:
+
+* factuality
+* relevance
+* completeness
+* groundedness
+* citation correctness
+
+---
+
+## 20.4 Golden Dataset
+
+Build:
+
+```text
+question
+relevant document
+relevant chunk
+expected answer
+```
+
+for representative questions.
+
+---
+
+## 20.5 Failure Classification
+
+For every failed question identify:
+
+```text
+parsing failure
+chunking failure
+embedding failure
+retrieval failure
+reranking failure
+context failure
+generation failure
+citation failure
+```
+
+---
+
+## 🧪 Required Evaluation Dataset
+
+Create at least:
+
+```text
+50 questions
+```
+
+covering:
+
+* easy questions
+* paraphrased questions
+* multi-step questions
+* exact keyword questions
+* ambiguous questions
+* unanswerable questions
+* adversarial questions
+
+---
+
+# Chapter 21 — Advanced Retrieval
+
+Now explore more advanced approaches.
+
+---
+
+## 21.1 Parent-Child Retrieval
+
+Retrieve a small child chunk but provide the larger parent context.
+
+---
+
+## 21.2 Hierarchical Retrieval
+
+```text
+Document
+ ↓
+Section
+ ↓
+Subsection
+ ↓
+Chunk
+```
+
+Search progressively.
+
+---
+
+## 21.3 Metadata-Aware Retrieval
+
+Use:
+
+```text
+department
+date
+document type
+version
+tenant
+```
+
+before or during search.
+
+---
+
+## 21.4 Temporal Retrieval
+
+Some questions depend on time:
+
+```text
+"What was the policy in 2024?"
+```
+
+Your system must not blindly return the newest document.
+
+---
+
+## 21.5 Multi-Hop Retrieval
+
+Some questions require multiple pieces of information.
+
+Example:
+
+```text
+Document A
+   +
+Document B
+   ↓
+Answer
+```
+
+---
+
+## 21.6 Graph-Based Retrieval
+
+Understand the concept of combining:
+
+```text
+entities
+relationships
+documents
+```
+
+for more complex knowledge systems.
+
+This is conceptual preparation, not a requirement to build a graph database yet.
+
+---
+
+# Chapter 22 — RAG Security & Multi-Tenancy
+
+This is critical for professional AI engineering.
+
+---
+
+## 22.1 Tenant Isolation
+
+Imagine:
+
+```text
+Company A
+ ├── documents
+
+Company B
+ ├── documents
+```
+
+Company A must never retrieve Company B's data.
+
+---
+
+## 22.2 Metadata Filters
+
+Every retrieval request may need:
+
+```text
+tenant_id = current_user.tenant_id
+```
+
+---
+
+## 22.3 Authorization Before Retrieval
+
+Do not rely on the LLM to decide whether a document is accessible.
+
+Your application must enforce authorization.
+
+---
+
+## 22.4 Document Poisoning
+
+An attacker may intentionally insert malicious content into the knowledge base.
+
+Study:
+
+* poisoned documents
+* malicious instructions
+* hidden prompt injection
+* misleading content
+
+---
+
+## 22.5 Secret Leakage
+
+Do not allow retrieved content to expose:
+
+* API keys
+* credentials
+* internal secrets
+* unrelated customer data
+
+---
+
+## 22.6 Auditability
+
+Record:
+
+```text
+user
+query
+retrieved document IDs
+model
+answer
+timestamp
+```
+
+while respecting privacy requirements.
+
+---
+
+# Chapter 23 — RAG Performance, Cost & Scaling
+
+---
+
+## 23.1 Latency Pipeline
+
+Understand:
+
+```text
+query embedding
++
+vector search
++
+keyword search
++
+reranking
++
+LLM generation
+=
+total latency
+```
+
+---
+
+## 23.2 Caching
+
+Potential caches:
+
+```text
+embedding cache
+retrieval cache
+LLM response cache
+document parsing cache
+```
+
+---
+
+## 23.3 Batch Embeddings
+
+Process multiple documents efficiently.
+
+---
+
+## 23.4 Indexing
+
+Understand why indexes improve retrieval speed.
+
+---
+
+## 23.5 Top-K Tradeoff
+
+Larger K:
+
+* potentially better recall
+* more context
+* higher processing cost
+
+Smaller K:
+
+* less noise
+* lower cost
+* potentially lower recall
+
+---
+
+## 23.6 Cost Model
+
+Think about:
+
+```text
+document ingestion cost
+embedding cost
+storage cost
+retrieval cost
+reranking cost
+LLM input cost
+LLM output cost
+```
+
+---
+
+## 23.7 Scaling
+
+Eventually:
+
+```text
+             ┌──────────────┐
+             │ Load Balancer│
+             └──────┬───────┘
+                    │
+        ┌───────────┼───────────┐
+        ▼           ▼           ▼
+      API 1       API 2       API 3
+        │           │           │
+        └───────────┼───────────┘
+                    │
+             Retrieval Layer
+                    │
+             Vector Database
+                    │
+               Object Storage
+```
+
+---
+
+# Chapter 24 — RAG Architecture Patterns
+
+Compare several architectures.
+
+---
+
+## Pattern 1 — Simple RAG
+
+```text
+Query
+ ↓
+Vector Search
+ ↓
+LLM
+```
+
+---
+
+## Pattern 2 — Hybrid RAG
+
+```text
+Query
+ ↓
+Vector + Keyword
+ ↓
+Fusion
+ ↓
+LLM
+```
+
+---
+
+## Pattern 3 — Reranked RAG
+
+```text
+Query
+ ↓
+Candidate Retrieval
+ ↓
+Reranker
+ ↓
+LLM
+```
+
+---
+
+## Pattern 4 — Agentic Retrieval
+
+```text
+User
+ ↓
+LLM
+ ↓
+Decide what to search
+ ↓
+Search
+ ↓
+Observe result
+ ↓
+Search again
+ ↓
+LLM
+```
+
+Understand the increased complexity and failure surface.
+
+---
+
+## Pattern 5 — Multi-Tenant RAG
+
+```text
+User
+ ↓
+Authentication
+ ↓
+Authorization
+ ↓
+Tenant Filter
+ ↓
+Retrieval
+ ↓
+Reranking
+ ↓
+LLM
+```
+
+---
+
+## Pattern 6 — RAG + Tools
+
+```text
+                    ┌── Database
+                    │
+User → LLM → Router ┼── Retrieval
+                    │
+                    └── External API
+```
+
+Understand when each source should be used.
+
+---
+
+# Chapter 25 — Production RAG Engineering
+
+Now combine everything.
+
+---
+
+## 25.1 Production Pipeline
+
+```text
+                    INGESTION
+
+Documents
+   ↓
+Parsing
+   ↓
+Normalization
+   ↓
+Chunking
+   ↓
+Metadata
+   ↓
+Embedding
+   ↓
+Vector Store
+
+
+                    QUERY
+
+User Question
+   ↓
+Authentication
+   ↓
+Authorization
+   ↓
+Query Processing
+   ↓
+Hybrid Retrieval
+   ↓
+Reranking
+   ↓
+Context Construction
+   ↓
+LLM
+   ↓
+Validation
+   ↓
+Citation Verification
+   ↓
+Response
+```
+
+---
+
+## 25.2 Production Requirements
+
+Your system should consider:
+
+* authentication
+* authorization
+* tenant isolation
+* document versioning
+* ingestion idempotency
+* retrieval evaluation
+* structured logging
+* request IDs
+* tracing
+* rate limiting
+* timeouts
+* retries
+* caching
+* cost controls
+* evaluation regression tests
+* security
+* data deletion
+* auditability
+
+---
+
+## 25.3 Document Updates
+
+Suppose:
+
+```text
+policy_v1
+```
+
+becomes:
+
+```text
+policy_v2
+```
+
+The system should not accidentally retrieve both as current truth.
+
+---
+
+## 25.4 Document Deletion
+
+If a document is deleted, understand that deletion may need to propagate to:
+
+```text
+raw storage
+chunks
+embeddings
+metadata
+indexes
+cache
+```
+
+---
+
+## 25.5 Observability
+
+Measure:
+
+```text
+ingestion failures
+retrieval latency
+retrieval hit rate
+LLM latency
+token usage
+cost
+answer quality
+citation failures
+```
+
+---
+
+# Chapter 26 — V10 Integration Project & Engineering Review
+
+# 🚀 Main Project
+
+# Production Knowledge Base RAG System
+
+This is the major practical project of V10.
+
+It is **not yet the flagship project**.
+
+It is a reusable retrieval platform that will give you the foundation required for V11 and eventually the flagship.
+
+---
+
+# Project Objective
+
+Build a complete RAG system that allows users to upload documents and ask questions grounded in those documents.
+
+---
+
+# Architecture
+
+```text id="h1y0mg"
+                         ┌──────────────┐
+                         │   Frontend   │
+                         └──────┬───────┘
+                                │
+                                ▼
+                         ┌──────────────┐
+                         │   FastAPI    │
+                         └──────┬───────┘
+                                │
+                    ┌───────────┼────────────┐
+                    │           │            │
+                    ▼           ▼            ▼
+                 Auth       RAG Service    Database
+                                │
+              ┌─────────────────┼─────────────────┐
+              │                 │                 │
+              ▼                 ▼                 ▼
+          Query Engine     Vector Search      LLM
+              │
+       ┌──────┴──────┐
+       ▼             ▼
+  Keyword Search  Vector Search
+       │             │
+       └──────┬──────┘
+              ▼
+           Fusion
+              │
+              ▼
+          Reranker
+              │
+              ▼
+       Context Builder
+              │
+              ▼
+             LLM
+              │
+              ▼
+        Answer + Citations
+```
+
+---
+
+# Core Resources
+
+```text
+Users
+Documents
+DocumentVersions
+Chunks
+Conversations
+Messages
+RetrievalQueries
+Citations
+```
+
+---
+
+# API
+
+## Documents
+
+```text
+POST   /documents
+GET    /documents
+GET    /documents/{id}
+DELETE /documents/{id}
+```
+
+---
+
+## Upload
+
+Support:
+
+```text
+PDF
+TXT
+Markdown
+```
+
+Start with these.
+
+Do not attempt every file format.
+
+---
+
+## Ingestion
+
+```text
+POST /documents/{id}/ingest
+GET  /documents/{id}/status
+```
+
+---
+
+## Search
+
+```text
+POST /search
+```
+
+Input:
+
+```json
+{
+  "query": "How many days of annual leave are available?",
+  "top_k": 5
+}
+```
+
+Return:
+
+```text
+chunks
+scores
+metadata
+sources
+```
+
+---
+
+## RAG Question
+
+```text
+POST /chat
+```
+
+Input:
+
+```json
+{
+  "question": "What is the annual leave policy?"
+}
+```
+
+Return:
+
+```json
+{
+  "answer": "...",
+  "citations": []
+}
+```
+
+---
+
+# Required Ingestion Pipeline
+
+Implement:
+
+```text
+Upload
+ ↓
+Extract
+ ↓
+Normalize
+ ↓
+Chunk
+ ↓
+Metadata
+ ↓
+Embed
+ ↓
+Store
+```
+
+---
+
+# Required Retrieval Pipeline
+
+Implement:
+
+```text
+Question
+ ↓
+Query embedding
+ ↓
+Vector search
+ ↓
+Keyword search
+ ↓
+Fusion
+ ↓
+Reranking
+ ↓
+Top context
+```
+
+Start simple.
+
+Then improve it.
+
+---
+
+# Required Generation Pipeline
+
+```text
+Context
++
+Question
+ ↓
+Prompt
+ ↓
+LLM
+ ↓
+Answer
+ ↓
+Citation verification
+ ↓
+Response
+```
+
+---
+
+# Required Security
+
+Implement:
+
+### Authentication
+
+Reuse V08.
+
+### Authorization
+
+Users can only access their own documents.
+
+### Tenant isolation
+
+If you implement organizations, retrieval must always apply tenant-level filtering.
+
+### Input validation
+
+Validate:
+
+* file type
+* file size
+* query length
+* pagination
+* metadata
+
+### Prompt injection protection
+
+Treat retrieved content as untrusted data.
+
+---
+
+# Required Evaluation Dataset
+
+Create at least:
+
+```text
+50 questions
+```
+
+For every question record:
+
+```text
+question
+expected relevant documents
+expected relevant chunks
+expected answer
+actual retrieved chunks
+actual answer
+citation correctness
+failure category
+```
+
+---
+
+# Evaluation Categories
+
+Include:
+
+## Direct Questions
+
+Answer explicitly present.
+
+## Paraphrased Questions
+
+Same meaning, different wording.
+
+## Exact-Term Questions
+
+Important keywords or identifiers.
+
+## Multi-Chunk Questions
+
+Answer requires multiple passages.
+
+## Unanswerable Questions
+
+Information does not exist.
+
+Expected behavior:
+
+```text
+I don't have enough information.
+```
+
+---
+
+## Adversarial Questions
+
+Attempt to manipulate retrieval or generation.
+
+---
+
+# Retrieval Experiments
+
+Run:
+
+## Experiment A
+
+Vector only.
+
+---
+
+## Experiment B
+
+Keyword only.
+
+---
+
+## Experiment C
+
+Hybrid.
+
+---
+
+## Experiment D
+
+Hybrid + reranking.
+
+---
+
+## Experiment E
+
+Different chunk sizes.
+
+---
+
+## Experiment F
+
+Different top-K values.
+
+---
+
+## Experiment G
+
+With and without metadata filtering.
+
+---
+
+# Record Results
+
+Create:
+
+```text
+docs/
+└── rag-evaluation.md
+```
+
+Include:
+
+```text
+Experiment
+Configuration
+Dataset
+Precision@K
+Recall@K
+MRR
+Latency
+Answer quality
+Observations
+```
+
+---
+
+# 🔬 Required Failure Injection
+
+Break the system intentionally.
+
+---
+
+## Failure 1 — Corrupted Document
+
+Observe ingestion behavior.
+
+---
+
+## Failure 2 — Duplicate Document
+
+Check idempotency.
+
+---
+
+## Failure 3 — Old Document Version
+
+Check whether stale content is retrieved.
+
+---
+
+## Failure 4 — Missing Embedding
+
+Observe how retrieval handles incomplete indexing.
+
+---
+
+## Failure 5 — Vector Database Unavailable
+
+Test failure handling.
+
+---
+
+## Failure 6 — LLM Unavailable
+
+The API should return a controlled error.
+
+---
+
+## Failure 7 — Prompt Injection in Document
+
+Verify that document text is not treated as trusted instructions.
+
+---
+
+## Failure 8 — Unauthorized Document
+
+Attempt retrieval using another user's identity.
+
+The system must reject it.
+
+---
+
+## Failure 9 — No Relevant Result
+
+The system should not confidently invent an answer.
+
+---
+
+## Failure 10 — Wrong Citation
+
+Test citation validation.
+
+---
+
+# 🧠 Architecture Challenge
+
+Explain the difference between:
+
+```text
+Document
+Chunk
+Embedding
+Vector
+Metadata
+Vector index
+Retriever
+Reranker
+Context
+Prompt
+LLM
+Citation
+```
+
+Then explain how they connect.
+
+---
+
+# 🧪 Build From Scratch Challenge
+
+After completing the guided implementation:
+
+> Delete your implementation of the retrieval pipeline and rebuild it from your architecture diagram and notes.
+
+Do not copy the previous implementation.
+
+This tests whether you actually understand the system.
+
+---
+
+# 🧠 V10 Feynman Test
+
+Without notes, explain:
+
+### Question 1
+
+Why do we need RAG?
+
+---
+
+### Question 2
+
+What is an embedding?
+
+---
+
+### Question 3
+
+Why can't we simply compare raw text?
+
+---
+
+### Question 4
+
+What is cosine similarity?
+
+---
+
+### Question 5
+
+Why do vector databases exist?
+
+---
+
+### Question 6
+
+What is approximate nearest-neighbor search?
+
+---
+
+### Question 7
+
+Why is chunking important?
+
+---
+
+### Question 8
+
+What happens if chunks are too small?
+
+---
+
+### Question 9
+
+What happens if chunks are too large?
+
+---
+
+### Question 10
+
+Why is metadata important?
+
+---
+
+### Question 11
+
+What is the difference between:
+
+```text
+semantic search
+keyword search
+hybrid search
+```
+
+?
+
+---
+
+### Question 12
+
+Why do we rerank?
+
+---
+
+### Question 13
+
+What is the difference between retrieval and generation?
+
+---
+
+### Question 14
+
+Why can a RAG system still hallucinate?
+
+---
+
+### Question 15
+
+What does grounded generation mean?
+
+---
+
+### Question 16
+
+Why should retrieved documents be treated as untrusted content?
+
+---
+
+### Question 17
+
+Why is tenant isolation critical?
+
+---
+
+### Question 18
+
+Why should retrieval and generation be evaluated separately?
+
+---
+
+### Question 19
+
+What is Recall@K?
+
+---
+
+### Question 20
+
+Why isn't increasing K always better?
+
+---
+
+### Question 21
+
+Why might keyword search outperform semantic search for an error code?
+
+---
+
+### Question 22
+
+Why might semantic search outperform exact keyword search for a paraphrased question?
+
+---
+
+### Question 23
+
+What is reranking?
+
+---
+
+### Question 24
+
+Why should a RAG system sometimes answer:
+
+```text
+"I don't know."
+```
+
+?
+
+---
+
+### Question 25
+
+Explain the entire RAG pipeline from document upload to final answer.
+
+---
+
+# 📝 V10 Notes System
+
+Create:
+
+```text
+V10-notes/
+├── RAG.md
+├── Embeddings.md
+├── Vector-Similarity.md
+├── Vector-Databases.md
+├── Ingestion.md
+├── Document-Parsing.md
+├── Chunking.md
+├── Metadata.md
+├── Vector-Search.md
+├── Keyword-Search.md
+├── Hybrid-Search.md
+├── Reranking.md
+├── Query-Transformation.md
+├── Context-Construction.md
+├── Grounding.md
+├── Citations.md
+├── RAG-Failures.md
+├── RAG-Evaluation.md
+├── RAG-Security.md
+├── RAG-Performance.md
+└── RAG-Architecture.md
+```
+
+For every retrieval technique record:
+
+```text
+What problem does it solve?
+How does it work?
+When should I use it?
+When should I not use it?
+What can go wrong?
+How do I evaluate it?
+What does it cost?
+```
+
+---
+
+# 🔗 Integration With Previous Volumes
+
+## V01
+
+Use:
+
+* first principles
+* experiments
+* debugging
+* documentation
+* scientific method
+
+---
+
+## V02
+
+Understand:
+
+* CPU
+* memory
+* storage
+* processes
+* resource constraints
+
+---
+
+## V03
+
+Understand:
+
+```text
+API
+ ↓
+Network
+ ↓
+Vector DB
+ ↓
+LLM Provider
+```
+
+---
+
+## V04
+
+Use Ubuntu for:
+
+* services
+* logs
+* processes
+* networking
+* resource monitoring
+
+---
+
+## V05
+
+Automate:
+
+* ingestion
+* evaluation
+* benchmarking
+* backups
+
+---
+
+## V06
+
+Use Git to version:
+
+* ingestion code
+* prompts
+* retrieval strategies
+* evaluation datasets
+* configuration
+
+---
+
+## V07
+
+Use:
+
+* Python
+* async
+* HTTP
+* Pydantic
+* CLI
+* testing
+* logging
+
+---
+
+## V08
+
+Use:
+
+* FastAPI
+* authentication
+* authorization
+* PostgreSQL
+* API design
+* streaming
+* production architecture
+
+---
+
+## V09
+
+Use:
+
+* LLMs
+* tokens
+* embeddings
+* model APIs
+* tool calling
+* evaluation
+* prompt engineering
+
+---
+
+# 🚦 Roadmap Boundary
+
+Do not turn V10 into an "agent" volume.
+
+Do not spend this volume primarily learning:
+
+* LangChain
+* LangGraph
+* multi-agent systems
+* autonomous agents
+
+Those concepts become useful later.
+
+First understand the underlying retrieval architecture.
+
+The sequence remains:
+
+```text
+V08
+Backend Engineering
+        ↓
+V09
+AI & LLM Fundamentals
+        ↓
+V10
+Embeddings + Vector Search + RAG
+        ↓
+V11
+AI Application Engineering
+        ↓
+🚀 FLAGSHIP PROJECT MILESTONE
+        ↓
+V12
+Docker
+        ↓
+V13
+CI/CD
+        ↓
+V14
+AWS
+        ↓
+V15
+Terraform
+        ↓
+V16
+Kubernetes
+        ↓
+V17
+DevSecOps
+        ↓
+V18
+Observability
+        ↓
+V19
+LLMOps
+        ↓
+V20
+Production Engineering + SRE
+        ↓
+V21
+Interview Preparation
+```
+
+---
+
+# 🧠 Final V10 Mental Model
+
+You should finish the volume seeing RAG as a complete information pipeline:
+
+```text
+                         KNOWLEDGE
+
+Documents
+    │
+    ▼
+┌──────────────┐
+│   Parsing    │
+└──────┬───────┘
+       ▼
+┌──────────────┐
+│ Normalizing  │
+└──────┬───────┘
+       ▼
+┌──────────────┐
+│   Chunking   │
+└──────┬───────┘
+       ▼
+┌──────────────┐
+│  Embeddings  │
+└──────┬───────┘
+       ▼
+┌──────────────┐
+│ Vector Store │
+└──────────────┘
+
+
+                         QUERY
+
+User Question
+       │
+       ▼
+┌──────────────┐
+│ Query Process│
+└──────┬───────┘
+       │
+       ├───────────────┐
+       ▼               ▼
+ Vector Search   Keyword Search
+       │               │
+       └───────┬───────┘
+               ▼
+         Result Fusion
+               │
+               ▼
+           Reranking
+               │
+               ▼
+       Context Construction
+               │
+               ▼
+              LLM
+               │
+               ▼
+       Grounded Answer
+               │
+               ▼
+        Citation Validation
+               │
+               ▼
+             User
+```
+
+And around the entire system:
+
+```text
+Authentication
+Authorization
+Tenant Isolation
+Evaluation
+Security
+Logging
+Observability
+Cost Control
+Caching
+Versioning
+```
+
+The most important mental model from V10 is:
+
+> **Retrieval determines what information the model gets to see. Generation determines how the model uses that information.**
+
+A good LLM cannot compensate for consistently bad retrieval.
+
+A good retriever cannot compensate for an application that blindly trusts model output.
+
+A production RAG system therefore requires **both retrieval engineering and application engineering**.
+
+---
+
+# 🏆 V10 Completion Criteria
+
+You are finished with V10 when you can independently:
+
+* Explain embeddings from first principles.
+* Calculate cosine similarity.
+* Explain vector search.
+* Explain approximate nearest-neighbor indexes.
+* Explain vector databases.
+* Parse documents.
+* Design a chunking strategy.
+* Explain chunk-size tradeoffs.
+* Build an embedding pipeline.
+* Implement vector retrieval.
+* Implement keyword retrieval.
+* Implement hybrid retrieval.
+* Understand reranking.
+* Understand query transformation.
+* Construct context intelligently.
+* Build grounded RAG generation.
+* Implement source citations.
+* Handle "no answer" cases.
+* Identify RAG failure modes.
+* Evaluate retrieval separately from generation.
+* Explain Precision@K and Recall@K.
+* Secure multi-tenant retrieval.
+* Handle document updates and deletion.
+* Measure RAG latency and cost.
+* Build a complete RAG system.
+
+---
+
+# 🏁 Final V10 Deliverables
+
+Your repository should contain:
+
+```text
+1. Embedding experiments
+2. Similarity implementation
+3. Vector search implementation
+4. Document ingestion pipeline
+5. Document parser
+6. Chunking experiments
+7. Metadata model
+8. Vector database
+9. Keyword search
+10. Hybrid search
+11. Reranking experiment
+12. Query transformation experiment
+13. RAG generation pipeline
+14. Citation system
+15. 50+ question evaluation dataset
+16. Retrieval evaluation report
+17. Security review
+18. Failure-injection report
+19. Production RAG architecture diagram
+20. Production Knowledge Base RAG System
+21. README
+```
+
+---
+
+# 🔥 The Big Picture
+
+V09 taught you:
+
+```text
+What is an LLM?
+How does it work?
+How do we communicate with it?
+```
+
+V10 teaches:
+
+```text
+How do we give an LLM the right external information?
+```
+
+V11 will then teach:
+
+```text
+How do we engineer complete AI applications around
+LLMs + RAG + tools + backend systems?
+```
+
+Then, and only then:
+
+```text
+                 🚀 FLAGSHIP PROJECT
+```
+
+will begin.
+
+The flagship will therefore not be another tutorial project. It will be the point where everything you have learned from **V01 → V11** gets combined into one serious system.
