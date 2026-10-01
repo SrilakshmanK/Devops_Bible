@@ -550,6 +550,7 @@ Record:
 ---
 
 # Chapter 05 — Structured Outputs & Reliable Data Extraction
+Tier: SKIM — You built this in V09 Ch18; study only: §5.5 Retry on Invalid Output, §5.6 Partial Failure.
 
 LLMs are powerful at generating text.
 
@@ -641,6 +642,7 @@ The decision belongs to application logic.
 ---
 
 # Chapter 06 — Tool Calling & Function Execution
+Tier: SKIM — You built this in V09 Ch18; study only: §6.4 Tools vs APIs, §6.5 Tool Permissions, §6.6 Tool Idempotency.
 
 This is one of the most important AI application concepts.
 

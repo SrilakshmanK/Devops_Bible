@@ -1787,7 +1787,7 @@ but generated an unsupported answer.
 ---
 
 # Chapter 20 — RAG Evaluation
-Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapter 18 for the main AI-application evaluation treatment; retain the retrieval-specific metrics as context.
+Tier: CORE
 
 This is the most important engineering chapter after retrieval fundamentals.
 

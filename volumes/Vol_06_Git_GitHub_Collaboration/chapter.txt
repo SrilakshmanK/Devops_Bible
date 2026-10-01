@@ -209,6 +209,7 @@ Hosted Git platform + collaboration ecosystem
 ---
 
 # Chapter 01 — Version Control Fundamentals
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -325,6 +326,7 @@ Then explain how version control addresses each one.
 ---
 
 # Chapter 02 — Git Installation & Configuration
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -456,6 +458,7 @@ Then document your configuration.
 ---
 
 # Chapter 03 — Git Repository Fundamentals
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -625,6 +628,7 @@ before and after staging.
 ---
 
 # Chapter 04 — Commits & History
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -771,6 +775,7 @@ and explain your history.
 ---
 
 # Chapter 05 — Git Diff & Change Inspection
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -863,6 +868,7 @@ Then commit only the intended change.
 ---
 
 # Chapter 06 — Branches & References
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -1032,6 +1038,7 @@ point.
 ---
 
 # Chapter 07 — Merging & Conflict Resolution
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -1159,6 +1166,7 @@ How did you verify it?
 ---
 
 # Chapter 08 — Rebasing & History Management
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -1307,6 +1315,7 @@ Then visualize the result using Git Graph.
 ---
 
 # Chapter 09 — Remote Repositories & GitHub
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -1459,6 +1468,7 @@ Verify that the cloned repository contains the expected history.
 ---
 
 # Chapter 10 — Collaboration & Pull Requests
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -1617,6 +1627,7 @@ Document the workflow.
 ---
 
 # Chapter 11 — Git Internals
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -1761,6 +1772,7 @@ Your goal:
 ---
 
 # Chapter 12 — Stashing, Cherry-Picking & Tags
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -1864,6 +1876,7 @@ On the toolkit repository:
 ---
 
 # Chapter 13 — Git Recovery & Disaster Handling
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -2034,6 +2047,7 @@ Final verification
 ---
 
 # Chapter 14 — Git Hooks & Repository Automation
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -2124,6 +2138,7 @@ Commit again.
 ---
 
 # Chapter 15 — Professional Git Workflows
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -2273,6 +2288,7 @@ release management
 ---
 
 # Chapter 16 — Git in DevOps & CI/CD
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 
@@ -2421,6 +2437,7 @@ The purpose is understanding the chain.
 ---
 
 # Chapter 17 — Git Security & Repository Hygiene
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Objective
 

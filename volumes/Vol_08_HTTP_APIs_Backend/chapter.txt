@@ -115,6 +115,7 @@ By the end of this volume, you should be able to:
 ---
 
 # Chapter 01 — Backend Engineering From First Principles
+Tier: TEST-OUT — Do this chapter's exercises cold; study only what you fail.
 
 ## 1.1 What Is a Backend?
 
@@ -271,6 +272,7 @@ Label every layer.
 ---
 
 # Chapter 02 — HTTP From the Ground Up
+Tier: TEST-OUT — Do this chapter's exercises cold; study only what you fail.
 
 This chapter is extremely important.
 
@@ -400,6 +402,7 @@ Study:
 ---
 
 # Chapter 03 — URLs, DNS, TCP, TLS & The Complete Request Journey
+Tier: TEST-OUT — Do this chapter's exercises cold; study only what you fail.
 
 Connect V03 networking with backend engineering.
 
@@ -510,6 +513,7 @@ Explain what each tool reveals.
 ---
 
 # Chapter 04 — HTTP Methods, Status Codes, Headers & Content
+Tier: TEST-OUT — Do this chapter's exercises cold; study only what you fail.
 
 ## 4.1 HTTP Methods
 
@@ -644,6 +648,7 @@ Use `curl` to manually construct requests with different:
 ---
 
 # Chapter 05 — REST & Resource-Oriented API Design
+Tier: TEST-OUT — Do this chapter's exercises cold; study only what you fail.
 
 ## 5.1 What REST Actually Means
 
@@ -741,6 +746,7 @@ First design the resources.
 ---
 
 # Chapter 06 — API Parameters, Request Bodies & Validation
+Tier: TEST-OUT — Do this chapter's exercises cold; study only what you fail.
 
 Study the difference between:
 

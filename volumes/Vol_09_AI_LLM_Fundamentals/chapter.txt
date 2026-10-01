@@ -128,6 +128,7 @@ Response
 ---
 
 # Chapter 01 — What Is Artificial Intelligence?
+Tier: CORE
 
 Start with the broadest concept.
 
@@ -724,6 +725,7 @@ Examples:
 ---
 
 # Chapter 07 — From Neural Networks to Language Models
+Tier: CORE
 
 Now move toward language.
 
@@ -808,6 +810,7 @@ That distinction becomes critical later.
 ---
 
 # Chapter 08 — Tokens & Tokenization
+Tier: CORE
 
 This is one of the most important LLM concepts.
 
@@ -1305,6 +1308,7 @@ You will study RAG deeply in V10.
 ---
 
 # Chapter 14 — LLM Inference
+Tier: CORE
 
 Training and inference are different operations.
 
@@ -1387,6 +1391,7 @@ Understand why repeated calls may or may not produce identical outputs depending
 ---
 
 # Chapter 15 — Context Windows & Conversation State
+Tier: CORE
 
 ## 15.1 Context Window
 
@@ -1449,6 +1454,7 @@ This becomes extremely important in V10 and V11.
 ---
 
 # Chapter 16 — Prompt Engineering
+Tier: CORE
 
 Prompt engineering is not:
 
@@ -1542,6 +1548,7 @@ Test each on at least 10 examples.
 ---
 
 # Chapter 17 — LLM APIs & Model Integration
+Tier: CORE
 
 Now connect V09 directly to your V08 backend knowledge.
 
@@ -1640,7 +1647,7 @@ context overflow
 ---
 
 # Chapter 18 — Structured Outputs, Tool Calling & Function Calling
-Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapters 05–06 for the main treatment.
+Tier: CORE
 
 This chapter moves beyond:
 
@@ -1829,6 +1836,7 @@ Understand the transport mechanism rather than simply copying an SDK example.
 ---
 
 # Chapter 20 — LLM Limitations, Hallucinations & Reliability
+Tier: CORE
 
 This is one of the most important chapters.
 
@@ -2363,6 +2371,8 @@ Tier: CORE
 ## AI Assistant Backend
 
 Build a small but properly engineered AI backend.
+
+Note: The V09 codebase extends the FastAPI + Postgres + Redis backend built in V08 §14.6 / §14.7 / §16.7.
 
 This is **not the flagship project**.
 
