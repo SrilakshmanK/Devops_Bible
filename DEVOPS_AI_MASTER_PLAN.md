@@ -394,6 +394,8 @@ Deploy the flagship application to AWS.
 
 ## Volume 15 — Infrastructure as Code with Terraform
 
+*Supplementary material: See `archive/old-volume-12-iac` for early experimental IaC content.*
+
 Focus:
 
 * Infrastructure as Code

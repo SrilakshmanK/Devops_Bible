@@ -122,24 +122,30 @@ Each volume contains:
 
 ---
 
-# 📦 Planned Volumes
+# 📦 Volume Roadmap (21 Volumes)
 
-* Volume 01 — Foundations
-* Volume 02 — Computer Fundamentals
-* Volume 03 — Networking
-* Volume 04 — Linux
-* Volume 05 — Git
-* Volume 06 — Bash
-* Volume 07 — Python
-* Volume 08 — Docker
-* Volume 09 — CI/CD
-* Volume 10 — Cloud
-* Volume 11 — Terraform
-* Volume 12 — Kubernetes
-* Volume 13 — Monitoring
-* Volume 14 — Security
-* Volume 15 — Production Projects
-* Volume 16 — Future of DevOps
+* Volume 01 — Engineering Foundations
+* Volume 02 — Computer Architecture & Operating Systems
+* Volume 03 — Computer Networking Fundamentals
+* Volume 04 — Linux Administration & Systems Engineering
+* Volume 05 — Bash Scripting, Automation & CLI Tooling
+* Volume 06 — Git, GitHub & Collaborative Engineering
+* Volume 07 — Python Engineering & Asynchronous Programming
+* Volume 08 — HTTP, REST APIs & Backend Engineering
+* Volume 09 — AI & LLM Fundamentals
+* Volume 10 — Embeddings, Vector Search & Retrieval-Augmented Generation (RAG)
+* Volume 11 — AI Application Engineering, Agents & Workflows
+* Volume 12 — Docker & Container Engineering
+* Volume 13 — CI/CD & Release Engineering
+* Volume 14 — Cloud Engineering with AWS
+* Volume 15 — Infrastructure as Code with Terraform
+* Volume 16 — Kubernetes & Container Orchestration
+* Volume 17 — DevSecOps & Production Security
+* Volume 18 — Observability, Monitoring & Reliability
+* Volume 19 — AI Infrastructure & LLMOps
+* Volume 20 — Production Engineering, SRE & Scaling
+* Volume 21 — Interview Preparation & Portfolio
+
 
 ---
 

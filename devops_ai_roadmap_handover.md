@@ -231,15 +231,15 @@ Permanent learning repository containing:
 -   Scripts
 -   Engineering notes
 
-Required evidence included:
+Required evidence included (REQUIRED MVP):
 
--   3 debugging reports
--   2 system diagrams
--   3 documentation investigations
--   3 experiments
--   2 minimal reproducible examples
--   2 engineering decision records
--   Personal README
+-   1 troubleshooting report
+-   1 system map
+-   1 documentation investigation
+-   1 technical experiment
+-   1 minimal reproducible example
+-   1 engineering decision record
+-   2 learning-journal entries + Personal README
 
 No LMS.
 
@@ -643,20 +643,17 @@ AI Orchestrator connects:
 Suggested development phases:
 
 1.  Backend foundation
-2.  Authentication
-3.  Conversation system
-4.  LLM integration
-5.  Structured outputs
-6.  Tool calling
-7.  RAG
-8.  Workflows
-9.  Controlled agent
-10. Streaming
-11. Evaluation
-12. Security
-13. Performance/cost optimization
-14. Frontend/UX
-15. Final engineering review
+2.  Document management
+3.  RAG
+4.  Chat
+5.  Prompts
+6.  Tools
+7.  Workflows
+8.  Structured outputs
+9.  Evaluation
+10. Security
+11. Multimodal / UX
+12. Final engineering review
 
 Required experiments:
 
@@ -723,27 +720,9 @@ V11 completion should demonstrate the ability to:
 
 # 18. The Exact Handover Point
 
-When the user finishes V11, the next conversation should begin here:
+Currently on: Phase 1 Repair — Executing Phase 1 (Volumes 01–11) finish line plan by Dec 31, 2026.
 
-## STATUS
-
-V01--V10 completed/covered. V11 completed. V11 integration project
-completed/reviewed.
-
-## NEXT TASK
-
-### FLAGSHIP PROJECT --- DESIGN & MVP
-
-Do NOT start V12 yet.
-
-Do NOT invent another practice project.
-
-Do NOT immediately jump to Docker.
-
-First design and build the initial flagship MVP.
-
-The flagship should become the user's long-term engineering environment
-for V12--V20.
+Next task: Apply Phase 1 repair changes across Volumes 01–11, DEVOPS_AI_MASTER_PLAN.md, and handover documentation.
 
 ------------------------------------------------------------------------
 
@@ -878,3 +857,16 @@ After V11's project is completed, the next milestone is:
 Then:
 
 **V12 --- Docker & Container Engineering**
+
+------------------------------------------------------------------------
+
+# 26. Study Tier Quick Reference (Phase 1)
+
+Phase 1 uses three clear study tiers across Volumes 01–11 to prioritize core engineering skills while preserving total depth:
+
+| Tier | Meaning | Applied To | Action Required |
+|---|---|---|---|
+| **CORE** | Non-negotiable foundation | All core engineering labs across V01–V11 (including V08 §14.6/14.7/16.7, V09 Ch18, V10 ML Bridge & Ch20, V11 Ch24) | Read thoroughly, complete all hands-on labs end-to-end, and build into volume MVPs. |
+| **TEST-OUT** | Diagnostic fast-track | Prerequisite volumes V01–V06 and V08 Ch01–06 | Perform exercises/challenge cold. If passed cleanly, skip text. Study only what you fail. |
+| **SKIM** | High-level conceptual context | Theoretical background chapters (V07 Ch13–15, V09 ML theory/streaming, V10 security/cost, V11 Ch05–06 non-CORE parts) | Read once, write a 1-paragraph Feynman summary, skip heavy hands-on labs. |
+
