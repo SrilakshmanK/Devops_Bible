@@ -60,6 +60,7 @@ The goal is to understand the **reasoning behind the architecture**.
 ---
 
 # Chapter 1 — What Is a Computer?
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -174,6 +175,7 @@ Represent them in binary/hexadecimal where appropriate and verify your calculati
 ---
 
 # Chapter 2 — Computer Hardware
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -271,6 +273,7 @@ Explain:
 ---
 
 # Chapter 3 — CPU Architecture & Instruction Execution
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -369,6 +372,7 @@ Explain:
 ---
 
 # Chapter 4 — Programs, Compilation & Execution
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 This chapter is added because understanding **how source code becomes a running process** is essential before studying operating systems deeply.
 
@@ -465,6 +469,7 @@ Explain why opening the same application twice can create multiple processes or 
 ---
 
 # Chapter 5 — Memory Architecture
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -583,6 +588,7 @@ Explain:
 ---
 
 # Chapter 6 — Storage & I/O
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -672,6 +678,7 @@ with a practical example of each.
 ---
 
 # Chapter 7 — Boot Process
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -737,6 +744,7 @@ Explain what would happen if the bootloader worked but the operating system kern
 ---
 
 # Chapter 8 — Operating System Fundamentals
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -838,6 +846,7 @@ Application
 ---
 
 # Chapter 9 — Processes, Threads & IPC
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -924,6 +933,7 @@ Explain why a process crashing is different from one thread crashing inside a mu
 ---
 
 # Chapter 10 — Filesystems
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -1015,6 +1025,7 @@ Filesystem
 ---
 
 # Chapter 11 — Virtualization Fundamentals
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -1098,6 +1109,7 @@ The goal is simply to understand **why containers are different from virtual mac
 ---
 
 # Chapter 12 — Servers & Compute Infrastructure
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -1188,6 +1200,7 @@ and explain what workload each resource affects.
 ---
 
 # Chapter 13 — Computer Architecture in Modern Infrastructure
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 This chapter connects the fundamentals to the roadmap ahead.
 
@@ -1357,6 +1370,22 @@ This is the **single main mini-project for Volume 02**.
 We are combining the original "My Computer Blueprint" and "Build a Virtual Lab" into one meaningful project.
 
 The goal is to create a technical dossier of your physical computer and then build a small virtual environment on top of it.
+
+## REQUIRED MVP
+
+* Record the physical CPU model, core count, RAM, storage, operating system, and boot mode.
+* Draw a high-level diagram from physical machine through firmware, kernel, OS, and applications.
+* Install one Ubuntu virtual machine and record its vCPU, RAM, virtual disk, and network mode.
+* Compare physical and virtual CPU, memory, storage, and network resources.
+* Run and monitor one CPU workload and one memory workload; write a short report explaining the boot path and one observed resource limit.
+
+## STRETCH
+
+* GPU, bus, cache, instruction-cycle, paging, and filesystem internals.
+* Detailed BIOS/UEFI, POST, bootloader, and service-startup tracing.
+* All workloads and every section in the full 12-part technical report below.
+
+The full project detail below remains available as stretch practice. The REQUIRED MVP is enough to test out of the chapters for this phase.
 
 ---
 

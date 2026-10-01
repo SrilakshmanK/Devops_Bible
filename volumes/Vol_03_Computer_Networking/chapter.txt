@@ -718,6 +718,7 @@ into a browser.
 ---
 
 # Chapter 7 — The Complete Website Journey
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V08 Chapter 03 for the main request-journey treatment.
 
 This chapter connects everything you've learned so far.
 

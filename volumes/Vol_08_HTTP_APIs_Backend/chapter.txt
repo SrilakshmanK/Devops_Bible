@@ -2476,6 +2476,7 @@ Your API should have:
 ---
 
 # Chapter 26 — V08 Integration Project & Engineering Review
+Tier: CORE
 
 # 🚀 Main Practical Project
 
@@ -2498,6 +2499,23 @@ Scale           → V20
 ```
 
 The actual flagship project remains a separate milestone after V11.
+
+## Project Scope
+
+Build this project by extending the V07 Python automation codebase. Continue the previous volume's repository instead of creating a new repo.
+
+### REQUIRED MVP
+
+* Users, projects, and tasks with registration, login, and ownership checks.
+* FastAPI routes with Pydantic validation and consistent errors.
+* PostgreSQL persistence with one migration and a transaction on a multi-step write.
+* CRUD for projects and tasks, plus a small pytest suite.
+
+### STRETCH
+
+* Comments, advanced filtering/sorting/pagination, extra auth flows, and additional production hardening.
+
+The detailed requirements below explain these features. The labels above define the minimum project acceptance scope.
 
 ---
 

@@ -31,6 +31,7 @@ By the end of this volume, you should be able to:
 ---
 
 # Chapter 1 — What Engineering Actually Means
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -129,6 +130,7 @@ Draw the system on paper.
 ---
 
 # Chapter 2 — First-Principles Thinking
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -186,6 +188,7 @@ Explain:
 ---
 
 # Chapter 3 — Systems Thinking
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -262,6 +265,7 @@ List every component involved.
 ---
 
 # Chapter 4 — Problem Solving & Decomposition
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -317,6 +321,7 @@ Reconstruct the problem from scratch using the framework above.
 ---
 
 # Chapter 5 — Debugging Fundamentals
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -391,6 +396,7 @@ Prevention
 ---
 
 # Chapter 6 — Documentation & Technical Research
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -469,6 +475,7 @@ Write:
 ---
 
 # Chapter 7 — Asking Technical Questions
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -543,6 +550,7 @@ Specific question
 ---
 
 # Chapter 8 — Scientific Method for Engineering
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -614,6 +622,7 @@ Conclusion
 ---
 
 # Chapter 9 — Engineering Workflow & Personal Knowledge System
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -670,6 +679,7 @@ This repository will continue growing throughout the roadmap.
 ---
 
 # Chapter 10 — Engineering Discipline & Learning Strategy
+Tier: TEST-OUT — Complete the volume challenge and REQUIRED MVP first; study only what you fail.
 
 ## Concepts
 
@@ -814,6 +824,23 @@ engineering-lab/
 │
 └── scripts/
 ```
+
+## REQUIRED MVP
+
+Create one usable artifact for every project category:
+
+* A README and two learning-journal entries.
+* One complete troubleshooting report.
+* One system map.
+* One documentation investigation.
+* One technical experiment with a hypothesis, measurement, and conclusion.
+* One minimal reproducible example.
+* One engineering decision record.
+* Complete the volume challenge and explain why the solution works.
+
+## STRETCH
+
+The full counts and additional detail in the existing requirements below are stretch targets. The REQUIRED MVP above is sufficient for the Phase 1 calendar.
 
 ## Requirements
 

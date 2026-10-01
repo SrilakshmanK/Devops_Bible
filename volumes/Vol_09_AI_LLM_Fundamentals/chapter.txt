@@ -264,6 +264,7 @@ For each, record:
 ---
 
 # Chapter 02 — Machine Learning From First Principles
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs.
 
 You need enough ML fundamentals to understand what happens inside modern AI systems.
 
@@ -380,6 +381,7 @@ Your goal is understanding, not performance.
 ---
 
 # Chapter 03 — Data, Features, Labels & Datasets
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs.
 
 AI systems are fundamentally dependent on data.
 
@@ -469,6 +471,7 @@ Study:
 ---
 
 # Chapter 04 — Training, Validation, Testing & Generalization
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapter 18 for the main AI-application evaluation treatment.
 
 ## 4.1 Training
 
@@ -549,6 +552,7 @@ Observe training and validation performance.
 ---
 
 # Chapter 05 — Neural Networks From First Principles
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs.
 
 Now move toward deep learning.
 
@@ -654,6 +658,7 @@ A subset of training examples processed together.
 ---
 
 # Chapter 06 — Deep Learning & Representation Learning
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs.
 
 ## 6.1 Why Deep Networks?
 
@@ -903,6 +908,7 @@ Observe how tokenization differs.
 ---
 
 # Chapter 09 — Embeddings & Semantic Representation
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V10 Chapter 02 for the main treatment.
 
 This chapter introduces the idea needed for V10.
 
@@ -990,6 +996,7 @@ Do not assume the numbers are inherently meaningful without comparing them using
 ---
 
 # Chapter 10 — The Transformer Architecture
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs.
 
 This is the heart of modern LLMs.
 
@@ -1070,6 +1077,7 @@ Understand that GPT-style LLMs are primarily decoder-only transformer architectu
 ---
 
 # Chapter 11 — Attention Mechanism Deep Dive
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs.
 
 Do not skip this chapter.
 
@@ -1163,6 +1171,7 @@ weighted values
 ---
 
 # Chapter 12 — How Large Language Models Are Trained
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs.
 
 ## 12.1 Pretraining
 
@@ -1236,6 +1245,7 @@ Training metadata
 ---
 
 # Chapter 13 — Pretraining, Fine-Tuning & Alignment
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs.
 
 ## 13.1 Pretraining
 
@@ -1630,6 +1640,7 @@ context overflow
 ---
 
 # Chapter 18 — Structured Outputs, Tool Calling & Function Calling
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapters 05–06 for the main treatment.
 
 This chapter moves beyond:
 
@@ -1743,6 +1754,7 @@ Validate every tool argument.
 ---
 
 # Chapter 19 — Streaming & Real-Time AI Responses
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapter 14 for the main treatment.
 
 ## 19.1 Normal Response
 
@@ -1893,6 +1905,7 @@ The model's linguistic certainty is not automatically a calibrated probability o
 ---
 
 # Chapter 21 — AI Safety, Security & Privacy
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapter 19 for the main treatment.
 
 ## 21.1 Prompt Injection
 
@@ -1959,6 +1972,7 @@ Action
 ---
 
 # Chapter 22 — Model Selection, Cost & Performance
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapter 21 for the main treatment.
 
 AI engineering is not:
 
@@ -2053,6 +2067,7 @@ Record measurements.
 ---
 
 # Chapter 23 — Evaluating AI Systems
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapter 18 for the main treatment.
 
 This is where AI engineering becomes engineering rather than demo building.
 
@@ -2149,6 +2164,7 @@ Categorize failures.
 ---
 
 # Chapter 24 — AI Application Architecture
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapters 02 and 23 for the main treatment.
 
 Now combine V08 + V09.
 
@@ -2235,6 +2251,7 @@ Users
 ---
 
 # Chapter 25 — Local Models & Open-Source LLMs
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. Local inference practice is scoped in the V09/V10 AI-app tooling bridge; serving and GPU operations return in V19.
 
 You should understand the alternative to hosted APIs.
 
@@ -2339,6 +2356,7 @@ If hardware is insufficient, use a hosted model or study the architecture withou
 ---
 
 # Chapter 26 — V09 Integration Project & Engineering Review
+Tier: CORE
 
 # 🚀 Main Project
 
@@ -2362,6 +2380,25 @@ V11 AI Application Engineering
 ```
 
 ---
+
+## Project Scope
+
+Build this project in the V08 backend codebase. Extend the previous volume's repository instead of creating a new repo.
+
+### REQUIRED MVP
+
+* FastAPI authentication and conversation/message persistence.
+* One provider adapter and a dedicated prompt layer.
+* One validated structured-output endpoint.
+* The calculator and current-time tools, with validated arguments.
+* At least 10 evaluation prompts and a basic security review.
+
+### STRETCH
+
+* Streaming, 25 or more evaluation prompts, and all six experiments.
+* Additional providers, model comparisons, and production-scale behavior.
+
+The detailed requirements below explain these features. The labels above define the minimum project acceptance scope.
 
 # Architecture
 

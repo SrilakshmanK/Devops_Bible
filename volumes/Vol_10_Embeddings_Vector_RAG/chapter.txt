@@ -1787,6 +1787,7 @@ but generated an unsupported answer.
 ---
 
 # Chapter 20 — RAG Evaluation
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapter 18 for the main AI-application evaluation treatment; retain the retrieval-specific metrics as context.
 
 This is the most important engineering chapter after retrieval fundamentals.
 
@@ -1981,6 +1982,7 @@ This is conceptual preparation, not a requirement to build a graph database yet.
 ---
 
 # Chapter 22 — RAG Security & Multi-Tenancy
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapter 19 for the main AI-application security treatment; retain retrieval authorization as context.
 
 This is critical for professional AI engineering.
 
@@ -2062,6 +2064,7 @@ while respecting privacy requirements.
 ---
 
 # Chapter 23 — RAG Performance, Cost & Scaling
+Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapter 21 for the main cost and latency treatment; retain the RAG-specific cost breakdown as context.
 
 ---
 
@@ -2397,6 +2400,7 @@ citation failures
 ---
 
 # Chapter 26 — V10 Integration Project & Engineering Review
+Tier: CORE
 
 # 🚀 Main Project
 
@@ -2407,6 +2411,23 @@ This is the major practical project of V10.
 It is **not yet the flagship project**.
 
 It is a reusable retrieval platform that will give you the foundation required for V11 and eventually the flagship.
+
+## Project Scope
+
+Build this project by extending the V09 AI Assistant Backend codebase. Continue the previous volume's repository instead of creating a new repo.
+
+### REQUIRED MVP
+
+* Upload and normalize TXT or Markdown documents.
+* Store chunks and embeddings in PostgreSQL with pgvector.
+* Answer questions with vector retrieval and source citations.
+* Record at least 10 retrieval questions and review the misses.
+
+### STRETCH
+
+* PDF parsing, keyword and hybrid retrieval, reranking, query transformation, advanced multi-tenancy, and scaling.
+
+The detailed requirements below explain these features. The labels above define the minimum project acceptance scope.
 
 ---
 

@@ -2322,6 +2322,7 @@ Every AI system should document:
 ---
 
 # Chapter 26 — V11 Integration Project & Final Pre-Flagship Review
+Tier: CORE
 
 This is the final project before the flagship milestone.
 
@@ -2356,6 +2357,45 @@ This is the **largest learning project before the flagship**.
 It is still not the flagship.
 
 Its purpose is to prove that you understand the components that will later become part of the flagship architecture.
+
+## Project Scope
+
+Build this project by extending the V10 Production Knowledge Base RAG System codebase. Continue the previous volume's repository instead of creating a new repo.
+
+### REQUIRED MVP
+
+Complete these phases:
+
+* Phase 1 — Backend Foundation
+* Phase 2 — Document Management
+* Phase 3 — RAG
+* Phase 4 — Chat
+* Phase 6 — Tools
+* Phase 8 — Structured Outputs
+* Phase 9 — Evaluation
+* Phase 10 — Security
+
+Run these experiments:
+
+* Experiment 1 — RAG vs No RAG
+* Experiment 3 — Tool vs LLM
+* Experiment 7 — Failure Injection
+
+Complete these security tests:
+
+* Prompt injection
+* Unauthorized document retrieval
+* Cross-user conversation access
+* Tool argument manipulation
+* Sensitive information leakage
+
+### STRETCH
+
+* Phases 5, 7, 11, and 12.
+* Experiments 2, 4, 5, and 6.
+* Indirect prompt injection, privilege escalation, excessive tool calls, context overflow, and malicious document upload tests.
+
+The detailed project requirements below retain the complete learning path. The subset above defines the required pre-flagship MVP.
 
 ---
 
