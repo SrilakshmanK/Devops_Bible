@@ -2420,7 +2420,7 @@ report.csv
 ---
 
 # Chapter 13 — Concurrency & Async Programming
-Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V08 Chapter 16 for the main API background-work treatment.
+Tier: CORE
 
 ## Objective
 
@@ -2628,7 +2628,7 @@ Explain why concurrency helps.
 ---
 
 # Chapter 14 — Logging, CLI & Configuration
-Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V08 Chapter 22 for the main service logging and observability treatment.
+Tier: CORE
 
 ## Objective
 
@@ -2775,7 +2775,7 @@ configuration
 ---
 
 # Chapter 15 — Testing & Debugging
-Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V08 Chapter 17 for the main API testing treatment.
+Tier: CORE
 
 ## Objective
 

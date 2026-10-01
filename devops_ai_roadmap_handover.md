@@ -866,7 +866,8 @@ Phase 1 uses three clear study tiers across Volumes 01–11 to prioritize core e
 
 | Tier | Meaning | Applied To | Action Required |
 |---|---|---|---|
-| **CORE** | Non-negotiable foundation | All core engineering labs across V01–V11 (including V08 §14.6/14.7/16.7, V09 Ch18, V10 ML Bridge & Ch20, V11 Ch24) | Read thoroughly, complete all hands-on labs end-to-end, and build into volume MVPs. |
+| **CORE** | Non-negotiable foundation | All core engineering labs across V01–V11 (including V07 Ch13–15, V08 §14.6/14.7/16.7, V09 Ch18/21/23, V10 ML Bridge & Ch20, V11 Ch24) | Read thoroughly, complete all hands-on labs end-to-end, and build into volume MVPs. |
 | **TEST-OUT** | Diagnostic fast-track | Prerequisite volumes V01–V06 and V08 Ch01–06 | Perform exercises/challenge cold. If passed cleanly, skip text. Study only what you fail. |
-| **SKIM** | High-level conceptual context | Theoretical background chapters (V07 Ch13–15, V09 ML theory/streaming, V10 security/cost, V11 Ch05–06 non-CORE parts) | Read once, write a 1-paragraph Feynman summary, skip heavy hands-on labs. |
+| **SKIM** | High-level conceptual context | Theoretical background chapters (V09 ML theory/streaming, V10 security/cost, V11 Ch05–06 non-CORE parts) | Read once, write a 1-paragraph Feynman summary, skip heavy hands-on labs. |
+
 

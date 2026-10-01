@@ -809,7 +809,7 @@ Real-world work experience
 # Phase 1 Execution Calendar (Volumes 01–11)
 
 **Target Completion Date:** December 31, 2026 (91 days total window, starting Oct 1, 2026).
-**Pacing Target:** 20 hours/week across 11.5 active study weeks.
+**Pacing Target:** 20 hours/week across 12 active study weeks.
 
 ### Volume Cumulative Hour Schedule
 
@@ -821,19 +821,19 @@ Real-world work experience
 | **V04** | Linux Administration & Systems | 24.0 h | 54.5 h | Week 3 | Oct 20, 2026 |
 | **V05** | Bash Scripting & Automation | 21.0 h | 75.5 h | Week 4 | Oct 27, 2026 |
 | **V06** | Git, GitHub & Collaboration | 23.0 h | 98.5 h | Week 5 | Nov 4, 2026 |
-| **V07** | Python Engineering & Async | 26.0 h | 124.5 h | Week 7 | Nov 13, 2026 |
-| **V08** | HTTP, REST APIs & Backend | 30.0 h | 154.5 h | Week 8 | Nov 24, 2026 |
-| **V09** | AI & LLM Fundamentals | 19.0 h | 173.5 h | Week 9 | Nov 30, 2026 |
-| **V10** | Embeddings, Vector Search & RAG | 30.0 h | 203.5 h | Week 11 | Dec 11, 2026 |
-| **V11** | AI Application Engineering | 26.0 h | 229.5 h | Week 12 | Dec 20, 2026 |
+| **V07** | Python Engineering & Async | 32.0 h | 130.5 h | Week 7 | Nov 16, 2026 |
+| **V08** | HTTP, REST APIs & Backend | 30.0 h | 160.5 h | Week 8 | Nov 26, 2026 |
+| **V09** | AI & LLM Fundamentals | 23.0 h | 183.5 h | Week 10 | Dec 4, 2026 |
+| **V10** | Embeddings, Vector Search & RAG | 30.0 h | 213.5 h | Week 11 | Dec 15, 2026 |
+| **V11** | AI Application Engineering | 26.0 h | 239.5 h | Week 12 | Dec 24, 2026 |
 
-*Buffer remaining before Dec 31 deadline: 11 days.*
+*Buffer remaining before Dec 31 deadline: 7 days.*
 
 ### Re-forecast Checkpoints & Drift Rules
 
 * **Checkpoint 1 (End of W3 / Oct 21)**: Complete V04. Review cumulative hours spent vs 54.5 h target.
-* **Checkpoint 2 (End of W7 / Nov 13)**: Complete V07. Review cumulative hours spent vs 124.5 h target.
-* **Checkpoint 3 (End of W9 / Nov 30)**: Complete V09. Review cumulative hours spent vs 173.5 h target.
+* **Checkpoint 2 (End of W7 / Nov 16)**: Complete V07. Review cumulative hours spent vs 130.5 h target.
+* **Checkpoint 3 (End of W10 / Dec 4)**: Complete V09. Review cumulative hours spent vs 183.5 h target.
 
 > **Drift Management Rules:**
 > * **>15% behind schedule** at any checkpoint: Trigger early warning; trim remaining SKIM chapter depth and enforce cold TEST-OUT strategy.

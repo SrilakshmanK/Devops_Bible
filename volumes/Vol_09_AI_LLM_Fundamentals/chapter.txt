@@ -1913,7 +1913,7 @@ The model's linguistic certainty is not automatically a calibrated probability o
 ---
 
 # Chapter 21 — AI Safety, Security & Privacy
-Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapter 19 for the main treatment.
+Tier: CORE
 
 ## 21.1 Prompt Injection
 
@@ -2075,7 +2075,7 @@ Record measurements.
 ---
 
 # Chapter 23 — Evaluating AI Systems
-Tier: SKIM — Read once, write a 1-paragraph Feynman summary, skip labs. See V11 Chapter 18 for the main treatment.
+Tier: CORE
 
 This is where AI engineering becomes engineering rather than demo building.
 
