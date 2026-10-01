@@ -329,7 +329,7 @@ Focus:
 * Dockerfiles
 * Layers
 * Registries
-* Vol.umes
+* Volumes
 * Networks
 * Multi-stage builds
 * Docker Compose
@@ -680,6 +680,18 @@ This is the final consolidation volume.
 * Communication
 * STAR framework
 
+# Roadmap Phase Mapping
+
+The 21 volumes map across five core curriculum phases:
+
+| Curriculum Phase | Headings & Scope | Volumes Included |
+|---|---|---|
+| **Phase 1** | Engineering & Infrastructure Foundations | Volume 01 – Volume 06 |
+| **Phase 2** | Programming & Backend Foundations | Volume 07 – Volume 08 |
+| **Phase 3** | AI / LLM Application Engineering | Volume 09 – Volume 11 |
+| **Phase 4** | Production & DevOps | Volume 12 – Volume 20 |
+| **Phase 5** | Interview Preparation | Volume 21 |
+
 ---
 
 # MASTER FLOW
@@ -791,6 +803,40 @@ Real-world work experience
 18. The roadmap should prioritize understanding over technology collection.
 19. The roadmap should prioritize building over passive course consumption.
 20. If the roadmap needs to change, update this master structure first so it remains the source of truth.
+
+# Phase 1 Execution Calendar (Volumes 01–11)
+
+**Target Completion Date:** December 31, 2026 (91 days total window, starting Oct 1, 2026).
+**Pacing Target:** 20 hours/week across 11.5 active study weeks.
+
+### Volume Cumulative Hour Schedule
+
+| Volume | Title | Mid-point Estimate | Cumulative Hours | Target Finish Week | Target Finish Date |
+|---|---|---|---|---|---|
+| **V01** | Engineering Foundations | 6.5 h | 6.5 h | Week 1 | Oct 3, 2026 |
+| **V02** | Computer Architecture & OS | 10.0 h | 16.5 h | Week 1 | Oct 6, 2026 |
+| **V03** | Computer Networking | 14.0 h | 30.5 h | Week 2 | Oct 11, 2026 |
+| **V04** | Linux Administration & Systems | 24.0 h | 54.5 h | Week 3 | Oct 20, 2026 |
+| **V05** | Bash Scripting & Automation | 21.0 h | 75.5 h | Week 4 | Oct 27, 2026 |
+| **V06** | Git, GitHub & Collaboration | 23.0 h | 98.5 h | Week 5 | Nov 4, 2026 |
+| **V07** | Python Engineering & Async | 26.0 h | 124.5 h | Week 7 | Nov 13, 2026 |
+| **V08** | HTTP, REST APIs & Backend | 30.0 h | 154.5 h | Week 8 | Nov 24, 2026 |
+| **V09** | AI & LLM Fundamentals | 19.0 h | 173.5 h | Week 9 | Nov 30, 2026 |
+| **V10** | Embeddings, Vector Search & RAG | 30.0 h | 203.5 h | Week 11 | Dec 11, 2026 |
+| **V11** | AI Application Engineering | 26.0 h | 229.5 h | Week 12 | Dec 20, 2026 |
+
+*Buffer remaining before Dec 31 deadline: 11 days.*
+
+### Re-forecast Checkpoints & Drift Rules
+
+* **Checkpoint 1 (End of W3 / Oct 21)**: Complete V04. Review cumulative hours spent vs 54.5 h target.
+* **Checkpoint 2 (End of W7 / Nov 13)**: Complete V07. Review cumulative hours spent vs 124.5 h target.
+* **Checkpoint 3 (End of W9 / Nov 30)**: Complete V09. Review cumulative hours spent vs 173.5 h target.
+
+> **Drift Management Rules:**
+> * **>15% behind schedule** at any checkpoint: Trigger early warning; trim remaining SKIM chapter depth and enforce cold TEST-OUT strategy.
+> * **>30% behind schedule** at any checkpoint: Reschedule Volume 11 to January 2027 to protect depth in Volumes 08–10.
+
 # Recommended Books
 
 * The Pragmatic Programmer → engineering mindset

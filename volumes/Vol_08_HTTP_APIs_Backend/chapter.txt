@@ -1503,6 +1503,137 @@ PostgreSQL
 
 ---
 
+## 14.6 Docker Lite (Compose) Prerequisite
+
+Before containerizing full applications in V12, use Docker Compose as a local service manager for backend infrastructure (PostgreSQL and Redis).
+
+### Ubuntu Installation (Docker Engine + Compose Plugin)
+
+```bash
+# Remove old versions if present
+sudo apt-get remove -y docker docker-engine docker.io containerd runc
+
+# Install prerequisites and official Docker GPG key
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add Docker repository
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Install Docker Engine and Compose plugin
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Verify installation
+docker compose version
+```
+
+### Local Infrastructure Compose File (`docker-compose.yml`)
+
+Run the database and Redis in containers while running your FastAPI application on the host machine via `uvicorn main:app --reload`.
+
+```yaml
+version: '3.8'
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: devops_db
+    environment:
+      POSTGRES_USER: devuser
+      POSTGRES_PASSWORD: devpassword
+      POSTGRES_DB: devops_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U devuser -d devops_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: devops_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
+```
+
+Launch local infrastructure with:
+```bash
+docker compose up -d
+```
+
+---
+
+## 14.7 Database Minimum & Vector Storage Setup
+
+### Dependency Installation
+
+Install SQLAlchemy 2.0 and PostgreSQL drivers:
+```bash
+pip install "sqlalchemy>=2.0" "psycopg2-binary" "alembic" "pgvector"
+```
+
+### SQLAlchemy 2.0 Declarative Models (`models.py`)
+
+Always use SQLAlchemy 2.0 modern type mapping (`Mapped` and `mapped_column`):
+
+```python
+from datetime import datetime
+from typing import Optional
+from sqlalchemy import String, DateTime, func
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+
+class Base(DeclarativeBase):
+    pass
+
+class User(Base):
+    __tablename__ = "users"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    email: Mapped[str] = mapped_column(String(255), unique=True, index=True)
+    hashed_password: Mapped[str] = mapped_column(String(255))
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+
+class Document(Base):
+    __tablename__ = "documents"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    title: Mapped[str] = mapped_column(String(255))
+    content: Mapped[str] = mapped_column(String)
+    # Note: pgvector embedding column definition.
+    # The vector dimension MUST match your chosen embedding model
+    # (e.g., 384 for sentence-transformers/all-MiniLM-L6-v2, 1536 for OpenAI text-embedding-3-small).
+```
+
+### Alembic Migration Setup (`alembic.ini`)
+
+Configure database URL in `alembic.ini`:
+```ini
+[alembic]
+script_location = alembic
+sqlalchemy.url = postgresql://devuser:devpassword@localhost:5432/devops_db
+```
+
+---
+
+
 # Chapter 15 — Pagination, Filtering, Sorting & Searching
 
 Real APIs rarely return:
@@ -1671,9 +1802,91 @@ Queue
 Worker
 ```
 
-Later this becomes important for production architecture.
 
 ---
+
+## 16.7 Background Worker Integration (arq + Redis)
+
+Use `arq` for asynchronous task queues backed by Redis.
+
+### Worker & Retry Definition (`worker.py`)
+
+`arq` retries jobs by explicitly raising `arq.Retry`. Configure maximum attempts with `max_tries = 3`.
+
+```python
+import asyncio
+from arq import Retry
+from arq.connections import RedisSettings
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+# Database session setup (synchronous SQLAlchemy 2.0 matching §14.7)
+DATABASE_URL = "postgresql://devuser:devpassword@localhost:5432/devops_db"
+engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+async def on_startup(ctx):
+    # Initialize DB session factory in worker context
+    ctx["db_session_factory"] = SessionLocal
+    print("arq worker started and DB session factory initialized.")
+
+async def on_shutdown(ctx):
+    engine.dispose()
+    print("arq worker shut down.")
+
+async def process_document_job(ctx, doc_id: int):
+    """Processes a background document task. Retries up to 3 times on transient failure."""
+    db_factory = ctx["db_session_factory"]
+    with db_factory() as db:
+        try:
+            # Perform background work using SQLAlchemy session
+            print(f"Processing document {doc_id} in background worker...")
+            # Simulate work / potential transient error
+            # If a transient error occurs, raise Retry(defer=5) for 5s backoff
+        except Exception as e:
+            print(f"Transient error processing doc {doc_id}: {e}. Retrying in 5 seconds...")
+            raise Retry(defer=5)
+
+class WorkerSettings:
+    functions = [process_document_job]
+    on_startup = on_startup
+    on_shutdown = on_shutdown
+    max_tries = 3
+    redis_settings = RedisSettings(host="localhost", port=6379)
+```
+
+### FastAPI Lifespan Redis Pool Integration (`main.py`)
+
+Create the Redis pool ONCE at application startup during FastAPI lifespan, not per request:
+
+```python
+from contextlib import asynccontextmanager
+from fastapi import FastAPI, Depends, HTTPException
+from arq import create_pool
+from arq.connections import RedisSettings, ArqRedis
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Create Redis pool once at app startup
+    app.state.redis = await create_pool(RedisSettings(host="localhost", port=6379))
+    yield
+    # Close Redis pool at app shutdown
+    await app.state.redis.close()
+
+app = FastAPI(lifespan=lifespan)
+
+async def get_redis_pool() -> ArqRedis:
+    return app.state.redis
+
+@app.post("/enqueue-document/{doc_id}")
+async def enqueue_document(doc_id: int, redis: ArqRedis = Depends(get_redis_pool)):
+    job = await redis.enqueue_job("process_document_job", doc_id)
+    return {"status": "enqueued", "job_id": job.job_id}
+```
+
+---
+
+
 
 # Chapter 17 — API Testing & Quality Engineering
 
@@ -2516,6 +2729,7 @@ Build this project by extending the V07 Python automation codebase. Continue the
 * FastAPI routes with Pydantic validation and consistent errors.
 * PostgreSQL persistence with one migration and a transaction on a multi-step write.
 * CRUD for projects and tasks, plus a small pytest suite.
+* Cleanly layered API codebase: FastAPI + Postgres (SQLAlchemy 2.0) + Redis + arq worker in a single, well-structured repository.
 
 ### STRETCH
 

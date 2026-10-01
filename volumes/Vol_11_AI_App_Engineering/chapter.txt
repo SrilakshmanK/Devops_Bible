@@ -2206,6 +2206,170 @@ Understand risks:
 
 ---
 
+## 24.6 LangGraph State Machine Lab
+
+Build an agentic state machine using `langgraph` with explicit step and tool call tracking, safe AST-based calculation tools, and deterministic completion routing.
+
+> [!NOTE]
+> Install dependencies: `pip install langgraph "mcp<2"`
+
+```python
+import ast
+import operator
+from typing import TypedDict, List, Literal
+from langgraph.graph import StateGraph, START, END
+
+# --- AST Arithmetic Calculator Tool (Fix 3) ---
+ALLOWED_OPERATORS = {
+    ast.Add: operator.add,
+    ast.Sub: operator.sub,
+    ast.Mult: operator.mul,
+    ast.Div: operator.truediv,
+    ast.Pow: operator.pow,
+    ast.USub: operator.neg,
+    ast.UAdd: operator.pos,
+}
+
+def safe_eval_ast(expr: str) -> float:
+    """Evaluates arithmetic expressions safely using AST parsing (numbers and + - * / ** and parentheses)."""
+    try:
+        tree = ast.parse(expr, mode="eval")
+    except Exception as e:
+        raise ValueError(f"Invalid arithmetic expression: {e}")
+
+    def _eval(node):
+        if isinstance(node, ast.Expression):
+            return _eval(node.body)
+        elif isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
+            return node.value
+        elif isinstance(node, ast.BinOp):
+            left = _eval(node.left)
+            right = _eval(node.right)
+            op_type = type(node.op)
+            if op_type in ALLOWED_OPERATORS:
+                return ALLOWED_OPERATORS[op_type](left, right)
+            raise ValueError(f"Unsupported binary operator: {op_type.__name__}")
+        elif isinstance(node, ast.UnaryOp):
+            operand = _eval(node.operand)
+            op_type = type(node.op)
+            if op_type in ALLOWED_OPERATORS:
+                return ALLOWED_OPERATORS[op_type](operand)
+            raise ValueError(f"Unsupported unary operator: {op_type.__name__}")
+        else:
+            raise ValueError(f"Disallowed node type: {type(node).__name__}")
+
+    return _eval(tree)
+
+
+# --- State Definition (Fix 2) ---
+class AgentState(TypedDict):
+    messages: List[str]
+    steps_used: int
+    tool_calls_used: int
+
+
+# --- Node Definitions ---
+def agent_node(state: AgentState) -> dict:
+    """Agent decision node: increments steps_used and outputs tool call or final answer."""
+    last_msg = state["messages"][-1].lower()
+    new_steps = state.get("steps_used", 0) + 1
+
+    if "calculate" in last_msg and state.get("tool_calls_used", 0) == 0:
+        # Request tool execution
+        return {
+            "messages": state["messages"] + ["tool_call: calc (3 + 4) * 2 ** 3"],
+            "steps_used": new_steps
+        }
+    else:
+        # Final answer generated without tool call
+        return {
+            "messages": state["messages"] + ["final answer: The calculation result is 56.0"],
+            "steps_used": new_steps
+        }
+
+def tool_node(state: AgentState) -> dict:
+    """Tool execution node: parses tool request, invokes safe_eval_ast, increments tool_calls_used."""
+    last_msg = state["messages"][-1]
+    expr = last_msg.split("tool_call: calc ")[1]
+    result = safe_eval_ast(expr)
+
+    new_tools = state.get("tool_calls_used", 0) + 1
+    return {
+        "messages": state["messages"] + [f"tool_result: {result}"],
+        "tool_calls_used": new_tools
+    }
+
+def respond_node(state: AgentState) -> dict:
+    """Terminal node: formats final completion message."""
+    return {"messages": state["messages"] + ["Execution complete."]}
+
+def router(state: AgentState) -> Literal["tool", "respond"]:
+    """Conditional router: routes to 'tool' if model requests tool, or 'respond' on final answer."""
+    last_msg = state["messages"][-1]
+    if "tool_call:" in last_msg:
+        return "tool"
+    return "respond"
+
+
+# --- Graph Construction ---
+builder = StateGraph(AgentState)
+builder.add_node("agent", agent_node)
+builder.add_node("tool", tool_node)
+builder.add_node("respond", respond_node)
+
+builder.add_edge(START, "agent")
+builder.add_conditional_edges("agent", router, {"tool": "tool", "respond": "respond"})
+builder.add_edge("tool", "agent")
+builder.add_edge("respond", END)
+
+graph = builder.compile()
+
+# --- Execution Example ---
+if __name__ == "__main__":
+    initial_state = {"messages": ["Calculate (3 + 4) * 2 ** 3"], "steps_used": 0, "tool_calls_used": 0}
+    final_output = graph.invoke(initial_state)
+
+    print("LangGraph execution completed cleanly:")
+    for msg in final_output["messages"]:
+        print(f"  - {msg}")
+    print(f"Total steps: {final_output['steps_used']}, Total tool calls: {final_output['tool_calls_used']}")
+```
+
+---
+
+## 24.7 Model Context Protocol (MCP) Integration Lab
+
+Expose custom backend tools and resources via standard MCP protocol using `FastMCP`.
+
+> [!IMPORTANT]
+> Pin `mcp<2` in your `requirements.txt` to ensure compatibility with `FastMCP`.
+
+```python
+from mcp.server.fastmcp import FastMCP
+
+# Initialize MCP server
+mcp = FastMCP("DevOps Assistant Tools")
+
+@mcp.tool()
+def evaluate_math(expression: str) -> str:
+    """Safely evaluates an arithmetic math expression."""
+    try:
+        val = safe_eval_ast(expression)
+        return f"Result: {val}"
+    except Exception as e:
+        return f"Error: {e}"
+
+@mcp.resource("system://status")
+def get_system_status() -> str:
+    """Returns local system operational status."""
+    return "All services online: Postgres (pgvector), Redis (arq worker), FastAPI."
+
+if __name__ == "__main__":
+    mcp.run()
+```
+
+---
+
 # Chapter 25 — Professional AI Engineering Workflow
 
 Now turn AI development into an engineering discipline.
@@ -2376,6 +2540,7 @@ Complete these phases:
 * Phase 8 — Structured Outputs
 * Phase 9 — Evaluation
 * Phase 10 — Security
+* Autonomous agent pipeline built with LangGraph and MCP server integration.
 
 Run these experiments:
 

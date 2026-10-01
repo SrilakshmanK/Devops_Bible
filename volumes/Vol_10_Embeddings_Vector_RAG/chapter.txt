@@ -38,6 +38,9 @@ The goal is not simply:
 
 The goal is to understand **why retrieval works, when it fails, how to measure it, and how to engineer a reliable retrieval system.**
 
+> [!IMPORTANT]
+> **Prerequisites**: This volume builds directly on the Docker Lite environment (PostgreSQL + pgvector + Redis), SQLAlchemy 2.0 vector database schema, and arq background worker pattern established in V08 §14.6, §14.7, and §16.7. Ensure these backend components are functional before proceeding with vector indexing.
+
 ---
 
 # 🧠 Core Mental Model
@@ -138,6 +141,90 @@ The most important principle:
 ## Chapter 25 — Production RAG Engineering
 
 ## Chapter 26 — V10 Integration Project & Engineering Review
+
+---
+
+# 🛠️ ML Tooling Bridge — Practical Warm-up
+
+Tier: CORE
+
+Before engineering full retrieval pipelines, master the four fundamental Python libraries required for data manipulation, vector math, retrieval evaluation, and local model execution.
+
+### MT.1 Vector Math with NumPy
+
+NumPy is the core array-processing library used for computing vector similarity (dot product, cosine similarity, Euclidean distance).
+
+```python
+import numpy as np
+
+# Compute cosine similarity between query and document vectors
+query_vector = np.array([0.1, 0.5, 0.8], dtype=np.float32)
+doc_vector = np.array([0.2, 0.4, 0.7], dtype=np.float32)
+
+# Formula: (A · B) / (||A|| * ||B||)
+dot_product = np.dot(query_vector, doc_vector)
+norm_q = np.linalg.norm(query_vector)
+norm_d = np.linalg.norm(doc_vector)
+cosine_sim = dot_product / (norm_q * norm_d)
+
+print(f"Cosine similarity: {cosine_sim:.4f}")
+```
+
+### MT.2 Evaluation Datasets with Pandas
+
+Pandas handles structured evaluation logs, golden datasets, and retrieval metrics tables.
+
+```python
+import pandas as pd
+
+# Load and analyze retrieval evaluation results
+eval_data = {
+    "question": ["What is arq?", "How to run pgvector?"],
+    "retrieved_doc_id": [101, 205],
+    "ground_truth_doc_id": [101, 204],
+    "score": [0.92, 0.45]
+}
+df = pd.DataFrame(eval_data)
+df["is_relevant"] = df["retrieved_doc_id"] == df["ground_truth_doc_id"]
+print(df.describe())
+```
+
+### MT.3 Metrics with scikit-learn
+
+Compute precision, recall, and F1-score for evaluating retrieval accuracy.
+
+```python
+from sklearn.metrics import precision_score, recall_score, f1_score
+
+# Ground truth binary relevance vs system predictions
+y_true = [1, 1, 0, 1, 0, 1]
+y_pred = [1, 1, 0, 0, 0, 1]
+
+precision = precision_score(y_true, y_pred)
+recall = recall_score(y_true, y_pred)
+f1 = f1_score(y_true, y_pred)
+
+print(f"Precision: {precision:.2f}, Recall: {recall:.2f}, F1: {f1:.2f}")
+```
+
+### MT.4 Open-Source Model Inference with Hugging Face (`transformers` & `sentence-transformers`)
+
+Use Hugging Face pipelines or `sentence-transformers` for local embedding generation and open-source model inference.
+
+> [!NOTE]
+> **Model Download Sizes**: Installing `torch` requires ~700 MB–2 GB depending on CPU/CUDA configuration. `sentence-transformers` models like `all-MiniLM-L6-v2` download ~80 MB. Small open-source LLMs like `TinyLlama-1.1B` download ~2.2 GB. Plan disk space and network bandwidth accordingly.
+
+```python
+from sentence_transformers import SentenceTransformer
+
+# Load a lightweight local embedding model (~80 MB download)
+model = SentenceTransformer("all-MiniLM-L6-v2")
+
+sentences = ["FastAPI backend with Redis", "Asynchronous Python worker"]
+embeddings = model.encode(sentences)
+
+print(f"Embedding shape: {embeddings.shape}")  # (2, 384)
+```
 
 ---
 
@@ -2422,6 +2509,7 @@ Build this project by extending the V09 AI Assistant Backend codebase. Continue 
 * Store chunks and embeddings in PostgreSQL with pgvector.
 * Answer questions with vector retrieval and source citations.
 * Record at least 10 retrieval questions and review the misses.
+* RAG system with custom vector storage and evaluation pipeline.
 
 ### STRETCH
 
