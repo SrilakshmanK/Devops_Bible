@@ -791,3 +791,11 @@ Real-world work experience
 18. The roadmap should prioritize understanding over technology collection.
 19. The roadmap should prioritize building over passive course consumption.
 20. If the roadmap needs to change, update this master structure first so it remains the source of truth.
+# Recommended Books
+
+* The Pragmatic Programmer → engineering mindset
+* Refactoring → improving existing code
+* Agile Software Development → understand professional development practices
+* Head First Design Patterns → design patterns
+* DDIA → databases + distributed systems
+* Software Architecture in Practice → architecture
