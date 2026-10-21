@@ -1,0 +1,5 @@
+What is the difference between programming and software engineering?
+
+Programming focuses mainly on writing code that solves a specific problem. Software engineering goes beyond that by considering requirements, edge cases,
+system failures, maintainability, and the overall behavior of the system before and after deployment.
+
